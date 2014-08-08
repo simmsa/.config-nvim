@@ -25,15 +25,15 @@ hi Normal      ctermfg=233  ctermbg=NONE  cterm=NONE
 " All the Python related stuff
 
 hi Todo        ctermfg=233  ctermbg=NONE  cterm=bold
-hi String      ctermfg=221  ctermbg=NONE  cterm=NONE "Too Dark Blue"
+hi String      ctermfg=124  ctermbg=NONE  cterm=NONE
 hi Operator    ctermfg=208  ctermbg=NONE  cterm=bold
 hi Statement   ctermfg=208  ctermbg=NONE  cterm=bold
-hi Comment     ctermfg=203  ctermbg=NONE      cterm=NONE "Make Salmon"
+hi Comment     ctermfg=30  ctermbg=NONE      cterm=NONE
 hi Constant    ctermfg=178  ctermbg=NONE  cterm=bold
-hi Character   ctermfg=123  ctermbg=NONE  cterm=NONE "Make lighter red"
+hi Character   ctermfg=9  ctermbg=NONE  cterm=NONE
 hi Error       ctermfg=88   ctermbg=172   cterm=bold
-hi PreProc     ctermfg=81   ctermbg=NONE  cterm=NONE
-hi Special     ctermfg=81   ctermbg=NONE  cterm=NONE
+hi PreProc     ctermfg=9   ctermbg=NONE  cterm=NONE
+hi Special     ctermfg=9   ctermbg=NONE  cterm=NONE
 hi Boolean     ctermfg=38   ctermbg=NONE  cterm=bold
 hi Function    ctermfg=35   ctermbg=NONE  cterm=NONE
 hi Conditional ctermfg=33  ctermbg=NONE  cterm=NONE
@@ -49,16 +49,16 @@ hi Visual      ctermfg=233  ctermbg=235   cterm=NONE
 hi VertSplit   ctermfg=8  ctermbg=NONE   cterm=NONE
 hi PmenuSel    ctermfg=202  ctermbg=16    cterm=NONE
 hi ErrorMsg    ctermfg=88   ctermbg=172   cterm=bold
-hi PmenuThumb  ctermfg=81   ctermbg=16    cterm=NONE
-hi PmenuSbar   ctermfg=81   ctermbg=16    cterm=NONE
-hi Pmenu       ctermfg=81   ctermbg=16    cterm=NONE
+hi PmenuThumb  ctermfg=9   ctermbg=16    cterm=NONE
+hi PmenuSbar   ctermfg=9   ctermbg=16    cterm=NONE
+hi Pmenu       ctermfg=9   ctermbg=16    cterm=NONE
 hi LineNr      ctermfg=73   ctermbg=NONE  cterm=NONE
 hi NonText     ctermfg=25   ctermbg=NONE  cterm=NONE
 hi TabLineFill ctermfg=46   ctermbg=NONE  cterm=NONE
 hi MatchParen  ctermfg=16   ctermbg=215   cterm=bold
 hi TabLineSel  ctermfg=14   ctermbg=NONE  cterm=bold
 hi FoldColumn  ctermfg=9   ctermbg=255    cterm=NONE
-hi Folded      ctermfg=50   ctermbg=8    cterm=NONE
+hi Folded      ctermfg=52   ctermbg=8    cterm=NONE
 hi TabLine     ctermfg=3    ctermbg=NONE  cterm=NONE
 
 " I added this shizzle
