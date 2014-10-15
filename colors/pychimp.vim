@@ -43,9 +43,9 @@ hi Number      ctermfg=4   ctermbg=NONE  cterm=NONE
 
 "Vim Stuff
 
-hi IncSearch   ctermfg=232  ctermbg=46    cterm=NONE | " When typing
-hi Search      ctermfg=51   ctermbg=16    cterm=NONE  | " Search complete
-hi Visual      ctermfg=NONE ctermbg=6     cterm=NONE  | " Visual Selection
+hi IncSearch   ctermfg=233  ctermbg=46    cterm=NONE | " When typing
+hi Search      ctermfg=51   ctermbg=16    cterm=NONE | " Search complete
+hi Visual      ctermfg=NONE ctermbg=8     cterm=NONE | " Visual Selection
 hi VertSplit   ctermfg=8    ctermbg=NONE  cterm=NONE
 hi PmenuSel    ctermfg=202  ctermbg=16    cterm=NONE
 hi ErrorMsg    ctermfg=88   ctermbg=172   cterm=bold
