@@ -314,6 +314,22 @@ let g:syntastic_cpp_compiler = "g++"
 let g:syntastic_cpp_compiler_options = "-std=c++11"
 
 " }}}
+" Tabularize ------------------------------------------------ {{{
+
+if exists(":Tabularize")
+    nnoremap <Leader>ap :Tabularize /\|<CR> | " Align Pipe
+    nnoremap <Leader>at :Tabularize /\|<CR> | " Align Table
+    nnoremap <Leader>aa :Tabularize /       | " Align Choice
+    nnoremap <Leader>av :Tab /\|\ "<CR>     | " Align Vim inline comment
+    vmap <Leader>ap :Tabularize /\|<CR>     | " Align Pipe
+    vmap <Leader>at :Tabularize /\|<CR>     | " Align Table
+    vmap <Leader>aa :Tabularize /           | " Align Choice
+    vmap  <Leader>av :Tab /\|\ "<CR>        | " Align Vim inline comment
+    " nnoremap <Leader>a| :Tabularize /\|<CR> "Conflicts with ino maps
+    " vmap <Leader>a| :Tabularize /\|<CR> "Conflicts with ino maps
+endif
+
+" }}}
 " UltiSnips -------------------------------------------------- {{{
 
 " UltiSnips Config
