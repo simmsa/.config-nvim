@@ -82,5 +82,15 @@ hi htmlH4 ctermfg=199  ctermbg=NONE   cterm=NONE
 hi htmlH5 ctermfg=200  ctermbg=NONE   cterm=NONE
 hi htmlH6 ctermfg=201  ctermbg=NONE   cterm=NONE
 
+" Fugitive Syntax
+" White on green
+hi DiffAdd ctermfg=255 ctermbg=2 cterm=NONE
+" White on orange
+hi DiffChange ctermfg=255 ctermbg=166 cterm=NONE
+" White on red
+hi DiffDelete ctermfg=255 ctermbg=88 cterm=NONE
+" White on darker orange, slightly darker than DiffChange
+hi DiffText ctermfg=255 ctermbg=9 cterm=NONE
+
 " End of Colour scheme ! (Pretty small !:) )
 " Will add support for more languages eventually. !

@@ -119,12 +119,13 @@ command! -nargs=* Nowrap set wrap linebreak list
 "Changing number incrementing
 nnoremap <C-[> <C-a>
 nnoremap <C-]> <C-x>
-
 "Split file vertically <leader>vs
 noremap <silent> <Leader>vs :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
-
 "Easy buffer switching
 nnoremap <Tab> :bn<CR>
+"Quicker Commands
+nnoremap ; :
+nnoremap : ;
 
 " Leader Mappings -------------------------------------------------- {{{
 
@@ -138,6 +139,8 @@ nnoremap <Leader>t gt
 nnoremap <Leader>s :so ~/.vimrc<CR>
 " Easy inversion of colorscheme
 nnoremap <Leader>ic :colorscheme pychimp-inverted<CR>
+" Easier uppercase
+nnoremap <Leader>u bgUw
 
 " }}}
 " Emacs Insert Mode -------------------------------------------------- {{{
@@ -275,30 +278,30 @@ map <C-o> :NERDTreeToggle<CR>
 " }}}
 " Rainbow Parens -------------------------------------------------- {{{
 
-" let g:rbpt_colorpairs = [
-"     \ ['brown',       'RoyalBlue3'],
-"     \ ['Darkblue',    'SeaGreen3'],
-"     \ ['darkgray',    'DarkOrchid3'],
-"     \ ['darkgreen',   'firebrick3'],
-"     \ ['darkcyan',    'RoyalBlue3'],
-"     \ ['darkred',     'SeaGreen3'],
-"     \ ['darkmagenta', 'DarkOrchid3'],
-"     \ ['brown',       'firebrick3'],
-"     \ ['gray',        'RoyalBlue3'],
-"     \ ['black',       'SeaGreen3'],
-"     \ ['darkmagenta', 'DarkOrchid3'],
-"     \ ['Darkblue',    'firebrick3'],
-"     \ ['darkgreen',   'RoyalBlue3'],
-"     \ ['darkcyan',    'SeaGreen3'],
-"     \ ['darkred',     'DarkOrchid3'],
-"     \ ['red',         'firebrick3'],
-"     \ ]
-" let g:rbpt_max = 16
-" let g:rbpt_loadcmd_toggle = 0
-" au VimEnter * RainbowParenthesesToggle
-" au Syntax * RainbowParenthesesLoadRound
-" au Syntax * RainbowParenthesesLoadSquare
-" au Syntax * RainbowParenthesesLoadBraces
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
 " Turn off Rainbow parentheses for Django html
 autocmd FileType htmldjango RainbowParenthesesToggle
@@ -307,13 +310,15 @@ autocmd FileType htmldjango RainbowParenthesesToggle
 " Syntastic -------------------------------------------------- {{{
 
 let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_cpp_compiler = "g++"
+let g:syntastic_cpp_compiler_options = "-std=c++11"
 
 " }}}
 " UltiSnips -------------------------------------------------- {{{
 
 " UltiSnips Config
-" let g:UltiSnipsExpandTrigger='<C-s>'
-" let g:UltiSnipsJumpForwardTrigger='<C-j>'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
 " let g:UltiSnipsJumpBackwardTrigger='<C-k>'
 
 " }}}
