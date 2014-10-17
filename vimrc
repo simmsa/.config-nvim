@@ -95,6 +95,8 @@ noremap l n
 nnoremap K dd
 nnoremap D 0
 nnoremap N $
+"easier navigation of finds
+nmap - :
 
 " }}}
 " Convience Mappings ------------------------------------------------- {{{
