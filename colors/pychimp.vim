@@ -57,7 +57,7 @@ hi NonText     ctermfg=25   ctermbg=NONE  cterm=NONE
 hi TabLineFill ctermfg=46   ctermbg=NONE  cterm=NONE
 hi MatchParen  ctermfg=16   ctermbg=215   cterm=bold
 hi TabLineSel  ctermfg=14   ctermbg=NONE  cterm=bold
-hi FoldColumn  ctermfg=9    ctermbg=255   cterm=NONE
+hi FoldColumn  ctermfg=50    ctermbg=NONE   cterm=NONE
 hi Folded      ctermfg=50   ctermbg=8     cterm=NONE
 hi TabLine     ctermfg=3    ctermbg=NONE  cterm=NONE
 

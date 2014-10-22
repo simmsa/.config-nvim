@@ -210,6 +210,9 @@ set foldtext=NeatFoldText()
 
 " Forcing vim to read .md as markdown and not as 'modula2' or whatever
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" Folding for markdown
+autocmd Filetype markdown set foldmethod=syntax
+autocmd Filetype markdown set foldcolumn=4
 
 " }}}
 " Python -------------------------------------------------- {{{
