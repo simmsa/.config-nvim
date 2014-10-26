@@ -121,9 +121,11 @@ cnoremap <C-b> <Left>
 "Wrapping and unwrapping lines
 command! -nargs=* Wrap set wrap linebreak nolist
 command! -nargs=* Nowrap set wrap linebreak list
+" Links
+" nnoremap <C-]> <C-g>
 "Changing number incrementing
-nnoremap <C-[> <C-a>
-nnoremap <C-]> <C-x>
+nnoremap <C-9> <C-a>
+nnoremap <C-0> <C-x>
 "Split file vertically <leader>vs
 noremap <silent> <Leader>vs :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
 "Quicker Commands
