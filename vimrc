@@ -53,6 +53,9 @@ autocmd InsertLeave * set rnu
 " Fixing Delays?
 set ttimeoutlen=10
 set timeoutlen=300
+" Better tab completion?
+set wildmode=longest,list,full
+set wildmenu
 
 
 " Color scheme -------------------------------------------------- {{{
@@ -123,8 +126,6 @@ nnoremap <C-[> <C-a>
 nnoremap <C-]> <C-x>
 "Split file vertically <leader>vs
 noremap <silent> <Leader>vs :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
-"Easy buffer switching
-nnoremap <Tab> :bn<CR>
 "Quicker Commands
 nnoremap ; :
 nnoremap : ;
@@ -143,6 +144,9 @@ nnoremap <Leader>s :so ~/.vimrc<CR>
 nnoremap <Leader>ic :colorscheme pychimp-inverted<CR>
 " Easier uppercase
 nnoremap <Leader>u bgUw
+"Easy buffer switching
+nnoremap <Leader>n :bn<CR>
+nnoremap <Leader>p :bp<CR>
 
 " }}}
 " Emacs Insert Mode -------------------------------------------------- {{{
@@ -169,6 +173,82 @@ set hlsearch
 
 " }}}
 " Quick Editing  ------------------------------------------------- {{{
+
+nnoremap <Leader>ev :e ~/.vim/vimrc<CR>
+nnoremap <Leader>ez :e ~/.zshrc<CR>
+" Org mode
+" nnoremap <Leader>oo :e ~/org/index.org<CR>
+function! OrgDayFilename()
+    silent !org -day
+    redraw!
+    return "/Users/macuser/org/days/" . strftime("%Y-%m-%d") . ".org"
+endfunction
+function! OrgWeekFilename()
+    silent !org -week
+    redraw!
+    return "/Users/macuser/org/weeks/" . strftime("%Y-%W") . ".org"
+endfunction
+function! OrgAgenda()
+    " silent !echo Hello, world.
+    " redraw!
+    execute ":e " . OrgWeekFilename()
+    execute ":sp " . OrgDayFilename()
+endfunction
+function! OrgQuit()
+    execute ":w"
+    execute ":bd"
+    execute ":w"
+    execute ":bd"
+endfunction
+function! OrgTimestampStart()
+    let line=getline('.')
+
+    let org_states = ["* ", "* TODO ","* UNDERWAY ", "* DONE "]
+
+    " Testing for org state
+    for test_state in range(3, 0, -1)
+        if match(line, org_states[test_state]) != -1
+            let current_org_state = test_state
+            break
+        else
+            let current_org_state = 1000
+        endif
+    endfor
+
+    " substituting current org state for next org state
+    if current_org_state < 1000
+        let org_state_substituted_line = substitute(line, org_states[current_org_state], org_states[(current_org_state + 1) % 4], "")
+        let line = org_state_substituted_line
+    endif
+
+    " Handling insertion of timestamp
+    let timestamp_regex = "\[.*"
+    let timestamp = "[" . strftime("%b %d, %I:%M:%S %p") . "]"
+
+    " if the timestamp exists, replace it with the current timestamp
+    if match(line, timestamp_regex) != -1
+        let new_time_stamp_line = substitute(line, "\[.*", timestamp, "")
+        let line = new_time_stamp_line
+    " or else append the timestamp
+    else
+        let line = line  . " " . timestamp
+    endif
+
+    call setline('.', line)
+endfunction
+
+nnoremap <Leader>od :e `=OrgDayFilename()`<CR>
+nnoremap <Leader>ow :e `=OrgWeekFilename()`<CR>
+nnoremap <Leader>op :e ~/org/
+" nnoremap <Leader>oa :e `=OrgDayFilename()`; :sp `=OrgWeekFilename()`<CR>
+nnoremap <Leader>oa :call OrgAgenda()<CR>
+nnoremap <Leader>oq :call OrgQuit()<CR>
+" inoremap <C-T><C-T> <C-R>=OrgTimestampStart()<CR>
+nnoremap <C-T><C-T> :silent call OrgTimestampStart()<CR>
+" nnoremap <Leader>ts =OrgTimestampStart()<CR>
+" inoremap <C-T><C-E> <C-R>=OrgTimestampComplete()<CR>
+
+
 " }}}
 " Folding {{{
 set foldenable
@@ -378,3 +458,4 @@ autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg=8
 " Fold Settings -------------------------------------------------- {{{
 " execute "normal \<Esc>"
 " vim:foldmethod=marker:foldlevel=0 }}}
+let maplocalleader = "\<Space>"
