@@ -202,7 +202,7 @@ function! OrgQuit()
     execute ":w"
     execute ":bd"
 endfunction
-function! OrgTimestampStart()
+function! OrgTimestamp()
     let line=getline('.')
 
     let org_states = ["* ", "* TODO ","* UNDERWAY ", "* DONE "]
@@ -236,9 +236,9 @@ function! OrgTimestampStart()
         let line = line  . " " . timestamp
     endif
 
+    call repeat#set("\<C-T>\<C-T>")
     call setline('.', line)
 endfunction
-
 nnoremap <Leader>od :e `=OrgDayFilename()`<CR>
 nnoremap <Leader>ow :e `=OrgWeekFilename()`<CR>
 nnoremap <Leader>op :e ~/org/
@@ -246,10 +246,9 @@ nnoremap <Leader>op :e ~/org/
 nnoremap <Leader>oa :call OrgAgenda()<CR>
 nnoremap <Leader>oq :call OrgQuit()<CR>
 " inoremap <C-T><C-T> <C-R>=OrgTimestampStart()<CR>
-nnoremap <C-T><C-T> :silent call OrgTimestampStart()<CR>
+nnoremap <C-T><C-T> :silent call OrgTimestamp()<CR>
 " nnoremap <Leader>ts =OrgTimestampStart()<CR>
 " inoremap <C-T><C-E> <C-R>=OrgTimestampComplete()<CR>
-
 
 " }}}
 " Folding {{{
