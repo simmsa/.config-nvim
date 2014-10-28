@@ -47,7 +47,7 @@ snippet hhhhhh
 ###### ${0}
 endsnippet
 # }}}
-
+# Formatting Snippets -------------------------------------------- {{{
 snippet b
 **${1}**${0}
 endsnippet
@@ -60,13 +60,20 @@ snippet s
 * ${0}
 endsnippet
 
+# }}}
+# Code Snippet Styles ------------------------------------------- {{{
 snippet java
 \`\`\`java
 ${0}
 \`\`\`
 endsnippet
 
-
+snippet vim
+\`\`\`vim
+${0}
+\`\`\`
+endsnippet
+# }}}
 # Tables -------------------------------------------------- {{{
 
 snippet 2cts
@@ -119,5 +126,4 @@ snippet 6ct
 ${0}
 endsnippet
 # }}}
-
-# vim:foldmarker="{{{,}}}"
+# vim:foldmethod=marker
