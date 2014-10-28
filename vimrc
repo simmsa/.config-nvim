@@ -132,6 +132,28 @@ noremap <silent> <Leader>vs :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljz
 nnoremap ; :
 nnoremap : ;
 
+" Insert multiple lines ------------------------------------------ {{{
+
+function! OpenLines(num_lines, dir)
+    if a:num_lines == 0
+        normal! o
+        return
+    endif
+    if a:dir > 0
+        for x in range(1, a:num_lines)
+            normal! o
+        endfor
+    else
+        for x in range(1, a:num_lines)
+            normal o
+            normal tKpt
+        endfor
+    endif
+endfunction
+nnoremap <Leader>l :<C-u>call OpenLines(v:count, 1)<CR>S
+nnoremap <Leader>ll :<C-u>call OpenLines(v:count, -1)<CR>S
+
+" }}}
 " Leader Mappings -------------------------------------------------- {{{
 
 " Map leader key to space
