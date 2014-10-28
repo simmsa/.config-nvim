@@ -149,6 +149,7 @@ nnoremap <Leader>u bgUw
 "Easy buffer switching
 nnoremap <Leader>n :bn<CR>
 nnoremap <Leader>p :bp<CR>
+nnoremap <Leader>d :bd<CR>
 
 " }}}
 " Emacs Insert Mode -------------------------------------------------- {{{
