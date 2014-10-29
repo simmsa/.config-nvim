@@ -380,11 +380,6 @@ nnoremap <Leader>gd :Gdiff<CR>
 " nnoremap gu :GundoToggle<CR>
 
 " }}}
-" Nerd Tree -------------------------------------------------- {{{
-
-map <C-o> :NERDTreeToggle<CR>
-
-" }}}
 " Rainbow Parens -------------------------------------------------- {{{
 
 let g:rbpt_colorpairs = [
