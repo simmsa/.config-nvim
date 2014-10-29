@@ -108,21 +108,17 @@ nmap - :
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 " Map esc to ht
 imap ht <Esc>
+vmap ht <Esc>
 " Set insert mode timeout, cause I keep forgetting
 au CursorHoldI * stopinsert
 au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
 au InsertLeave * let &updatetime=updaterestore
-"Vim regex mappings
-" noremap subg :%s:::g<Left><Left><Left>
-" noremap subgc :%s:::cg<Left><Left><Left><Left>
 "Remap normal mode
 cnoremap <C-f> <Right>
 cnoremap <C-b> <Left>
 "Wrapping and unwrapping lines
 command! -nargs=* Wrap set wrap linebreak nolist
 command! -nargs=* Nowrap set wrap linebreak list
-" Links
-" nnoremap <C-]> <C-g>
 "Changing number incrementing
 nnoremap <C-9> <C-a>
 nnoremap <C-0> <C-x>
@@ -130,39 +126,35 @@ nnoremap <C-0> <C-x>
 noremap <silent> <Leader>vs :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
 "Quicker Commands
 nnoremap ; :
+vmap ; :
 nnoremap : ;
+" Insert multiple lines (o stays in normal mode and works with a count)
+nnoremap o o<Esc>i
+nnoremap O @='O<C-V><Esc>'<CR>i
+" Quicker Movement
+nnoremap D ^
+nnoremap N g_
+nnoremap H %
+nnoremap T {
+vnoremap D ^
+vnoremap N g_
+vnoremap H %
+vnoremap T {
+" Easier tabbing of selections
+vnoremap < <gv
+vnoremap > >gv
 
-" Insert multiple lines ------------------------------------------ {{{
 
-function! OpenLines(num_lines, dir)
-    if a:num_lines == 0
-        normal! o
-        return
-    endif
-    if a:dir > 0
-        for x in range(1, a:num_lines)
-            normal! o
-        endfor
-    else
-        for x in range(1, a:num_lines)
-            normal o
-            normal tKpt
-        endfor
-    endif
-endfunction
-nnoremap <Leader>l :<C-u>call OpenLines(v:count, 1)<CR>S
-nnoremap <Leader>ll :<C-u>call OpenLines(v:count, -1)<CR>S
-
-" }}}
 " Leader Mappings -------------------------------------------------- {{{
 
 " Map leader key to space
 let mapleader = "\<Space>"
+let maplocalleader = "\<Space>"
 " <Space> w to save a file
 nnoremap <Leader>w :w<CR>
 " <Space> t to switch tabs
 nnoremap <Leader>t gt
-"<Space> s to source vimrc
+"<Space> s to source VIMRC
 nnoremap <Leader>s :so ~/.vimrc<CR>
 " Easy inversion of colorscheme
 nnoremap <Leader>ic :colorscheme pychimp-inverted<CR>
@@ -315,7 +307,6 @@ set foldtext=NeatFoldText()
 " Forcing vim to read .md as markdown and not as 'modula2' or whatever
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " Folding for markdown
-autocmd Filetype markdown set foldmethod=syntax
 autocmd Filetype markdown set foldcolumn=4
 
 " }}}
@@ -371,8 +362,17 @@ let g:ctrlp_working_path_mode = 'ra'
 " Fugitive --------------------------------------------------" {{{
 
 " Fugitive custom mappings
-nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gb :Gblame<CR>
+function! ToggleGStatus()
+    if buflisted(bufname('.git/index'))
+        bd .git/index
+    else
+        Gstatus
+    endif
+endfunction
+command! ToggleGStatus :call ToggleGStatus()
+nnoremap <Leader>g :ToggleGStatus<CR>
+nnoremap <Leader>gc :Gcommit
+nnoremap <Leader>gd :Gdiff<CR>
 
 " }}}
 " Gundo -------------------------------------------------- {{{
@@ -477,9 +477,13 @@ autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd ctermbg=18
 autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg=8
 
 " }}}
+" vim markdown folding ----------------------------------------------- {{{
+
+let g:markdown_fold_style = 'nested'
+let g:markdown_fold_override_foldtext = 0
+
+" }}}
 
 " }}}
 " Fold Settings -------------------------------------------------- {{{
-" execute "normal \<Esc>"
 " vim:foldmethod=marker:foldlevel=0 }}}
-let maplocalleader = "\<Space>"
