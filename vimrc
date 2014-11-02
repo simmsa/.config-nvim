@@ -56,7 +56,8 @@ set timeoutlen=300
 " Better tab completion?
 set wildmode=longest,list,full
 set wildmenu
-
+" Use system clipboard
+" set clipboard=unnamed,unnamedplus
 
 " Color scheme -------------------------------------------------- {{{
 
@@ -120,8 +121,8 @@ cnoremap <C-b> <Left>
 command! -nargs=* Wrap set wrap linebreak nolist
 command! -nargs=* Nowrap set wrap linebreak list
 "Changing number incrementing
-nnoremap <C-9> <C-a>
-nnoremap <C-0> <C-x>
+nnoremap <C-j> <C-a>
+nnoremap <C-k> <C-x>
 "Split file vertically <leader>vs
 noremap <silent> <Leader>vs :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
 "Quicker Commands
@@ -129,8 +130,8 @@ nnoremap ; :
 vmap ; :
 nnoremap : ;
 " Insert multiple lines (o stays in normal mode and works with a count)
-nnoremap o o<Esc>i
-nnoremap O @='O<C-V><Esc>'<CR>i
+nnoremap o o<Esc>S
+nnoremap O @='O<C-V><Esc>'<CR>S
 " Quicker Movement
 nnoremap D ^
 nnoremap N g_
