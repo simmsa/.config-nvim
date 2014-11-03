@@ -181,6 +181,8 @@ nnoremap <Leader>n :bn<CR>
 nnoremap <Leader>p :bp<CR>
 nnoremap <Leader>d :bd<CR>
 nnoremap <Leader>b :ls<CR>:b<Space>
+" Substitute like * (\< and \> select only that word)
+nnoremap <Leader>; :%s:\<<C-R><C-W>\>:
 
 " }}}
 " Emacs Insert Mode -------------------------------------------------- {{{
