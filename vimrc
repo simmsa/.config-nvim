@@ -157,7 +157,9 @@ vnoremap T {
 " Easier tabbing of selections
 vnoremap < <gv
 vnoremap > >gv
-
+" Easier system copy and paste
+vmap <Leader>sy "+y
+nnoremap <Leader>sp "+p
 
 " Leader Mappings -------------------------------------------------- {{{
 
