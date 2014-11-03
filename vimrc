@@ -439,7 +439,9 @@ endif
 
 " UltiSnips Config
 let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsExpandTrigger="<C-S>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<C-S>"
 " let g:UltiSnipsJumpBackwardTrigger='<C-k>'
 
 " }}}
@@ -477,6 +479,13 @@ autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg=8
 
 let g:markdown_fold_style = 'nested'
 let g:markdown_fold_override_foldtext = 0
+
+" }}}
+" YouCompleteMe -------------------------------------------------- {{{
+
+" Allows both UltiSnips and YCM to use tab
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
 
 " }}}
 
