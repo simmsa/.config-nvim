@@ -30,7 +30,7 @@ set showmode
 set number
 "Display tabs and trailing spaces
 set list
-set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+set listchars=tab:▷⋅,trail:⋅,nbsp:⋅,extends:,precedes:,eol:¬
 set linebreak
 " Configuring backup and related
 set backup
@@ -69,8 +69,8 @@ set timeoutlen=300
 " Better tab completion?
 set wildmode=longest,list,full
 set wildmenu
-" Use system clipboard
-" set clipboard=unnamed,unnamedplus
+" Spell check dictionary
+set dictionary=/usr/share/dict/words
 
 " Color scheme -------------------------------------------------- {{{
 
@@ -195,6 +195,14 @@ imap <C-b> <Left>
 " }}}
 " Cool Functions -------------------------------------------------- {{{
 
+"Make sure vim returns to the same line when you reopen a file.
+augroup line_return
+    au!
+    au BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   execute 'normal! g`"zvzz' |
+        \ endif
+augroup END
 
 " }}}
 " Searching and Movement {{{
@@ -203,6 +211,10 @@ imap <C-b> <Left>
 set incsearch
 "Highlight searches by default
 set hlsearch
+set smartcase
+set ignorecase
+set showmatch
+set gdefault
 
 " }}}
 " Quick Editing  ------------------------------------------------- {{{
@@ -366,6 +378,13 @@ autocmd Filetype eruby setlocal ts=3 sw=2 expandtab
 " Bundle 'sjl/gundo.vim'
 " Bundle 'SirVer/ultisnips'
 " Bundle 'plasticboy/vim-markdown'
+
+" }}}
+" Buffer line -------------------------------------------------- {{{
+
+let g:bufferline_active_buffer_left = ""
+let g:bufferline_active_buffer_right = ""
+
 
 " }}}
 " Ctrl P -------------------------------------------------- {{{
