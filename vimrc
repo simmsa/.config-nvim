@@ -32,9 +32,22 @@ set number
 set list
 set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 set linebreak
-" Configuring backup directories
-set backupdir=./.backup,.,/tmp
-set directory=.,./.backup,/tmp
+" Configuring backup and related
+set backup
+set noswapfile
+set undodir=~/.vim/tmp/undo//
+set backupdir=~/.vim/tmp/backup//
+set directory=~/.vim/tmp/swap//
+" Make directory folders
+if !isdirectory(expand(&undodir))
+    call mkdir(expand(&undodir), "p")
+endif
+if !isdirectory(expand(&backupdir))
+    call mkdir(expand(&backupdir), "p")
+endif
+if !isdirectory(expand(&directory))
+    call mkdir(expand(&directory), "p")
+endif
 "Autocomplete matches
 set wildmenu
 "Faster Macros
