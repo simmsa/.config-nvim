@@ -180,6 +180,7 @@ nnoremap <Leader>u bgUw
 nnoremap <Leader>n :bn<CR>
 nnoremap <Leader>p :bp<CR>
 nnoremap <Leader>d :bd<CR>
+nnoremap <Leader>b :ls<CR>:b<Space>
 
 " }}}
 " Emacs Insert Mode -------------------------------------------------- {{{
@@ -382,8 +383,8 @@ autocmd Filetype eruby setlocal ts=3 sw=2 expandtab
 " }}}
 " Buffer line -------------------------------------------------- {{{
 
-let g:bufferline_active_buffer_left = ""
-let g:bufferline_active_buffer_right = ""
+" let g:bufferline_active_buffer_left = ""
+" let g:bufferline_active_buffer_right = ""
 
 
 " }}}
