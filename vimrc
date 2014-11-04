@@ -218,6 +218,7 @@ set smartcase
 set ignorecase
 set showmatch
 set gdefault
+set infercase
 
 " }}}
 " Quick Editing  ------------------------------------------------- {{{
