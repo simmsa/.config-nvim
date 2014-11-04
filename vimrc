@@ -512,6 +512,12 @@ autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd ctermbg=18
 autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg=8
 
 " }}}
+" vim journal -------------------------------------------------- {{{
+
+let g:journal_directory="~/.journal"
+let g:journal_extension="md"
+
+" }}}
 " vim markdown folding ----------------------------------------------- {{{
 
 let g:markdown_fold_style = 'nested'

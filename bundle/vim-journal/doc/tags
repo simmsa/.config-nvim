@@ -1,0 +1,12 @@
+:JournalToggle	journal.txt	/*:JournalToggle*
+g:journal_directory	journal.txt	/*g:journal_directory*
+g:journal_encrypted	journal.txt	/*g:journal_encrypted*
+g:journal_extension	journal.txt	/*g:journal_extension*
+g:journal_loaded	journal.txt	/*g:journal_loaded*
+journal	journal.txt	/*journal*
+journal-author	journal.txt	/*journal-author*
+journal-commands	journal.txt	/*journal-commands*
+journal-configuration	journal.txt	/*journal-configuration*
+journal-requirements	journal.txt	/*journal-requirements*
+journal.txt	journal.txt	/*journal.txt*
+journal.vim	journal.txt	/*journal.vim*
