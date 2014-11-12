@@ -20,49 +20,51 @@ let g:colors_name = "pychimp"
 
 " The Basic (Normal) Text Style
 
-hi Normal      ctermfg=253  ctermbg=NONE  cterm=NONE
+hi Normal      ctermfg=255  ctermbg=NONE  cterm=NONE
 
 " All the Python related stuff
 
-hi Todo        ctermfg=253 ctermbg=NONE  cterm=bold
-hi String      ctermfg=221 ctermbg=NONE  cterm=NONE
-hi Operator    ctermfg=208 ctermbg=NONE  cterm=bold
-hi Statement   ctermfg=208 ctermbg=NONE  cterm=bold
-hi Comment     ctermfg=203 ctermbg=NONE  cterm=NONE
-hi Constant    ctermfg=178 ctermbg=NONE  cterm=bold
-hi Character   ctermfg=123 ctermbg=NONE  cterm=NONE
-hi Error       ctermfg=88  ctermbg=172   cterm=bold
-hi PreProc     ctermfg=81  ctermbg=NONE  cterm=NONE
-hi Special     ctermfg=81  ctermbg=NONE  cterm=NONE
-hi Boolean     ctermfg=38  ctermbg=NONE  cterm=bold
-hi Function    ctermfg=35  ctermbg=NONE  cterm=NONE
-hi Conditional ctermfg=33  ctermbg=NONE  cterm=NONE
-hi Include     ctermfg=24  ctermbg=NONE  cterm=bold
-hi Float       ctermfg=4   ctermbg=NONE  cterm=NONE
-hi Number      ctermfg=4   ctermbg=NONE  cterm=NONE
+hi Number      ctermfg=4   ctermbg=NONE  cterm=NONE | "Blue
+hi Float       ctermfg=6   ctermbg=NONE  cterm=NONE | "Lighter Blue
+hi Include     ctermfg=24  ctermbg=NONE  cterm=bold | "Steelblue
+hi Conditional ctermfg=33  ctermbg=NONE  cterm=NONE | "Lighter Steelblue
+hi Function    ctermfg=35  ctermbg=NONE  cterm=italic | "Seafoam Green
+hi Boolean     ctermfg=38  ctermbg=NONE  cterm=bold | "Steelblue
+hi Type        ctermfg=43  ctermbg=NONE  cterm=italic | "Teal
+hi Special     ctermfg=81  ctermbg=NONE  cterm=NONE | "Light Blue
+hi PreProc     ctermfg=85  ctermbg=NONE  cterm=NONE | "Sea Green 'NONE'
+hi Error       ctermfg=88  ctermbg=172   cterm=bold | "Red
+hi Character   ctermfg=123 ctermbg=NONE  cterm=NONE | "Light Blue
+hi Todo        ctermfg=162 ctermbg=NONE  cterm=bold | "Magenta
+hi Constant    ctermfg=178 ctermbg=NONE  cterm=bold | "Yellow
+hi Comment     ctermfg=203 ctermbg=NONE  cterm=NONE | "Salmon
+hi Operator    ctermfg=208 ctermbg=NONE  cterm=bold | "Orange
+hi Statement   ctermfg=13 ctermbg=NONE  cterm=bold | "Purple
+hi String      ctermfg=221 ctermbg=NONE  cterm=NONE | "Light Yellow
 
 "Vim Stuff
 
-hi IncSearch   ctermfg=233  ctermbg=46    cterm=NONE | " When typing
-hi Search      ctermfg=51   ctermbg=16    cterm=NONE | " Search complete
-hi Visual      ctermfg=NONE ctermbg=8     cterm=NONE | " Visual Selection
+hi TabLine     ctermfg=3    ctermbg=NONE  cterm=NONE
 hi VertSplit   ctermfg=8    ctermbg=NONE  cterm=NONE
-hi PmenuSel    ctermfg=202  ctermbg=16    cterm=NONE
-hi ErrorMsg    ctermfg=88   ctermbg=172   cterm=bold
+hi TabLineSel  ctermfg=14   ctermbg=NONE  cterm=bold
+hi MatchParen  ctermfg=46   ctermbg=215   cterm=bold
+hi NonText     ctermfg=25   ctermbg=NONE  cterm=NONE
+hi TabLineFill ctermfg=46   ctermbg=NONE  cterm=NONE
+hi FoldColumn  ctermfg=50    ctermbg=NONE   cterm=NONE
+hi Folded      ctermfg=50   ctermbg=8     cterm=NONE
+hi Search      ctermfg=190   ctermbg=233    cterm=NONE | " Search complete
+hi LineNr      ctermfg=73   ctermbg=NONE  cterm=NONE
 hi PmenuThumb  ctermfg=81   ctermbg=16    cterm=NONE
 hi PmenuSbar   ctermfg=81   ctermbg=16    cterm=NONE
 hi Pmenu       ctermfg=81   ctermbg=16    cterm=NONE
-hi LineNr      ctermfg=73   ctermbg=NONE  cterm=NONE
-hi NonText     ctermfg=25   ctermbg=NONE  cterm=NONE
-hi TabLineFill ctermfg=46   ctermbg=NONE  cterm=NONE
-hi MatchParen  ctermfg=16   ctermbg=215   cterm=bold
-hi TabLineSel  ctermfg=14   ctermbg=NONE  cterm=bold
-hi FoldColumn  ctermfg=50    ctermbg=NONE   cterm=NONE
-hi Folded      ctermfg=50   ctermbg=8     cterm=NONE
-hi TabLine     ctermfg=3    ctermbg=NONE  cterm=NONE
+hi ErrorMsg    ctermfg=88   ctermbg=172   cterm=bold
+hi PmenuSel    ctermfg=202  ctermbg=16    cterm=NONE
+hi IncSearch   ctermfg=233  ctermbg=190    cterm=NONE | " When typing
+hi Visual      ctermfg=NONE ctermbg=8     cterm=italic | " Visual Selection
 
 " I added this shizzle
 hi CursorLine  ctermfg=NONE   ctermbg=8    cterm=NONE
+hi CursorLineNR ctermfg=196 ctermbg=8 cterm=underline
 
 " For Python
 hi pythonColon ctermfg=5 ctermbg=NONE cterm=NONE
