@@ -94,5 +94,22 @@ hi DiffDelete ctermfg=255 ctermbg=88 cterm=NONE
 " White on darker orange, slightly darker than DiffChange
 hi DiffText ctermfg=255 ctermbg=9 cterm=NONE
 
+" Org Mode
+hi org_1_header ctermfg=14 ctermbg=NONE cterm=NONE
+hi org_1_line ctermfg=190 ctermbg=NONE cterm=NONE
+hi org_2_header ctermfg=4 ctermbg=NONE cterm=NONE
+hi org_3_header ctermfg=21 ctermbg=NONE cterm=NONE
+hi org_4_header ctermfg=19 ctermbg=NONE cterm=NONE
+hi org_5_header ctermfg=17 ctermbg=NONE cterm=NONE
+hi org_todo ctermfg=196 ctermbg=NONE cterm=NONE
+hi org_1_todo ctermfg=196 ctermbg=NONE cterm=NONE
+hi org_underway ctermfg=226 ctermbg=NONE cterm=NONE
+hi org_1_underway ctermfg=226 ctermbg=NONE cterm=NONE
+hi org_done ctermfg=39 ctermbg=NONE cterm=NONE
+hi org_1_done ctermfg=39 ctermbg=NONE cterm=NONE
+hi org_time ctermfg=27 ctermbg=NONE cterm=NONE
+hi org_time_1_header ctermfg=27 ctermbg=NONE cterm=NONE
+
+
 " End of Colour scheme ! (Pretty small !:) )
 " Will add support for more languages eventually. !
