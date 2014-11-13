@@ -71,6 +71,8 @@ set wildmode=longest,list,full
 set wildmenu
 " Spell check dictionary
 set dictionary=/usr/share/dict/words
+" Use zsh
+set shell=/usr/local/bin/zsh
 
 " Color scheme -------------------------------------------------- {{{
 
@@ -121,8 +123,9 @@ nmap - :
 "<Ctrl-l> redraws the screen and removes any search highlighting
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 " Map esc to ht
-imap ht <Esc>
+" imap ht <Esc>
 vmap ht <Esc>
+imap <Space><Space> <Esc>
 " Set insert mode timeout, cause I keep forgetting
 au CursorHoldI * stopinsert
 au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
@@ -197,7 +200,6 @@ imap <C-b> <Left>
 
 " }}}
 " Cool Functions -------------------------------------------------- {{{
-
 "Make sure vim returns to the same line when you reopen a file.
 augroup line_return
     au!
@@ -206,6 +208,9 @@ augroup line_return
         \   execute 'normal! g`"zvzz' |
         \ endif
 augroup END
+" Change cursor shape for different modes
+let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 
 " }}}
 " Searching and Movement {{{
@@ -456,6 +461,11 @@ autocmd FileType htmldjango RainbowParenthesesToggle
 let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_cpp_compiler = "g++"
 let g:syntastic_cpp_compiler_options = "-std=c++11"
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+let g:syntastic_full_redraws = 1
+let g:syntastic_auto_jump = 2         " Jump to syntax errors
+let g:syntastic_auto_loc_list = 1     " Auto-open the error list
 
 " }}}
 " Tabularize ------------------------------------------------ {{{
