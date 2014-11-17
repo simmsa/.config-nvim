@@ -292,6 +292,17 @@ function! OrgTimestamp()
     call repeat#set("\<C-T>\<C-T>")
     call setline('.', line)
 endfunction
+function! OrgSort()
+    normal zM
+    normal gg
+    execute ":/\*"
+    normal VG
+    " normal :SortUnfolded
+    " execute ":normal gv :vi :SortUnfolded"
+    " visual :SortUnfolded
+    " visual ":'<,'>:SortUnfolded"
+    " execute ":%s/%x00/\r"
+endfunction
 nnoremap <Leader>od :e `=OrgDayFilename()`<CR>
 nnoremap <Leader>ow :e `=OrgWeekFilename()`<CR>
 nnoremap <Leader>op :e ~/org/
@@ -302,6 +313,8 @@ nnoremap <Leader>oq :call OrgQuit()<CR>
 nnoremap <C-T><C-T> :silent call OrgTimestamp()<CR>
 " nnoremap <Leader>ts =OrgTimestampStart()<CR>
 " inoremap <C-T><C-E> <C-R>=OrgTimestampComplete()<CR>
+" nnoremap <Leader>os :call OrgSort()<CR>
+nnoremap <Leader>os zMgg/\*VG:SortUnfolded:%s/\%x00/\rzM
 
 " }}}
 " Folding {{{
@@ -311,6 +324,8 @@ set foldmethod=marker
 " Easier Folding
 nnoremap <Leader><Space> za
 nnoremap <Leader>z zM
+" Jump to top level fold and fold it
+nnoremap zz 10[zzc
 
 nmap <Leader>f o<Esc>50i-<Esc>A<Space>{{{<CR>}}}<Esc>gcc2t0gcchkktf<Space>i<Space><Esc>ni
 " NeatFoldText -------------------------------------------------- {{{
@@ -534,6 +549,11 @@ let g:journal_extension="md"
 
 let g:markdown_fold_style = 'nested'
 let g:markdown_fold_override_foldtext = 0
+
+" }}}
+" vim org mode -------------------------------------------------- {{{
+
+autocmd Filetype org setl noai nocin nosi inde=
 
 " }}}
 " YouCompleteMe -------------------------------------------------- {{{
