@@ -30,7 +30,7 @@ set showmode
 set number
 "Display tabs and trailing spaces
 set list
-set listchars=tab:▷⋅,trail:⋅,nbsp:⋅,extends:,precedes:,eol:¬
+set listchars=tab:▷⋅,trail:⋅,nbsp:⋅,extends:,precedes:
 set linebreak
 " Configuring backup and related
 set backup
