@@ -241,6 +241,8 @@ nnoremap <Leader><Space> za
 nnoremap <Leader>z zM
 " Jump to top level fold and fold it
 nnoremap zz 10[zzc
+" Give me back zz functionality
+nnoremap z. zz
 
 nmap <Leader>f o<Esc>50i-<Esc>A<Space>{{{<CR>}}}<Esc>gcc2t0gcchkktf<Space>i<Space><Esc>ni
 " NeatFoldText -------------------------------------------------- {{{
