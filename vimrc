@@ -485,18 +485,14 @@ let g:syntastic_auto_loc_list = 1     " Auto-open the error list
 " }}}
 " Tabularize ------------------------------------------------ {{{
 
-if exists(":Tabularize")
-    nnoremap <Leader>ap :Tabularize /\|<CR> | " Align Pipe
-    nnoremap <Leader>at :Tabularize /\|<CR> | " Align Table
-    nnoremap <Leader>aa :Tabularize /       | " Align Choice
-    nnoremap <Leader>av :Tab /\|\ "<CR>     | " Align Vim inline comment
-    vmap <Leader>ap :Tabularize /\|<CR>     | " Align Pipe
-    vmap <Leader>at :Tabularize /\|<CR>     | " Align Table
-    vmap <Leader>aa :Tabularize /           | " Align Choice
-    vmap  <Leader>av :Tab /\|\ "<CR>        | " Align Vim inline comment
-    " nnoremap <Leader>a| :Tabularize /\|<CR> "Conflicts with ino maps
-    " vmap <Leader>a| :Tabularize /\|<CR> "Conflicts with ino maps
-endif
+nnoremap <Leader>ap :Tabularize /\|<CR> | " Align Pipe
+nnoremap <Leader>at :Tabularize /\|<CR> | " Align Table
+nnoremap <Leader>aa :Tabularize /       | " Align Choice
+nnoremap <Leader>av :Tab /\|\ "<CR>     | " Align Vim inline comment
+vmap <Leader>ap :Tabularize /\|<CR>     | " Align Pipe
+vmap <Leader>at :Tabularize /\|<CR>     | " Align Table
+vmap <Leader>aa :Tabularize /           | " Align Choice
+vmap  <Leader>av :Tab /\|\ "<CR>        | " Align Vim inline comment
 
 " }}}
 " UltiSnips -------------------------------------------------- {{{
