@@ -125,7 +125,6 @@ nnoremap <silent> <C-l> :nohl<CR><C-l>
 " Map esc to ht
 " imap ht <Esc>
 vmap ht <Esc>
-imap <Space><Space> <Esc>
 " Set insert mode timeout, cause I keep forgetting
 au CursorHoldI * stopinsert
 au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
