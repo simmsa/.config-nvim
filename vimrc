@@ -230,8 +230,56 @@ set infercase
 nnoremap <Leader>ev :e ~/.vim/vimrc<CR>
 nnoremap <Leader>ez :e ~/.zshrc<CR>
 nnoremap <Leader>ec :e ~/Desktop/Programming/vim/vim_cheatsheet.md<CR>
-" Org mode
-" nnoremap <Leader>oo :e ~/org/index.org<CR>
+
+" }}}
+" Folding {{{
+set foldenable
+set foldlevelstart=0
+set foldmethod=marker
+" Easier Folding
+nnoremap <Leader><Space> za
+nnoremap <Leader>z zM
+" Jump to top level fold and fold it
+nnoremap zz 10[zzc
+
+nmap <Leader>f o<Esc>50i-<Esc>A<Space>{{{<CR>}}}<Esc>gcc2t0gcchkktf<Space>i<Space><Esc>ni
+" NeatFoldText -------------------------------------------------- {{{
+
+function! NeatFoldText()
+  let line = ' ' . substitute(getline(v:foldstart), '^\s#*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+  let commentless_line = substitute(line, '//\|#\|/\*\|\*/\|"\|-', '', 'g')
+  let lines_count = v:foldend - v:foldstart + 1
+  let lines_count_text = ' ' . printf("%s", lines_count . ' lines') . ' '
+  " let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+  " let foldchar = matchstr(&fillchars, 'fold:\zs.')
+  let foldchar = "─"
+  let foldtextstart = strpart(commentless_line, 0, (winwidth(0)*2)/3)
+  " let foldtextend = lines_count_text . repeat(foldchar, 8 + 2)
+  let foldtextend = lines_count_text
+  " let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+  let foldtextlength = strlen(substitute(foldtextstart, '.', 'x', 'g')) + &foldcolumn
+  let foldtextstartlength = strlen(substitute(foldtextstart, '.', 'x', 'g')) + strlen(foldtextend) + &foldcolumn
+  " return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength - 17) . foldtextend . "      "
+  " return repeat(foldchar, winwidth(0))
+endfunction
+set foldtext=NeatFoldText()
+
+" }}}
+
+" }}}
+" Filetype Specific -------------------------------------------------- {{{
+
+" Markdown -------------------------------------------------- {{{
+
+" Forcing vim to read .md as markdown and not as 'modula2' or whatever
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" Folding for markdown
+autocmd Filetype markdown set foldcolumn=4
+
+" }}}
+" Org -------------------------------------------------- {{{
+
 function! OrgDayFilename()
     silent !org -day
     redraw!
@@ -302,64 +350,13 @@ function! OrgSort()
     " visual ":'<,'>:SortUnfolded"
     " execute ":%s/%x00/\r"
 endfunction
-nnoremap <Leader>od :e `=OrgDayFilename()`<CR>
-nnoremap <Leader>ow :e `=OrgWeekFilename()`<CR>
-nnoremap <Leader>op :e ~/org/
-" nnoremap <Leader>oa :e `=OrgDayFilename()`; :sp `=OrgWeekFilename()`<CR>
-nnoremap <Leader>oa :call OrgAgenda()<CR>
-nnoremap <Leader>oq :call OrgQuit()<CR>
-" inoremap <C-T><C-T> <C-R>=OrgTimestampStart()<CR>
-nnoremap <C-T><C-T> :silent call OrgTimestamp()<CR>
-" nnoremap <Leader>ts =OrgTimestampStart()<CR>
-" inoremap <C-T><C-E> <C-R>=OrgTimestampComplete()<CR>
-" nnoremap <Leader>os :call OrgSort()<CR>
-nnoremap <Leader>os zMgg/\*VG:SortUnfolded:%s/\%x00/\rzM
-
-" }}}
-" Folding {{{
-set foldenable
-set foldlevelstart=0
-set foldmethod=marker
-" Easier Folding
-nnoremap <Leader><Space> za
-nnoremap <Leader>z zM
-" Jump to top level fold and fold it
-nnoremap zz 10[zzc
-
-nmap <Leader>f o<Esc>50i-<Esc>A<Space>{{{<CR>}}}<Esc>gcc2t0gcchkktf<Space>i<Space><Esc>ni
-" NeatFoldText -------------------------------------------------- {{{
-
-function! NeatFoldText()
-  let line = ' ' . substitute(getline(v:foldstart), '^\s#*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-  let commentless_line = substitute(line, '//\|#\|/\*\|\*/\|"\|-', '', 'g')
-  let lines_count = v:foldend - v:foldstart + 1
-  let lines_count_text = ' ' . printf("%s", lines_count . ' lines') . ' '
-  " let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-  " let foldchar = matchstr(&fillchars, 'fold:\zs.')
-  let foldchar = "─"
-  let foldtextstart = strpart(commentless_line, 0, (winwidth(0)*2)/3)
-  " let foldtextend = lines_count_text . repeat(foldchar, 8 + 2)
-  let foldtextend = lines_count_text
-  " let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-  let foldtextlength = strlen(substitute(foldtextstart, '.', 'x', 'g')) + &foldcolumn
-  let foldtextstartlength = strlen(substitute(foldtextstart, '.', 'x', 'g')) + strlen(foldtextend) + &foldcolumn
-  " return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
-  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength - 17) . foldtextend . "      "
-  " return repeat(foldchar, winwidth(0))
-endfunction
-set foldtext=NeatFoldText()
-
-" }}}
-
-" }}}
-" Filetype Specific -------------------------------------------------- {{{
-
-" Markdown -------------------------------------------------- {{{
-
-" Forcing vim to read .md as markdown and not as 'modula2' or whatever
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-" Folding for markdown
-autocmd Filetype markdown set foldcolumn=4
+autocmd Filetype org nnoremap <Leader>od :e `=OrgDayFilename()`<CR>
+autocmd Filetype org nnoremap <Leader>ow :e `=OrgWeekFilename()`<CR>
+autocmd Filetype org nnoremap <Leader>op :e ~/org/
+autocmd Filetype org nnoremap <Leader>oa :call OrgAgenda()<CR>
+autocmd Filetype org nnoremap <Leader>oq :call OrgQuit()<CR>
+autocmd Filetype org nnoremap <C-T><C-T> :silent call OrgTimestamp()<CR>
+autocmd Filetype org nnoremap <Leader>os zMgg/\*VG:SortUnfolded:%s/\%x00/\rzM
 
 " }}}
 " Python -------------------------------------------------- {{{
