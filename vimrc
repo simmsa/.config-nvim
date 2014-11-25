@@ -417,6 +417,16 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 
 " }}}
+" Jedi -------------------------------------------------- {{{
+
+autocmd Filetype python let g:jedi#completions_command = "<C-N>"
+autocmd Filetype python let g:jedi#assignments_command = "<Leader>pg"
+autocmd Filetype python let g:jedi#goto_definitions_command = "<Leader>pg"
+autocmd Filetype python let g:jedi#documentation_command = "<Leader>pd"
+autocmd Filetype python let g:jedi#rename_command = "<Leader>pr"
+autocmd Filetype python let g:jedi#usages_command = "<Leader>pu"
+
+" }}}
 " Fugitive --------------------------------------------------" {{{
 
 " Fugitive custom mappings
