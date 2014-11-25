@@ -412,10 +412,17 @@ autocmd Filetype eruby setlocal ts=3 sw=2 expandtab
 " }}}
 " Ctrl P -------------------------------------------------- {{{
 
-let g:ctrlp_map = '<c-p>'
+let g:ctrlp_map = '<Leader>o'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_prompt_mappings = {'PrtSelectMove("j")':['h'], 'PrtSelectMove("k")': ['t']}
+let g:ctrlp_prompt_mappings = {'PrtSelectMove("k")': ['<c-t>'], 'ToggleByFName()':['<c-f>'], 'AcceptSelection("t")': ['<c-y>'], 'PrtCurLeft()': ['<left>'], 'PrtSelectMove("j")':['<c-n>'], 'PrtHistory(-1)': ['<c-l>'],}
+let ctrlp_filter_greps = "".
+    \ "egrep -iv '\\.(" .
+    \ "jar|class|swp|swo|log|so|o|pyc|jpe?g|png|gif|mo|po" .
+    \ ")$' | " .
+    \ "egrep -v '^(\\./)?(" .
+    \ "deploy/|lib/|classes/|libs/|deploy/vendor/|.git/|.hg/|.svn/|.*migrations/|docs/build/" .
+    \ ")'"
 
 " }}}
 " Jedi -------------------------------------------------- {{{
