@@ -415,6 +415,7 @@ autocmd Filetype eruby setlocal ts=3 sw=2 expandtab
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_prompt_mappings = {'PrtSelectMove("j")':['h'], 'PrtSelectMove("k")': ['t']}
 
 " }}}
 " Jedi -------------------------------------------------- {{{
