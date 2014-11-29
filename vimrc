@@ -352,10 +352,10 @@ function! OrgSort()
     " visual ":'<,'>:SortUnfolded"
     " execute ":%s/%x00/\r"
 endfunction
-autocmd Filetype org nnoremap <Leader>od :e `=OrgDayFilename()`<CR>
-autocmd Filetype org nnoremap <Leader>ow :e `=OrgWeekFilename()`<CR>
-autocmd Filetype org nnoremap <Leader>op :e ~/org/
-autocmd Filetype org nnoremap <Leader>oa :call OrgAgenda()<CR>
+nnoremap <Leader>od :e `=OrgDayFilename()`<CR>
+nnoremap <Leader>ow :e `=OrgWeekFilename()`<CR>
+nnoremap <Leader>op :e ~/org/
+nnoremap <Leader>oa :call OrgAgenda()<CR>
 autocmd Filetype org nnoremap <Leader>oq :call OrgQuit()<CR>
 autocmd Filetype org nnoremap <C-T><C-T> :silent call OrgTimestamp()<CR>
 autocmd Filetype org nnoremap <Leader>os zMgg/\*VG:SortUnfolded:%s/\%x00/\rzM
