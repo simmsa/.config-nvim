@@ -182,7 +182,6 @@ nnoremap <Leader>u bgUw
 nnoremap <Leader>n :bn<CR>
 nnoremap <Leader>p :bp<CR>
 nnoremap <Leader>d :bd<CR>
-nnoremap <Leader>b :ls<CR>:b<Space>
 " Substitute like * (\< and \> select only that word)
 nnoremap <Leader>; :%s:\<<C-R><C-W>\>:
 
@@ -412,7 +411,7 @@ autocmd Filetype eruby setlocal ts=3 sw=2 expandtab
 " }}}
 " Ctrl P -------------------------------------------------- {{{
 
-let g:ctrlp_map = '<Leader>o'
+" let g:ctrlp_map = '<Leader>o'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_prompt_mappings = {'PrtSelectMove("k")': ['<c-t>'], 'ToggleByFName()':['<c-f>'], 'AcceptSelection("t")': ['<c-y>'], 'PrtCurLeft()': ['<left>'], 'PrtSelectMove("j")':['<c-n>'], 'PrtHistory(-1)': ['<c-l>'],}
@@ -519,6 +518,16 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 " let g:UltiSnipsJumpForwardTrigger="<C-S>"
 " let g:UltiSnipsJumpBackwardTrigger='<C-k>'
+
+" }}}
+" Unite -------------------------------------------------- {{{
+
+let g:unite_enable_start_insert = 1
+let g:unite_force_overwrite_statusline = 0
+let g:unite_winheight = 10
+let g:unite_split_rule = "botright"
+" Quick Buffer Switching
+nnoremap <Leader>b :Unite -quick-match buffer<CR>
 
 " }}}
 " vim airline -------------------------------------------------- {{{
