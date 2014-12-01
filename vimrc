@@ -168,6 +168,9 @@ vmap <Leader>sy "+y
 nnoremap <Leader>sp "+p
 " Faster repeat command
 nnoremap <C-P> :<C-P><CR>
+"Quickfix mappings
+autocmd BufReadPost quickfix nnoremap <buffer> <C-N> <Down>
+autocmd BufReadPost quickfix nnoremap <buffer> <C-T> <Up>
 
 " Leader Mappings -------------------------------------------------- {{{
 
@@ -382,6 +385,11 @@ autocmd Filetype eruby setlocal ts=3 sw=2 expandtab
 " }}}
 " Plugin Settings -------------------------------------------------- {{{
 
+" Ag -------------------------------------------------- {{{
+
+nnoremap <Leader>/ :Ag<Space>
+
+" }}}
 " Bundles {{{
 
 " Bundle 'gmarik/vundle'
@@ -544,6 +552,7 @@ let g:airline#extensions#branch#enabled=1
 " let g:airline#extensions#branch#displayed_head_limit=10
 let g:airline#extensions#syntastic#enabled=1
 " let g:airline#extensions#whitespace#enabled=0
+let g:airline#extensions#eclim#enabled = 0
 
 " }}}
 " vim go -------------------------------------------------- {{{
