@@ -166,6 +166,8 @@ vnoremap > >gv
 " Easier system copy and paste
 vmap <Leader>sy "+y
 nnoremap <Leader>sp "+p
+" Faster repeat command
+nnoremap <C-P> :<C-P><CR>
 
 " Leader Mappings -------------------------------------------------- {{{
 
