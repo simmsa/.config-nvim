@@ -59,7 +59,6 @@ set breakindentopt=shift:4,sbr
 " Turn off parentheses matching, its driving me crazy
 let loaded_matchparen = 1
 " Toggle from relative numbering to regular numbering in normal/insert
-" set nu
 set rnu
 autocmd InsertEnter * set nornu
 autocmd InsertLeave * set rnu
@@ -116,8 +115,6 @@ noremap k d
 " l is now look up next swapping with n
 noremap l n
 nnoremap K dd
-nnoremap D 0
-nnoremap N $
 "easier navigation of finds
 nmap - :
 
@@ -126,14 +123,11 @@ nmap - :
 
 "<Ctrl-l> redraws the screen and removes any search highlighting
 nnoremap <silent> <C-l> :nohl<CR><C-l>
-" Map esc to ht
-" imap ht <Esc>
-vmap ht <Esc>
-" Set insert mode timeout, cause I keep forgetting
+" Set insert mode timeout, returns to normal mode after 15 seconds
 au CursorHoldI * stopinsert
 au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
 au InsertLeave * let &updatetime=updaterestore
-"Remap normal mode
+"Remap command mode
 cnoremap <C-f> <Right>
 cnoremap <C-b> <Left>
 "Wrapping and unwrapping lines
@@ -183,10 +177,9 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>t gt
 "<Space> s to source VIMRC
 nnoremap <Leader>s :so ~/.vimrc<CR>
-" Easy inversion of colorscheme
-nnoremap <Leader>ic :colorscheme pychimp-inverted<CR>
 " Easier uppercase
-nnoremap <Leader>u bgUw
+nnoremap <Leader>u BgUiWW
+imap <C-u> <ESC>BgUiWi
 "Easy buffer switching
 nnoremap <Leader>n :bn<CR>
 nnoremap <Leader>p :bp<CR>
