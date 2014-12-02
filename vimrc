@@ -432,11 +432,12 @@ let g:ctrlp_prompt_mappings = {'PrtSelectMove("k")': ['<c-t>'], 'ToggleByFName()
 " Jedi -------------------------------------------------- {{{
 
 let g:jedi#completions_command = "<C-N>"
-let g:jedi#assignments_command = "<Leader>pg"
+let g:jedi#goto_assignments_command = "<Leader>pg"
 let g:jedi#goto_definitions_command = "<Leader>pg"
 let g:jedi#documentation_command = "<Leader>pd"
 let g:jedi#rename_command = "<Leader>pr"
 let g:jedi#usages_command = "<Leader>pu"
+let g:jedi#show_call_signatures = "1"
 
 " }}}
 " Fugitive --------------------------------------------------" {{{
