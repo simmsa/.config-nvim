@@ -178,8 +178,9 @@ nnoremap <Leader>t gt
 "<Space> s to source VIMRC
 nnoremap <Leader>s :so ~/.vimrc<CR>
 " Easier uppercase
-nnoremap <Leader>u BgUiWW
-imap <C-u> <ESC>BgUiWi
+nnoremap <Leader>u mzgUiW`za
+imap <C-u> <ESC>mzgUiW`za
+
 "Easy buffer switching
 nnoremap <Leader>n :bn<CR>
 nnoremap <Leader>p :bp<CR>
