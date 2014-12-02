@@ -580,13 +580,6 @@ let g:markdown_fold_override_foldtext = 0
 autocmd Filetype org setl noai nocin nosi inde=
 
 " }}}
-" YouCompleteMe -------------------------------------------------- {{{
-
-" Allows both UltiSnips and YCM to use tab
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
-
-" }}}
 
 " }}}
 " Fold Settings -------------------------------------------------- {{{
