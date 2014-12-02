@@ -76,6 +76,8 @@ set wildignore+=*.pyc,*.jpg,*.png,*.log,*.o,*.so,*.gif
 set dictionary=/usr/share/dict/words
 " Use zsh
 set shell=/usr/local/bin/zsh
+" Make test-name and test_name auto completable
+set iskeyword+=\-,\_
 
 " Color scheme -------------------------------------------------- {{{
 
