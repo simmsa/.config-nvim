@@ -539,17 +539,9 @@ nnoremap <Leader>b :Unite -quick-match buffer<CR>
 
 let g:airline_powerline_fonts=1
 let g:airline_theme='base16'
-" let g:airline_left_sep=''
-" let g:airline_left_alt_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_right_alt_sep = ''
-" let g:airline_symbols.branch = ''
-" let g:airline_symbols.readonly = ''
-" let g:airline_symbols.linenr = ''
 let g:airline#extensions#branch#enabled=1
-" let g:airline#extensions#branch#displayed_head_limit=10
+let g:airline#extensions#branch#displayed_head_limit=10
 let g:airline#extensions#syntastic#enabled=1
-" let g:airline#extensions#whitespace#enabled=0
 let g:airline#extensions#eclim#enabled = 0
 
 " }}}
