@@ -200,6 +200,7 @@ imap <C-b> <Left>
 
 " }}}
 " Cool Functions -------------------------------------------------- {{{
+
 "Make sure vim returns to the same line when you reopen a file.
 augroup line_return
     au!
@@ -208,6 +209,7 @@ augroup line_return
         \   execute 'normal! g`"zvzz' |
         \ endif
 augroup END
+
 " Change cursor shape for different modes
 let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
 let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
