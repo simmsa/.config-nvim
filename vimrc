@@ -431,7 +431,7 @@ let g:ctrlp_prompt_mappings = {'PrtSelectMove("k")': ['<c-t>'], 'ToggleByFName()
 " }}}
 " Jedi -------------------------------------------------- {{{
 
-let g:jedi#completions_command = "<C-N>"
+let g:jedi#completions_command = "<C-P>"
 let g:jedi#goto_assignments_command = "<Leader>pg"
 let g:jedi#goto_definitions_command = "<Leader>pg"
 let g:jedi#documentation_command = "<Leader>pd"
@@ -452,7 +452,7 @@ function! ToggleGStatus()
 endfunction
 command! ToggleGStatus :call ToggleGStatus()
 nnoremap <Leader>g :ToggleGStatus<CR>
-nnoremap <Leader>gc :Gcommit
+nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 
 " }}}
