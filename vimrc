@@ -69,7 +69,7 @@ set timeoutlen=300
 set wildmode=longest,list,full
 set wildmenu
 " Ignore directories
-set wildignore+=*/.git/*,*/bundle/*,*/.sass-cache/*,*/lib/*
+set wildignore+=*/.git/*,*/bundle/*,*/.sass-cache/*,*/lib/*,*/migrations/*
 " Ignore files
 set wildignore+=*.pyc,*.jpg,*.png,*.log,*.o,*.so,*.gif
 " Spell check dictionary
