@@ -414,6 +414,12 @@ nnoremap <Leader>/ :Ag<Space>
 " Bundle 'plasticboy/vim-markdown'
 
 " }}}
+" Buffergator -------------------------------------------------- {{{
+
+let g:buffergator_suppress_keymaps=1
+nnoremap <Leader>b :BuffergatorToggle<CR>
+
+" }}}
 " Buffer line -------------------------------------------------- {{{
 
 " let g:bufferline_active_buffer_left = ""
@@ -533,7 +539,7 @@ let g:unite_force_overwrite_statusline = 0
 let g:unite_winheight = 10
 let g:unite_split_rule = "botright"
 " Quick Buffer Switching
-nnoremap <Leader>b :Unite -quick-match buffer<CR>
+" nnoremap <Leader>b :Unite -quick-match buffer<CR>
 
 " }}}
 " vim airline -------------------------------------------------- {{{
