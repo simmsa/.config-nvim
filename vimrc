@@ -278,6 +278,33 @@ set foldtext=NeatFoldText()
 " }}}
 " Filetype Specific -------------------------------------------------- {{{
 
+" Html -------------------------------------------------- {{{
+
+augroup ft_html
+    au!
+
+    au BufNewFile, BufRead *.html setlocal filetype=htmldjango
+    au FileType xhtml setlocal filetype=htmldjango
+    au FileType htmldjango setlocal foldmethod=indent
+
+    " Tag folding
+    " au FileType htmldjango syn region XMLFold start=+^<\([^/?!><]*[^/]>\)\&.*\(<\1\|[[:alnum:]]\)$+ end=+^</.*[^-?]>$+ fold transparent keepend extend
+
+    " Django tags
+    au FileType htmldjango inoremap <buffer> <C-T> {%<Space><Space>%}<Left><Left><Left>
+
+    " Django variables
+    au FileType htmldjango inoremap <buffer> <C-V> {{<Space><Space>}}<Left><Left><Left>
+
+    " Two space indenting for max screen real estate usage
+    autocmd Filetype htmldjango setlocal ts=2 sw=2 expandtab
+
+    " Set comments
+    au FileType htmldjango setlocal commentstring={#\ %s\ #}
+
+augroup END
+
+" }}}
 " Markdown -------------------------------------------------- {{{
 
 " Forcing vim to read .md as markdown and not as 'modula2' or whatever
@@ -435,17 +462,6 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_prompt_mappings = {'PrtSelectMove("k")': ['<c-t>'], 'ToggleByFName()':['<c-f>'], 'AcceptSelection("t")': ['<c-y>'], 'PrtCurLeft()': ['<left>'], 'PrtSelectMove("j")':['<c-n>'], 'PrtHistory(-1)': ['<c-l>'],}
 
 " }}}
-" Jedi -------------------------------------------------- {{{
-
-let g:jedi#completions_command = "<C-P>"
-let g:jedi#goto_assignments_command = "<Leader>pg"
-let g:jedi#goto_definitions_command = "<Leader>pg"
-let g:jedi#documentation_command = "<Leader>pd"
-let g:jedi#rename_command = "<Leader>pr"
-let g:jedi#usages_command = "<Leader>pu"
-let g:jedi#show_call_signatures = "1"
-
-" }}}
 " Fugitive --------------------------------------------------" {{{
 
 " Fugitive custom mappings
@@ -465,6 +481,23 @@ nnoremap <Leader>gd :Gdiff<CR>
 " Gundo -------------------------------------------------- {{{
 " Gundo config
 " nnoremap gu :GundoToggle<CR>
+
+" }}}
+" Jedi -------------------------------------------------- {{{
+
+let g:jedi#completions_command = "<C-P>"
+let g:jedi#goto_assignments_command = "<Leader>pg"
+let g:jedi#goto_definitions_command = "<Leader>pg"
+let g:jedi#documentation_command = "<Leader>pd"
+let g:jedi#rename_command = "<Leader>pr"
+let g:jedi#usages_command = "<Leader>pu"
+let g:jedi#show_call_signatures = "1"
+
+" }}}
+
+" Matchit -------------------------------------------------- {{{
+
+runtime macros/matchit.vim
 
 " }}}
 " Rainbow Parens -------------------------------------------------- {{{
