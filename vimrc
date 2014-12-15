@@ -302,6 +302,14 @@ augroup ft_html
 augroup END
 
 " }}}
+" Man -------------------------------------------------- {{{
+
+au Filetype man nnoremap h <Down>
+au Filetype man nnoremap t <Up>
+au Filetype man nnoremap <C-D> <PageDown>
+au Filetype man nnoremap <C-U> <PageUp>
+
+" }}}
 " Markdown -------------------------------------------------- {{{
 
 " Forcing vim to read .md as markdown and not as 'modula2' or whatever
