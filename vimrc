@@ -283,7 +283,7 @@ set foldtext=NeatFoldText()
 augroup ft_html
     au!
 
-    au BufNewFile, BufRead *.html setlocal filetype=htmldjango
+    au BufNewFile,BufRead *.html setlocal filetype=htmldjango
     au FileType xhtml setlocal filetype=htmldjango
     au FileType htmldjango setlocal foldmethod=indent
 
