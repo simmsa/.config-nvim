@@ -287,9 +287,6 @@ augroup ft_html
     au FileType xhtml setlocal filetype=htmldjango
     au FileType htmldjango setlocal foldmethod=indent
 
-    " Tag folding
-    " au FileType htmldjango syn region XMLFold start=+^<\([^/?!><]*[^/]>\)\&.*\(<\1\|[[:alnum:]]\)$+ end=+^</.*[^-?]>$+ fold transparent keepend extend
-
     " Django tags
     au FileType htmldjango inoremap <buffer> <C-T> {%<Space><Space>%}<Left><Left><Left>
 
