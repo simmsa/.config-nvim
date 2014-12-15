@@ -167,6 +167,8 @@ nnoremap <C-P> :<C-P><CR>
 "Quickfix mappings
 autocmd BufReadPost quickfix nnoremap <buffer> <C-N> <Down>
 autocmd BufReadPost quickfix nnoremap <buffer> <C-T> <Up>
+" Get to the shell faster
+nnoremap s :!<Space>
 
 " Leader Mappings -------------------------------------------------- {{{
 
