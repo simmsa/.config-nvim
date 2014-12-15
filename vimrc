@@ -506,41 +506,17 @@ let g:jedi#usages_command = "<Leader>pu"
 let g:jedi#show_call_signatures = "1"
 
 " }}}
-
 " Matchit -------------------------------------------------- {{{
 
 runtime macros/matchit.vim
 
 " }}}
-" Rainbow Parens -------------------------------------------------- {{{
+" Rainbow -------------------------------------------------- {{{
 
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-let g:rbpt_max = 16
-let g:rbpt_loadcmd_toggle = 0
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-
+let g:rainbow_active=1
 " Turn off Rainbow parentheses for Django html
 autocmd FileType htmldjango RainbowParenthesesToggle
+let g:rainbow_ctermfgs = [196, 129, 202, 126, 184, 21, 40]
 
 " }}}
 " Syntastic -------------------------------------------------- {{{
