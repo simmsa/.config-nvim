@@ -280,6 +280,11 @@ set foldtext=NeatFoldText()
 " }}}
 " Filetype Specific -------------------------------------------------- {{{
 
+" C -------------------------------------------------- {{{
+
+au FileType c setlocal foldmethod=syntax
+
+" }}}
 " Html -------------------------------------------------- {{{
 
 augroup ft_html
