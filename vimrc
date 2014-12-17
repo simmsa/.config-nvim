@@ -517,6 +517,7 @@ runtime macros/matchit.vim
 " neocomplete -------------------------------------------------- {{{
 
 let g:neocomplete#enable_at_startup = 1
+imap <expr> - pumvisible() ? "\<Plug>(neocomplete_start_unite_quick_match)" : '-'
 
 " }}}
 " Rainbow -------------------------------------------------- {{{
