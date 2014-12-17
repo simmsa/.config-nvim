@@ -34,6 +34,8 @@ Plugin 'nelstrom/vim-markdown-folding'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-ruby'
 Plugin 'rkitover/vimpager'
+Plugin 'tpope/vim-speeddating'
+Plugin 'Yankring.vim'
 call vundle#end()
 filetype plugin indent on
 
