@@ -36,6 +36,7 @@ Plugin 'tpope/vim-ruby'
 Plugin 'rkitover/vimpager'
 Plugin 'tpope/vim-speeddating'
 Plugin 'Yankring.vim'
+Plugin 'shougo/neocomplete.vim'
 call vundle#end()
 filetype plugin indent on
 
@@ -511,6 +512,11 @@ let g:jedi#show_call_signatures = "1"
 " Matchit -------------------------------------------------- {{{
 
 runtime macros/matchit.vim
+
+" }}}
+" neocomplete -------------------------------------------------- {{{
+
+let g:neocomplete#enable_at_startup = 1
 
 " }}}
 " Rainbow -------------------------------------------------- {{{
