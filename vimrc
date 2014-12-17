@@ -1,10 +1,40 @@
 " .vimrc
 " Author: Andrew Simms <andrew@andrewdsimms.com>
-" Preamble --------------------------------------- {{{
+" Vundle --------------------------------------- {{{
 
-filetype off
-execute pathogen#infect()
 set nocompatible
+filetype off
+" execute pathogen#infect()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-commentary'
+Plugin 'jplaut/vim-arduino-ino'
+Plugin 'tpope/vim-surround'
+Plugin 'bling/vim-airline'
+Plugin 'bling/vim-bufferline'
+Plugin 'sjl/gundo.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'rking/ag.vim'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'calendar.vim'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'oblitum/rainbow'
+Plugin 'godlygeek/tabular'
+Plugin 'Shougo/unite.vim'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'tpope/vim-markdown'
+Plugin 'nelstrom/vim-markdown-folding'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-ruby'
+Plugin 'rkitover/vimpager'
+call vundle#end()
 filetype plugin indent on
 
 " }}}
@@ -69,7 +99,7 @@ set timeoutlen=300
 set wildmode=longest,list,full
 set wildmenu
 " Ignore directories
-set wildignore+=*/.git/*,*/bundle/*,*/.sass-cache/*,*/lib/*,*/migrations/*
+set wildignore+=*/.git/*,*/.sass-cache/*,*/lib/*,*/migrations/*
 " Ignore files
 set wildignore+=*.pyc,*.jpg,*.png,*.log,*.o,*.so,*.gif
 " Spell check dictionary
@@ -427,32 +457,6 @@ autocmd Filetype eruby setlocal ts=3 sw=2 expandtab
 " Ag -------------------------------------------------- {{{
 
 nnoremap <Leader>/ :Ag<Space>
-
-" }}}
-" Bundles {{{
-
-" Bundle 'gmarik/vundle'
-" Bundle 'altercation/vim-colors-solarized'
-" Bundle 'mattn/emmet-vim'
-" Bundle 'kien/ctrlp.vim'
-" Bundle 'scrooloose/syntastic'
-" Bundle 'Lokaltog/vim-easymotion'
-" Bundle 'terryma/vim-multiple-cursors'
-" Bundle 'tpope/vim-fugitive'
-" Bundle 'mklabs/vim-fetch'
-" Bundle 'Townk/vim-autoclose'
-" Bundle 'fatih/vim-go'
-" Bundle 'ervandew/supertab'
-" Bundle 'tpope/vim-commentary'
-" Bundle 'Kazark/vim-SimpleSmoothScroll'
-" Bundle 'jplaut/vim-arduino-ino'
-" Bundle 'kien/rainbow_parentheses.vim'
-" Bundle 'tpope/vim-surround'
-" Bundle 'bling/vim-airline'
-" Bundle 'bling/vim-bufferline'
-" Bundle 'sjl/gundo.vim'
-" Bundle 'SirVer/ultisnips'
-" Bundle 'plasticboy/vim-markdown'
 
 " }}}
 " Buffergator -------------------------------------------------- {{{
