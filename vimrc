@@ -521,10 +521,9 @@ runtime macros/matchit.vim
 " }}}
 " Rainbow -------------------------------------------------- {{{
 
-let g:rainbow_active=1
-" Turn off Rainbow parentheses for Django html
-autocmd FileType htmldjango RainbowParenthesesToggle
+au FileType c,cpp,python,java,ruby call rainbow#load()
 let g:rainbow_ctermfgs = [196, 129, 202, 126, 184, 21, 40]
+nnoremap <Leader>r :RainbowToggle<CR>
 
 " }}}
 " Syntastic -------------------------------------------------- {{{
