@@ -600,6 +600,11 @@ let g:markdown_fold_override_foldtext = 0
 autocmd Filetype org setl noai nocin nosi inde=
 
 " }}}
+" Yankring -------------------------------------------------- {{{
+
+nnoremap <Leader>y :YRShow<CR>
+
+" }}}
 
 " }}}
 " Fold Settings -------------------------------------------------- {{{
