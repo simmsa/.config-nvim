@@ -556,8 +556,17 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 " }}}
 " unite.vim -------------------------------------------------- {{{
 
+" Move unite window to the bottom like ctrlp
+let g:unite_split_rule = "botright"
 " Quick buffer switching
 nnoremap <Leader>b :Unite -quick-match buffer<CR>
+" Better quick-match letters
+let g:unite_quick_match_table =
+      \ get(g:, 'unite_quick_match_table', {
+      \     'h' : 0, 'u' : 1, 't' : 2, 'e' : 3, 'n' : 4, 'o' : 5, 'a' : 6, 's' : 7, 'i' : 8, 'd' : 9,
+      \     'p' : 10, 'g' : 11, '.' : 12, 'c' : 13, 'y' : 14, 'f' : 15, 'b' : 16, 'k' : 17, 'm' : 18, 'j' : 19,
+      \     '1' : 20, '2' : 21, '3' : 22, '4' : 23, '5' : 24, '6' : 25, '7' : 26, '8' : 27, '9' : 28, '0' : 29,
+      \ })
 
 " }}}
 " vim airline -------------------------------------------------- {{{
