@@ -461,12 +461,6 @@ autocmd Filetype eruby setlocal ts=3 sw=2 expandtab
 nnoremap <Leader>/ :Ag<Space>
 
 " }}}
-" Buffergator -------------------------------------------------- {{{
-
-let g:buffergator_suppress_keymaps=1
-nnoremap <Leader>b :BuffergatorToggle<CR>
-
-" }}}
 " Buffer line -------------------------------------------------- {{{
 
 " let g:bufferline_active_buffer_left = ""
@@ -558,6 +552,12 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 " let g:UltiSnipsJumpForwardTrigger="<C-S>"
 " let g:UltiSnipsJumpBackwardTrigger='<C-k>'
+
+" }}}
+" unite.vim -------------------------------------------------- {{{
+
+" Quick buffer switching
+nnoremap <Leader>b :Unite -quick-match buffer<CR>
 
 " }}}
 " vim airline -------------------------------------------------- {{{
