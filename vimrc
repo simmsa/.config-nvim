@@ -184,8 +184,7 @@ nnoremap <Leader>t gt
 "<Space> s to source VIMRC
 nnoremap <Leader>s :so ~/.vimrc<CR>
 " Easier uppercase
-nnoremap <Leader>u mzgUiW`za
-imap <C-u> <ESC>mzgUiW`za
+imap <C-u> <ESC>mzgUiw`za
 
 "Easy buffer switching
 nnoremap <Leader>n :bn<CR>
@@ -494,8 +493,8 @@ nnoremap <Leader>gd :Gdiff<CR>
 
 " }}}
 " Gundo -------------------------------------------------- {{{
-" Gundo config
-" nnoremap gu :GundoToggle<CR>
+
+nnoremap <Leader>u :GundoToggle<CR>
 
 " }}}
 " Jedi -------------------------------------------------- {{{
