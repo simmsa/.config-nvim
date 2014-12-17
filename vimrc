@@ -283,6 +283,7 @@ set foldtext=NeatFoldText()
 " C -------------------------------------------------- {{{
 
 au FileType c setlocal foldmethod=syntax
+au FileType c syn match Function /\w\+(/me=e-1
 
 " }}}
 " Html -------------------------------------------------- {{{
