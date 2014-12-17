@@ -78,6 +78,8 @@ set dictionary=/usr/share/dict/words
 set shell=/usr/local/bin/zsh
 " Make test-name and test_name auto completable
 set iskeyword+=\-,\_
+" Don't highlight really long lines
+set synmaxcol=500
 
 " Color scheme -------------------------------------------------- {{{
 
