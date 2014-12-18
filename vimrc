@@ -565,8 +565,9 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 
 " Move unite window to the bottom like ctrlp
 let g:unite_split_rule = "botright"
+let g:unite_winheight = 10
 " Quick buffer switching
-nnoremap <Leader>b :Unite -quick-match buffer<CR>
+nnoremap <Leader>b :Unite -quick-match buffer -cursor-line-highlight=CursorLine<CR>
 " Better quick-match letters
 let g:unite_quick_match_table =
       \ get(g:, 'unite_quick_match_table', {
@@ -574,6 +575,14 @@ let g:unite_quick_match_table =
       \     'p' : 10, 'g' : 11, '.' : 12, 'c' : 13, 'y' : 14, 'f' : 15, 'b' : 16, 'k' : 17, 'm' : 18, 'j' : 19,
       \     '1' : 20, '2' : 21, '3' : 22, '4' : 23, '5' : 24, '6' : 25, '7' : 26, '8' : 27, '9' : 28, '0' : 29,
       \ })
+autocmd FileType unite call s:unite_settings()
+
+function! s:unite_settings()
+    imap <buffer> <C-t> <Plug>(unite_select_previous_line)
+    nmap <buffer> t <Down>
+    imap <buffer> <C-n> <Plug>(unite_select_next_line)
+    nmap <buffer> h <Up>
+endfunction
 
 " }}}
 " vim airline -------------------------------------------------- {{{
