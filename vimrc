@@ -328,6 +328,7 @@ augroup ft_html
     au BufNewFile,BufRead *.html setlocal filetype=htmldjango
     au FileType xhtml setlocal filetype=htmldjango
     au FileType htmldjango setlocal foldmethod=indent
+    au FileType htmldjango IndentGuidesEnable
 
     " Django tags
     au FileType htmldjango inoremap <buffer> <C-T> {%<Space><Space>%}<Left><Left><Left>
@@ -604,7 +605,7 @@ let g:go_disable_autoinstall = 1
 
 let g:indent_guides_start_level = 2
 let g:indent_guides_auto_colors = 0
-autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd ctermbg=18
+autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd ctermbg=NONE
 autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg=8
 
 " }}}
