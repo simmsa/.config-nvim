@@ -113,6 +113,8 @@ set shell=/usr/local/bin/zsh
 set iskeyword+=\-,\_
 " Don't highlight really long lines
 set synmaxcol=500
+" Window titles for tmux
+autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " . expand("%:t"))
 
 " Color scheme -------------------------------------------------- {{{
 
