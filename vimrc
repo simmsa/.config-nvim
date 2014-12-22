@@ -121,7 +121,7 @@ function! TruncateFilename()
         return filename
     else
         let filename_len=len(filename)
-        return filename[0:2] . ".." . filename[filename_len-3:filename_len-1]
+        return filename[0:2] . "…" . filename[filename_len-3:filename_len-1]
 endfunction
 autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . TruncateFilename())
 
@@ -612,7 +612,7 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:airline_powerline_fonts=1
 let g:airline_theme='base16'
 let g:airline#extensions#branch#enabled=1
-let g:airline#extensions#branch#displayed_head_limit=10
+let g:airline#extensions#branch#displayed_head_limit=6
 let g:airline#extensions#syntastic#enabled=1
 let g:airline#extensions#eclim#enabled = 0
 
