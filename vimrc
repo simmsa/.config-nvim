@@ -37,6 +37,7 @@ Plugin 'tpope/vim-speeddating'
 Plugin 'shougo/neocomplete.vim'
 Plugin 'troydm/easybuffer.vim'
 Plugin 'jmcantrell/vim-journal'
+Plugin 'maxbrunsfeld/vim-yankstack'
 call vundle#end()
 filetype plugin indent on
 
@@ -150,6 +151,8 @@ set softtabstop=4
 " }}}
 " Dvorak -------------------------------------------------- {{{
 
+" Run yankstack before any mappings
+call yankstack#setup()
 noremap h gj
 noremap t gk
 noremap d <Left>
@@ -488,7 +491,6 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_prompt_mappings = {'PrtSelectMove("k")': ['<c-t>'], 'ToggleByFName()':['<c-f>'], 'AcceptSelection("t")': ['<c-y>'], 'PrtCurLeft()': ['<left>'], 'PrtSelectMove("j")':['<c-n>'], 'PrtHistory(-1)': ['<c-l>'],}
 
 " }}}
-
 " EasyBuffer -------------------------------------------------- {{{
 
 let g:easybuffer_chars=['h', 't', 'n', 's', 'd', 'a', 'o', 'e', 'u', 'i']
@@ -645,9 +647,10 @@ let g:markdown_fold_override_foldtext = 0
 autocmd Filetype org setl noai nocin nosi inde=
 
 " }}}
-" Yankring -------------------------------------------------- {{{
+" vim yankstack -------------------------------------------------- {{{
 
-" nnoremap <Leader>y :YRShow<CR>
+let g:yankstack_map_keys=0
+nnoremap <Leader>y :Yanks<CR>
 
 " }}}
 
