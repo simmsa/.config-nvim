@@ -41,6 +41,7 @@ nosetests.xml
 *.swo
 tmp
 .netrwhist
+view/*
 
 # Plugins managed by Vundle
 bundle/*
