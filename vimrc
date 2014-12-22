@@ -4,7 +4,6 @@
 
 set nocompatible
 filetype off
-" execute pathogen#infect()
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
@@ -37,7 +36,6 @@ Plugin 'tpope/vim-speeddating'
 Plugin 'shougo/neocomplete.vim'
 Plugin 'troydm/easybuffer.vim'
 Plugin 'jmcantrell/vim-journal'
-Plugin 'maxbrunsfeld/vim-yankstack'
 call vundle#end()
 filetype plugin indent on
 
@@ -151,8 +149,6 @@ set softtabstop=4
 " }}}
 " Dvorak -------------------------------------------------- {{{
 
-" Run yankstack before any mappings
-call yankstack#setup()
 noremap h gj
 noremap t gk
 noremap d <Left>
@@ -645,12 +641,6 @@ let g:markdown_fold_override_foldtext = 0
 " vim org mode -------------------------------------------------- {{{
 
 autocmd Filetype org setl noai nocin nosi inde=
-
-" }}}
-" vim yankstack -------------------------------------------------- {{{
-
-let g:yankstack_map_keys=0
-nnoremap <Leader>y :Yanks<CR>
 
 " }}}
 
