@@ -299,7 +299,8 @@ nmap <Leader>f o<Esc>50i-<Esc>A<Space>{{{<CR>}}}<Esc>gcc2t0gcchkktf<Space>i<Spac
 " NeatFoldText -------------------------------------------------- {{{
 
 function! NeatFoldText()
-  let line = ' ' . substitute(getline(v:foldstart), '^\s#*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+  " let line = ' ' . substitute(getline(v:foldstart), '^\s#*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+  let line = ' ' . substitute(getline(v:foldstart), '{{' . '{', '', 'g') . ' '
   let commentless_line = substitute(line, '//\|#\|/\*\|\*/\|"\|-', '', 'g')
   let lines_count = v:foldend - v:foldstart + 1
   let lines_count_text = ' ' . printf("%s", lines_count . ' lines') . ' '
@@ -336,7 +337,6 @@ augroup ft_html
 
     au BufNewFile,BufRead *.html setlocal filetype=htmldjango
     au FileType xhtml setlocal filetype=htmldjango
-    au FileType htmldjango setlocal foldmethod=indent
     au FileType htmldjango IndentGuidesEnable
 
     " Django tags
@@ -346,10 +346,11 @@ augroup ft_html
     au FileType htmldjango inoremap <buffer> <C-V> {{<Space><Space>}}<Left><Left><Left>
 
     " Two space indenting for max screen real estate usage
-    autocmd Filetype htmldjango setlocal ts=2 sw=2 expandtab
+    au Filetype htmldjango setlocal ts=2 sw=2 expandtab
 
     " Set comments
     au FileType htmldjango setlocal commentstring={#\ %s\ #}
+    au FileType htmldjango setlocal foldmethod=indent
 
 augroup END
 
