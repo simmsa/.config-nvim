@@ -26,17 +26,18 @@ Plugin 'calendar.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'oblitum/rainbow'
 Plugin 'godlygeek/tabular'
-Plugin 'Shougo/unite.vim'
+" Plugin 'Shougo/unite.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'tpope/vim-markdown'
 Plugin 'nelstrom/vim-markdown-folding'
 Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-ruby'
+" Plugin 'tpope/vim-ruby'
 Plugin 'rkitover/vimpager'
 Plugin 'tpope/vim-speeddating'
-Plugin 'Yankring.vim'
+" Plugin 'Yankring.vim'
 Plugin 'shougo/neocomplete.vim'
+Plugin 'troydm/easybuffer.vim'
 call vundle#end()
 filetype plugin indent on
 
@@ -114,7 +115,15 @@ set iskeyword+=\-,\_
 " Don't highlight really long lines
 set synmaxcol=500
 " Window titles for tmux
-autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " . expand("%:t"))
+function! TruncateFilename()
+    let filename=expand("%:t")
+    if len(filename) <= 6
+        return filename
+    else
+        let filename_len=len(filename)
+        return filename[0:2] . ".." . filename[filename_len-3:filename_len-1]
+endfunction
+autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . TruncateFilename())
 
 " Color scheme -------------------------------------------------- {{{
 
@@ -480,6 +489,15 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_prompt_mappings = {'PrtSelectMove("k")': ['<c-t>'], 'ToggleByFName()':['<c-f>'], 'AcceptSelection("t")': ['<c-y>'], 'PrtCurLeft()': ['<left>'], 'PrtSelectMove("j")':['<c-n>'], 'PrtHistory(-1)': ['<c-l>'],}
 
 " }}}
+
+" EasyBuffer -------------------------------------------------- {{{
+
+let g:easybuffer_chars=['h', 't', 'n', 's', 'd', 'a', 'o', 'e', 'u', 'i']
+let g:easybuffer_horizontal_height='10'
+nnoremap <Leader>b :EasyBufferHorizontalBelow<CR>
+au FileType easybuffer set nu! rnu!
+
+" }}}
 " Fugitive --------------------------------------------------" {{{
 
 " Fugitive custom mappings
@@ -519,8 +537,8 @@ runtime macros/matchit.vim
 " }}}
 " neocomplete -------------------------------------------------- {{{
 
-let g:neocomplete#enable_at_startup = 1
-imap <expr> - pumvisible() ? "\<Plug>(neocomplete_start_unite_quick_match)" : '-'
+" let g:neocomplete#enable_at_startup = 1
+" imap <expr> - pumvisible() ? "\<Plug>(neocomplete_start_unite_quick_match)" : '-'
 
 " }}}
 " Rainbow -------------------------------------------------- {{{
@@ -567,25 +585,25 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 " unite.vim -------------------------------------------------- {{{
 
 " Move unite window to the bottom like ctrlp
-let g:unite_split_rule = "botright"
-let g:unite_winheight = 10
+" let g:unite_split_rule = "botright"
+" let g:unite_winheight = 10
 " Quick buffer switching
-nnoremap <Leader>b :Unite -quick-match buffer -cursor-line-highlight=CursorLine<CR>
+" nnoremap <Leader>b :Unite -quick-match buffer<CR>
 " Better quick-match letters
-let g:unite_quick_match_table =
-      \ get(g:, 'unite_quick_match_table', {
-      \     'h' : 0, 'u' : 1, 't' : 2, 'e' : 3, 'n' : 4, 'o' : 5, 'a' : 6, 's' : 7, 'i' : 8, 'd' : 9,
-      \     'p' : 10, 'g' : 11, '.' : 12, 'c' : 13, 'y' : 14, 'f' : 15, 'b' : 16, 'k' : 17, 'm' : 18, 'j' : 19,
-      \     '1' : 20, '2' : 21, '3' : 22, '4' : 23, '5' : 24, '6' : 25, '7' : 26, '8' : 27, '9' : 28, '0' : 29,
-      \ })
-autocmd FileType unite call s:unite_settings()
+" let g:unite_quick_match_table =
+"       \ get(g:, 'unite_quick_match_table', {
+"       \     'h' : 0, 'u' : 1, 't' : 2, 'e' : 3, 'n' : 4, 'o' : 5, 'a' : 6, 's' : 7, 'i' : 8, 'd' : 9,
+"       \     'p' : 10, 'g' : 11, '.' : 12, 'c' : 13, 'y' : 14, 'f' : 15, 'b' : 16, 'k' : 17, 'm' : 18, 'j' : 19,
+"       \     '1' : 20, '2' : 21, '3' : 22, '4' : 23, '5' : 24, '6' : 25, '7' : 26, '8' : 27, '9' : 28, '0' : 29,
+"       \ })
+" autocmd FileType unite call s:unite_settings()
 
-function! s:unite_settings()
-    imap <buffer> <C-t> <Plug>(unite_select_previous_line)
-    nmap <buffer> t <Down>
-    imap <buffer> <C-n> <Plug>(unite_select_next_line)
-    nmap <buffer> h <Up>
-endfunction
+" function! s:unite_settings()
+    " imap <buffer> <C-t> <Plug>(unite_select_previous_line)
+    " nmap <buffer> h <Down>
+    " imap <buffer> <C-n> <Plug>(unite_select_next_line)
+    " nmap <buffer> t <Up>
+" endfunction
 
 " }}}
 " vim airline -------------------------------------------------- {{{
@@ -630,7 +648,7 @@ autocmd Filetype org setl noai nocin nosi inde=
 " }}}
 " Yankring -------------------------------------------------- {{{
 
-nnoremap <Leader>y :YRShow<CR>
+" nnoremap <Leader>y :YRShow<CR>
 
 " }}}
 
