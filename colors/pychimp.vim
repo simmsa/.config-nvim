@@ -64,9 +64,11 @@ hi PmenuSbar   ctermfg=81   ctermbg=16    cterm=NONE
 hi Pmenu       ctermfg=81   ctermbg=16    cterm=NONE
 hi ErrorMsg    ctermfg=88   ctermbg=172   cterm=bold
 hi Search      ctermfg=190  ctermbg=233   cterm=NONE | " Search complete
-hi SpellBad    ctermfg=196  ctermbg=NONE  cterm=NONE  | "Red
-hi SpellCap    ctermfg=200  ctermbg=NONE  cterm=NONE  | "Red
-hi PmenuSel    ctermfg=NONE  ctermbg=8    cterm=NONE
+hi SpellBad    ctermfg=255  ctermbg=196   cterm=NONE | "Red
+hi SpellCap    ctermfg=255  ctermbg=198   cterm=NONE | "Red
+hi SpellLocal  ctermfg=255  ctermbg=198   cterm=NONE | "Red
+hi SpellRare   ctermfg=255  ctermbg=200   cterm=NONE | "Red
+hi PmenuSel    ctermfg=NONE ctermbg=8     cterm=NONE
 hi IncSearch   ctermfg=233  ctermbg=190   cterm=NONE | " When typing
 hi Visual      ctermfg=NONE ctermbg=8     cterm=NONE | " Visual Selection
 
@@ -84,7 +86,7 @@ hi djangoTagEnd   ctermfg=45  ctermbg=NONE  cterm=NONE
 hi djangoVarStart ctermfg=48  ctermbg=NONE  cterm=NONE
 hi djangoVarEnd   ctermfg=48  ctermbg=NONE  cterm=NONE
 
-" Fixing html red
+" Fixing HTML red
 hi htmlH1   ctermfg=196 ctermbg=NONE cterm=NONE
 hi htmlH2   ctermfg=197 ctermbg=NONE cterm=NONE
 hi htmlH3   ctermfg=198 ctermbg=NONE cterm=NONE
