@@ -331,6 +331,11 @@ au FileType c setlocal foldmethod=syntax
 au FileType c syn match Function /\w\+(/me=e-1
 
 " }}}
+" Git -------------------------------------------------- {{{
+
+au FileType gitcommit setlocal spell
+
+" }}}
 " Html -------------------------------------------------- {{{
 
 augroup ft_html
