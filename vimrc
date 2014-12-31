@@ -215,7 +215,9 @@ autocmd BufReadPost quickfix nnoremap <buffer> <C-N> <Down>
 autocmd BufReadPost quickfix nnoremap <buffer> <C-T> <Up>
 " Get to the shell faster
 nnoremap s :!<Space>
-
+" Make <C-P> behave like it should and also zsh like
+cnoremap <C-P> <Up>
+cnoremap <C-T> <Up>
 " Leader Mappings -------------------------------------------------- {{{
 
 " Map leader key to space
