@@ -105,8 +105,9 @@ set wildmenu
 set wildignore+=*/.git/*,*/.sass-cache/*,*/lib/*,*/migrations/*
 " Ignore files
 set wildignore+=*.pyc,*.jpg,*.png,*.log,*.o,*.so,*.gif
-" Spell check dictionary
+" Spelling
 set dictionary=/usr/share/dict/words
+set spelllang=en_us
 " Use zsh
 set shell=/usr/local/bin/zsh
 " Make test-name and test_name auto completable
