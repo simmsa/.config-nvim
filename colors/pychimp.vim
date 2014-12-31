@@ -38,7 +38,7 @@ hi PreProc     ctermfg=85  ctermbg=NONE  cterm=NONE | "Sea Green 'NONE'
 hi Character   ctermfg=123 ctermbg=NONE  cterm=NONE | "Light Blue
 hi Repeat      ctermfg=148 ctermbg=NONE  cterm=NONE | "Yellow
 hi Todo        ctermfg=162 ctermbg=NONE  cterm=bold | "Magenta
-hi Identifier  ctermfg=165 ctermbg=NONE  cterm=NONE | "Purple
+hi Identifier  ctermfg=NONE ctermbg=NONE  cterm=NONE | "Purple
 hi Keyword     ctermfg=166 ctermbg=NONE  cterm=NONE | "Orange
 hi Constant    ctermfg=178 ctermbg=NONE  cterm=bold | "Yellow
 hi Error       ctermfg=196 ctermbg=NONE  cterm=bold | "Red
