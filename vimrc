@@ -205,9 +205,6 @@ vnoremap T {
 " Easier tabbing of selections
 vnoremap < <gv
 vnoremap > >gv
-" Easier system copy and paste
-vmap <Leader>sy "+y
-nnoremap <Leader>sp "+p
 " Faster repeat command
 nnoremap <C-P> :<C-P><CR>
 "Quickfix mappings
@@ -218,6 +215,9 @@ nnoremap s :!<Space>
 " Make <C-P> behave like it should and also zsh like
 cnoremap <C-P> <Up>
 cnoremap <C-T> <Up>
+" Easier uppercase
+imap <C-u> <ESC>mzgUiw`za
+
 " Leader Mappings -------------------------------------------------- {{{
 
 " Map leader key to space
@@ -229,15 +229,32 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>t gt
 "<Space> s to source VIMRC
 nnoremap <Leader>s :so ~/.vimrc<CR>
-" Easier uppercase
-imap <C-u> <ESC>mzgUiw`za
-
 "Easy buffer switching
 nnoremap <Leader>n :bn<CR>
 nnoremap <Leader>p :bp<CR>
 nnoremap <Leader>d :bd<CR>
 " Substitute like * (\< and \> select only that word)
 nnoremap <Leader>; :%s:\<<C-R><C-W>\>:
+" Spell Checking (Change cursorline to underline to retain highlights)
+function! ToggleSpellCheck()
+    if (&spell == 0)
+        setlocal spell
+        hi Cursorline ctermfg=NONE ctermbg=NONE cterm=underline
+        echo "Spell Check On!"
+    else
+        setlocal nospell
+        hi Cursorline ctermfg=NONE ctermbg=8 cterm=NONE
+        echo "Spell Check Off!"
+    endif
+endfunction
+nnoremap <Leader>sc :call ToggleSpellCheck()<CR>
+" Spelling suggestions
+nnoremap <Leader>ss z=
+" Navigate misspelled words
+" Next misspelled word
+nnoremap <Leader>sn ]s
+" Previous misspelled word
+nnoremap <Leader>sp [s
 
 " }}}
 " Emacs Insert Mode -------------------------------------------------- {{{
