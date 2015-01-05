@@ -240,10 +240,12 @@ function! ToggleSpellCheck()
     if (&spell == 0)
         setlocal spell
         hi Cursorline ctermfg=NONE ctermbg=NONE cterm=underline
+        setlocal complete+=kspell
         echo "Spell Check On!"
     else
         setlocal nospell
         hi Cursorline ctermfg=NONE ctermbg=8 cterm=NONE
+        setlocal complete-=kspell
         echo "Spell Check Off!"
     endif
 endfunction
@@ -252,9 +254,19 @@ nnoremap <Leader>sc :call ToggleSpellCheck()<CR>
 nnoremap <Leader>ss z=
 " Navigate misspelled words
 " Next misspelled word
-nnoremap <Leader>sn ]s
+function! NextMisspelledWord()
+    normal ]s
+    normal zo
+    call repeat#set("\ sn")
+endfunction
+nnoremap <Leader>sn :call NextMisspelledWord()<CR>
 " Previous misspelled word
-nnoremap <Leader>sp [s
+function! PreviousMisspelledWord()
+    normal [s
+    normal zo
+    call repeat#set("\ sp")
+endfunction
+nnoremap <Leader>sp :call PreviousMisspelledWord()<CR>
 
 " }}}
 " Emacs Insert Mode -------------------------------------------------- {{{
@@ -394,10 +406,13 @@ au Filetype man nnoremap <C-U> <PageUp>
 " }}}
 " Markdown -------------------------------------------------- {{{
 
-" Forcing vim to read .md as markdown and not as 'modula2' or whatever
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-" Folding for markdown
-autocmd Filetype markdown set foldcolumn=4
+augroup ft_md
+    autocmd!
+    " Forcing vim to read .md as markdown and not as 'modula2' or whatever
+    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+    " Folding for markdown
+    autocmd Filetype markdown set foldcolumn=4
+augroup END
 
 " }}}
 " Org -------------------------------------------------- {{{
