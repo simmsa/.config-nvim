@@ -211,12 +211,19 @@ nnoremap <C-P> :<C-P><CR>
 autocmd BufReadPost quickfix nnoremap <buffer> <C-N> <Down>
 autocmd BufReadPost quickfix nnoremap <buffer> <C-T> <Up>
 " Get to the shell faster
-nnoremap s :!<Space>
+nnoremap S :!<Space>
 " Make <C-P> behave like it should and also zsh like
 cnoremap <C-P> <Up>
 cnoremap <C-T> <Up>
 " Easier uppercase
 imap <C-u> <ESC>mzgUiw`za
+" Faster window switching
+nnoremap ss <C-w><C-w>
+nnoremap sh <C-w><Down>
+nnoremap st <C-w><Up>
+nnoremap sd <C-w><Left>
+nnoremap sn <C-w><Right>
+nnoremap sq <C-w>q
 
 " Leader Mappings -------------------------------------------------- {{{
 
