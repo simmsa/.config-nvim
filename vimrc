@@ -15,7 +15,6 @@ Plugin 'tpope/vim-commentary'
 Plugin 'jplaut/vim-arduino-ino'
 Plugin 'tpope/vim-surround'
 Plugin 'bling/vim-airline'
-Plugin 'bling/vim-bufferline'
 Plugin 'sjl/gundo.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'tmhedberg/SimpylFold'
@@ -115,15 +114,16 @@ set iskeyword+=\-,\_
 " Don't highlight really long lines
 set synmaxcol=500
 " Window titles for tmux
-function! TruncateFilename()
+function! TruncateFilename(max_len)
     let filename=expand("%:t")
-    if len(filename) <= 6
+    if len(filename) <= a:max_len
         return filename
     else
         let filename_len=len(filename)
-        return filename[0:2] . "…" . filename[filename_len-3:filename_len-1]
+        let half = a:max_len / 2
+        return filename[0:half-1] . "…" . filename[filename_len-(half):filename_len-1]
 endfunction
-autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . TruncateFilename())
+autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . TruncateFilename(6))
 
 " Color scheme -------------------------------------------------- {{{
 
@@ -517,13 +517,6 @@ autocmd Filetype eruby setlocal ts=3 sw=2 expandtab
 nnoremap <Leader>/ :Ag<Space>
 
 " }}}
-" Buffer line -------------------------------------------------- {{{
-
-" let g:bufferline_active_buffer_left = ""
-" let g:bufferline_active_buffer_right = ""
-
-
-" }}}
 " Ctrl P -------------------------------------------------- {{{
 
 let g:ctrlp_map = '<Leader>o'
@@ -656,6 +649,10 @@ let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#branch#displayed_head_limit=6
 let g:airline#extensions#syntastic#enabled=1
 let g:airline#extensions#eclim#enabled = 0
+function! AirlineFilename()
+    return "/" . TruncateFilename(24)
+endfunction
+let g:airline_section_c="%{AirlineFilename()}"
 
 " }}}
 " vim go -------------------------------------------------- {{{
