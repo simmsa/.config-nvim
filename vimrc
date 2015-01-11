@@ -320,6 +320,7 @@ set infercase
 
 nnoremap <Leader>ev :e ~/.vim/vimrc<CR>
 nnoremap <Leader>ez :e ~/.zshrc<CR>
+nnoremap <Leader>ea :e ~/.aliases.zsh<CR>
 nnoremap <Leader>ec :e ~/Desktop/Programming/vim/vim_cheatsheet.md<CR>
 
 " }}}
