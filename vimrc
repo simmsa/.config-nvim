@@ -36,6 +36,7 @@ Plugin 'shougo/neocomplete.vim'
 Plugin 'troydm/easybuffer.vim'
 Plugin 'jmcantrell/vim-journal'
 Plugin 'ervandew/supertab'
+Plugin 'wting/rust.vim'
 call vundle#end()
 filetype plugin indent on
 
