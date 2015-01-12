@@ -45,3 +45,7 @@ view/*
 
 # Plugins managed by Vundle
 bundle/*
+
+# Plugins not managed by vundle
+eclim/*
+
