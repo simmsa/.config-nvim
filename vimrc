@@ -225,6 +225,8 @@ nnoremap st <C-w><Up>
 nnoremap sd <C-w><Left>
 nnoremap sn <C-w><Right>
 nnoremap sq <C-w>q
+" Remap man command
+nnoremap M K
 
 " Leader Mappings -------------------------------------------------- {{{
 
@@ -508,6 +510,7 @@ autocmd Filetype org nnoremap <Leader>os zMgg/\*VG:SortUnfolded:%s/\%x00/\rzM
 " Python -------------------------------------------------- {{{
 
 let python_highlight_all = 1
+au BufNewFile,BufRead *.py set keywordprg=pydoc
 
 " }}}
 " Ruby -------------------------------------------------- {{{
