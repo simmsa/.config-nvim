@@ -227,6 +227,8 @@ nnoremap sn <C-w><Right>
 nnoremap sq <C-w>q
 " Remap man command
 nnoremap M K
+" Faster tab in insert mode.
+imap <C-t> <tab>
 
 " Leader Mappings -------------------------------------------------- {{{
 
