@@ -350,18 +350,12 @@ function! NeatFoldText()
   let commentless_line = substitute(line, '//\|#\|/\*\|\*/\|"\|-', '', 'g')
   let lines_count = v:foldend - v:foldstart + 1
   let lines_count_text = ' ' . printf("%s", lines_count . ' lines') . ' '
-  " let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-  " let foldchar = matchstr(&fillchars, 'fold:\zs.')
   let foldchar = "─"
   let foldtextstart = strpart(commentless_line, 0, (winwidth(0)*2)/3)
-  " let foldtextend = lines_count_text . repeat(foldchar, 8 + 2)
   let foldtextend = lines_count_text
-  " let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
   let foldtextlength = strlen(substitute(foldtextstart, '.', 'x', 'g')) + &foldcolumn
   let foldtextstartlength = strlen(substitute(foldtextstart, '.', 'x', 'g')) + strlen(foldtextend) + &foldcolumn
-  " return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
   return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength - 17) . foldtextend . "      "
-  " return repeat(foldchar, winwidth(0))
 endfunction
 set foldtext=NeatFoldText()
 
