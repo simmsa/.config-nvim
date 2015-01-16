@@ -124,7 +124,7 @@ function! TruncateFilename(max_len)
         let half = a:max_len / 2
         return filename[0:half-1] . "…" . filename[filename_len-(half):filename_len-1]
 endfunction
-autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . TruncateFilename(6))
+autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . TruncateFilename(8))
 
 " Color scheme -------------------------------------------------- {{{
 
@@ -346,12 +346,17 @@ nmap <Leader>f o<Esc>50i-<Esc>A<Space>{{{<CR>}}}<Esc>gcc2t0gcchkktf<Space>i<Spac
 
 function! NeatFoldText()
   " let line = ' ' . substitute(getline(v:foldstart), '^\s#*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-  let line = ' ' . substitute(getline(v:foldstart), '{{' . '{', '', 'g') . ' '
-  let commentless_line = substitute(line, '//\|#\|/\*\|\*/\|"\|-', '', 'g')
+  let line = substitute(getline(v:foldstart), '{{' . '{', '', 'g') . ' '
+  let commentless_line = ' ' . substitute(line, '//\|#\|/\*\|\*/\|"\|-', '', 'g')
+  let markdown_line = line
   let lines_count = v:foldend - v:foldstart + 1
   let lines_count_text = ' ' . printf("%s", lines_count . ' lines') . ' '
   let foldchar = "─"
-  let foldtextstart = strpart(commentless_line, 0, (winwidth(0)*2)/3)
+  if (&ft=='markdown')
+      let foldtextstart = strpart(markdown_line, 0, (winwidth(0)*2)/3)
+  else
+      let foldtextstart = strpart(commentless_line, 0, (winwidth(0)*2)/3)
+  endif
   let foldtextend = lines_count_text
   let foldtextlength = strlen(substitute(foldtextstart, '.', 'x', 'g')) + &foldcolumn
   let foldtextstartlength = strlen(substitute(foldtextstart, '.', 'x', 'g')) + strlen(foldtextend) + &foldcolumn
