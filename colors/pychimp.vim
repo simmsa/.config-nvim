@@ -1,12 +1,12 @@
 " Vim colorscheme -- PyChimp
 "
-" Created specifically for Python coding ! (For other languages, I do suggest that
-" you find other colorschemes, there are loads !)
+" Created specifically for Python coding ! (For other languages, I do
+" suggest that you find other colorschemes, there are loads !)
 "
 " Author: Pratheek <pratheek.i@gmail.com>
 "
-" Note: This theme uses ideas from Python IDLE, (and has some similarities) from Molokai theme
-" created by Thomas Restrepo
+" Note: This theme uses ideas from Python IDLE, (and has some
+" similarities) from Molokai theme created by Thomas Restrepo
 " <http://www.vim.org/scripts/script.php?script_id=2340>
 "
 " This colorscheme is specifically created, to work in a translucent
@@ -76,6 +76,10 @@ hi Visual      ctermfg=NONE ctermbg=8     cterm=NONE | " Visual Selection
 hi Cursor       ctermfg=NONE ctermbg=NONE cterm=NONE
 hi CursorLine   ctermfg=NONE ctermbg=8    cterm=NONE
 hi CursorLineNR ctermfg=196  ctermbg=8    cterm=underline
+
+" Highlight 81st column
+hi ColorColumn ctermfg=NONE ctermbg=200 cterm=NONE
+call matchadd('ColorColumn', '\%81v', 100)
 
 " For Python
 hi pythonColon ctermfg=5 ctermbg=NONE cterm=NONE
