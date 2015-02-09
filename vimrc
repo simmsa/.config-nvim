@@ -32,7 +32,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'rkitover/vimpager'
 Plugin 'tpope/vim-speeddating'
-Plugin 'shougo/neocomplete.vim'
+" Plugin 'shougo/neocomplete.vim'
 Plugin 'troydm/easybuffer.vim'
 Plugin 'jmcantrell/vim-journal'
 Plugin 'ervandew/supertab'
@@ -591,7 +591,7 @@ runtime macros/matchit.vim
 " }}}
 " Rainbow -------------------------------------------------- {{{
 
-au FileType c,cpp,python,java,ruby call rainbow#load()
+au FileType c,cpp,python,java,ruby,arduino call rainbow#load()
 let g:rainbow_ctermfgs = [196, 129, 202, 126, 184, 21, 40]
 nnoremap <Leader>r :RainbowToggle<CR>
 
