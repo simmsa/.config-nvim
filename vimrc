@@ -596,16 +596,16 @@ let g:rbpt_colorpairs = [
     \ ['Darkblue',    'firebrick3'],
     \ ['darkgreen',   'RoyalBlue3'],
     \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
+    \ ['166',     'DarkOrchid3'],
+    \ ['163',         'firebrick3'],
     \ ]
 
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
-au VimEnter cpp RainbowParenthesesToggle
-au Syntax cpp RainbowParenthesesLoadRound
-au Syntax cpp RainbowParenthesesLoadSquare
-au Syntax cpp RainbowParenthesesLoadBraces
+au FileType cpp RainbowParenthesesToggle
+au FileType cpp RainbowParenthesesLoadRound
+au FileType cpp RainbowParenthesesLoadSquare
+au FileType cpp RainbowParenthesesLoadBraces
 
 " }}}
 " Matchit -------------------------------------------------- {{{
