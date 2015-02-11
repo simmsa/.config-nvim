@@ -37,6 +37,7 @@ Plugin 'troydm/easybuffer.vim'
 Plugin 'jmcantrell/vim-journal'
 Plugin 'ervandew/supertab'
 Plugin 'wting/rust.vim'
+Plugin 'kien/rainbow_parentheses.vim'
 call vundle#end()
 filetype plugin indent on
 
@@ -578,6 +579,35 @@ let g:jedi#usages_command = "<Leader>pu"
 let g:jedi#show_call_signatures = "1"
 
 " }}}
+" Kien Rainbow -------------------------------------------------- {{{
+
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+au VimEnter cpp RainbowParenthesesToggle
+au Syntax cpp RainbowParenthesesLoadRound
+au Syntax cpp RainbowParenthesesLoadSquare
+au Syntax cpp RainbowParenthesesLoadBraces
+
+" }}}
 " Matchit -------------------------------------------------- {{{
 
 runtime macros/matchit.vim
@@ -589,9 +619,9 @@ runtime macros/matchit.vim
 " imap <expr> - pumvisible() ? "\<Plug>(neocomplete_start_unite_quick_match)" : '-'
 
 " }}}
-" Rainbow -------------------------------------------------- {{{
+" Oblitum Rainbow -------------------------------------------------- {{{
 
-au FileType c,cpp,python,java,ruby,arduino call rainbow#load()
+au FileType c,python,java,ruby,arduino call rainbow#load()
 let g:rainbow_ctermfgs = [196, 129, 202, 126, 184, 21, 40]
 nnoremap <Leader>r :RainbowToggle<CR>
 
