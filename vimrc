@@ -377,6 +377,15 @@ au FileType c syn match Function /\w\+(/me=e-1
 au FileType c setlocal makeprg=make\ f=%:r
 
 " }}}
+" C++ -------------------------------------------------- {{{
+
+au FileType cpp syn match Special /*\s\|+\s\|-\s\|\/\s\|%\s/
+au FileType cpp syn match Operator /=/
+au FileType cpp syn match Todo /==/
+au FileType cpp syn match Exception />\|</
+au FileType cpp setlocal commentstring=//\ %s
+
+" }}}
 " Git -------------------------------------------------- {{{
 
 au FileType gitcommit setlocal spell
