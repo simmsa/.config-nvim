@@ -568,6 +568,7 @@ function! ToggleGStatus()
 endfunction
 command! ToggleGStatus :call ToggleGStatus()
 nnoremap <Leader>g :ToggleGStatus<CR>
+nnoremap gs :ToggleGStatus<CR>
 nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 
