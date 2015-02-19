@@ -230,6 +230,9 @@ nnoremap sq <C-w>q
 nnoremap M K
 " Faster tab in insert mode.
 imap <C-t> <tab>
+" Zipping
+" Zip current char to the last char
+nmap ze xNp
 
 " Leader Mappings -------------------------------------------------- {{{
 
