@@ -660,7 +660,8 @@ nnoremap <Leader>av :Tab /\|\ "<CR>     | " Align Vim inline comment
 vmap <Leader>ap :Tabularize /\|<CR>     | " Align Pipe
 vmap <Leader>at :Tabularize /\|<CR>     | " Align Table
 vmap <Leader>aa :Tabularize /           | " Align Choice
-vmap  <Leader>av :Tab /\|\ "<CR>        | " Align Vim inline comment
+vmap <Leader>av :Tab /\|\ "<CR>         | " Align Vim inline comment
+vmap <Leader>ae :Tab /=<CR>             | " Align equals
 
 " }}}
 " UltiSnips -------------------------------------------------- {{{
