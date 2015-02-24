@@ -635,7 +635,7 @@ runtime macros/matchit.vim
 " Oblitum Rainbow -------------------------------------------------- {{{
 
 au FileType c,python,java,ruby,arduino call rainbow#load()
-let g:rainbow_ctermfgs = [196, 129, 202, 126, 184, 21, 40]
+let g:rainbow_ctermfgs = [196, 129, 202, 126, 184, 14, 40]
 nnoremap <Leader>r :RainbowToggle<CR>
 
 " }}}
