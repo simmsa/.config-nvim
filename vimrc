@@ -49,6 +49,7 @@ set modelines=0
 set textwidth=0
 set wrap
 set autoindent
+set cindent
 set hidden
 "Turn on status line
 set laststatus=2
