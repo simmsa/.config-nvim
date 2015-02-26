@@ -182,8 +182,8 @@ au InsertLeave * let &updatetime=updaterestore
 cnoremap <C-f> <Right>
 cnoremap <C-b> <Left>
 "Wrapping and unwrapping lines
-command! -nargs=* Wrap set wrap linebreak nolist
-command! -nargs=* Nowrap set wrap linebreak list
+" command! -nargs=* Wrap set wrap linebreak nolist
+" command! -nargs=* Nowrap set wrap linebreak list
 "Changing number incrementing
 nnoremap <C-j> <C-a>
 nnoremap <C-k> <C-x>
