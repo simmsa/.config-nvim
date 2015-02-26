@@ -181,9 +181,6 @@ au InsertLeave * let &updatetime=updaterestore
 "Remap command mode
 cnoremap <C-f> <Right>
 cnoremap <C-b> <Left>
-"Wrapping and unwrapping lines
-" command! -nargs=* Wrap set wrap linebreak nolist
-" command! -nargs=* Nowrap set wrap linebreak list
 "Changing number incrementing
 nnoremap <C-j> <C-a>
 nnoremap <C-k> <C-x>
@@ -438,6 +435,8 @@ augroup ft_md
     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
     " Folding for markdown
     autocmd Filetype markdown set foldcolumn=4
+    autocmd Filetype markdown set breakat-=\*
+
 augroup END
 
 " }}}
