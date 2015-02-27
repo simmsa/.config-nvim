@@ -38,6 +38,7 @@ Plugin 'jmcantrell/vim-journal'
 Plugin 'ervandew/supertab'
 Plugin 'wting/rust.vim'
 Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'justinmk/vim-sneak'
 call vundle#end()
 filetype plugin indent on
 
@@ -740,6 +741,17 @@ let g:markdown_fold_override_foldtext = 0
 " vim org mode -------------------------------------------------- {{{
 
 autocmd Filetype org setl noai nocin nosi inde=
+
+" }}}
+" vim-sneak -------------------------------------------------- {{{
+
+nmap s <Plug>Sneak_s
+nmap - <Plug>SneakNext
+nmap _ <Plug>SneakPrevious
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+nmap j <Plug>Sneak_t
+nmap J <Plug>Sneak_T
 
 " }}}
 
