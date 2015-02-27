@@ -377,6 +377,28 @@ set foldtext=NeatFoldText()
 au FileType c setlocal foldmethod=syntax
 au FileType c syn match Function /\w\+(/me=e-1
 au FileType c setlocal makeprg=make\ f=%:r
+function CompileC(position)
+    :w
+    let filename = expand("%:r")
+    let outputwin = bufwinnr("output")
+    if (outputwin >= 0)
+        execute ":bd output"
+    endif
+    if (a:position == "v")
+        :vs output
+        call repeat#set("cc")
+    else
+        :10sp output
+        call repeat#set("cb")
+    endif
+    :winc r
+    :%d
+    execute ":r! make f=" . filename
+    normal ggK
+    :w
+endfunction
+au FileType c nnoremap cc :call CompileC("v")<CR>
+au FileType c nnoremap cb :call CompileC("b")<CR>
 
 " }}}
 " C++ -------------------------------------------------- {{{
