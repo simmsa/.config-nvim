@@ -460,8 +460,8 @@ augroup ft_md
     " Folding for markdown
     autocmd Filetype markdown set foldcolumn=4
     autocmd Filetype markdown set breakat-=\*
-
 augroup END
+let g:markdown_fenced_languages = ['python', 'bash=sh', 'c', 'html', 'css']
 
 " }}}
 " Org -------------------------------------------------- {{{
