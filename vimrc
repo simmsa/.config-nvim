@@ -229,6 +229,8 @@ nnoremap sq <C-w>q
 nnoremap M K
 " Faster tab in insert mode.
 imap <C-t> <tab>
+" I always use A and never use a, so why not save a motion
+nnoremap a A
 " Zipping
 " Zip current char to the last char
 nmap ze xNp
@@ -378,7 +380,7 @@ au FileType c setlocal foldmethod=syntax
 au FileType c setlocal commentstring=//\ %s
 au FileType c syn match Function /\w\+(/me=e-1
 au FileType c setlocal makeprg=make\ f=%:r
-function CompileC(position)
+function! CompileC(position)
     :w
     let filename = expand("%:r")
     let outputwin = bufwinnr("output")
