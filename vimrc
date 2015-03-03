@@ -581,7 +581,7 @@ nnoremap <Leader>/ :Ag<Space>
 " }}}
 " Ctrl P -------------------------------------------------- {{{
 
-let g:ctrlp_map = '<Leader>o'
+let g:ctrlp_map = 'go'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_prompt_mappings = {'PrtSelectMove("k")': ['<c-t>'], 'ToggleByFName()':['<c-f>'], 'AcceptSelection("t")': ['<c-y>'], 'PrtCurLeft()': ['<left>'], 'PrtSelectMove("j")':['<c-n>'], 'PrtHistory(-1)': ['<c-l>'],}
