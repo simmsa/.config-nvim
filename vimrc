@@ -376,10 +376,6 @@ set foldtext=NeatFoldText()
 
 " C -------------------------------------------------- {{{
 
-au FileType c setlocal foldmethod=syntax
-au FileType c setlocal commentstring=//\ %s
-au FileType c syn match Function /\w\+(/me=e-1
-au FileType c setlocal makeprg=make\ f=%:r
 function! CompileC(position)
     :w
     let filename = expand("%:r")
@@ -400,8 +396,16 @@ function! CompileC(position)
     normal ggK
     :w
 endfunction
-au FileType c nnoremap cc :call CompileC("v")<CR>
-au FileType c nnoremap cb :call CompileC("b")<CR>
+
+augroup ft_c
+    autocmd!
+    au FileType c setlocal foldmethod=syntax
+    au FileType c setlocal commentstring=//\ %s
+    au FileType c syn match Function /\w\+(/me=e-1
+    au FileType c setlocal makeprg=make\ f=%:r
+    au FileType c nnoremap <buffer> cc :call CompileC("v")<CR>
+    au FileType c nnoremap <buffer> cb :call CompileC("b")<CR>
+augroup END
 
 " }}}
 " C++ -------------------------------------------------- {{{
@@ -455,14 +459,20 @@ au Filetype man nnoremap <C-U> <PageUp>
 " }}}
 " Markdown -------------------------------------------------- {{{
 
+function! CompileMD()
+    execute ":! md2pdf " . expand("%:r")
+endfunction
+
 augroup ft_md
     autocmd!
     " Forcing vim to read .md as markdown and not as 'modula2' or whatever
-    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+    au BufNewFile,BufReadPost *.md set filetype=markdown
     " Folding for markdown
-    autocmd Filetype markdown set foldcolumn=4
-    autocmd Filetype markdown set breakat-=\*
+    au Filetype markdown set foldcolumn=4
+    au Filetype markdown set breakat-=\*
+    au Filetype markdown nnoremap <buffer> cc :call CompileMD()<CR>
 augroup END
+
 let g:markdown_fenced_languages = ['python', 'bash=sh', 'c', 'html', 'css']
 
 " }}}
