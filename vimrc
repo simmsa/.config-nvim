@@ -683,8 +683,11 @@ let g:syntastic_cpp_compiler_options = "-std=c++11"
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_full_redraws = 1
-let g:syntastic_auto_jump = 2         " Jump to syntax errors
+" let g:syntastic_auto_jump = 2         " Jump to syntax errors
 let g:syntastic_auto_loc_list = 1     " Auto-open the error list
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " }}}
 " Tabularize ------------------------------------------------ {{{
@@ -737,9 +740,9 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 " vim airline -------------------------------------------------- {{{
 
 let g:airline_powerline_fonts=1
-let g:airline_theme='base16'
+let g:airline_theme='lucius'
 let g:airline#extensions#branch#enabled=1
-let g:airline#extensions#branch#displayed_head_limit=6
+let g:airline#extensions#branch#displayed_head_limit=7
 let g:airline#extensions#syntastic#enabled=1
 let g:airline#extensions#eclim#enabled = 0
 function! AirlineFilename()
