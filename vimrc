@@ -217,7 +217,7 @@ nnoremap S :!<Space>
 cnoremap <C-P> <Up>
 cnoremap <C-T> <Up>
 " Easier uppercase
-imap <C-u> <ESC>mzgUiw`za
+imap <C-u> <ESC>mzgUiw`zi<C-f>
 " Faster window switching
 nnoremap ss <C-w><C-w>
 nnoremap sh <C-w><Down>
