@@ -78,8 +78,8 @@ hi CursorLine   ctermfg=NONE ctermbg=8    cterm=NONE
 hi CursorLineNR ctermfg=196  ctermbg=8    cterm=underline
 
 " Highlight 81st column
-hi ColorColumn ctermfg=NONE ctermbg=200 cterm=NONE
-call matchadd('ColorColumn', '\%81v', 100)
+" hi ColorColumn ctermfg=NONE ctermbg=200 cterm=NONE
+" call matchadd('ColorColumn', '\%81v', 100)
 
 " For Python
 hi pythonColon ctermfg=5 ctermbg=NONE cterm=NONE
