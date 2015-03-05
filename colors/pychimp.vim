@@ -33,46 +33,44 @@ hi Function    ctermfg=35  ctermbg=NONE  cterm=NONE | "Seafoam Green
 hi Boolean     ctermfg=38  ctermbg=NONE  cterm=bold | "Steelblue
 hi Label       ctermfg=42  ctermbg=NONE  cterm=NONE | "Light Green
 hi Type        ctermfg=43  ctermbg=NONE  cterm=NONE | "Teal
+hi Statement   ctermfg=75  ctermbg=NONE  cterm=NONE | "Cerulean
 hi Special     ctermfg=81  ctermbg=NONE  cterm=NONE | "Light Blue
-hi PreProc     ctermfg=85  ctermbg=NONE  cterm=NONE | "Sea Green 'NONE'
+hi PreProc     ctermfg=215 ctermbg=NONE  cterm=NONE | "Sea Green 'NONE'
 hi Character   ctermfg=123 ctermbg=NONE  cterm=NONE | "Light Blue
 hi Repeat      ctermfg=148 ctermbg=NONE  cterm=NONE | "Yellow
 hi Todo        ctermfg=162 ctermbg=NONE  cterm=bold | "Magenta
-hi Identifier  ctermfg=NONE ctermbg=NONE  cterm=NONE | "Purple
+hi Identifier  ctermfg=NONE ctermbg=NONE cterm=NONE | "Purple
 hi Keyword     ctermfg=166 ctermbg=NONE  cterm=NONE | "Orange
 hi Constant    ctermfg=178 ctermbg=NONE  cterm=bold | "Yellow
 hi Error       ctermfg=196 ctermbg=NONE  cterm=bold | "Red
 hi Comment     ctermfg=203 ctermbg=NONE  cterm=NONE | "Salmon
 hi Exception   ctermfg=206 ctermbg=NONE  cterm=NONE | "Lavender
 hi Operator    ctermfg=208 ctermbg=NONE  cterm=bold | "Orange
-hi Statement   ctermfg=209 ctermbg=NONE  cterm=bold | "Cream
 hi String      ctermfg=221 ctermbg=NONE  cterm=NONE | "Light Yellow
-"Vim Stuff
 
+"Vim Specific
 hi TabLine     ctermfg=3    ctermbg=NONE  cterm=NONE
 hi VertSplit   ctermfg=8    ctermbg=NONE  cterm=NONE
 hi NonText     ctermfg=8    ctermbg=NONE  cterm=NONE
 hi SpecialKey  ctermfg=84   ctermbg=NONE  cterm=NONE
-hi TabLineSel  ctermfg=14   ctermbg=NONE  cterm=bold
+hi TabLineSel  ctermfg=23   ctermbg=NONE  cterm=bold
 hi MatchParen  ctermfg=46   ctermbg=215   cterm=bold
 hi TabLineFill ctermfg=46   ctermbg=NONE  cterm=NONE
 hi FoldColumn  ctermfg=50   ctermbg=NONE  cterm=NONE
 hi Folded      ctermfg=50   ctermbg=8     cterm=NONE
-hi LineNr      ctermfg=51   ctermbg=NONE  cterm=NONE
+hi LineNr      ctermfg=24   ctermbg=NONE  cterm=NONE
 hi PmenuThumb  ctermfg=81   ctermbg=16    cterm=NONE
 hi PmenuSbar   ctermfg=81   ctermbg=16    cterm=NONE
-hi Pmenu       ctermfg=81   ctermbg=16    cterm=NONE
+hi Pmenu       ctermfg=8    ctermbg=237   cterm=NONE
 hi ErrorMsg    ctermfg=88   ctermbg=172   cterm=bold
-hi Search      ctermfg=190  ctermbg=233   cterm=NONE | " Search complete
+hi Search      ctermfg=255  ctermbg=57   cterm=NONE | " Search complete
 hi SpellBad    ctermfg=255  ctermbg=196   cterm=underline | "Red
 hi SpellCap    ctermfg=255  ctermbg=198   cterm=underline | "Red
 hi SpellLocal  ctermfg=255  ctermbg=198   cterm=underline | "Red
 hi SpellRare   ctermfg=255  ctermbg=200   cterm=underline | "Red
-hi PmenuSel    ctermfg=NONE ctermbg=8     cterm=NONE
-hi IncSearch   ctermfg=233  ctermbg=190   cterm=NONE | " When typing
+hi PmenuSel    ctermfg=9    ctermbg=255   cterm=NONE
+hi IncSearch   ctermfg=9  ctermbg=255   cterm=underline | " When typing
 hi Visual      ctermfg=NONE ctermbg=8     cterm=NONE | " Visual Selection
-
-" I added this shizzle
 hi Cursor       ctermfg=NONE ctermbg=NONE cterm=NONE
 hi CursorLine   ctermfg=NONE ctermbg=8    cterm=NONE
 hi CursorLineNR ctermfg=196  ctermbg=8    cterm=underline
