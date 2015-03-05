@@ -379,6 +379,11 @@ set foldtext=NeatFoldText()
 function! CompileC(position)
     :w
     let filename = expand("%:r")
+    if(a:position == "i")
+        " Could not find a way to save the output when scanf is involved
+        execute ":! make f=" . filename
+        return
+    endif
     let outputwin = bufwinnr("output")
     if (outputwin >= 0)
         execute ":bd output"
@@ -405,6 +410,7 @@ augroup ft_c
     au FileType c setlocal makeprg=make\ f=%:r
     au FileType c nnoremap <buffer> cc :call CompileC("b")<CR>
     au FileType c nnoremap <buffer> cv :call CompileC("v")<CR>
+    au FileType c nnoremap <buffer> ci :call CompileC("i")<CR>
 augroup END
 
 " }}}
