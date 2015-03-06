@@ -33,7 +33,7 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'rkitover/vimpager'
 Plugin 'tpope/vim-speeddating'
 " Plugin 'shougo/neocomplete.vim'
-Plugin 'troydm/easybuffer.vim'
+" Plugin 'troydm/easybuffer.vim'
 Plugin 'jmcantrell/vim-journal'
 Plugin 'ervandew/supertab'
 Plugin 'wting/rust.vim'
@@ -589,16 +589,17 @@ nnoremap <Leader>/ :Ag<Space>
 
 let g:ctrlp_map = 'go'
 let g:ctrlp_cmd = 'CtrlP'
+nnoremap cb :CtrlPBuffer<CR>
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_prompt_mappings = {'PrtSelectMove("k")': ['<c-t>'], 'ToggleByFName()':['<c-f>'], 'AcceptSelection("t")': ['<c-y>'], 'PrtCurLeft()': ['<left>'], 'PrtSelectMove("j")':['<c-n>'], 'PrtHistory(-1)': ['<c-l>'],}
 
 " }}}
 " EasyBuffer -------------------------------------------------- {{{
 
-let g:easybuffer_chars=['h', 't', 'n', 's', 'd', 'a', 'o', 'e', 'u', 'i']
-let g:easybuffer_horizontal_height='10'
-nnoremap <Leader>b :EasyBufferHorizontalBelow<CR>
-au FileType easybuffer set nu! rnu!
+" let g:easybuffer_chars=['h', 't', 'n', 's', 'd', 'a', 'o', 'e', 'u', 'i']
+" let g:easybuffer_horizontal_height='10'
+" nnoremap <Leader>b :EasyBufferHorizontalBelow<CR>
+" au FileType easybuffer set nu! rnu!
 
 " }}}
 " Fugitive --------------------------------------------------" {{{
