@@ -390,10 +390,10 @@ function! CompileC(position)
     endif
     if (a:position == "v")
         :vs output
-        call repeat#set("cc")
+        call repeat#set("cv")
     else
         :10sp output
-        call repeat#set("cb")
+        call repeat#set("cc")
     endif
     :winc r
     :%d
@@ -746,7 +746,7 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 " vim airline -------------------------------------------------- {{{
 
 let g:airline_powerline_fonts=1
-let g:airline_theme='lucius'
+let g:airline_theme='relative'
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#branch#displayed_head_limit=7
 let g:airline#extensions#syntastic#enabled=1
@@ -755,6 +755,27 @@ function! AirlineFilename()
     return "/" . TruncateFilename(24)
 endfunction
 let g:airline_section_c="%{AirlineFilename()}"
+
+function! AirlineNull()
+    return ""
+endfunction
+let g:airline_section_y="%{AirlineNull()}"
+
+function! FileProgress()
+    let current_line = str2nr(line("."))
+    let total_lines = str2nr(line("$"))
+    let percent_of_file = (current_line * 10 / total_lines)
+    let actual_percent = (current_line * 100) / (total_lines * 1)
+    let total_lines = 10
+    let percent_left = 10 - percent_of_file
+    let indicator = "█"
+    let non_indicator = "░"
+    let start_char = ""
+    let end_char = ""
+    let delim="-"
+    return repeat(indicator, percent_of_file) . delim . actual_percent . "%" . delim . repeat(non_indicator, percent_left)
+endfunction
+let g:airline_section_z="%{FileProgress()}"
 
 " }}}
 " vim go -------------------------------------------------- {{{
