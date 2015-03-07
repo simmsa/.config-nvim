@@ -39,6 +39,7 @@ Plugin 'ervandew/supertab'
 Plugin 'wting/rust.vim'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'justinmk/vim-sneak'
+Plugin 'airblade/vim-gitgutter'
 call vundle#end()
 filetype plugin indent on
 
