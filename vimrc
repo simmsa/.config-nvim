@@ -242,6 +242,10 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
+" Make y jump to the end of the selection
+vnoremap <silent> y y`]
+vnoremap <silent> p p`]
+nnoremap <silent> y y`]
 
 " Leader Mappings -------------------------------------------------- {{{
 
