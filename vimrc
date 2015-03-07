@@ -394,6 +394,7 @@ function! CompileC(position)
     let filename = expand("%:r")
     if(a:position == "i")
         " Could not find a way to save the output when scanf is involved
+        call repeat#set("ci")
         execute ":! make f=" . filename
         return
     endif
