@@ -74,6 +74,7 @@ hi Visual      ctermfg=NONE ctermbg=8     cterm=NONE | " Visual Selection
 hi Cursor       ctermfg=NONE ctermbg=NONE cterm=NONE
 hi CursorLine   ctermfg=NONE ctermbg=8    cterm=NONE
 hi CursorLineNR ctermfg=196  ctermbg=8    cterm=underline
+hi SignColumn   ctermfg=14 ctermbg=NONE cterm=NONE
 
 " Airline Settings
 " Normal Mode
@@ -103,12 +104,9 @@ hi AirlineR3 ctermfg=255 ctermbg=196 cterm=NONE
 
 " Inactive
 " Lt BG on Gray
-" hi AirlineIA1 ctermfg=235 ctermbg=8 cterm=NONE
-" hi AirlineIA2 ctermfg=8 ctermbg=235 cterm=NONE
-" hi AirlineIA3 ctermfg=235 ctermbg=8 cterm=NONE
 hi AirlineIA1 ctermfg=8 ctermbg=240 cterm=NONE
-hi AirlineIA2 ctermfg=240 ctermbg=8 cterm=NONE
-hi AirlineIA3 ctermfg=8 ctermbg=240 cterm=NONE
+hi AirlineIA2 ctermfg=8 ctermbg=240 cterm=NONE
+hi AirlineIA3 ctermfg=240 ctermbg=8 cterm=NONE
 
 " Highlight 81st column
 " hi ColorColumn ctermfg=NONE ctermbg=200 cterm=NONE
