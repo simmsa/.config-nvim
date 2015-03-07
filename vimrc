@@ -339,6 +339,7 @@ nnoremap <Leader>ec :e ~/Desktop/Programming/vim/vim_cheatsheet.md<CR>
 set foldenable
 set foldlevelstart=0
 set foldmethod=marker
+set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 " Easier Folding
 nnoremap <Leader><Space> za
 nnoremap <Leader>z zM
