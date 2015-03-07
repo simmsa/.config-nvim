@@ -235,6 +235,13 @@ nnoremap a A
 " Zipping
 " Zip current char to the last char
 nmap ze xNp
+" Easier system copy and paste
+vmap <Leader>y "+y
+vmap <Leader>k "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
 
 " Leader Mappings -------------------------------------------------- {{{
 
