@@ -101,8 +101,8 @@ set rnu
 autocmd InsertEnter * set nornu
 autocmd InsertLeave * set rnu
 " Fixing Delays?
-set ttimeoutlen=10
-set timeoutlen=300
+" set ttimeoutlen=10
+" set timeoutlen=300
 " Better tab completion?
 set wildmode=longest,list,full
 set wildmenu
