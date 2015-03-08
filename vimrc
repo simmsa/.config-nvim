@@ -605,7 +605,7 @@ nnoremap <Leader>/ :Ag<Space>
 
 let g:ctrlp_map = 'go'
 let g:ctrlp_cmd = 'CtrlP'
-nnoremap cb :CtrlPBuffer<CR>
+nnoremap gu :CtrlPBuffer<CR>
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_prompt_mappings = {'PrtSelectMove("k")': ['<c-t>'], 'ToggleByFName()':['<c-f>'], 'AcceptSelection("t")': ['<c-y>'], 'PrtCurLeft()': ['<left>'], 'PrtSelectMove("j")':['<c-n>'], 'PrtHistory(-1)': ['<c-l>'],}
 
@@ -617,14 +617,6 @@ if executable("ag")
 else
     let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 endif
-
-" }}}
-" EasyBuffer -------------------------------------------------- {{{
-
-" let g:easybuffer_chars=['h', 't', 'n', 's', 'd', 'a', 'o', 'e', 'u', 'i']
-" let g:easybuffer_horizontal_height='10'
-" nnoremap <Leader>b :EasyBufferHorizontalBelow<CR>
-" au FileType easybuffer set nu! rnu!
 
 " }}}
 " Fugitive --------------------------------------------------" {{{
@@ -808,6 +800,26 @@ let g:airline_section_z="%{FileProgress()}"
 
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
+
+" }}}
+" vim gitgutter -------------------------------------------------- {{{
+
+function! JumpToHunkAndUnfold(keypress)
+    if(a:keypress == "c")
+        :GitGutterNextHunk
+    endif
+
+    if(a:keypress == "C")
+        :GitGutterPrevHunk
+    endif
+    " Unfold just where the cursor is (supposed to be)
+    normal zv
+    " Move cursor to the middle of the screen
+    normal z.
+endfunction
+
+nnoremap <Leader>c :call JumpToHunkAndUnfold('c')<CR>
+nnoremap <Leader>C :call JumpToHunkAndUnfold('C')<CR>
 
 " }}}
 " vim go -------------------------------------------------- {{{
