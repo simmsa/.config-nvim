@@ -40,6 +40,7 @@ Plugin 'wting/rust.vim'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'justinmk/vim-sneak'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'terryma/vim-expand-region'
 call vundle#end()
 filetype plugin indent on
 
@@ -245,7 +246,8 @@ vmap <Leader>P "+P
 " Make y jump to the end of the selection
 vnoremap <silent> y y`]
 vnoremap <silent> p p`]
-nnoremap <silent> y y`]
+nnoremap <silent> p p`]
+" nnoremap <silent> y y`]
 
 " Leader Mappings -------------------------------------------------- {{{
 
@@ -800,6 +802,12 @@ function! FileProgress()
     return repeat(indicator, percent_of_file) . delim . actual_percent . "%" . delim . repeat(non_indicator, percent_left)
 endfunction
 let g:airline_section_z="%{FileProgress()}"
+
+" }}}
+" vim expand region -------------------------------------------------- {{{
+
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 
 " }}}
 " vim go -------------------------------------------------- {{{
