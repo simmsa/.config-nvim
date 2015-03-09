@@ -811,7 +811,9 @@ autocmd Filetype org setl noai nocin nosi inde=
 " }}}
 " vim-sneak -------------------------------------------------- {{{
 
-nmap s <Plug>Sneak_s
+nmap e <Plug>Sneak_s
+nmap E <Plug>Sneak_S
+nnoremap <C-e> e
 nmap - <Plug>SneakNext
 nmap _ <Plug>SneakPrevious
 nmap f <Plug>Sneak_f
