@@ -113,8 +113,10 @@ set wildignore+=*.pyc,*.jpg,*.png,*.log,*.o,*.so,*.gif
 " Spelling
 set dictionary=/usr/share/dict/words
 set spelllang=en_us
-" Use zsh
-set shell=/usr/local/bin/zsh
+" Use zsh if available
+if system("which zsh")
+    set shell=`echo system("which zsh")`
+endif
 " Make test-name and test_name auto completable
 set iskeyword+=\-,\_
 " Don't highlight really long lines
