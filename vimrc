@@ -166,7 +166,9 @@ noremap j t
 noremap k d
 " l is now look up next swapping with n
 noremap l n
-nnoremap K dd
+" Consistent behavior with C
+nnoremap K d$
+nnoremap Y y$
 "easier navigation of finds
 nmap - :
 
