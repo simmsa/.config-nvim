@@ -276,24 +276,24 @@ function! ToggleSpellCheck()
         echo "Spell Check Off!"
     endif
 endfunction
-nnoremap <Leader>sc :call ToggleSpellCheck()<CR>
+nnoremap sc :call ToggleSpellCheck()<CR>
 " Spelling suggestions
-nnoremap <Leader>ss z=
+nnoremap sg z=
 " Navigate misspelled words
-" Next misspelled word
 function! NextMisspelledWord()
     normal ]s
-    normal zo
-    call repeat#set("\ sn")
+    normal zv
+    call repeat#set("sn")
 endfunction
-nnoremap <Leader>sn :call NextMisspelledWord()<CR>
-" Previous misspelled word
+command! NextMisspelledWord call NextMisspelledWord()
+nnoremap sn :NextMisspelledWord<CR>
 function! PreviousMisspelledWord()
     normal [s
-    normal zo
-    call repeat#set("\ sp")
+    normal zv
+    call repeat#set("sp")
 endfunction
-nnoremap <Leader>sp :call PreviousMisspelledWord()<CR>
+command PreviousMisspelledWord call PreviousMisspelledWord()
+nnoremap sp :PreviousMisspelledWord<CR>
 
 " }}}
 " Emacs Insert Mode -------------------------------------------------- {{{
@@ -715,7 +715,6 @@ vmap <Leader>ae :Tab /=<CR>             | " Align equals
 
 " UltiSnips Config
 let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsExpandTrigger="<C-S>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 
 " }}}
