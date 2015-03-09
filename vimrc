@@ -246,7 +246,6 @@ vmap <Leader>P "+P
 vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
-" nnoremap <silent> y y`]
 
 " Leader Mappings -------------------------------------------------- {{{
 
@@ -255,13 +254,11 @@ let mapleader = "\<Space>"
 let maplocalleader = "\<Space>"
 " <Space> w to save a file
 nnoremap <Leader>w :w<CR>
-" <Space> t to switch tabs
-nnoremap <Leader>t gt
 "<Space> s to source VIMRC
 nnoremap <Leader>s :so ~/.vimrc<CR>
 "Easy buffer switching
-nnoremap <Leader>n :bn<CR>
-nnoremap <Leader>p :bp<CR>
+" nnoremap <Leader>n :bn<CR>
+" nnoremap <Leader>p :bp<CR>
 nnoremap <Leader>d :bd<CR>
 " Substitute like * (\< and \> select only that word)
 nnoremap <Leader>; :%s:\<<C-R><C-W>\>:
@@ -473,14 +470,6 @@ augroup ft_html
 augroup END
 
 " }}}
-" Man -------------------------------------------------- {{{
-
-au Filetype man nnoremap h <Down>
-au Filetype man nnoremap t <Up>
-au Filetype man nnoremap <C-D> <PageDown>
-au Filetype man nnoremap <C-U> <PageUp>
-
-" }}}
 " Markdown -------------------------------------------------- {{{
 
 function! CompileMD()
@@ -688,17 +677,10 @@ au FileType cpp RainbowParenthesesLoadBraces
 runtime macros/matchit.vim
 
 " }}}
-" neocomplete -------------------------------------------------- {{{
-
-" let g:neocomplete#enable_at_startup = 1
-" imap <expr> - pumvisible() ? "\<Plug>(neocomplete_start_unite_quick_match)" : '-'
-
-" }}}
 " Oblitum Rainbow -------------------------------------------------- {{{
 
 au FileType c,python,java,ruby,arduino call rainbow#load()
 let g:rainbow_ctermfgs = [196, 129, 202, 126, 184, 14, 40]
-nnoremap <Leader>r :RainbowToggle<CR>
 
 " }}}
 " Syntastic -------------------------------------------------- {{{
@@ -735,32 +717,6 @@ vmap <Leader>ae :Tab /=<CR>             | " Align equals
 let g:UltiSnipsExpandTrigger="<tab>"
 " let g:UltiSnipsExpandTrigger="<C-S>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<C-S>"
-" let g:UltiSnipsJumpBackwardTrigger='<C-k>'
-
-" }}}
-" unite.vim -------------------------------------------------- {{{
-
-" Move unite window to the bottom like ctrlp
-" let g:unite_split_rule = "botright"
-" let g:unite_winheight = 10
-" Quick buffer switching
-" nnoremap <Leader>b :Unite -quick-match buffer<CR>
-" Better quick-match letters
-" let g:unite_quick_match_table =
-"       \ get(g:, 'unite_quick_match_table', {
-"       \     'h' : 0, 'u' : 1, 't' : 2, 'e' : 3, 'n' : 4, 'o' : 5, 'a' : 6, 's' : 7, 'i' : 8, 'd' : 9,
-"       \     'p' : 10, 'g' : 11, '.' : 12, 'c' : 13, 'y' : 14, 'f' : 15, 'b' : 16, 'k' : 17, 'm' : 18, 'j' : 19,
-"       \     '1' : 20, '2' : 21, '3' : 22, '4' : 23, '5' : 24, '6' : 25, '7' : 26, '8' : 27, '9' : 28, '0' : 29,
-"       \ })
-" autocmd FileType unite call s:unite_settings()
-
-" function! s:unite_settings()
-    " imap <buffer> <C-t> <Plug>(unite_select_previous_line)
-    " nmap <buffer> h <Down>
-    " imap <buffer> <C-n> <Plug>(unite_select_next_line)
-    " nmap <buffer> t <Up>
-" endfunction
 
 " }}}
 " vim airline -------------------------------------------------- {{{
