@@ -222,9 +222,10 @@ imap <C-u> <ESC>mzgUiw`zi<C-f>
 nnoremap ss <C-w><C-w>
 nnoremap sh <C-w><Down>
 nnoremap st <C-w><Up>
-nnoremap sd <C-w><Left>
-nnoremap sn <C-w><Right>
+" nnoremap sd <C-w><Left>
+" nnoremap sn <C-w><Right>
 nnoremap sq <C-w>q
+nnoremap sx :bd<CR>
 " Remap man command
 nnoremap M K
 " Faster tab in insert mode.
