@@ -187,8 +187,6 @@ cnoremap <C-b> <Left>
 "Changing number incrementing
 nnoremap <C-j> <C-a>
 nnoremap <C-k> <C-x>
-"Split file vertically <leader>vs
-noremap <silent> <Leader>vs :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
 "Quicker Commands
 nnoremap ; :
 vmap ; :
@@ -325,6 +323,9 @@ augroup END
 " Change cursor shape for different modes
 let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
 let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+
+" Vertically split current file and scroll with it
+nnoremap <silent> sf :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
 
 " }}}
 " Searching and Movement {{{
