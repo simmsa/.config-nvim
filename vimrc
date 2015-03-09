@@ -759,21 +759,24 @@ vmap <C-v> <Plug>(expand_region_shrink)
 " vim gitgutter -------------------------------------------------- {{{
 
 function! JumpToHunkAndUnfold(keypress)
-    if(a:keypress == "c")
+    if(a:keypress == "n")
         :GitGutterNextHunk
     endif
 
-    if(a:keypress == "C")
+    if(a:keypress == "p")
         :GitGutterPrevHunk
     endif
     " Unfold just where the cursor is (supposed to be)
     normal zv
     " Move cursor to the middle of the screen
     normal z.
+    call repeat#set("c" . a:keypress)
 endfunction
 
-nnoremap <Leader>c :call JumpToHunkAndUnfold('c')<CR>
-nnoremap <Leader>C :call JumpToHunkAndUnfold('C')<CR>
+nnoremap cn :call JumpToHunkAndUnfold("n")<CR>
+nnoremap cp :call JumpToHunkAndUnfold("p")<CR>
+
+let g:gitgutter_sign_removed = '-'
 
 " }}}
 " vim go -------------------------------------------------- {{{
