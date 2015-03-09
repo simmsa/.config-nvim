@@ -736,21 +736,18 @@ function! AirlineNull()
 endfunction
 let g:airline_section_y="%{AirlineNull()}"
 
-function! FileProgress()
+function! FileProgress(total_lines)
     let current_line = str2nr(line("."))
     let total_lines = str2nr(line("$"))
-    let percent_of_file = (current_line * 10 / total_lines)
+    let percent_of_file = (current_line * a:total_lines / total_lines)
     let actual_percent = (current_line * 100) / (total_lines * 1)
-    let total_lines = 10
-    let percent_left = 10 - percent_of_file
+    let percent_left = a:total_lines - percent_of_file
     let indicator = "█"
     let non_indicator = "░"
-    let start_char = ""
-    let end_char = ""
     let delim="-"
     return repeat(indicator, percent_of_file) . delim . actual_percent . "%" . delim . repeat(non_indicator, percent_left)
 endfunction
-let g:airline_section_z="%{FileProgress()}"
+let g:airline_section_z="%{FileProgress(10)}"
 
 " }}}
 " vim expand region -------------------------------------------------- {{{
