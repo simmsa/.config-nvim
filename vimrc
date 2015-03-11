@@ -37,6 +37,7 @@ Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'justinmk/vim-sneak'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'terryma/vim-expand-region'
+Plugin 'zaiste/tmux.vim'
 call vundle#end()
 filetype plugin indent on
 
