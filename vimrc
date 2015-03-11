@@ -292,7 +292,7 @@ function! PreviousMisspelledWord()
     normal zv
     call repeat#set("sp")
 endfunction
-command PreviousMisspelledWord call PreviousMisspelledWord()
+command! PreviousMisspelledWord call PreviousMisspelledWord()
 nnoremap sp :PreviousMisspelledWord<CR>
 
 " }}}
