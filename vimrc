@@ -338,6 +338,8 @@ set ignorecase
 set showmatch
 set gdefault
 set infercase
+" Turn off highlighting when it is not needed
+nnoremap <CR> :noh<CR><CR>
 
 " }}}
 " Quick Editing  ------------------------------------------------- {{{
