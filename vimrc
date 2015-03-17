@@ -247,6 +247,10 @@ vmap <Leader>P "+P
 vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
+" Go to tag
+nnoremap gt <C-]>
+" Go to previous buffer
+nnoremap gp :bp<CR>
 
 " Leader Mappings -------------------------------------------------- {{{
 
