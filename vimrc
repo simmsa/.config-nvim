@@ -2,7 +2,7 @@
 " Author: Andrew Simms <andrew@andrewdsimms.com>
 " Vundle --------------------------------------- {{{
 
-set nocompatible
+" set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
