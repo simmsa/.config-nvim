@@ -38,6 +38,7 @@ Plugin 'justinmk/vim-sneak'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'terryma/vim-expand-region'
 Plugin 'zaiste/tmux.vim'
+Plugin 'scrooloose/nerdtree'
 call vundle#end()
 filetype plugin indent on
 
@@ -684,6 +685,21 @@ au FileType cpp RainbowParenthesesLoadBraces
 " Matchit -------------------------------------------------- {{{
 
 runtime macros/matchit.vim
+
+" }}}
+" Nerdtree -------------------------------------------------- {{{
+
+nnoremap <C-b> :NERDTreeToggle<CR>
+
+augroup nerdtree_fix
+    autocmd!
+    autocmd filetype nerdtree call Mod_NTree_Maps()
+augroup end
+
+function! Mod_NTree_Maps()
+    nnoremap <buffer> h gj
+    nnoremap <buffer> t gk
+endfunction
 
 " }}}
 " Oblitum Rainbow -------------------------------------------------- {{{
