@@ -400,13 +400,25 @@ set foldtext=NeatFoldText()
 
 " C -------------------------------------------------- {{{
 
+if has("nvim")
+    tnoremap <Esc> <C-\><C-n>
+endif
 function! CompileC(position)
     :w
     let filename = expand("%:r")
-    if(a:position == "i")
+    if(a:position == "i") " Compile with input
         " Could not find a way to save the output when scanf is involved
         call repeat#set("ci")
-        execute ":! make f=" . filename
+        if has("nvim")
+            execute ":terminal make f=" . filename
+        else
+            execute ":! make f=" . filename
+        endif
+        return
+    endif
+    if(a:position == "g") " Compile with the debugger, scan-build
+        call repeat#set("cg")
+        execute ":! scan-build make f=" . filename
         return
     endif
     let outputwin = bufwinnr("output")
@@ -418,12 +430,12 @@ function! CompileC(position)
         call repeat#set("cv")
     else
         :10sp output
-        call repeat#set("cc")
+        call repeat#set("cp")
     endif
     :winc r
     :%d
     execute ":r! make f=" . filename
-    normal ggK
+    normal ggkk
     :w
 endfunction
 
