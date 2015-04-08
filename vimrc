@@ -457,9 +457,10 @@ augroup ft_c
     au FileType c setlocal commentstring=//\ %s
     au FileType c syn match Function /\w\+(/me=e-1
     au FileType c setlocal makeprg=make\ f=%:r
-    au FileType c nnoremap <buffer> cc :call CompileC("b")<CR>
+    au FileType c nnoremap <buffer> cp :call CompileC("b")<CR>
     au FileType c nnoremap <buffer> cv :call CompileC("v")<CR>
     au FileType c nnoremap <buffer> ci :call CompileC("i")<CR>
+    au FileType c nnoremap <buffer> cg :call CompileC("g")<CR>
 augroup END
 
 " }}}
