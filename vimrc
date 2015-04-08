@@ -65,7 +65,7 @@ set showmode
 "Show line numbers
 set number
 "Display tabs and trailing spaces
-set list
+set list " Messes up line break, but shows list chars
 set listchars=tab:▷⋅,trail:⋅,nbsp:⋅,extends:,precedes:
 set linebreak
 " Configuring backup and related
