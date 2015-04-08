@@ -226,6 +226,8 @@ nnoremap st <C-w><Up>
 " nnoremap sd <C-w><Left>
 " nnoremap sn <C-w><Right>
 nnoremap sq <C-w>q
+" 'Axe' the current window (close only the current window)
+nnoremap sa :b#<bar>bd#<CR>
 nnoremap sx :bd<CR>
 " Remap man command
 nnoremap M K
