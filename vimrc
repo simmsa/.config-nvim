@@ -254,6 +254,16 @@ nnoremap <silent> p p`]
 nnoremap gt <C-]>
 " Go to previous buffer
 nnoremap gp :bp<CR>
+" Use full width of the screen
+function! NoDistractions()
+    :set nornu
+    :set nonu
+    :set nolist
+    :silent AirlineToggleWhitespace
+endfunction
+command! Nd :silent call NoDistractions()
+" Quit!
+nnoremap Q :qall<CR>
 
 " Leader Mappings -------------------------------------------------- {{{
 
