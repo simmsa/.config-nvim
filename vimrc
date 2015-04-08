@@ -291,6 +291,7 @@ nnoremap sg z=
 function! NextMisspelledWord()
     normal ]s
     normal zv
+    normal z.
     call repeat#set("sn")
 endfunction
 command! NextMisspelledWord call NextMisspelledWord()
@@ -298,6 +299,7 @@ nnoremap sn :NextMisspelledWord<CR>
 function! PreviousMisspelledWord()
     normal [s
     normal zv
+    normal z.
     call repeat#set("sp")
 endfunction
 command! PreviousMisspelledWord call PreviousMisspelledWord()
