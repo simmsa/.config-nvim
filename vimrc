@@ -428,6 +428,17 @@ function! CompileC(position)
         endif
         return
     endif
+    if(a:position == "v") " Compile and analyze with valgrind
+        call repeat#set("cv")
+        if has("nvim")
+            " Compile with debug symbols, run valgrind, delete
+            " executable and debug folder.
+            execute ":terminal gcc -g " . filename . ".c -o " . filename . " && valgrind ./" . filename . "&& rm " . filename . " && rm -rf " . filename . ".dSYM"
+        else
+            execute ":! gcc -g " . filename . ".c -o " . filename . " && valgrind ./" . filename . "&& rm " . filename . " && rm -rf " . filename . ".dSYM"
+        endif
+        return
+    endif
     if(a:position == "g") " Compile with the debugger, scan-build
         call repeat#set("cg")
         execute ":! scan-build make f=" . filename
