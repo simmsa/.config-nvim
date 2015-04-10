@@ -428,8 +428,8 @@ function! CompileC(position)
         endif
         return
     endif
-    if(a:position == "v") " Compile and analyze with valgrind
-        call repeat#set("cv")
+    if(a:position == "d") " Debug: Compile and analyze with valgrind
+        call repeat#set("cd")
         if has("nvim")
             " Compile with debug symbols, run valgrind, delete
             " executable and debug folder.
@@ -472,6 +472,7 @@ augroup ft_c
     au FileType c nnoremap <buffer> cv :call CompileC("v")<CR>
     au FileType c nnoremap <buffer> ci :call CompileC("i")<CR>
     au FileType c nnoremap <buffer> cg :call CompileC("g")<CR>
+    au FileType c nnoremap <buffer> cd :call CompileC("d")<CR>
 augroup END
 
 " }}}
