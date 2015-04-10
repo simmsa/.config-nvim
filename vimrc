@@ -433,7 +433,7 @@ function! CompileC(position)
         if has("nvim")
             " Compile with debug symbols, run valgrind, delete
             " executable and debug folder.
-            let command = " gcc -g -std=c11" . filename . ".c -o " . filename . " && valgrind ./" . filename . "&& rm " . filename . " && rm -rf " . filename . ".dSYM"
+            let command = " gcc -g -std=c11 " . filename . ".c -o " . filename . " && valgrind ./" . filename . "&& rm " . filename . " && rm -rf " . filename . ".dSYM"
             execute ":terminal" . command
         else
             execute ":!" . command
