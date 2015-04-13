@@ -39,6 +39,8 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'terryma/vim-expand-region'
 Plugin 'zaiste/tmux.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'marijnh/tern_for_vim'
 call vundle#end()
 filetype plugin indent on
 
@@ -264,6 +266,8 @@ endfunction
 command! Nd :silent call NoDistractions()
 " Quit!
 nnoremap Q :qall<CR>
+" I never use ; in any commands, but I use : all the time
+cnoremap ; :
 
 " Leader Mappings -------------------------------------------------- {{{
 
@@ -518,6 +522,14 @@ augroup ft_html
 augroup END
 
 " }}}
+" JavaScript -------------------------------------------------- {{{
+
+augroup ft_javascript
+    au!
+    au FileType javascript let g:term_show_argument_hints="on_hold"
+augroup end
+
+" }}}
 " Markdown -------------------------------------------------- {{{
 
 function! CompileMD()
@@ -742,7 +754,7 @@ endfunction
 " }}}
 " Oblitum Rainbow -------------------------------------------------- {{{
 
-au FileType c,python,java,ruby,arduino call rainbow#load()
+au FileType c,python,java,ruby,arduino,json call rainbow#load()
 let g:rainbow_ctermfgs = [196, 129, 202, 126, 184, 14, 40]
 
 " }}}
@@ -849,10 +861,10 @@ let g:go_disable_autoinstall = 1
 " }}}
 " vim indent guides -------------------------------------------------- {{{
 
-let g:indent_guides_start_level = 2
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd ctermbg=NONE
-autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg=8
+" let g:indent_guides_start_level = 2
+" let g:indent_guides_auto_colors = 0
+" autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd ctermbg=NONE
+" autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg=8
 
 " }}}
 " vim journal -------------------------------------------------- {{{
