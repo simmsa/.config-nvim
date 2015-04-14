@@ -268,6 +268,8 @@ command! Nd :silent call NoDistractions()
 nnoremap Q :qall<CR>
 " I never use ; in any commands, but I use : all the time
 cnoremap ; :
+" Mouse scroll in iterm2
+set mouse=nicr
 
 " Leader Mappings -------------------------------------------------- {{{
 
