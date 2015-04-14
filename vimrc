@@ -39,7 +39,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'terryma/vim-expand-region'
 Plugin 'zaiste/tmux.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'jelera/vim-javascript-syntax'
+Plugin 'pangloss/vim-javascript'
 Plugin 'marijnh/tern_for_vim'
 call vundle#end()
 filetype plugin indent on
@@ -529,6 +529,9 @@ augroup END
 augroup ft_javascript
     au!
     au FileType javascript let g:term_show_argument_hints="on_hold"
+    " Pave the way for rainbow parens
+    au FileType javascript syntax clear jsFuncBlock
+    au FileType javascript syntax clear jsFuncArgs
 augroup end
 
 " }}}
@@ -548,7 +551,7 @@ augroup ft_md
     au Filetype markdown nnoremap <buffer> cc :call CompileMD()<CR>
 augroup END
 
-let g:markdown_fenced_languages = ['python', 'bash=sh', 'c', 'html', 'css']
+let g:markdown_fenced_languages = ['python', 'bash=sh', 'c', 'html', 'css', 'javascript']
 
 " }}}
 " Org -------------------------------------------------- {{{
@@ -756,7 +759,7 @@ endfunction
 " }}}
 " Oblitum Rainbow -------------------------------------------------- {{{
 
-au FileType c,python,java,ruby,arduino,json call rainbow#load()
+au FileType c,python,java,ruby,arduino,json,javascript call rainbow#load()
 let g:rainbow_ctermfgs = [196, 129, 202, 126, 184, 14, 40]
 
 " }}}
