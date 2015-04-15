@@ -541,6 +541,22 @@ function! CompileMD()
     execute ":! md2pdf " . expand("%:r")
 endfunction
 
+function! CreateIncludeFile()
+    " !INCLUDE "File Path"
+    let line = getline(".")
+    " echo(line)
+    " echo(match(line, "!INCLUDE"))
+    if(match(line, "!INCLUDE") < 0)
+        echo("Error: Not an includes line!")
+        return
+    endif
+    " echo(matchstr(line, '".*"'))
+    let filename = matchstr(line, '".*"')[1:-2]
+    " echo(filename)
+    execute ":e " . filename
+    return
+endfunction
+
 augroup ft_md
     autocmd!
     " Forcing vim to read .md as markdown and not as 'modula2' or whatever
@@ -549,6 +565,7 @@ augroup ft_md
     au Filetype markdown set foldcolumn=4
     au Filetype markdown set breakat-=\*
     au Filetype markdown nnoremap <buffer> cc :call CompileMD()<CR>
+    au Filetype markdown nnoremap <buffer> gi :call CreateIncludeFile()<CR>
 augroup END
 
 let g:markdown_fenced_languages = ['python', 'bash=sh', 'c', 'html', 'css', 'javascript']
