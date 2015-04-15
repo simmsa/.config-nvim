@@ -270,6 +270,8 @@ nnoremap Q :qall<CR>
 cnoremap ; :
 " Mouse scroll in iterm2
 set mouse=nicr
+" Fix unwanted action in normal mode
+nnoremap <C-f> :echo "Not in insert mode!"<CR>
 
 " Leader Mappings -------------------------------------------------- {{{
 
