@@ -676,6 +676,11 @@ autocmd Filetype eruby setlocal ts=3 sw=2 expandtab
 nnoremap <Leader>/ :Ag<Space>
 
 " }}}
+" auto pairs -------------------------------------------------- {{{
+
+let g:AutoPairsCenterLine = 0
+
+" }}}
 " Ctrl P -------------------------------------------------- {{{
 
 let g:ctrlp_map = 'go'
