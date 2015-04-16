@@ -506,7 +506,6 @@ augroup ft_html
 
     au BufNewFile,BufRead *.html setlocal filetype=htmldjango
     au FileType xhtml setlocal filetype=htmldjango
-    au FileType htmldjango IndentGuidesEnable
 
     " Django tags
     au FileType htmldjango inoremap <buffer> <C-T> {%<Space><Space>%}<Left><Left><Left>
