@@ -41,6 +41,7 @@ Plugin 'zaiste/tmux.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'pangloss/vim-javascript'
 Plugin 'marijnh/tern_for_vim'
+Plugin 'heavenshell/vim-jsdoc'
 call vundle#end()
 filetype plugin indent on
 
@@ -533,6 +534,8 @@ augroup ft_javascript
     " Pave the way for rainbow parens
     au FileType javascript syntax clear jsFuncBlock
     au FileType javascript syntax clear jsFuncArgs
+    " docuMentation
+    au FileType javascript nnoremap <buffer> gm :JsDoc<CR>
 augroup end
 
 " }}}
@@ -899,6 +902,11 @@ let g:go_disable_autoinstall = 1
 
 let g:journal_directory="~/.journal"
 let g:journal_extension="md"
+
+" }}}
+" vim js doc -------------------------------------------------- {{{
+
+" See javascript FileType commands
 
 " }}}
 " vim markdown folding ----------------------------------------------- {{{
