@@ -541,22 +541,39 @@ augroup end
 " }}}
 " Markdown -------------------------------------------------- {{{
 
-function! CompileMD()
+function! CompileMDPDF()
     execute ":! md2pdf " . expand("%:r")
+endfunction
+
+function! CompileMDHtml()
+    let filename_with_extension = expand("%")
+    let filename = expand("%:r")
+    " Create the comp for include files
+    silent execute ":w"
+    silent execute ":! cp " . filename . ".md " . filename . ".mdpp"
+    silent execute ":! markdown-pp " . filename . ".mdpp " . filename . "_comp.md"
+    silent execute ":! md2html " . filename . "_comp.md > " . filename . ".html"
+    silent execute ":! rm " . filename . "_comp.md"
+endfunction
+
+function! CompileHtmlAndOpen()
+    silent call CompileMDHtml()
+    silent execute ":! open " . expand("%:r") . ".html"
+endfunction
+
+function! CompileHtmlAndReload()
+    silent call CompileMDHtml()
+    silent execute ":! chrome_reload"
 endfunction
 
 function! CreateIncludeFile()
     " !INCLUDE "File Path"
     let line = getline(".")
-    " echo(line)
-    " echo(match(line, "!INCLUDE"))
     if(match(line, "!INCLUDE") < 0)
         echo("Error: Not an includes line!")
         return
     endif
-    " echo(matchstr(line, '".*"'))
     let filename = matchstr(line, '".*"')[1:-2]
-    " echo(filename)
     execute ":e " . filename
     return
 endfunction
@@ -568,7 +585,9 @@ augroup ft_md
     " Folding for markdown
     au Filetype markdown set foldcolumn=4
     au Filetype markdown set breakat-=\*
-    au Filetype markdown nnoremap <buffer> cc :call CompileMD()<CR>
+    au Filetype markdown nnoremap <buffer> cp :call CompileMDPDF()<CR>
+    au Filetype markdown nnoremap <buffer> ch :silent call CompileHtmlAndOpen()<CR>
+    au Filetype markdown nnoremap <buffer> cr :silent call CompileHtmlAndReload()<CR>
     au Filetype markdown nnoremap <buffer> gi :call CreateIncludeFile()<CR>
 augroup END
 
