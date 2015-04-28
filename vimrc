@@ -526,6 +526,43 @@ augroup ft_html
 augroup END
 
 " }}}
+" Java -------------------------------------------------- {{{
+
+function! CompileJava(input_type)
+    let filename = expand("%:r")
+    let compilecommand = "javac " . filename . ".java"
+    let runcommand = "java " . filename
+    let runcommand_escaped = "java\\ " . filename
+    " Syntastic has to compile the file to run the checker
+    :w|SyntasticCheck
+
+    " If the quickfix window is open there are errors so don't
+    " run anything.
+    for i in range(1, winnr('$'))
+        let bnum = winbufnr(i)
+        if getbufvar(bnum, '&buftype') == 'quickfix'
+            return
+        endif
+    endfor
+
+    if has("nvim")
+        execute ":10sp term://" . runcommand_escaped
+        :winc r
+        if(a:input_type =="normal")
+            :startinsert
+        endif
+    else
+        execute ":! java " . filename
+    endif
+endfunction
+
+augroup ft_java
+    au Filetype java nnoremap <buffer> cp :call CompileJava("normal")<CR>
+    au Filetype java nnoremap <buffer> ci :call CompileJava("input")<CR>
+    au Filetype java nnoremap <buffer> <Leader>w :w<bar>SyntasticCheck<CR>
+augroup end
+
+" }}}
 " JavaScript -------------------------------------------------- {{{
 
 augroup ft_javascript
@@ -813,6 +850,9 @@ let g:rainbow_ctermfgs = [196, 129, 202, 126, 184, 14, 40]
 let g:syntastic_python_checkers = ['python']
 let g:syntastic_cpp_compiler = "g++"
 let g:syntastic_cpp_compiler_options = "-std=c++11"
+let g:syntastic_java_javac_executable = "javac"
+let g:syntastic_java_checkers = ['javac']
+let g:syntastic_java_javac_delete_output = 0
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_full_redraws = 1
