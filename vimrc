@@ -715,7 +715,29 @@ autocmd Filetype org nnoremap <Leader>os zMgg/\*VG:SortUnfolded:%s/\%x00/\rzM
 " Python -------------------------------------------------- {{{
 
 let python_highlight_all = 1
-au BufNewFile,BufRead *.py set keywordprg=pydoc
+
+function RunPython(input_type)
+    :w
+    let filename = expand("%")
+    let command = "python " . filename
+    let command_escaped = "python\\ " . filename
+    if has("nvim")
+        execute ":10sp term://" . command_escaped
+        :winc r
+        if(a:input_type == "normal")
+            :startinsert
+        endif
+    else
+        execute ":! " . command
+    endif
+endfunction
+
+augroup ft_python
+    autocmd!
+    au BufNewFile,BufRead *.py set keywordprg=pydoc
+    au Filetype python nnoremap <buffer> cp :call RunPython("normal")<CR>
+    au Filetype python nnoremap <buffer> ci :call RunPython("input")<CR>
+augroup end
 
 " }}}
 " Ruby -------------------------------------------------- {{{
