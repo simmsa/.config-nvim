@@ -480,7 +480,7 @@ augroup ft_c
     au FileType c setlocal makeprg=make\ f=%:r
     au FileType c nnoremap <buffer> cp :call CompileC("b")<CR>
     au FileType c nnoremap <buffer> cv :call CompileC("v")<CR>
-    au FileType c nnoremap <buffer> ci :call CompileC("i")<CR>
+    au FileType c nnoremap <buffer> cn :call CompileC("i")<CR>
     au FileType c nnoremap <buffer> cg :call CompileC("g")<CR>
     au FileType c nnoremap <buffer> cd :call CompileC("d")<CR>
 augroup END
@@ -558,7 +558,7 @@ endfunction
 
 augroup ft_java
     au Filetype java nnoremap <buffer> cp :call CompileJava("normal")<CR>
-    au Filetype java nnoremap <buffer> ci :call CompileJava("input")<CR>
+    au Filetype java nnoremap <buffer> cn :call CompileJava("input")<CR>
     au Filetype java nnoremap <buffer> <Leader>w :w<bar>SyntasticCheck<CR>
 augroup end
 
@@ -736,7 +736,7 @@ augroup ft_python
     autocmd!
     au BufNewFile,BufRead *.py set keywordprg=pydoc
     au Filetype python nnoremap <buffer> cp :call RunPython("normal")<CR>
-    au Filetype python nnoremap <buffer> ci :call RunPython("input")<CR>
+    au Filetype python nnoremap <buffer> cn :call RunPython("input")<CR>
 augroup end
 
 " }}}
