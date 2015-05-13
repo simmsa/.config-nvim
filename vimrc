@@ -110,7 +110,7 @@ set wildmenu
 " Ignore directories
 set wildignore+=*/.git/*,*/.sass-cache/*,*/lib/*,*/migrations/*
 " Ignore files
-set wildignore+=*.pyc,*.jpg,*.png,*.log,*.o,*.so,*.gif
+set wildignore+=*.pyc,*.jpg,*.png,*.log,*.o,*.so,*.gif,*.class
 " Spelling
 set dictionary=/usr/share/dict/words
 set spelllang=en_us
@@ -530,9 +530,11 @@ augroup END
 
 function! CompileJava(input_type)
     let filename = expand("%:r")
-    let compilecommand = "javac " . filename . ".java"
-    let runcommand = "java " . filename
-    let runcommand_escaped = "java\\ " . filename
+    let dot_filename = substitute(filename, "/", ".", "g")
+    let compilecommand = "javac -cp '.'" . filename . ".java"
+    let runcommand = "java -cp '.' " . filename
+    let runcommand_escaped = "java\\ -cp\\ '.'\\ " . dot_filename
+    " echo runcommand_escaped
     " Syntastic has to compile the file to run the checker
     :w|SyntasticCheck
 
@@ -628,7 +630,7 @@ augroup ft_md
     au Filetype markdown nnoremap <buffer> gi :call CreateIncludeFile()<CR>
 augroup END
 
-let g:markdown_fenced_languages = ['python', 'bash=sh', 'c', 'html', 'css', 'javascript']
+let g:markdown_fenced_languages = ['python', 'bash=sh', 'c', 'html', 'css', 'javascript', 'java']
 
 " }}}
 " Org -------------------------------------------------- {{{
@@ -875,6 +877,7 @@ let g:syntastic_cpp_compiler_options = "-std=c++11"
 let g:syntastic_java_javac_executable = "javac"
 let g:syntastic_java_checkers = ['javac']
 let g:syntastic_java_javac_delete_output = 0
+" let g:syntastic_java_javac_classpath = "\."
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
 let g:syntastic_full_redraws = 1
