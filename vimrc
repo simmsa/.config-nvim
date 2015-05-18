@@ -424,65 +424,69 @@ set foldtext=NeatFoldText()
 if has("nvim")
     tnoremap <Esc> <C-\><C-n>
 endif
-function! CompileC(position)
-    :w
-    let filename = expand("%:r")
-    if(a:position == "i") " Compile with input
-        " Could not find a way to save the output when scanf is involved
-        call repeat#set("ci")
-        if has("nvim")
-            execute ":terminal make f=" . filename
-        else
-            execute ":! make f=" . filename
-        endif
-        return
-    endif
-    if(a:position == "d") " Debug: Compile and analyze with valgrind
-        call repeat#set("cd")
-        if has("nvim")
-            " Compile with debug symbols, run valgrind, delete
-            " executable and debug folder.
-            let command = " gcc -g -std=c11 " . filename . ".c -o " . filename . " && valgrind ./" . filename . "&& rm " . filename . " && rm -rf " . filename . ".dSYM"
-            execute ":terminal" . command
-        else
-            execute ":!" . command
-        endif
-        return
-    endif
-    if(a:position == "g") " Compile with the debugger, scan-build
-        call repeat#set("cg")
-        execute ":! scan-build make f=" . filename
-        return
-    endif
-    let outputwin = bufwinnr("output")
-    if (outputwin >= 0)
-        execute ":bd output"
-    endif
-    if (a:position == "v")
-        :vs output
-        call repeat#set("cv")
-    else
-        :10sp output
-        call repeat#set("cp")
-    endif
-    :winc r
-    :%d
-    execute ":r! make f=" . filename
-    normal ggkk
-    :w
+
+function! TermEscape(str)
+    return substitute(a:str, " ", "\\\\ ", "g")
 endfunction
 
+function! IsQuickWindowOpen()
+    for i in range(1, winnr('$'))
+        let bnum = winbufnr(i)
+        if getbufvar(bnum, '&buftype') == 'quickfix'
+            return 1
+        endif
+    endfor
+    return 0
+endfunction
+
+function! MakeC()
+    :w|SyntasticCheck
+    if IsQuickWindowOpen() > 0
+        execute ":winc r"
+        return
+    endif
+    let l:filename = expand("%:r")
+    execute ":silent ! make f=" . l:filename
+endfunction
+
+function! MakeRunC(option)
+    let l:filename = expand("%:r")
+    let l:run_command = "make run f=" . l:filename
+    let l:valgrind_command = "make valgrind f=" . l:filename
+    let l:scan_build_command = "make scan-build f=" . l:filename
+    if(a:option == "valgrind")
+        let l:run_command = l:valgrind_command
+    elseif(a:option == "scan-build")
+        let l:run_command = l:scan_build_command
+    endif
+    if has("nvim")
+        execute ":10sp"
+        execute ":winc r"
+        execute ":term " . run_command
+    else
+        execute ":! " . run_command
+    endif
+    execute ":silent ! make clean f=" . l:filename
+endfunction
+
+command! -bar Make :call MakeC()
+command! Run :call MakeRunC("normal")
+command! RunValgrind :call MakeRunC("valgrind")
+command! RunScanBuild :call MakeRunC("scan-build")
 augroup ft_c
     autocmd!
     au FileType c setlocal foldmethod=syntax
     au FileType c setlocal commentstring=//\ %s
     au FileType c syn match Function /\w\+(/me=e-1
     au FileType c setlocal makeprg=make\ f=%:r
-    au FileType c nnoremap <buffer> cp :call CompileC("b")<CR>
-    au FileType c nnoremap <buffer> cv :call CompileC("v")<CR>
-    au FileType c nnoremap <buffer> cn :call CompileC("i")<CR>
-    au FileType c nnoremap <buffer> cg :call CompileC("g")<CR>
-    au FileType c nnoremap <buffer> cd :call CompileC("d")<CR>
+    " au FileType c nnoremap <buffer> cp :call CompileC("p")<CR>
+    au FileType c nnoremap <buffer> cp :Make<bar>Run<CR><CR>
+    au FileType c nnoremap <buffer> cv :Make<bar>RunValgrind<CR><CR>
+    au FileType c nnoremap <buffer> cd :Make<bar>RunScanBuild<CR><CR>
+    " au FileType c nnoremap <buffer> cv :call CompileC("v")<CR>
+    " au FileType c nnoremap <buffer> cn :call CompileC("i")<CR>
+    " au FileType c nnoremap <buffer> cg :call CompileC("g")<CR>
+    " au FileType c nnoremap <buffer> cd :call CompileC("d")<CR>
 augroup END
 
 " }}}
@@ -533,7 +537,8 @@ function! CompileJava(input_type)
     let dot_filename = substitute(filename, "/", ".", "g")
     let compilecommand = "javac -cp '.'" . filename . ".java"
     let runcommand = "java -cp '.' " . filename
-    let runcommand_escaped = "java\\ -cp\\ '.'\\ " . dot_filename
+    " let runcommand_escaped = "java\\ -cp\\ '.'\\ " . dot_filename
+    let runcommand_escaped = TermEscape(runcommand)
     " echo runcommand_escaped
     " Syntastic has to compile the file to run the checker
     :w|SyntasticCheck
