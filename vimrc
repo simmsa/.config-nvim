@@ -479,14 +479,9 @@ augroup ft_c
     au FileType c setlocal commentstring=//\ %s
     au FileType c syn match Function /\w\+(/me=e-1
     au FileType c setlocal makeprg=make\ f=%:r
-    " au FileType c nnoremap <buffer> cp :call CompileC("p")<CR>
     au FileType c nnoremap <buffer> cp :Make<bar>Run<CR><CR>
     au FileType c nnoremap <buffer> cv :Make<bar>RunValgrind<CR><CR>
     au FileType c nnoremap <buffer> cd :Make<bar>RunScanBuild<CR><CR>
-    " au FileType c nnoremap <buffer> cv :call CompileC("v")<CR>
-    " au FileType c nnoremap <buffer> cn :call CompileC("i")<CR>
-    " au FileType c nnoremap <buffer> cg :call CompileC("g")<CR>
-    " au FileType c nnoremap <buffer> cd :call CompileC("d")<CR>
 augroup END
 
 " }}}
@@ -537,9 +532,7 @@ function! CompileJava(input_type)
     let dot_filename = substitute(filename, "/", ".", "g")
     let compilecommand = "javac -cp '.'" . filename . ".java"
     let runcommand = "java -cp '.' " . filename
-    " let runcommand_escaped = "java\\ -cp\\ '.'\\ " . dot_filename
     let runcommand_escaped = TermEscape(runcommand)
-    " echo runcommand_escaped
     " Syntastic has to compile the file to run the checker
     :w|SyntasticCheck
 
