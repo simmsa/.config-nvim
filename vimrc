@@ -463,8 +463,11 @@ function! MakeRunC(option)
         let l:run_command = l:gdb_command
     endif
     if has("nvim")
-        execute ":10sp"
-        execute ":winc r"
+        " gdb tui mode works best with the full screen
+        if(a:option != "gdb")
+            execute ":10sp"
+            execute ":winc r"
+        endif
         execute ":term " . run_command
     else
         execute ":! " . run_command
