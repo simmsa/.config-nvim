@@ -454,10 +454,13 @@ function! MakeRunC(option)
     let l:run_command = "make run f=" . l:filename
     let l:valgrind_command = "make valgrind f=" . l:filename
     let l:scan_build_command = "make scan-build f=" . l:filename
+    let l:gdb_command = "make gdb f=" . l:filename
     if(a:option == "valgrind")
         let l:run_command = l:valgrind_command
     elseif(a:option == "scan-build")
         let l:run_command = l:scan_build_command
+    elseif(a:option == "gdb")
+        let l:run_command = l:gdb_command
     endif
     if has("nvim")
         execute ":10sp"
@@ -466,13 +469,21 @@ function! MakeRunC(option)
     else
         execute ":! " . run_command
     endif
+    " Cleanup files when the buffer is deleted
+    au! BufDelete <buffer> call MakeClean()
+endfunction
+
+function MakeClean()
+    let l:filename = expand("%:r")
     execute ":silent ! make clean f=" . l:filename
+    echo l:filename
 endfunction
 
 command! -bar Make :call MakeC()
 command! Run :call MakeRunC("normal")
 command! RunValgrind :call MakeRunC("valgrind")
 command! RunScanBuild :call MakeRunC("scan-build")
+command! RunGDB :call MakeRunC("gdb")
 augroup ft_c
     autocmd!
     au FileType c setlocal foldmethod=syntax
@@ -482,6 +493,7 @@ augroup ft_c
     au FileType c nnoremap <buffer> cp :Make<bar>Run<CR><CR>
     au FileType c nnoremap <buffer> cv :Make<bar>RunValgrind<CR><CR>
     au FileType c nnoremap <buffer> cd :Make<bar>RunScanBuild<CR><CR>
+    au FileType c nnoremap <buffer> cg :Make<bar>RunGDB<CR><CR>
 augroup END
 
 " }}}
