@@ -816,6 +816,11 @@ nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 
 " }}}
+" Git Gutter -------------------------------------------------- {{{
+
+nnoremap gh :GitGutterStageHunk<CR>
+
+" }}}
 " Gundo -------------------------------------------------- {{{
 
 nnoremap <Leader>u :GundoToggle<CR>
