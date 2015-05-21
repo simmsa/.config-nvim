@@ -241,6 +241,7 @@ nnoremap M K
 imap <C-t> <tab>
 " I always use A and never use a, so why not save a motion
 nnoremap a A
+nnoremap A a
 " Zipping
 " Zip current char to the last char
 nmap ze xNp
