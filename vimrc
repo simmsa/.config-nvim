@@ -273,6 +273,8 @@ cnoremap ; :
 set mouse=nicr
 " Fix unwanted action in normal mode
 nnoremap <C-f> :echo "Not in insert mode!"<CR>
+" Read the file, useful for proofreading
+command! Read :! say -v kate -f %
 
 " Leader Mappings -------------------------------------------------- {{{
 
