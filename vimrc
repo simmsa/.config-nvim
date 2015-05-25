@@ -133,6 +133,7 @@ function! TruncateFilename(max_len)
         return filename[0:half-1] . "…" . filename[filename_len-(half):filename_len-1]
 endfunction
 autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . TruncateFilename(8))
+let g:terminal_scrollback_buffer_size = 100000
 
 " Color scheme -------------------------------------------------- {{{
 
