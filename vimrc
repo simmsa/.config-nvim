@@ -234,6 +234,8 @@ nnoremap sq <C-w>q
 " 'Axe' the current window (close only the current window)
 nnoremap sa :b#<bar>bd#<CR>
 nnoremap sx :bd<CR>
+" Vertically split the current file
+nnoremap sv :vs<CR>
 " Show open buffers
 nnoremap sb :ls<CR>
 " Remap man command
