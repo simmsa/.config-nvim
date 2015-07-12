@@ -1,6 +1,6 @@
 " .vimrc
-" Author: Andrew Simms <andrew@andrewdsimms.com>
-" vim-plug --------------------------------------- {{{
+" Author: Andrew Simms <andrew@andrewdsimms.com> <https://github.com/simmsa>
+" vim plug --------------------------------------- {{{
 
 " set nocompatible
 filetype off
