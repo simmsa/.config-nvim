@@ -290,7 +290,7 @@ let maplocalleader = "\<Space>"
 " <Space> w to save a file
 nnoremap <Leader>w :w<CR>
 "<Space> s to source VIMRC
-nnoremap <Leader>s :so ~/.vimrc<CR>
+nnoremap <Leader>s :so ~/.nvimrc<CR>
 "Easy buffer switching
 " nnoremap <Leader>n :bn<CR>
 " nnoremap <Leader>p :bp<CR>
