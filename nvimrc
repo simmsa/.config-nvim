@@ -772,6 +772,35 @@ autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
 autocmd Filetype eruby setlocal ts=3 sw=2 expandtab
 
 " }}}
+" Swift -------------------------------------------------- {{{
+
+function! RunSwift()
+    execute ":w"
+    if IsQuickWindowOpen()
+        return
+    endif
+    let s:fname = expand("%")
+    let s:command = "swift " . s:fname
+    if has("nvim")
+        execute ":10sp"
+        execute ":winc r"
+        execute ":term " . s:command
+    else
+        execute ":! " . s:command
+    endif
+endfunction
+
+command! RunSwift :call RunSwift()
+
+augroup ft_swift
+    autocmd!
+    au FileType swift syn match Function /\w\+(/me=e-1
+    au FileType swift nnoremap <buffer> cp :RunSwift<CR><CR>
+
+augroup END
+
+
+" }}}
 
 " }}}
 " Plugin Settings -------------------------------------------------- {{{
