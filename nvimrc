@@ -873,24 +873,26 @@ let g:jedi#show_call_signatures = "1"
 " }}}
 " Kien Rainbow -------------------------------------------------- {{{
 
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['166',     'DarkOrchid3'],
-    \ ['163',         'firebrick3'],
-    \ ]
+" let g:rbpt_colorpairs = [
+"     \ ['brown',       'RoyalBlue3'],
+"     \ ['Darkblue',    'SeaGreen3'],
+"     \ ['darkgray',    'DarkOrchid3'],
+"     \ ['darkgreen',   'firebrick3'],
+"     \ ['darkcyan',    'RoyalBlue3'],
+"     \ ['darkred',     'SeaGreen3'],
+"     \ ['darkmagenta', 'DarkOrchid3'],
+"     \ ['brown',       'firebrick3'],
+"     \ ['gray',        'RoyalBlue3'],
+"     \ ['black',       'SeaGreen3'],
+"     \ ['darkmagenta', 'DarkOrchid3'],
+"     \ ['Darkblue',    'firebrick3'],
+"     \ ['darkgreen',   'RoyalBlue3'],
+"     \ ['darkcyan',    'SeaGreen3'],
+"     \ ['166',     'DarkOrchid3'],
+"     \ ['163',         'firebrick3'],
+"     \ ]
+
+let g:rbpt_colorpairs = g:sustain_kien_rainbow_parens
 
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
@@ -922,8 +924,10 @@ endfunction
 " }}}
 " Oblitum Rainbow -------------------------------------------------- {{{
 
-au FileType c,python,java,ruby,arduino,json,javascript call rainbow#load()
-let g:rainbow_ctermfgs = [196, 129, 202, 126, 184, 14, 40]
+au FileType c,python,java,ruby,arduino,json,javascript,vim,swift call rainbow#load()
+" let g:rainbow_ctermfgs = [196, 129, 202, 126, 184, 14, 40]
+let g:rainbow_ctermfgs = g:sustain_cterm_rainbow_parens
+let g:rainbow_guifgs = g:sustain_gui_rainbow_parens
 
 " }}}
 " Syntastic -------------------------------------------------- {{{
