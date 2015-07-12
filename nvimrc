@@ -741,7 +741,7 @@ autocmd Filetype org nnoremap <Leader>os zMgg/\*VG:SortUnfolded:%s/\%x00/\rzM
 
 let python_highlight_all = 1
 
-function RunPython(input_type)
+function! RunPython(input_type)
     :w
     let filename = expand("%")
     let command = "python " . filename
