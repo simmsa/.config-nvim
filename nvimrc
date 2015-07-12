@@ -40,6 +40,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'pangloss/vim-javascript'
 Plug 'marijnh/tern_for_vim'
 Plug 'heavenshell/vim-jsdoc'
+Plug 'gorodinskiy/vim-coloresque'
+Plug 'vim-scripts/SyntaxAttr.vim'
 call plug#end()
 filetype plugin indent on
 
