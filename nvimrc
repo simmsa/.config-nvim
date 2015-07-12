@@ -138,7 +138,7 @@ let g:terminal_scrollback_buffer_size = 100000
 " Color scheme -------------------------------------------------- {{{
 
 syntax on
-colorscheme pychimp
+colorscheme sustain
 " Highlight current line
 set cursorline
 
