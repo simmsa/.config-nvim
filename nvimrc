@@ -450,7 +450,6 @@ endfunction
 function! MakeC()
     :w|SyntasticCheck
     if IsQuickWindowOpen() > 0
-        execute ":winc r"
         return
     endif
     let l:filename = expand("%:r")
@@ -458,6 +457,9 @@ function! MakeC()
 endfunction
 
 function! MakeRunC(option)
+    if IsQuickWindowOpen() > 0
+        return
+    endif
     let l:filename = expand("%:r")
     let l:run_command = "make run f=" . l:filename
     let l:valgrind_command = "make valgrind f=" . l:filename
@@ -484,7 +486,7 @@ function! MakeRunC(option)
     au! BufDelete <buffer> call MakeClean()
 endfunction
 
-function MakeClean()
+function! MakeClean()
     let l:filename = expand("%:r")
     execute ":silent ! make clean f=" . l:filename
     echo l:filename
