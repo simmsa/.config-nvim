@@ -653,7 +653,7 @@ augroup ft_md
     au Filetype markdown nnoremap <buffer> gi :call CreateIncludeFile()<CR>
 augroup END
 
-let g:markdown_fenced_languages = ['python', 'bash=sh', 'c', 'html', 'css', 'javascript', 'java']
+let g:markdown_fenced_languages = ['python', 'bash=sh', 'c', 'html', 'css', 'javascript', 'java', 'xml']
 
 " }}}
 " Org -------------------------------------------------- {{{
