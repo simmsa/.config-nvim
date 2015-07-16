@@ -490,6 +490,26 @@ function! MakeRunC(option)
     au! BufDelete <buffer> call MakeClean()
 endfunction
 
+function! MakeRunCWithArgs(...)
+    if IsQuickWindowOpen() > 0
+        return
+    endif
+    " a:000 is a list of the given args
+    let l:args = join(a:000, " ")
+    let l:filename = expand("%:r")
+    let l:run_command = "make run_w_args f=" . l:filename . " args=\"" . l:args . "\""
+    echo l:run_command
+    if has("nvim")
+        execute ":10sp"
+        execute ":winc r"
+        execute ":term " . run_command
+    else
+        execute ":! " . run_command
+    endif
+    " Cleanup files when the buffer is deleted
+    au! BufDelete <buffer> call MakeClean()
+endfunction
+
 function! MakeClean()
     let l:filename = expand("%:r")
     execute ":silent ! make clean f=" . l:filename
@@ -502,6 +522,7 @@ command! Run :call MakeRunC("normal")
 command! RunValgrind :call MakeRunC("valgrind")
 command! RunScanBuild :call MakeRunC("scan-build")
 command! RunGDB :call MakeRunC("gdb")
+command! -nargs=* RunWithArgs :call MakeRunCWithArgs(<f-args>)
 augroup ft_c
     autocmd!
     au FileType c setlocal foldmethod=syntax
@@ -513,6 +534,7 @@ augroup ft_c
     au FileType c nnoremap <buffer> cd :Make<bar>RunScanBuild<CR><CR>
     au FileType c nnoremap <buffer> cg :Make<bar>RunGDB<CR><CR>
     au FileType c nnoremap <buffer> ca :ForceMake<bar>Run<CR><CR>
+    au FileType c nnoremap <buffer> ci :Make<bar>RunWithArgs<Space>
 augroup END
 
 " }}}
