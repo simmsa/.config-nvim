@@ -447,8 +447,12 @@ function! IsQuickWindowOpen()
     return 0
 endfunction
 
-function! MakeC()
-    :w|SyntasticCheck
+function! MakeC(check_syntax)
+    if(a:check_syntax != "false")
+        :w|SyntasticCheck
+    else
+        :w
+    endif
     if IsQuickWindowOpen() > 0
         return
     endif
@@ -492,7 +496,8 @@ function! MakeClean()
     echo l:filename
 endfunction
 
-command! -bar Make :call MakeC()
+command! -bar Make :call MakeC("true")
+command! -bar ForceMake :call MakeC("false")
 command! Run :call MakeRunC("normal")
 command! RunValgrind :call MakeRunC("valgrind")
 command! RunScanBuild :call MakeRunC("scan-build")
@@ -507,6 +512,7 @@ augroup ft_c
     au FileType c nnoremap <buffer> cv :Make<bar>RunValgrind<CR><CR>
     au FileType c nnoremap <buffer> cd :Make<bar>RunScanBuild<CR><CR>
     au FileType c nnoremap <buffer> cg :Make<bar>RunGDB<CR><CR>
+    au FileType c nnoremap <buffer> ca :ForceMake<bar>Run<CR><CR>
 augroup END
 
 " }}}
