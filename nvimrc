@@ -535,6 +535,7 @@ augroup ft_c
     au FileType c nnoremap <buffer> cg :Make<bar>RunGDB<CR><CR>
     au FileType c nnoremap <buffer> ca :ForceMake<bar>Run<CR><CR>
     au FileType c nnoremap <buffer> ci :Make<bar>RunWithArgs<Space>
+    au FileType c setlocal nofoldenable
 augroup END
 
 " }}}
