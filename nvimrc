@@ -1005,7 +1005,6 @@ let g:airline_theme='relative'
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#branch#displayed_head_limit=7
 let g:airline#extensions#syntastic#enabled=1
-let g:airline#extensions#eclim#enabled = 0
 function! AirlineFilename()
     return "/" . TruncateFilename(24)
 endfunction
