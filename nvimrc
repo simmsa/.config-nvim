@@ -134,6 +134,9 @@ function! TruncateFilename(max_len)
 endfunction
 autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . TruncateFilename(8))
 let g:terminal_scrollback_buffer_size = 100000
+" Prefer splits to open below and on the right
+set splitbelow
+set splitright
 
 " Color scheme -------------------------------------------------- {{{
 
