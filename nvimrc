@@ -873,6 +873,8 @@ function! ToggleGStatus()
         bd .git/index
     else
         Gstatus
+        " Move to the first file in the list
+        exe "normal \<C-n>"
     endif
 endfunction
 command! ToggleGStatus :call ToggleGStatus()
