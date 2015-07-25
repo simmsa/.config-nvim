@@ -7,7 +7,6 @@ filetype off
 call plug#begin('~/.nvim/bundle')
 Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
-Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'jplaut/vim-arduino-ino'
@@ -42,6 +41,7 @@ Plug 'marijnh/tern_for_vim'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'vim-scripts/SyntaxAttr.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| .install' }
 call plug#end()
 filetype plugin indent on
 
@@ -847,24 +847,6 @@ nnoremap <Leader>/ :Ag<Space>
 let g:AutoPairsCenterLine = 0
 
 " }}}
-" Ctrl P -------------------------------------------------- {{{
-
-let g:ctrlp_map = 'go'
-let g:ctrlp_cmd = 'CtrlP'
-nnoremap gu :CtrlPBuffer<CR>
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_prompt_mappings = {'PrtSelectMove("k")': ['<c-t>'], 'ToggleByFName()':['<c-f>'], 'AcceptSelection("t")': ['<c-y>'], 'PrtCurLeft()': ['<left>'], 'PrtSelectMove("j")':['<c-n>'], 'PrtHistory(-1)': ['<c-l>'],}
-
-" Make ctrlp super fast
-let g:ctrlp_use_caching = 0
-if executable("ag")
-    set grepprg=ag\ --nogroup\ --nocolor
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-else
-    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-endif
-
-" }}}
 " Fugitive --------------------------------------------------" {{{
 
 " Fugitive custom mappings
@@ -882,6 +864,84 @@ nnoremap <Leader>g :ToggleGStatus<CR>
 nnoremap gs :ToggleGStatus<CR>
 nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gd :Gdiff<CR>
+
+" }}}
+" FZF -------------------------------------------------- {{{
+
+nnoremap go :FZF<CR>
+
+au TermOpen term://*:FZF tnoremap <buffer> <C-t> <Up>
+au TermOpen term://*:FZF tnoremap <buffer> <Esc> <C-c>
+
+function! FZF_fileopen(e)
+    execute 'e ' a:e
+endfunction
+
+" Open buffer list with fzf, directly from fzf wiki
+function! FZF_buflist()
+    redir => ls
+    silent ls
+    redir END
+    return split(ls, '\n')
+endfunction
+
+function! FZF_bufopen(e)
+    execute 'buffer ' matchstr(a:e, '^[ 0-9]*')
+endfunction
+
+nnoremap <silent> gu :call fzf#run({
+\ 'down': len(FZF_buflist()) + 2,
+\ 'source': reverse(FZF_buflist()),
+\ 'sink': function('FZF_bufopen'),
+\ 'options': '+m'
+\ })<CR>
+
+" Jump to tags with fzf, directly from fzf wiki
+command! -bar FZFTags if !empty(tagfiles()) | call fzf#run({
+\   'source': "sed '/^\\!/d;s/\t.*//' " . join(tagfiles()) . ' | uniq',
+\   'sink':   'tag',
+\ }) | else | echo 'Preparing tags' | call system('ctags -R') | FZFTag | endif
+
+nnoremap gt :FZFTags<CR>
+
+" Narrow ag results within vim, directly from fzf wiki
+function! s:ag_to_qf(line)
+  let parts = split(a:line, ':')
+  return {'filename': parts[0], 'lnum': parts[1], 'col': parts[2],
+        \ 'text': join(parts[3:], ':')}
+endfunction
+
+function! s:ag_handler(lines)
+  if len(a:lines) < 2 | return | endif
+
+  let cmd = get({'ctrl-x': 'split',
+               \ 'ctrl-v': 'vertical split',
+               \ 'ctrl-t': 'tabe'}, a:lines[0], 'e')
+  let list = map(a:lines[1:], 's:ag_to_qf(v:val)')
+
+  let first = list[0]
+  execute cmd escape(first.filename, ' %#\')
+  execute first.lnum
+  execute 'normal!' first.col.'|zz'
+
+  if len(list) > 1
+    call setqflist(list)
+    copen
+    wincmd p
+  endif
+endfunction
+
+command! -nargs=* FZFSilverSearch call fzf#run({
+\ 'source':  printf('ag --nogroup --column --color "%s"',
+\                   escape(empty(<q-args>) ? '^(?=.)' : <q-args>, '"\')),
+\ 'sink*':    function('<sid>ag_handler'),
+\ 'options': '--ansi --expect=ctrl-t,ctrl-v,ctrl-x '.
+\            '--multi --bind ctrl-a:select-all,ctrl-d:deselect-all '.
+\            '--color hl:68,hl+:110',
+\ 'down':    '40%'
+\ })
+
+nnoremap ga :FZFSilverSearch<Space>
 
 " }}}
 " Git Gutter -------------------------------------------------- {{{
