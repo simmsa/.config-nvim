@@ -337,7 +337,8 @@ let s:vim_msg = ['ModeMsg', 'MoreMsg', 'Question']
 let s:vim_popup_menu = ['Pmenu', 'PmenuSbar', 'PmenuThumb', 'WildMenu']
 let s:vim_popup_menu_select = ['PmenuSel']
 let s:vim_normal = ['Normal']
-let s:vim_search = ['Search', 'IncSearch']
+let s:vim_search = ['Search']
+let s:vim_inc_search = ['IncSearch']
 let s:vim_special = ['Directory', 'SpecialKey', 'Title']
 let s:vim_spell = ['SpellBad', 'SpellCap', 'SpellLocal', 'SpellRare']
 let s:vim_tab = ['TabLine', 'TabLineFill', 'TabLineSel']
@@ -357,6 +358,7 @@ call s:HiGroup(s:vim_normal, s:sustain_whites, s:sustain_gui_bg)
 call s:HiGroup(s:vim_popup_menu, s:sustain_gui_bg, s:sustain_gui_not_selected)
 call s:HiGroup(s:vim_popup_menu_select, s:sustain_gui_bg_selected, s:sustain_gui_selected)
 " call s:HiGroup(s:vim_search, s:sustain_intense_indigos, s:sustain_gui_bg_highlight)
+call s:HiGroup(s:vim_inc_search, s:GetShade(s:blues, "accent", "none"), s:white)
 call s:HiGroup(s:vim_search, s:GetShade(s:blues, "accent", "italic"))
 call s:HiGroup(s:vim_special, s:sustain_gui_light)
 call s:HiGroup(s:vim_spell, s:sustain_whites, s:sustain_dark_red)
