@@ -311,7 +311,7 @@ call s:HiGroup(s:comments, s:GetShade(s:reds, "light", "none"))
 " call s:HiGroup(s:conditionals, s:sustain_dark_purple)
 " call s:HiGroup(s:pre_procs, s:sustain_dark_blues)
 call s:HiGroup(s:pre_condits, s:GetShade(s:greens, "normal", "none"))
-call s:HiGroup(s:conditionals, s:GetShade(s:deep_purples, "normal", "none"))
+call s:HiGroup(s:conditionals, s:GetShade(s:deep_purples, "light", "none"))
 call s:HiGroup(s:pre_procs, s:GetShade(s:blues, "normal", "none"))
 
 " Accents
