@@ -284,6 +284,8 @@ set mouse=nicr
 nnoremap <C-f> :echo "Not in insert mode!"<CR>
 " Read the file, useful for proofreading
 command! Read :! say -v kate -f %
+" Go to the next buffer
+nnoremap <Tab> :bn<CR>
 
 " Leader Mappings -------------------------------------------------- {{{
 
