@@ -164,22 +164,22 @@ set softtabstop=4
 " }}}
 " Dvorak -------------------------------------------------- {{{
 
-noremap h gj
-noremap t gk
-noremap d <Left>
-noremap n <Right>
+nnoremap h gj
+nnoremap t gk
+nnoremap d <Left>
+nnoremap n <Right>
 
 " j is now jump, swapping with t
-noremap j t
-" k is now kill swapping with d
+nnoremap j t
+" k is now kill swapping with d, explicitly noremap
 noremap k d
 " l is now look up next swapping with n
-noremap l n
+nnoremap l n
 " Consistent behavior with C
 nnoremap K d$
 nnoremap Y y$
 "easier navigation of finds
-nmap - :
+nnoremap - :
 
 " }}}
 " Convience Mappings ------------------------------------------------- {{{
