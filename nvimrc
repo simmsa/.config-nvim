@@ -42,6 +42,8 @@ Plug 'heavenshell/vim-jsdoc'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| .install' }
+Plug 'junegunn/vim-pseudocl'
+Plug 'junegunn/vim-oblique'
 call plug#end()
 filetype plugin indent on
 
@@ -1164,6 +1166,12 @@ let g:journal_extension="md"
 
 let g:markdown_fold_style = 'nested'
 let g:markdown_fold_override_foldtext = 0
+
+" }}}
+" vim oblique  -------------------------------------------------- {{{
+
+nmap l <Plug>(Oblique-n)
+nmap L <Plug>(Oblique-N)
 
 " }}}
 " vim org mode -------------------------------------------------- {{{
