@@ -879,12 +879,23 @@ function! FZF_fileopen(e)
     execute 'e ' a:e
 endfunction
 
-" Open buffer list with fzf, directly from fzf wiki
+" Open buffer list with fzf, modified from fzf wiki
+" Removes the current buffer from the list and automatically
+" goes to the next buffer if there is only one result.
 function! FZF_buflist()
     redir => ls
     silent ls
     redir END
-    return split(ls, '\n')
+    " Remove the current active buffer from the buffer list
+    let FZF_all_buffers = split(ls, '\n')
+    let current_list_item = 0
+    for FZF_buf in FZF_all_buffers
+        if match(FZF_buf, "\%a") > 0
+            call remove(FZF_all_buffers, current_list_item)
+        endif
+        let current_list_item += 1
+    endfor
+    return FZF_all_buffers
 endfunction
 
 function! FZF_bufopen(e)
@@ -895,7 +906,7 @@ nnoremap <silent> gu :call fzf#run({
 \ 'down': len(FZF_buflist()) + 2,
 \ 'source': reverse(FZF_buflist()),
 \ 'sink': function('FZF_bufopen'),
-\ 'options': '+m'
+\ 'options': '+m -1 -0'
 \ })<CR>
 
 " Jump to tags with fzf, directly from fzf wiki
