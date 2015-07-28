@@ -874,6 +874,7 @@ nnoremap <Leader>g :ToggleGStatus<CR>
 nnoremap gs :ToggleGStatus<CR>
 nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gd :Gdiff<CR>
+nnoremap gm :Gcommit<CR>
 
 " }}}
 " FZF -------------------------------------------------- {{{
