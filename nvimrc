@@ -184,6 +184,10 @@ noremap K d$
 noremap Y y$
 "easier navigation of finds
 noremap - :
+" Faster Movements (lookUps)
+noremap u f
+" I Fudged up
+noremap f u
 
 " }}}
 " Convience Mappings ------------------------------------------------- {{{
@@ -1188,8 +1192,8 @@ nmap E <Plug>Sneak_S
 nnoremap <C-e> e
 nmap - <Plug>SneakNext
 nmap _ <Plug>SneakPrevious
-nmap f <Plug>Sneak_f
-nmap F <Plug>Sneak_F
+nmap u <Plug>Sneak_f
+nmap U <Plug>Sneak_F
 nmap j <Plug>Sneak_t
 nmap J <Plug>Sneak_T
 
