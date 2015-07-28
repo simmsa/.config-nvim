@@ -166,22 +166,24 @@ set softtabstop=4
 " }}}
 " Dvorak -------------------------------------------------- {{{
 
-nnoremap h gj
-nnoremap t gk
-nnoremap d <Left>
-nnoremap n <Right>
+" Map dvorak keys everywhere with noremap explicitly
+" noremap as opposed to nnoremap maps a command in every mode
+noremap h gj
+noremap t gk
+noremap d <Left>
+noremap n <Right>
 
 " j is now jump, swapping with t
-nnoremap j t
-" k is now kill swapping with d, explicitly noremap
+noremap j t
+" k is now kill swapping with d
 noremap k d
 " l is now look up next swapping with n
-nnoremap l n
+noremap l n
 " Consistent behavior with C
-nnoremap K d$
-nnoremap Y y$
+noremap K d$
+noremap Y y$
 "easier navigation of finds
-nnoremap - :
+noremap - :
 
 " }}}
 " Convience Mappings ------------------------------------------------- {{{
