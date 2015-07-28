@@ -546,8 +546,8 @@ augroup ft_c
     au FileType c nnoremap <buffer> cv :Make<bar>RunValgrind<CR><CR>
     au FileType c nnoremap <buffer> cd :Make<bar>RunScanBuild<CR><CR>
     au FileType c nnoremap <buffer> cg :Make<bar>RunGDB<CR><CR>
-    au FileType c nnoremap <buffer> ca :ForceMake<bar>Run<CR><CR>
-    au FileType c nnoremap <buffer> ci :Make<bar>RunWithArgs<Space>
+    au FileType c nnoremap <buffer> co :ForceMake<bar>Run<CR><CR>
+    au FileType c nnoremap <buffer> ca :Make<bar>RunWithArgs<Space>
     au FileType c setlocal nofoldenable
 augroup END
 
