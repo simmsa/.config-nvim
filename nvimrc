@@ -485,22 +485,30 @@ function! MakeRunC(option)
     let l:valgrind_command = "make valgrind f=" . l:filename
     let l:scan_build_command = "make scan-build f=" . l:filename
     let l:gdb_command = "make gdb f=" . l:filename
+    let l:gdv_command = "gdv ./" . l:filename
+    let l:gdh_command = "gdh ./" . l:filename
+    let l:gds_command = "gds ./" . l:filename
     if(a:option == "valgrind")
         let l:run_command = l:valgrind_command
     elseif(a:option == "scan-build")
         let l:run_command = l:scan_build_command
     elseif(a:option == "gdb")
         let l:run_command = l:gdb_command
+    elseif(a:option == "gdv")
+        let l:run_command = l:gdv_command
+    elseif(a:option == "gdh")
+        let l:run_command = l:gdh_command
+    elseif(a:option == "gds")
+        let l:run_command = l:gds_command
     endif
-    if has("nvim")
+    if has("nvim") && !(index(["gdv", "gdh", "gds"], a:option) >= 0)
         " gdb tui mode works best with the full screen
         if(a:option != "gdb")
             execute ":10sp"
-            execute ":winc r"
         endif
-        execute ":term " . run_command
+        execute ":term " . l:run_command
     else
-        execute ":! " . run_command
+        execute ":! " . l:run_command
     endif
     " Cleanup files when the buffer is deleted
     au! BufDelete <buffer> call MakeClean()
