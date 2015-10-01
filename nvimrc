@@ -50,7 +50,6 @@ filetype plugin indent on
 " }}}
 " Basic Options {{{
 
-set encoding=utf-8
 set modelines=0
 set textwidth=0
 set wrap
