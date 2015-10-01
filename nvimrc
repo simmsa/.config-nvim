@@ -578,6 +578,13 @@ au FileType cpp syn match Exception />\|</
 au FileType cpp setlocal commentstring=//\ %s
 
 " }}}
+" CSS -------------------------------------------------- {{{
+
+augroup ft_css
+    au FileType css hi link cssVendor StorageClass
+augroup END
+
+" }}}
 " Git -------------------------------------------------- {{{
 
 au FileType gitcommit setlocal spell
