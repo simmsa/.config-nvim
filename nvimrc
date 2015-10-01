@@ -1112,6 +1112,7 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 
 let g:airline_powerline_fonts=1
 let g:airline_theme='relative'
+let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#branch#displayed_head_limit=7
 let g:airline#extensions#syntastic#enabled=1
