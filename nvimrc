@@ -294,6 +294,9 @@ nnoremap <C-f> :echo "Not in insert mode!"<CR>
 command! Read :! say -v kate -f %
 " Go to the next buffer
 nnoremap <Tab> :bn<CR>
+" Faster semicolon insert
+" Note, <C-punctuation> mappings don't work due to term issues
+inoremap <C-s> <End>;
 
 " Leader Mappings -------------------------------------------------- {{{
 
