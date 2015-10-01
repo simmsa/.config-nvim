@@ -521,11 +521,10 @@ function! MakeRunCWithArgs(...)
     " a:000 is a list of the given args
     let l:args = join(a:000, " ")
     let l:filename = expand("%:r")
-    let l:run_command = "make run_w_args f=" . l:filename . " args=\"" . l:args . "\""
+    let l:run_command = "./" . l:filename . " " . l:args
     echo l:run_command
     if has("nvim")
         execute ":10sp"
-        execute ":winc r"
         execute ":term " . run_command
     else
         execute ":! " . run_command
