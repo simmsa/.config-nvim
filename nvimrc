@@ -545,6 +545,9 @@ command! Run :call MakeRunC("normal")
 command! RunValgrind :call MakeRunC("valgrind")
 command! RunScanBuild :call MakeRunC("scan-build")
 command! RunGDB :call MakeRunC("gdb")
+command! RunGDV :call MakeRunC("gdv")
+command! RunGDH :call MakeRunC("gdh")
+command! RunGDS :call MakeRunC("gds")
 command! -nargs=* RunWithArgs :call MakeRunCWithArgs(<f-args>)
 augroup ft_c
     autocmd!
@@ -556,6 +559,9 @@ augroup ft_c
     au FileType c nnoremap <buffer> cv :Make<bar>RunValgrind<CR><CR>
     au FileType c nnoremap <buffer> cd :Make<bar>RunScanBuild<CR><CR>
     au FileType c nnoremap <buffer> cg :Make<bar>RunGDB<CR><CR>
+    au FileType c nnoremap <buffer> cv :Make<bar>RunGDV<CR><CR>
+    au FileType c nnoremap <buffer> ch :Make<bar>RunGDH<CR><CR>
+    au FileType c nnoremap <buffer> cm :Make<bar>RunGDS<CR><CR>
     au FileType c nnoremap <buffer> co :ForceMake<bar>Run<CR><CR>
     au FileType c nnoremap <buffer> ca :Make<bar>RunWithArgs<Space>
     au FileType c setlocal nofoldenable
