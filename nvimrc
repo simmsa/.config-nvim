@@ -44,6 +44,8 @@ Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| .install' }
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-oblique'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --gocode-completer' }
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 call plug#end()
 filetype plugin indent on
 
@@ -464,11 +466,14 @@ endfunction
 
 function! MakeC(check_syntax)
     if(a:check_syntax != "false")
-        :w|SyntasticCheck
+        execute ":w | silent YcmDiags"
     else
         :w
     endif
     if IsQuickWindowOpen() > 0
+        " Compilation failed, handle appropriately
+        echoerr "Compilation failed! See loc list for errors"
+        execute 'sleep 2 | call feedkeys("\<CR>")'
         return
     endif
     let l:filename = expand("%:r")
@@ -663,6 +668,8 @@ augroup ft_javascript
     au FileType javascript syntax clear jsFuncArgs
     " docuMentation
     au FileType javascript nnoremap <buffer> gm :JsDoc<CR>
+    " Have tern and Ycm play nicely together
+    au FileType javascript setlocal omnifunc=tern#Complete
 augroup end
 
 " }}}
@@ -1106,6 +1113,50 @@ vmap <Leader>ae :Tab /=<CR>             | " Align equals
 " UltiSnips Config
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsExpandTrigger="<C-s>"
+" let g:UltiSnipsJumpForwardTrigger="<C-s>"
+
+" Enable tabbing through list of results
+function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+        " Execute ycm complete key
+        " execute 'startinsert! | call feedkeys("\<C-o>")'
+        " execute 'startinsert | call feedkeys("\<Right>\<C-o>")'
+        if pumvisible()
+            return "\<C-n>"
+            " return ""
+        else
+            " execute 'startinsert! | call feedkeys("\<C-x>\<C-n>")'
+            " if pumvisible()
+            "     return ""
+            " else
+                call UltiSnips#JumpForwards()
+                if g:ulti_jump_forwards_res == 0
+                    return "\<Tab>"
+                    " return ""
+                endif
+            " endif
+        endif
+    endif
+    return ""
+endfunction
+
+au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<CR>"
+
+" Expand snippet or return
+let g:ulti_expand_res = 0
+function! Ulti_ExpandOrEnter()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res
+        return ''
+    else
+        return "\<return>"
+    endif
+endfunction
+
+" Set <return> as primary trigger
+inoremap <return> <C-r>=Ulti_ExpandOrEnter()<CR>
 
 " }}}
 " vim airline -------------------------------------------------- {{{
@@ -1221,6 +1272,33 @@ nmap u <Plug>Sneak_f
 nmap U <Plug>Sneak_F
 nmap j <Plug>Sneak_t
 nmap J <Plug>Sneak_T
+
+" }}}
+" YouCompleteMe ------------------------------ {{{
+
+let g:ycm_key_list_select_completion = [ '<C-n>', '<Down>' ]
+let g:ycm_key_list_previous_completion = [ '<C-p>', '<Up>' ]
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" let g:ycm_key_invoke_completion = '<C-o>'
+
+let g:ycm_min_num_identifier_candidate_chars = 2
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_use_ultisnips_completer = 0
+
+" Opens automatic popup menu at 4 characters
+let g:ycm_min_num_of_chars_for_completion = 4
+
+" Preview window options
+" let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
+let g:ycm_open_loc_list_on_ycm_diags = 1
 
 " }}}
 
