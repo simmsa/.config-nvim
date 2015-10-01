@@ -46,6 +46,8 @@ Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-oblique'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --gocode-completer' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+Plug 'gregsexton/MatchTag'
+Plug 'JulesWang/css.vim'
 call plug#end()
 filetype plugin indent on
 
