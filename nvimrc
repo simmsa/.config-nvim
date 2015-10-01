@@ -551,6 +551,7 @@ command! RunGDS :call MakeRunC("gds")
 command! -nargs=* RunWithArgs :call MakeRunCWithArgs(<f-args>)
 augroup ft_c
     autocmd!
+    au BufNewFile,BufRead *.h set filetype=c
     au FileType c setlocal foldmethod=syntax
     au FileType c setlocal commentstring=//\ %s
     au FileType c syn match Function /\w\+(/me=e-1
