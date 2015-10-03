@@ -339,12 +339,13 @@ let s:vim_popup_menu = ['Pmenu', 'PmenuSbar', 'PmenuThumb', 'WildMenu']
 let s:vim_popup_menu_select = ['PmenuSel']
 let s:vim_normal = ['Normal']
 let s:vim_search = ['Search']
-let s:vim_inc_search = ['IncSearch']
+let s:vim_inc_search = ['IncSearch', 'SneakPluginTarget', 'SneakStreakTarget']
 let s:vim_special = ['Directory', 'SpecialKey', 'Title']
 let s:vim_spell = ['SpellBad', 'SpellCap', 'SpellLocal', 'SpellRare']
 let s:vim_tab = ['TabLine', 'TabLineFill', 'TabLineSel']
 let s:vim_visual = ['Visual']
 let s:vim_match_paren = ['MatchParen']
+let s:vim_sneak_mask = ['SneakStreakMask']
 " }}}
 " Vim Syntax Coloring {{{
 call s:HiGroup(s:vim_conceal, s:sustain_gui_subtle)
@@ -360,7 +361,7 @@ call s:HiGroup(s:vim_normal, s:sustain_whites, s:sustain_gui_bg)
 call s:HiGroup(s:vim_popup_menu, s:sustain_gui_bg, s:sustain_gui_not_selected)
 call s:HiGroup(s:vim_popup_menu_select, s:sustain_gui_bg_selected, s:sustain_gui_selected)
 " call s:HiGroup(s:vim_search, s:sustain_intense_indigos, s:sustain_gui_bg_highlight)
-call s:HiGroup(s:vim_inc_search, s:GetShade(s:blues, "accent", "none"), s:white)
+call s:HiGroup(s:vim_inc_search, s:GetShade(s:reds, "accent", "none"), s:white)
 call s:HiGroup(s:vim_match_paren, s:GetShade(s:blues, "accent", "none"), s:white)
 call s:HiGroup(s:vim_search, s:GetShade(s:blues, "accent", "italic"))
 call s:HiGroup(s:vim_special, s:sustain_gui_light)
@@ -369,6 +370,7 @@ call s:HiGroup(s:vim_tab, s:sustain_gui_light, s:sustain_gui_subtle)
 " call s:HiGroup(s:vim_visual, s:sustain_whites, s:sustain_dark_orange)
 call s:HiGroup(s:vim_visual, s:GetShade(s:white, "solid", "none"), s:GetShade(s:oranges, "accent", "none"))
 " }}}
+call s:HiGroup(s:vim_sneak_mask, s:sustain_whites, s:sustain_whites)
 " Diffs {{{
 " For easier reading of diffs backgrounds are dark to maintian syntax
 " highlighting. Colors are atypical, but easier on the eyes. They are:
