@@ -112,7 +112,8 @@ function! s:RainbowMergeColors(type, color_groups)
         let l:hex_color = a:color_groups[x][0][12]
         let l:cterm_color = a:color_groups[x][1][3]
         if(a:type == "kien")
-            call extend(l:result, [l:hex_color, l:cterm_color])
+            " call add(l:result, [l:hex_color, l:cterm_color])
+            call add(l:result, [l:cterm_color, l:hex_color])
         elseif(a:type == "hex")
             call add(l:result, l:hex_color)
         elseif(a:type == "cterm")
