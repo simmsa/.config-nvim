@@ -1265,15 +1265,17 @@ autocmd Filetype org setl noai nocin nosi inde=
 " }}}
 " vim-sneak -------------------------------------------------- {{{
 
-nmap e <Plug>Sneak_s
-nmap E <Plug>Sneak_S
-nnoremap <C-e> e
-nmap - <Plug>SneakNext
-nmap _ <Plug>SneakPrevious
-nmap u <Plug>Sneak_f
-nmap U <Plug>Sneak_F
-nmap j <Plug>Sneak_t
-nmap J <Plug>Sneak_T
+let g:sneak#streak = 1
+
+map e <Plug>Sneak_s
+map E <Plug>Sneak_S
+map <C-e> e
+map - <Plug>SneakNext
+map _ <Plug>SneakPrevious
+map u <Plug>Sneak_f
+map U <Plug>Sneak_F
+map j <Plug>Sneak_t
+map J <Plug>Sneak_T
 
 " }}}
 " YouCompleteMe ------------------------------ {{{
