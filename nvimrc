@@ -240,7 +240,7 @@ cnoremap <C-T> <Up>
 inoremap <C-l> <ESC>mzgUiw`zi<Right>
 " Faster window switching
 nnoremap ss <C-w><C-w>
-nnoremap sh <C-w><Down>
+" nnoremap sh <C-w><Down>
 nnoremap st <C-w><Up>
 " nnoremap sd <C-w><Left>
 " nnoremap sn <C-w><Right>
@@ -1005,7 +1005,7 @@ nnoremap ga :FZFSilverSearch<Space>
 " }}}
 " Git Gutter -------------------------------------------------- {{{
 
-nnoremap gh :GitGutterStageHunk<CR>
+nnoremap sh :GitGutterStageHunk<CR>
 
 " }}}
 " Gundo -------------------------------------------------- {{{
