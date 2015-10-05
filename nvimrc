@@ -47,6 +47,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --gocode-
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'gregsexton/MatchTag'
 Plug 'JulesWang/css.vim'
+Plug 'vim-scripts/a.vim'
 call plug#end()
 filetype plugin indent on
 
@@ -878,6 +879,11 @@ augroup END
 " }}}
 " Plugin Settings -------------------------------------------------- {{{
 
+" A.vim-------------------------------------------------- {{{
+
+nnoremap gh :A<CR>
+
+" }}}
 " Ag -------------------------------------------------- {{{
 
 nnoremap <Leader>/ :Ag<Space>
