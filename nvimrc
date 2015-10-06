@@ -381,6 +381,19 @@ let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 " Vertically split current file and scroll with it
 nnoremap <silent> sf :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
 
+" Close a :term when the process is complete
+let g:TermAutoExit = {}
+function! TermAutoExit.on_exit(id, code)
+    exe 'bd!' self.bufid
+    echo self.exit_message
+endfunction
+
+function! StartTermAutoExit(command, exit_message)
+    exe "10sp | enew"
+    let auto_exit_dict = extend(copy(g:TermAutoExit), {'bufid': bufnr("%"), 'exit_message': a:exit_message})
+    call termopen(a:command, auto_exit_dict)
+endfunction
+
 " }}}
 " Searching and Movement {{{
 
