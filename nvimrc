@@ -394,6 +394,14 @@ function! StartTermAutoExit(command, exit_message)
     call termopen(a:command, auto_exit_dict)
 endfunction
 
+" Enable custom vim commands in any directory
+function! SourceDirectory()
+    let vim_dir_file = "vim_dir_commands.vim"
+    if filereadable(vim_dir_file)
+        exe "source " . vim_dir_file
+    endif
+endfunction
+
 " }}}
 " Searching and Movement {{{
 
@@ -1293,6 +1301,11 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_open_loc_list_on_ycm_diags = 1
 
 " }}}
+
+" }}}
+" Directory Specific Commands {{{
+
+call SourceDirectory()
 
 " }}}
 " Fold Settings -------------------------------------------------- {{{
