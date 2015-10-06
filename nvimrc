@@ -48,6 +48,7 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'gregsexton/MatchTag'
 Plug 'JulesWang/css.vim'
 Plug 'vim-scripts/a.vim'
+Plug 'tpope/vim-rsi'
 call plug#end()
 filetype plugin indent on
 
@@ -201,9 +202,6 @@ nnoremap <silent> <C-l> :nohl<CR><C-l>
 au CursorHoldI * stopinsert
 au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
 au InsertLeave * let &updatetime=updaterestore
-"Remap command mode
-cnoremap <C-f> <Right>
-cnoremap <C-b> <Left>
 "Changing number incrementing
 nnoremap <C-j> <C-a>
 nnoremap <C-k> <C-x>
@@ -350,15 +348,6 @@ function! PreviousMisspelledWord()
 endfunction
 command! PreviousMisspelledWord call PreviousMisspelledWord()
 nnoremap sp :PreviousMisspelledWord<CR>
-
-" }}}
-" Emacs Insert Mode -------------------------------------------------- {{{
-
-imap <C-e> <End>
-" Go forward in insert mode
-imap <C-f> <Right>
-" Go back in insert mode
-imap <C-b> <Left>
 
 " }}}
 
