@@ -49,6 +49,7 @@ Plug 'gregsexton/MatchTag'
 Plug 'JulesWang/css.vim'
 Plug 'vim-scripts/a.vim'
 Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-abolish'
 call plug#end()
 filetype plugin indent on
 
@@ -1174,6 +1175,11 @@ function! FileProgress(total_lines)
     return repeat(indicator, percent_of_file) . delim . actual_percent . "%" . delim . repeat(non_indicator, percent_left)
 endfunction
 let g:airline_section_z="%{FileProgress(10)}"
+
+" }}}
+" vim abolish -------------------------------------------------- {{{
+
+" Abolish abbreviations are in ~/.nvim/after/plugins/abolish.vim
 
 " }}}
 " vim expand region -------------------------------------------------- {{{
