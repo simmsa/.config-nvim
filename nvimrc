@@ -200,7 +200,7 @@ noremap Y y$
 "easier navigation of finds
 noremap - :
 " Faster Movements (lookUps)
-noremap u f
+" u -> f mapped with vim-sneak
 " I Fudged up
 noremap f u
 
