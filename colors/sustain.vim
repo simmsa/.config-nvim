@@ -329,7 +329,6 @@ let s:vim_conceal = ['Conceal', 'NonText']
 let s:vim_cursor = ['Cursor', 'CursorIM', 'CursorColumn', 'CursorLineNr']
 let s:vim_cursor_line = ['CursorLine']
 let s:vim_cursor_line_number = ['CursorLineNr']
-let s:vim_diffs = ['DiffAdd', 'DiffChange', 'DiffDelete', 'DiffText']
 let s:vim_error = ['ErrorMsg', 'WarningMsg']
 let s:vim_fold = ['Folded']
 let s:vim_column = ['FoldColumn', 'SignColumn']
@@ -375,14 +374,16 @@ call s:HiGroup(s:vim_sneak_mask, s:sustain_whites, s:sustain_whites)
 " For easier reading of diffs backgrounds are dark to maintian syntax
 " highlighting. Colors are atypical, but easier on the eyes. They are:
 " * Slate Green (#003333) for Additions
-" * Dark Purple (##180033) for Changed Lines
+" * Dark Purple (#180033) for Changed Lines
 " * Italics for Changed Text
 " * Dark Red (#330000) for Deletions
-let s:vim_diff = ['DiffAdd', 'DiffChange', 'DiffDelete']
-call s:HiGroup(s:vim_diff, [], s:MergeColors([[['#003333'], [22]], [['#180033'], [53]], [['#330000'], [52]]], 0, 0, "none"))
+hi DiffAdd ctermbg=22 ctermfg=NONE cterm=NONE guibg=#003333 guifg=NONE gui=NONE
+hi DiffChange ctermbg=53 ctermfg=NONE cterm=NONE guibg=#180033 guifg=NONE gui=NONE
+hi DiffDelete ctermbg=52 ctermfg=NONE cterm=NONE guibg=#330000 guifg=NONE gui=NONE
 " Set diff text as italic
 " Background must be set if you don't want your retinas blasted with red
-hi DiffText ctermfg=none guifg=none ctermbg=53 guibg=#180033 cterm=bold gui=italic
+" Don't use italic unless you want bad things to happen
+hi DiffText ctermbg=53 ctermfg=NONE cterm=NONE guibg=#300067 guifg=NONE gui=underline
 " }}}
 " Custom Highlighting {{{
 " Airline Settings {{{
