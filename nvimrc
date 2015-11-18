@@ -54,6 +54,7 @@ Plug 'vim-scripts/lh-vim-lib'
 Plug '~/.nvim/bundle/simple-org-mode'
 Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-unimpaired'
+Plug 'vim-scripts/CmdlineComplete'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
 call plug#end()
@@ -958,6 +959,12 @@ nnoremap gh :A<CR>
 let g:AutoPairsCenterLine = 0
 
 " }}}
+" CmdlineComplete ---------------------------------------------------------- {{{
+
+cmap <C-N> <Plug>CmdlineCompleteForward
+cmap <C-S> <Plug>CmdlineCompleteBackward
+
+" End CmdlineComplete ------------------------------------------------------ }}}
 " Fugitive --------------------------------------------------" {{{
 
 " Fugitive custom mappings
