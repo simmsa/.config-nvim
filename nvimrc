@@ -244,14 +244,56 @@ cnoremap <C-T> <Up>
 inoremap <C-l> <ESC>mzgUiw`zi<Right>
 " Faster window switching
 nnoremap ss <C-w><C-w>
-" nnoremap sh <C-w><Down>
-nnoremap st <C-w><Up>
-" nnoremap sd <C-w><Left>
-" nnoremap sn <C-w><Right>
-nnoremap sq <C-w>q
-" 'Axe' the current window (close only the current window)
-nnoremap sa :b#<bar>bd#<CR>
-nnoremap sx :bd<CR>
+nnoremap sx :call SmartBufferDelete()<CR>
+function! SmartBufferDelete()
+    " Clear the command line
+    echo ""
+    " If the buffer is of the following filetypes close it and exit function
+    let l:quick_close_ft_array = ['git', 'org', 'gitcommit']
+    if index(l:quick_close_ft_array, &filetype) > -1
+        exe "bd"
+        return
+    endif
+
+    " There are some buffer types that I want to close no matter what
+    " window I am in
+    let l:buftype_close_keywords = ['nofile', 'quickfix']
+    let l:max_buffers_open = 20
+    for i in range(max_buffers_open)
+        if index(l:buftype_close_keywords, getbufvar(i, "&buftype")) > -1
+            echo "Match: " . getbufvar(i, "&buftype")
+            sleep 2
+            exe "bd " . i
+            return
+        endif
+    endfor
+
+    " If the current buffer
+    " Next two lines from
+    " http://stackoverflow.com/questions/2974192/how-can-i-pare-down-vims-buffer-list-to-only-include-active-buffers/2974600#2974600n
+    " Changed range min from 0 to 1 see :h bufname() for explanation
+    " of the 0 buffer, I think I don't need it here
+    let l:buffers_open = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+    let l:windows_open = len(lh#list#unique_sort(eval(join(map(range(1, tabpagenr()), 'tabpagebuflist(v:val)'), '+'))))
+    " If there is only one (or none) buffer(s) open quit vim and only one
+    " window open
+    if l:buffers_open <= 1 && l:windows_open <= 1
+        exe ":q"
+    " If there is only window open, close the current window
+    elseif l:windows_open == 1
+        exe ":bd"
+    " If one file is open but split between windows
+    elseif l:windows_open > 1 && l:buffers_open == 1
+        exe "winc q"
+    " If there are only two windows (splits) open and two buffers close the current buffer
+    elseif l:buffers_open == 2 && l:windows_open == 2
+        exe ":bd"
+    " If there is a split window and more than two buffers, keep the split there just
+    " close the current file and put another file in that split
+    elseif l:buffers_open > 2 && l:windows_open >= 2
+        exe ":b#|bd#"
+    endif
+endfunction
 " Vertically split the current file
 nnoremap sv :vs<CR>
 " Remap man command
