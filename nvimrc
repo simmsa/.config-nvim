@@ -172,8 +172,6 @@ set softtabstop=4
 " }}}
 
 " }}}
-" Abbreviations {{{
-" }}}
 " Dvorak -------------------------------------------------- {{{
 
 " Map dvorak keys everywhere with noremap explicitly
