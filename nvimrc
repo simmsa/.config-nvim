@@ -223,15 +223,6 @@ nnoremap : ;
 " Insert multiple lines (o stays in normal mode and works with a count)
 nnoremap o o<Esc>S
 nnoremap O @='O<C-V><Esc>'<CR>S
-" Quicker Movement
-nnoremap D ^
-nnoremap N g_
-nnoremap H %
-nnoremap T {
-vnoremap D ^
-vnoremap N g_
-vnoremap H %
-vnoremap T {
 " Easier tabbing of selections
 vnoremap < <gv
 vnoremap > >gv
