@@ -1211,6 +1211,12 @@ let g:airline_section_z="%{FileProgress(10)}"
 " Abolish abbreviations are in ~/.nvim/after/plugins/abolish.vim
 
 " }}}
+" vim commentary ----------------------------------------------------------- {{{
+
+nmap gcp gccyypgcc
+nmap gcu gccyytpgcc
+
+" End vim commentary ------------------------------------------------------- }}}
 " vim expand region -------------------------------------------------- {{{
 
 vmap v <Plug>(expand_region_expand)
