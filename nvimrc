@@ -38,7 +38,7 @@ Plug 'marijnh/tern_for_vim'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'vim-scripts/SyntaxAttr.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| .install' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-oblique'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --gocode-completer' }
@@ -48,6 +48,7 @@ Plug 'JulesWang/css.vim'
 Plug 'vim-scripts/a.vim'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-abolish'
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
 call plug#end()
 filetype plugin indent on
@@ -1029,14 +1030,10 @@ nnoremap gm :Gcommit<CR>
 " }}}
 " FZF -------------------------------------------------- {{{
 
-nnoremap go :FZF<CR>
+nnoremap go :GitFiles<CR>
 
-au TermOpen term://*:FZF tnoremap <buffer> <C-t> <Up>
-au TermOpen term://*:FZF tnoremap <buffer> <Esc> <C-c>
-
-function! FZF_fileopen(e)
-    execute 'e ' a:e
-endfunction
+au TermOpen term://*fzf* tmap <buffer> <C-t> <Up>
+au TermOpen term://*fzf* tmap <buffer> <Esc> <Esc>
 
 " Open buffer list with fzf, modified from fzf wiki
 " Removes the current buffer from the list and automatically
@@ -1061,59 +1058,31 @@ function! FZF_bufopen(e)
     execute 'buffer ' matchstr(a:e, '^[ 0-9]*')
 endfunction
 
-nnoremap <silent> gu :call fzf#run({
-\ 'down': len(FZF_buflist()) + 2,
-\ 'source': reverse(FZF_buflist()),
-\ 'sink': function('FZF_bufopen'),
-\ 'options': '+m -1 -0'
-\ })<CR>
-
-" Jump to tags with fzf, directly from fzf wiki
-command! -bar FZFTags if !empty(tagfiles()) | call fzf#run({
-\   'source': "sed '/^\\!/d;s/\t.*//' " . join(tagfiles()) . ' | uniq',
-\   'sink':   'tag',
-\ }) | else | echo 'Preparing tags' | call system('ctags -R') | FZFTag | endif
-
-nnoremap gt :FZFTags<CR>
-
-" Narrow ag results within vim, directly from fzf wiki
-function! s:ag_to_qf(line)
-  let parts = split(a:line, ':')
-  return {'filename': parts[0], 'lnum': parts[1], 'col': parts[2],
-        \ 'text': join(parts[3:], ':')}
+function! FZF_should_run_bufopen()
+    let l:current_buf_list = FZF_buflist()
+    if len(l:current_buf_list) > 1
+        call fzf#run({
+        \ 'down': len(l:current_buf_list) + 2,
+        \ 'source': reverse(l:current_buf_list),
+        \ 'sink': function('FZF_bufopen'),
+        \ 'options': '+m -1 -0'
+        \ })
+    elseif len(l:current_buf_list) == 1
+        call FZF_bufopen(l:current_buf_list[0])
+    else
+        echo "Cannot switch buffers: There are no other active buffers!"
+    endif
 endfunction
 
-function! s:ag_handler(lines)
-  if len(a:lines) < 2 | return | endif
+nnoremap <silent> gu :call FZF_should_run_bufopen()<CR>
 
-  let cmd = get({'ctrl-x': 'split',
-               \ 'ctrl-v': 'vertical split',
-               \ 'ctrl-t': 'tabe'}, a:lines[0], 'e')
-  let list = map(a:lines[1:], 's:ag_to_qf(v:val)')
+nnoremap gt :Tags<CR>
 
-  let first = list[0]
-  execute cmd escape(first.filename, ' %#\')
-  execute first.lnum
-  execute 'normal!' first.col.'|zz'
+" fzf.vim Ag search
+nnoremap ga :Ag<CR>
 
-  if len(list) > 1
-    call setqflist(list)
-    copen
-    wincmd p
-  endif
-endfunction
-
-command! -nargs=* FZFSilverSearch call fzf#run({
-\ 'source':  printf('ag --nogroup --column --color "%s"',
-\                   escape(empty(<q-args>) ? '^(?=.)' : <q-args>, '"\')),
-\ 'sink*':    function('<sid>ag_handler'),
-\ 'options': '--ansi --expect=ctrl-t,ctrl-v,ctrl-x '.
-\            '--multi --bind ctrl-a:select-all,ctrl-d:deselect-all '.
-\            '--color hl:68,hl+:110',
-\ 'down':    '40%'
-\ })
-
-nnoremap ga :FZFSilverSearch<Space>
+command! H :Helptags
+nnoremap g- :Helptags<CR>
 
 " }}}
 " Git Gutter -------------------------------------------------- {{{
