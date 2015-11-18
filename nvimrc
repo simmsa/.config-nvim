@@ -178,6 +178,16 @@ noremap t gk
 noremap d <Left>
 noremap n <Right>
 
+" Quicker Movement
+nnoremap H /
+nnoremap T ?
+nnoremap D ^
+nnoremap N g_
+vnoremap D ^
+vnoremap N g_
+vnoremap H /
+vnoremap T ?
+
 " j is now jump, swapping with t
 noremap j t
 " k is now kill swapping with d
