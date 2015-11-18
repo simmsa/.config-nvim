@@ -18,7 +18,6 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'jiangmiao/auto-pairs'
 Plug 'calendar.vim'
 Plug 'davidhalter/jedi-vim'
-Plug 'oblitum/rainbow'
 Plug 'godlygeek/tabular'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -49,6 +48,7 @@ Plug 'JulesWang/css.vim'
 Plug 'vim-scripts/a.vim'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-abolish'
+Plug 'junegunn/rainbow_parentheses.vim'
 call plug#end()
 filetype plugin indent on
 
@@ -353,7 +353,7 @@ let maplocalleader = "\<Space>"
 " <Space> w to save a file
 nnoremap <Leader>w :w<CR>
 "<Space> s to source VIMRC
-nnoremap <Leader>s :so ~/.nvimrc<Bar>RainbowLoad<CR>
+nnoremap <Leader>s :so ~/.nvimrc<CR>
 "Easy buffer switching
 " nnoremap <Leader>n :bn<CR>
 " nnoremap <Leader>p :bp<CR>
@@ -1157,13 +1157,20 @@ function! Mod_NTree_Maps()
 endfunction
 
 " }}}
-" Oblitum Rainbow -------------------------------------------------- {{{
+" Rainbow Parens ----------------------------------------------------------- {{{
 
-au FileType c,cpp,python,java,ruby,arduino,json,javascript,vim,swift call rainbow#load()
-let g:rainbow_ctermfgs = g:sustain_cterm_rainbow_parens
-let g:rainbow_guifgs = g:sustain_gui_rainbow_parens
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+let g:rainbow#include = [':', ';', ',', '=']
 
-" }}}
+let g:rainbow#colors = {'dark': g:sustain_kien_rainbow_parens, 'light': g:sustain_kien_rainbow_parens}
+
+augroup rainbow_ft
+    autocmd!
+    autocmd FileType vim,typescript RainbowParentheses
+augroup END
+
+" End Rainbow Parens ------------------------------------------------------- }}}
 " Syntastic -------------------------------------------------- {{{
 
 let g:syntastic_python_checkers = ['python']
