@@ -1307,9 +1307,9 @@ let g:rooter_silent_chdir = 1
 
 let g:sneak#streak = 1
 
+noremap <C-E> :normal! e<CR>
 map e <Plug>Sneak_s
 map E <Plug>Sneak_S
-map <C-e> e
 map - <Plug>SneakNext
 map _ <Plug>SneakPrevious
 map u <Plug>Sneak_f
