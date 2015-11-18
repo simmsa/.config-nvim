@@ -376,4 +376,29 @@ call s:HiGroup(s:org_yellow, s:GetShade(s:yellows, "accent", "bold"))
 let s:org_reds = ['org_1_todo', 'org_todo']
 call s:HiGroup(s:org_reds, s:GetShade(s:reds, "accent", "none"))
 " }}}
+" Neovim True Color -------------------------------------------------- {{{
+
+" From https://github.com/gilgigilgil/anderson.vim/blob/master/colors/anderson.vim
+if $NVIM_TUI_ENABLE_TRUE_COLOR == 1
+    let g:terminal_foreground = "#d1e3ea"
+    let g:terminal_color_background = "#001019"
+    let g:terminal_color_0 = "#000000"
+    let g:terminal_color_1 = "#f44236"
+    let g:terminal_color_2 = "#4caf4f"
+    let g:terminal_color_3 = "#ffea3a"
+    let g:terminal_color_4 = "#2196f3"
+    let g:terminal_color_5 = "#9c27b0"
+    let g:terminal_color_6 = "#00bcd4"
+    let g:terminal_color_7 = "#ffffff"
+    let g:terminal_color_8 = "#002233"
+    let g:terminal_color_9 = "#ff2844"
+    let g:terminal_color_10 = "#00e676"
+    let g:terminal_color_11 = "#ffea00"
+    let g:terminal_color_12 = "#2979ff"
+    let g:terminal_color_13 = "#d53bf9"
+    let g:terminal_color_14 = "#02ffdf"
+    let g:terminal_color_15 = "#fdf6e3"
+endif
+
+" }}}
 " }}}
