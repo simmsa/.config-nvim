@@ -445,10 +445,15 @@ endfunction
 
 function! Term(command)
     " Open term in a split
-    silent exe "10sp | enew | te " . a:command
+    silent exe "10sp | enew"
+    " Commands are split for TermClose feedkeys compatability
+    silent exe "te " . a:command
 endfunction
 
 command! -bar -nargs=* Term :call Term(<q-args>)
+
+" Don't show term process exited
+au TermClose * call feedkeys('<cr>')
 
 " Enable custom vim commands in any directory
 function! SourceDirectory()
