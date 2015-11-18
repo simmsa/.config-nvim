@@ -487,7 +487,53 @@ nnoremap zz 10[zzc
 " Give me back zz functionality
 nnoremap z. zz
 
-nmap <Leader>f o<Esc>50i-<Esc>A<Space>{{{<CR>}}}<Esc>gcc2t0gcchkktf<Space>i<Space><Esc>ni
+function! CreateFold(fold_name)
+    let fold_line_len = 80
+    let fold_marker_start = " {{{"
+    let fold_marker_end = " }}}"
+    let current_line = line(".")
+    let comment_string = &commentstring
+    let last_fold_name = "End " . a:fold_name
+
+    " Account for space after comment
+    let comment_len = len(substitute(comment_string, "%s", "", "")) + 1
+    let name_len = len(a:fold_name)
+
+    " Create First Line
+    let first_line_repeat = fold_line_len - len(a:fold_name) - comment_len - 1 - len(fold_marker_start)
+    let first_line_content = " " . a:fold_name . " " . repeat("-", first_line_repeat) . fold_marker_start
+    let first_line = substitute(comment_string, "%s", first_line_content, "")
+
+    " Create Last Line
+    let last_line_repeat = fold_line_len - len(last_fold_name) - comment_len - 1 - len(fold_marker_end)
+    let last_line_content = " " . last_fold_name . " " . repeat("-", last_line_repeat) . fold_marker_end
+    let last_line = substitute(comment_string, "%s", last_line_content, "")
+
+    " Add the fold
+    let complete_create_fold = [first_line, "", "", "", last_line]
+    call append(current_line, complete_create_fold)
+
+    " Move to the middle
+    exe "normal! jjj"
+endfunction
+
+function! CreateFoldSection(fold_name)
+    set nofoldenable
+    " Save selection into the z register
+    execute ":'<,'>delete z"
+    exe "normal! k"
+    call CreateFold(a:fold_name)
+    " Clean up some weirdness here
+    exe "normal! ddk"
+    execute "put z"
+    set foldenable
+endfunction
+
+command! -nargs=1 CreateFold call CreateFold(<f-args>)
+nnoremap <Leader>f :CreateFold<Space>
+command! -range -nargs=1 CreateFoldSection call CreateFoldSection(<f-args>)
+vnoremap <Leader>f :CreateFoldSection<Space>
+
 " NeatFoldText -------------------------------------------------- {{{
 
 function! NeatFoldText()
