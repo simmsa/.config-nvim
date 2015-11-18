@@ -7,7 +7,7 @@ filetype off
 call plug#begin('~/.nvim/bundle')
 Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
-Plug 'scrooloose/syntastic'
+Plug 'benekastah/neomake'
 Plug 'tpope/vim-fugitive'
 Plug 'jplaut/vim-arduino-ino'
 Plug 'tpope/vim-surround'
@@ -48,6 +48,7 @@ Plug 'JulesWang/css.vim'
 Plug 'vim-scripts/a.vim'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
 call plug#end()
@@ -345,6 +346,8 @@ nnoremap <Tab> :bn<CR>
 " Faster semicolon insert
 " Note, <C-punctuation> mappings don't work due to term issues
 inoremap <C-s> <End>;
+" Navigate the quickfix list
+nnoremap cc :cc<CR>
 
 " Leader Mappings -------------------------------------------------- {{{
 
@@ -1111,6 +1114,19 @@ let g:jedi#show_call_signatures = "1"
 runtime macros/matchit.vim
 
 " }}}
+" Neomake ------------------------------------------------------------------ {{{
+
+" Only run neomake on the current file, basically syntax checking
+autocmd! BufWritePost *.js,*.json Neomake
+" Run neomake using makeprg in the cwd
+autocmd! BufWritePost *.ts Neomake!
+
+let g:neomake_list_height = 3
+let g:neomake_open_list = 2
+let g:neomake_error_sign = { 'text': "✗>", 'texthl': 'Error' }
+let g:neomake_warning_sign = { 'text': "?>", 'texthl': 'Visual' }
+
+" End Neomake -------------------------------------------------------------- }}}
 " Nerdtree -------------------------------------------------- {{{
 
 nnoremap <C-b> :NERDTreeToggle<CR>
@@ -1140,25 +1156,6 @@ augroup rainbow_ft
 augroup END
 
 " End Rainbow Parens ------------------------------------------------------- }}}
-" Syntastic -------------------------------------------------- {{{
-
-let g:syntastic_python_checkers = ['python']
-let g:syntastic_cpp_compiler = "g++"
-let g:syntastic_cpp_compiler_options = "-std=c++11"
-let g:syntastic_java_javac_executable = "javac"
-let g:syntastic_java_checkers = ['javac']
-let g:syntastic_java_javac_delete_output = 0
-" let g:syntastic_java_javac_classpath = "\."
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '⚠'
-let g:syntastic_full_redraws = 1
-" let g:syntastic_auto_jump = 2         " Jump to syntax errors
-let g:syntastic_auto_loc_list = 1     " Auto-open the error list
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
-" }}}
 " Tabularize ------------------------------------------------ {{{
 
 nnoremap <Leader>ap :Tabularize /\|<CR> | " Align Pipe
