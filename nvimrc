@@ -1292,6 +1292,10 @@ let g:markdown_fold_override_foldtext = 0
 nmap l <Plug>(Oblique-n)
 nmap L <Plug>(Oblique-N)
 
+" Center cursor after search
+autocmd! User Oblique normal! zz
+autocmd! User ObliqueStar normal! zz
+autocmd! User ObliqueRepeat normal! zz
 
 " }}}
 " vim rooter --------------------------------------------------------------- {{{
