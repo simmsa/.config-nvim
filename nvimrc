@@ -235,7 +235,7 @@ nnoremap S :!<Space>
 " Make <C-P> behave like it should and also zsh like
 cnoremap <C-P> <Up>
 cnoremap <C-T> <Up>
-" Easier uppercase
+" Easier uppercase (ycm bricks <C-u>)
 inoremap <C-l> <ESC>mzgUiw`zi<Right>
 " Faster window switching
 nnoremap ss <C-w><C-w>
