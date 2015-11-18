@@ -541,8 +541,12 @@ function! NeatFoldText()
   let line = substitute(getline(v:foldstart), '{{' . '{', '', 'g') . ' '
   let commentless_line = ' ' . substitute(line, '//\|#\|/\*\|\*/\|"\|-', '', 'g')
   let markdown_line = line
-  let lines_count = v:foldend - v:foldstart + 1
-  let lines_count_text = ' ' . printf("%s", lines_count . ' lines') . ' '
+  let lines_count = v:foldend - v:foldstart + 1 - 4
+  if lines_count != 1
+      let lines_count_text = ' ' . printf("%s", lines_count . ' lines') . ' '
+  else
+      let lines_count_text = ' ' . printf("%s", lines_count . ' line') . ' '
+  endif
   let foldchar = "─"
   if (&ft=='markdown')
       let foldtextstart = strpart(markdown_line, 0, (winwidth(0)*2)/3)
