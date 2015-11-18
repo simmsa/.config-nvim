@@ -49,6 +49,9 @@ Plug 'vim-scripts/a.vim'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-abolish'
 Plug 'rdolgushin/gitignore.vim'
+Plug 'vim-scripts/lh-vim-lib'
+Plug '~/.nvim/bundle/simple-org-mode'
+Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-unimpaired'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
@@ -853,87 +856,6 @@ augroup END
 let g:markdown_fenced_languages = ['python', 'bash=sh', 'c', 'html', 'css', 'javascript', 'java', 'xml']
 
 " }}}
-" Org -------------------------------------------------- {{{
-
-function! OrgDayFilename()
-    silent !org -day
-    redraw!
-    return "/Users/macuser/org/days/" . strftime("%Y-%m-%d") . ".org"
-endfunction
-function! OrgWeekFilename()
-    silent !org -week
-    redraw!
-    return "/Users/macuser/org/weeks/" . strftime("%Y-%W") . ".org"
-endfunction
-function! OrgAgenda()
-    " silent !echo Hello, world.
-    " redraw!
-    execute ":e " . OrgWeekFilename()
-    execute ":sp " . OrgDayFilename()
-endfunction
-function! OrgQuit()
-    execute ":w"
-    execute ":bd"
-    execute ":w"
-    execute ":bd"
-endfunction
-function! OrgTimestamp()
-    let line=getline('.')
-
-    let org_states = ["* ", "* TODO ","* UNDERWAY ", "* DONE "]
-
-    " Testing for org state
-    for test_state in range(3, 0, -1)
-        if match(line, org_states[test_state]) != -1
-            let current_org_state = test_state
-            break
-        else
-            let current_org_state = 1000
-        endif
-    endfor
-
-    " substituting current org state for next org state
-    if current_org_state < 1000
-        let org_state_substituted_line = substitute(line, org_states[current_org_state], org_states[(current_org_state + 1) % 4], "")
-        let line = org_state_substituted_line
-    endif
-
-    " Handling insertion of timestamp
-    let timestamp_regex = "\[.*"
-    let timestamp = "[" . strftime("%b %d, %I:%M:%S %p") . "]"
-
-    " if the timestamp exists, replace it with the current timestamp
-    if match(line, timestamp_regex) != -1
-        let new_time_stamp_line = substitute(line, "\[.*", timestamp, "")
-        let line = new_time_stamp_line
-    " or else append the timestamp
-    else
-        let line = line  . " " . timestamp
-    endif
-
-    call repeat#set("\<C-T>\<C-T>")
-    call setline('.', line)
-endfunction
-function! OrgSort()
-    normal zM
-    normal gg
-    execute ":/\*"
-    normal VG
-    " normal :SortUnfolded
-    " execute ":normal gv :vi :SortUnfolded"
-    " visual :SortUnfolded
-    " visual ":'<,'>:SortUnfolded"
-    " execute ":%s/%x00/\r"
-endfunction
-nnoremap <Leader>od :e `=OrgDayFilename()`<CR>
-nnoremap <Leader>ow :e `=OrgWeekFilename()`<CR>
-nnoremap <Leader>op :e ~/org/
-nnoremap <Leader>oa :call OrgAgenda()<CR>
-autocmd Filetype org nnoremap <Leader>oq :call OrgQuit()<CR>
-autocmd Filetype org nnoremap <C-T><C-T> :silent call OrgTimestamp()<CR>
-autocmd Filetype org nnoremap <Leader>os zMgg/\*VG:SortUnfolded:%s/\%x00/\rzM
-
-" }}}
 " Python -------------------------------------------------- {{{
 
 let python_highlight_all = 1
@@ -1322,12 +1244,13 @@ let g:markdown_fold_override_foldtext = 0
 nmap l <Plug>(Oblique-n)
 nmap L <Plug>(Oblique-N)
 
-" }}}
-" vim org mode -------------------------------------------------- {{{
-
-autocmd Filetype org setl noai nocin nosi inde=
 
 " }}}
+" vim rooter --------------------------------------------------------------- {{{
+
+let g:rooter_silent_chdir = 1
+
+" End vim rooter ----------------------------------------------------------- }}}
 " vim-sneak -------------------------------------------------- {{{
 
 let g:sneak#streak = 1

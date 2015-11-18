@@ -368,6 +368,7 @@ call s:HiGroup(s:html_links, s:MergeColors([s:deep_purples], 0, 0, "bold"))
 " Org Mode {{{
 let s:org_headers = ['org_1_header', 'org_2_header', 'org_3_header', 'org_4_header', 'org_5_header']
 call s:HiGroup(s:org_headers, s:sustain_reverse_pinks)
+call s:HiGroup(['org_1_freeform_header'], s:GetShade(s:pinks, "normal", "underline"))
 let s:org_blue = ['org_time_1_header', 'org_time', 'org_1_done', 'org_done']
 call s:HiGroup(s:org_blue, s:GetShade(s:blues, "normal", "none"))
 let s:org_yellow = ['org_1_line', 'org_1_underway', 'org_underway']
