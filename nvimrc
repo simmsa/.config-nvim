@@ -249,8 +249,6 @@ nnoremap sa :b#<bar>bd#<CR>
 nnoremap sx :bd<CR>
 " Vertically split the current file
 nnoremap sv :vs<CR>
-" Show open buffers
-nnoremap sb :ls<CR>
 " Remap man command
 nnoremap M K
 " Faster tab in insert mode.
