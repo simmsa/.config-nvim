@@ -43,13 +43,8 @@ function! TermColors()
     let l:all_colors = [s:ambers, s:yellows, s:limes, s:light_greens, s:greens, s:teals, s:cyans, s:light_blues, s:blues, s:indigos, s:deep_purples, s:purples, s:pinks, s:reds, s:sustain_gui_elements]
     let l:py_command = "python color_approx/colortrans.py "
     let l:command_string = ""
-    " for color in l:all_colors[-1][0]
     for color in range(5, 9)
-        " let l:command_string .= (l:py_command . color[1:6] . ' && ')
         let l:command_string .= (l:py_command . l:all_colors[-1][0][color][1:6] . ' && ')
-        " let l:command_string .= (l:py_command . l:all_colors[color][0][0][1:6] . ' && ')
-        " let l:command_string .= (l:py_command . l:all_colors[color][0][8][1:6] . ' && ')
-        " let l:command_string .= (l:py_command . l:all_colors[color][0][12][1:6] . ' && ')
     endfor
     execute ":10sp"
     execute ":winc r"
@@ -112,7 +107,6 @@ function! s:RainbowMergeColors(type, color_groups)
         let l:hex_color = a:color_groups[x][0][12]
         let l:cterm_color = a:color_groups[x][1][3]
         if(a:type == "kien")
-            " call add(l:result, [l:hex_color, l:cterm_color])
             call add(l:result, [l:cterm_color, l:hex_color])
         elseif(a:type == "hex")
             call add(l:result, l:hex_color)
@@ -175,8 +169,6 @@ function! s:HiGroup(group, fg_colors, ...)
         endif
         let l:hlstr .= ' cterm=' . l:term . ' gui=' . l:term
         let l:count += 1
-        " echo l:hlstr
-        " sleep 1
         execute l:hlstr
         let l:hlstr = 'hi '
     endfor
@@ -184,39 +176,6 @@ endfunction
 " }}}
 " Sustain Colors {{{
 
-" let s:sustain_whites = s:MergeColors([s:white], 0, 0, "none")
-" let s:sustain_blacks = s:MergeColors([s:black], 0, 0, "none")
-" let s:sustain_blues = s:MergeColors([s:blues], 4, 7, "none")
-" let s:sustain_greens = s:MergeColors([s:greens], 5, 5, "none")
-" let s:sustain_light_blues = s:MergeColors([s:light_blues], 4, 7, "none")
-" let s:sustain_intense_blues = s:MergeColors([s:blues], 12, 13, "none")
-" let s:sustain_intense_indigos = s:MergeColors([s:indigos], 12, 13, "none")
-" let s:sustain_intense_cyans = s:MergeColors([s:cyans], 12, 13, "none")
-" let s:sustain_indigos = s:MergeColors([s:indigos], 3, 5, "none")
-" let s:sustain_purples = s:MergeColors([s:deep_purples], 3, 5, "none")
-" let s:sustain_reds = s:MergeColors([s:reds], 3, 5, "none")
-" let s:sustain_pinks = s:MergeColors([s:pinks], 3, 5, "none")
-" let s:sustain_magentas = s:MergeColors([s:purples], 3, 5, "none")
-" let s:sustain_cyans = s:MergeColors([s:cyans], 3, 8, "none")
-" let s:sustain_intense_greens = s:MergeColors([s:greens], 12, 12, "none")
-" let s:sustain_teals = s:MergeColors([s:teals], 12, 13, "none")
-" let s:sustain_light_teals = s:MergeColors([s:teals], 3, 5, "none")
-" let s:sustain_yellows = s:MergeColors([s:yellows], 3, 5, "none")
-" let s:sustain_oranges = s:MergeColors([s:oranges], 3, 5, "none")
-" let s:sustain_reds = s:MergeColors([s:reds], 3, 5, "none")
-" let s:sustain_pinks = s:MergeColors([s:pinks], 3, 6, "none")
-" let s:sustain_accent_orange = s:MergeColors([s:oranges], 11, 11, "none")
-" let s:sustain_accent_purple = s:MergeColors([s:deep_purples], 11, 11, "none")
-" let s:sustain_accent_red = s:MergeColors([s:reds], 11, 11, "none")
-" let s:sustain_accent_green = s:MergeColors([s:greens], 11, 11, "none")
-" let s:sustain_accent_pink = s:MergeColors([s:pinks], 10, 10, "none")
-" let s:sustain_comments = s:MergeColors([s:reds], 4, 4, "none")
-" let s:sustain_dark_orange = s:MergeColors([s:oranges], 13, 13, "none")
-" let s:sustain_dark_purple = s:MergeColors([s:deep_purples], 10, 10, "none")
-" let s:sustain_dark_blues = s:MergeColors([s:blues], 10, 10, "none")
-" let s:sustain_search_purple = s:MergeColors([s:deep_purples], 13, 13, "underline")
-" let s:sustain_dark_red = s:MergeColors([s:reds], 13, 13, "none")
-" let s:sustain_dark_green = s:MergeColors([s:greens], 13, 13, "none")
 let s:sustain_whites = s:GetShade(s:white, "solid", "none")
 let s:sustain_blacks = s:GetShade(s:black, "solid", "none")
 let s:sustain_blues = s:GetShade(s:blues, "light", "none")
@@ -256,7 +215,6 @@ let s:sustain_gui_dark = s:MergeColors([s:sustain_gui_elements], 9, 11, "none")
 let s:sustain_gui_normal = s:MergeColors([s:sustain_gui_elements], 6, 9, "none")
 let s:sustain_gui_light = s:MergeColors([s:sustain_gui_elements], 4, 7, "none")
 let s:sustain_gui_bright = s:MergeColors([s:sustain_gui_elements], 2, 3, "none")
-" let s:sustain_gui_bg = s:MergeColors([s:sustain_gui_elements], 14, 14, "none")
 let s:sustain_gui_bg = s:GetShade(s:main_background, "solid", "none")
 let s:sustain_gui_bg_highlight = s:MergeColors([s:sustain_gui_elements], 0, 0, "none")
 let s:sustain_gui_selected = s:MergeColors([s:sustain_gui_elements], 3, 3, "bold")
@@ -289,14 +247,6 @@ let s:todos = ['Todo']
 " }}}
 " Code Syntax Coloring {{{
 " Light Colors
-" call s:HiGroup(s:constants   , s:sustain_oranges)
-" call s:HiGroup(s:strings     , s:sustain_yellows)
-" call s:HiGroup(s:numbers     , s:sustain_blues)
-" call s:HiGroup(s:identifiers , s:sustain_indigos)
-" call s:HiGroup(s:functions   , s:sustain_greens)
-" call s:HiGroup(s:statements  , s:sustain_teals)
-" call s:HiGroup(s:specials    , s:sustain_blues)
-" call s:HiGroup(s:types       , s:sustain_light_blues)
 call s:HiGroup(s:constants, s:GetShade(s:oranges, "light", "none"))
 call s:HiGroup(s:strings, s:GetShade(s:yellows, "light", "none"))
 call s:HiGroup(s:numbers, s:GetShade(s:blues, "light", "none"))
@@ -308,18 +258,11 @@ call s:HiGroup(s:types, s:GetShade(s:light_blues, "light", "none"))
 call s:HiGroup(s:comments, s:GetShade(s:reds, "light", "none"))
 
 " More Intense
-" call s:HiGroup(s:pre_condits, s:sustain_intense_greens)
-" call s:HiGroup(s:conditionals, s:sustain_dark_purple)
-" call s:HiGroup(s:pre_procs, s:sustain_dark_blues)
 call s:HiGroup(s:pre_condits, s:GetShade(s:greens, "normal", "none"))
 call s:HiGroup(s:conditionals, s:GetShade(s:deep_purples, "light", "none"))
 call s:HiGroup(s:pre_procs, s:GetShade(s:blues, "normal", "none"))
 
 " Accents
-" call s:HiGroup(s:comments, s:sustain_comments)
-" call s:HiGroup(s:ignores, s:sustain_accent_purple)
-" call s:HiGroup(s:errors, s:sustain_accent_orange)
-" call s:HiGroup(s:todos, s:sustain_accent_green)
 call s:HiGroup(s:ignores, s:GetShade(s:deep_purples, "accent", "none"))
 call s:HiGroup(s:errors, s:GetShade(s:reds, "accent", "bold"))
 call s:HiGroup(s:todos, s:GetShade(s:greens, "accent", "bold"))
@@ -359,17 +302,15 @@ call s:HiGroup(s:vim_msg, s:sustain_whites, s:sustain_gui_subtle)
 call s:HiGroup(s:vim_normal, s:sustain_whites, s:sustain_gui_bg)
 call s:HiGroup(s:vim_popup_menu, s:sustain_gui_bg, s:sustain_gui_not_selected)
 call s:HiGroup(s:vim_popup_menu_select, s:sustain_gui_bg_selected, s:sustain_gui_selected)
-" call s:HiGroup(s:vim_search, s:sustain_intense_indigos, s:sustain_gui_bg_highlight)
 call s:HiGroup(s:vim_inc_search, s:GetShade(s:reds, "accent", "none"), s:white)
 call s:HiGroup(s:vim_match_paren, s:GetShade(s:blues, "accent", "none"), s:white)
 call s:HiGroup(s:vim_search, s:GetShade(s:blues, "accent", "italic"))
 call s:HiGroup(s:vim_special, s:sustain_gui_light)
 call s:HiGroup(s:vim_spell, s:sustain_whites, s:sustain_dark_red)
 call s:HiGroup(s:vim_tab, s:sustain_gui_light, s:sustain_gui_subtle)
-" call s:HiGroup(s:vim_visual, s:sustain_whites, s:sustain_dark_orange)
 call s:HiGroup(s:vim_visual, s:GetShade(s:white, "solid", "none"), s:GetShade(s:oranges, "accent", "none"))
-" }}}
 call s:HiGroup(s:vim_sneak_mask, s:sustain_whites, s:sustain_whites)
+" }}}
 " Diffs {{{
 " For easier reading of diffs backgrounds are dark to maintian syntax
 " highlighting. Colors are atypical, but easier on the eyes. They are:
@@ -400,13 +341,11 @@ call s:HiGroup(s:airline_insert, s:sustain_gui_bg, s:sustain_gui_light)
 " Visual Mode
 " White on Orange
 let s:airline_visual = ['AirlineV1', 'AirlineV2', 'AirlineV3']
-" call s:HiGroup(s:airline_visual, s:sustain_whites, s:sustain_dark_orange)
 call s:HiGroup(s:airline_visual, s:GetShade(s:white, "solid", "none"), s:GetShade(s:oranges, "accent", "none"))
 
 " Replace Mode
 " White on Red
 let s:airline_replace = ['AirlineR1', 'AirlineR2', 'AirlineR3']
-" call s:HiGroup(s:airline_replace, s:sustain_whites, s:sustain_dark_red)
 call s:HiGroup(s:airline_replace, s:GetShade(s:white, "solid", "none"), s:GetShade(s:reds, "accent", "none"))
 
 " Inactive
@@ -415,7 +354,6 @@ let s:airline_inactive = ['AirlineIA1', 'AirlineIA2', 'AirlineIA3']
 call s:HiGroup(s:airline_inactive, s:sustain_gui_bg, s:sustain_gui_not_selected)
 " }}}
 " Python{{{
-" call s:HiGroup(['pythonColon'], s:sustain_accent_pink)
 call s:HiGroup(['pythonColon'], s:GetShade(s:pinks, "accent", "bold"))
 " }}}
 " HTML {{{
