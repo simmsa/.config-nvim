@@ -49,6 +49,7 @@ Plug 'vim-scripts/a.vim'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-abolish'
 Plug 'rdolgushin/gitignore.vim'
+Plug 'leafgarland/typescript-vim'
 Plug 'vim-scripts/lh-vim-lib'
 Plug '~/.nvim/bundle/simple-org-mode'
 Plug 'airblade/vim-rooter'
@@ -918,6 +919,31 @@ augroup END
 
 
 " }}}
+" Typescript --------------------------------------------------------------- {{{
+
+au FileType typescript setlocal makeprg=tsc
+au FileType typescript nnoremap M :YcmCompleter GetDoc<CR>
+
+" Run gulp command in the background while vim is running
+let g:gulp_async_id = 0
+function! StartAsyncGulp(command)
+    if g:gulp_async_id == 0
+        let g:gulp_async_id = jobstart(a:command)
+        echo "Starting Async Command: " . a:command
+    endif
+endfunction
+
+function! StopAsyncGulp()
+    if g:gulp_async_id > 0
+        call jobstop(g:gulp_async_id)
+    endif
+endfunction
+
+" autocmd! BufEnter *.ts call StartAsyncGulp("gulp chrome-watch")
+" autocmd! VimLeave call StopAsyncGulp()
+
+
+" End Typescript ----------------------------------------------------------- }}}
 
 " }}}
 " Plugin Settings -------------------------------------------------- {{{
