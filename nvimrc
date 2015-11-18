@@ -15,7 +15,6 @@ Plug 'bling/vim-airline'
 Plug 'sjl/gundo.vim'
 Plug 'SirVer/ultisnips'
 Plug 'tmhedberg/SimpylFold'
-Plug 'rking/ag.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'calendar.vim'
 Plug 'davidhalter/jedi-vim'
@@ -1001,11 +1000,6 @@ augroup END
 " A.vim-------------------------------------------------- {{{
 
 nnoremap gh :A<CR>
-
-" }}}
-" Ag -------------------------------------------------- {{{
-
-nnoremap <Leader>/ :Ag<Space>
 
 " }}}
 " auto pairs -------------------------------------------------- {{{
