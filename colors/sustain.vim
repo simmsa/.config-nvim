@@ -381,7 +381,7 @@ call s:HiGroup(s:org_reds, s:GetShade(s:reds, "accent", "none"))
 " From https://github.com/gilgigilgil/anderson.vim/blob/master/colors/anderson.vim
 if $NVIM_TUI_ENABLE_TRUE_COLOR == 1
     let g:terminal_foreground = "#d1e3ea"
-    let g:terminal_color_background = "#001019"
+    let g:terminal_background = "#001019"
     let g:terminal_color_0 = "#000000"
     let g:terminal_color_1 = "#f44236"
     let g:terminal_color_2 = "#4caf4f"
