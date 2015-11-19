@@ -987,8 +987,12 @@ function! ToggleGStatus()
 endfunction
 
 function! RunOrUpdateGDiff()
+    " clear cmd line
+    echo ""
     exe "silent! bd *fugitive*"
-    exe "Gdiff"
+    exe ":Gdiff"
+    call feedkeys("ss")
+    call feedkeys("]c")
 endfunction
 
 command! ToggleGStatus :call ToggleGStatus()
