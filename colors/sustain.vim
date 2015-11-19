@@ -352,6 +352,13 @@ call s:HiGroup(s:airline_replace, s:GetShade(s:white, "solid", "none"), s:GetSha
 " Lt Gray on Gray
 let s:airline_inactive = ['AirlineIA1', 'AirlineIA2', 'AirlineIA3']
 call s:HiGroup(s:airline_inactive, s:sustain_gui_bg, s:sustain_gui_not_selected)
+
+" Terminal
+" Teals
+let s:airline_terminal = ['AirlineTE1', 'AirlineTE2', 'AirlineTE3']
+let s:sustain_airline_teals = s:MergeColors([[reverse(copy(s:teals[0][5:9])), [23, 30, 37, 44, 50]]], 0, 4, "none")
+call s:HiGroup(s:airline_terminal, s:GetShade(s:white, "solid", "none"), s:sustain_airline_teals)
+
 " }}}
 " Python{{{
 call s:HiGroup(['pythonColon'], s:GetShade(s:pinks, "accent", "bold"))
