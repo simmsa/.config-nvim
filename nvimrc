@@ -985,11 +985,17 @@ function! ToggleGStatus()
         exe "normal \<C-n>"
     endif
 endfunction
+
+function! RunOrUpdateGDiff()
+    exe "silent! bd *fugitive*"
+    exe "Gdiff"
+endfunction
+
 command! ToggleGStatus :call ToggleGStatus()
 nnoremap <Leader>g :ToggleGStatus<CR>
 nnoremap gs :ToggleGStatus<CR>
 nnoremap <Leader>gc :Gcommit<CR>
-nnoremap <Leader>gd :Gdiff<CR>
+nnoremap sd :call RunOrUpdateGDiff()<CR>
 nnoremap cm :Gcommit<CR>
 nnoremap gl :Term tig<CR>
 
