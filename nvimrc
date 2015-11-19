@@ -248,6 +248,8 @@ cnoremap <C-P> <Up>
 cnoremap <C-T> <Up>
 " Easier uppercase (ycm bricks <C-u>)
 inoremap <C-l> <ESC>mzgUiw`zi<Right>
+" Faster save
+nnoremap sa :w<CR>
 " Faster window switching
 nnoremap ss <C-w><C-w>
 nnoremap sx :call SmartBufferDelete()<CR>
