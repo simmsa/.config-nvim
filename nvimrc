@@ -500,6 +500,9 @@ nnoremap <Leader>z zM
 nnoremap zz 10[zzc
 " Give me back zz functionality
 nnoremap z. zz
+" Dvorak fold movement
+nnoremap zh zj
+nnoremap zt zk
 
 function! CreateFold(fold_name)
     let fold_line_len = 75
