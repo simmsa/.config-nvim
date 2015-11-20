@@ -745,7 +745,7 @@ augroup ft_html
     au FileType htmldjango inoremap <buffer> <C-V> {{<Space><Space>}}<Left><Left><Left>
 
     " Two space indenting for max screen real estate usage
-    au Filetype htmldjango setlocal ts=2 sw=2 expandtab
+    au FileType htmldjango,html setlocal ts=2 sw=2 expandtab
 
     " Set comments
     au FileType htmldjango setlocal commentstring={#\ %s\ #}
