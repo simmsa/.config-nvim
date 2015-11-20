@@ -754,11 +754,13 @@ au FileType gitcommit setlocal spell
 " }}}
 " Html -------------------------------------------------- {{{
 
+" Let html comments have fold markers and whatever else
+let html_wrong_comments = 1
 augroup ft_html
     au!
 
-    au BufNewFile,BufRead *.html setlocal filetype=htmldjango
-    au FileType xhtml setlocal filetype=htmldjango
+    au BufNewFile,BufRead *.html setlocal filetype=html
+    au FileType xhtml setlocal filetype=html
 
     " Django tags
     au FileType htmldjango inoremap <buffer> <C-T> {%<Space><Space>%}<Left><Left><Left>
