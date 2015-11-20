@@ -20,7 +20,6 @@ Plug 'calendar.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'godlygeek/tabular'
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-markdown'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'tpope/vim-repeat'
@@ -1275,14 +1274,6 @@ let g:gitgutter_sign_removed = '-'
 " vim go -------------------------------------------------- {{{
 
 let g:go_disable_autoinstall = 1
-
-" }}}
-" vim indent guides -------------------------------------------------- {{{
-
-" let g:indent_guides_start_level = 2
-" let g:indent_guides_auto_colors = 0
-" autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd ctermbg=NONE
-" autocmd VimEnter,ColorScheme * :hi IndentGuidesEven ctermbg=8
 
 " }}}
 " vim journal -------------------------------------------------- {{{
