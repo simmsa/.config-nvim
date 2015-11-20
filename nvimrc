@@ -502,10 +502,20 @@ nnoremap zz 10[zzc
 nnoremap z. zz
 
 function! CreateFold(fold_name)
-    let fold_line_len = 80
+    let fold_line_len = 75
     let fold_marker_start = " {{{"
     let fold_marker_end = " }}}"
     let current_line = line(".")
+    let current_line_content = getline(".")
+    " Number of spaces before the first non whitespace character
+    let current_line_indent = match(current_line_content, '\S')
+
+    if &ts != 0
+        let indent_number = current_line_indent / &ts
+    else
+        let indent_number = 0
+    endif
+
     let comment_string = &commentstring
     let last_fold_name = "End " . a:fold_name
 
@@ -514,14 +524,19 @@ function! CreateFold(fold_name)
     let name_len = len(a:fold_name)
 
     " Create First Line
-    let first_line_repeat = fold_line_len - len(a:fold_name) - comment_len - 1 - len(fold_marker_start)
+    let first_line_repeat = fold_line_len - len(a:fold_name) - comment_len - 1 - len(fold_marker_start) - current_line_indent
     let first_line_content = " " . a:fold_name . " " . repeat("-", first_line_repeat) . fold_marker_start
     let first_line = substitute(comment_string, "%s", first_line_content, "")
+    " Add indent spaces
+    let first_line = repeat(" ", current_line_indent) . first_line
+
 
     " Create Last Line
-    let last_line_repeat = fold_line_len - len(last_fold_name) - comment_len - 1 - len(fold_marker_end)
+    let last_line_repeat = fold_line_len - len(last_fold_name) - comment_len - 1 - len(fold_marker_end) - current_line_indent
     let last_line_content = " " . last_fold_name . " " . repeat("-", last_line_repeat) . fold_marker_end
     let last_line = substitute(comment_string, "%s", last_line_content, "")
+    " Add indent spaces
+    let last_line = repeat(" ", current_line_indent) . last_line
 
     " Add the fold
     let complete_create_fold = [first_line, "", "", "", last_line]
@@ -529,6 +544,14 @@ function! CreateFold(fold_name)
 
     " Move to the middle
     exe "normal! jjj"
+
+    " Tab in to current indent level
+    exe "startinsert"
+    for x in range(indent_number)
+        call feedkeys("\<Tab>")
+    endfor
+    call feedkeys("\<Esc>")
+
 endfunction
 
 function! CreateFoldSection(fold_name)
