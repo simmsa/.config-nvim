@@ -574,9 +574,15 @@ vnoremap <Leader>f :CreateFoldSection<Space>
 " NeatFoldText -------------------------------------------------- {{{
 
 function! NeatFoldText()
-  " let line = ' ' . substitute(getline(v:foldstart), '^\s#*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-  let line = substitute(getline(v:foldstart), '{{' . '{', '', 'g') . ' '
-  let commentless_line = ' ' . substitute(line, '//\|#\|/\*\|\*/\|"\|-', '', 'g')
+  let line = getline(v:foldstart)
+  let fold_text_removal_array = []
+  call extend(fold_text_removal_array, split(&commentstring, "%s"))
+  call extend(fold_text_removal_array, split(&foldmarker, ","))
+  call add(fold_text_removal_array, "-")
+  let commentless_line = line
+  for x in range(len(fold_text_removal_array))
+      let commentless_line = substitute(commentless_line, fold_text_removal_array[x], '', 'g')
+  endfor
   let markdown_line = line
   let lines_count = v:foldend - v:foldstart + 1 - 4
   if lines_count != 1
