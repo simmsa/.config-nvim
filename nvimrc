@@ -749,9 +749,6 @@ augroup ft_html
 
     " Set comments
     au FileType htmldjango setlocal commentstring={#\ %s\ #}
-    if &foldmethod != "indent"
-        au FileType htmldjango setlocal foldmethod=indent
-    endif
 
 augroup END
 
