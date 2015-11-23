@@ -268,8 +268,6 @@ function! SmartBufferDelete()
     let l:max_buffers_open = 20
     for i in range(max_buffers_open)
         if index(l:buftype_close_keywords, getbufvar(i, "&buftype")) > -1
-            echo "Match: " . getbufvar(i, "&buftype")
-            sleep 2
             exe "bd " . i
             return
         endif
