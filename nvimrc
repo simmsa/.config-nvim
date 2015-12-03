@@ -1120,7 +1120,7 @@ runtime macros/matchit.vim
 " Only run neomake on the current file, basically syntax checking
 autocmd! BufWritePost *.js,*.json Neomake
 " Run neomake using makeprg in the cwd
-autocmd! BufWritePost *.ts Neomake!
+autocmd! BufWritePost *.ts,*.tsx Neomake!
 
 let g:neomake_list_height = 3
 let g:neomake_open_list = 2
