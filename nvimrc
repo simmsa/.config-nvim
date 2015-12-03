@@ -959,7 +959,17 @@ augroup END
 " Typescript --------------------------------------------------------------- {{{
 
 au FileType typescript setlocal makeprg=tsc
-au FileType typescript nnoremap M :YcmCompleter GetDoc<CR>
+au FileType typescript nnoremap <buffer> sj :call ToggleTSComments()<CR>
+au FileType typescript nnoremap <buffer> M :YcmCompleter GetDoc<CR>
+
+" Allow toggling between jsx comments and typescript comments
+function! ToggleTSComments()
+    if &commentstring == "// %s"
+        setlocal commentstring={/*\ %s\ */}
+    elseif &commentstring == "{/*\ %s\ */}"
+        setlocal commentstring=//\ %s
+    endif
+endfunction
 
 " Run gulp command in the background while vim is running
 let g:gulp_async_id = 0
