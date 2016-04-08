@@ -577,7 +577,7 @@ vnoremap <Leader>f :CreateFoldSection<Space>
 function! NeatFoldText()
   let line = getline(v:foldstart)
   let fold_text_removal_array = []
-  call extend(fold_text_removal_array, split(&commentstring, "%s"))
+  call extend(fold_text_removal_array, split(escape(&commentstring, "*"), "%s"))
   call extend(fold_text_removal_array, split(&foldmarker, ","))
   call add(fold_text_removal_array, "-")
   let commentless_line = line
