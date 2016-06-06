@@ -112,9 +112,9 @@ set breakindentopt=shift:4,sbr
 " Turn off parentheses matching, its driving me crazy
 let loaded_matchparen = 1
 " Toggle from relative numbering to regular numbering in normal/insert
-set rnu
-autocmd InsertEnter * set nornu
-autocmd InsertLeave * set rnu
+set relativenumber
+autocmd InsertEnter * set norelativenumber
+autocmd InsertLeave * set relativenumber
 " Fixing Delays?
 set ttimeoutlen=10
 set timeoutlen=300
