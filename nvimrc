@@ -33,7 +33,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'pangloss/vim-javascript'
 Plug 'marijnh/tern_for_vim'
 Plug 'heavenshell/vim-jsdoc'
-Plug 'gorodinskiy/vim-coloresque'
+Plug 'chrisbra/Colorizer'
 Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/vim-pseudocl'
