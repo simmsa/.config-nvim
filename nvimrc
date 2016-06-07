@@ -187,8 +187,8 @@ noremap n <Right>
 " Quicker Movement
 nnoremap D ^
 nnoremap N g_
-vnoremap D ^
-vnoremap N g_
+xnoremap D ^
+xnoremap N g_
 
 " j is now jump, swapping with t
 noremap j t
@@ -228,8 +228,8 @@ nnoremap : ;
 nnoremap o o<Esc>S
 nnoremap O @='O<C-V><Esc>'<CR>S
 " Easier tabbing of selections
-vnoremap < <gv
-vnoremap > >gv
+xnoremap < <gv
+xnoremap > >gv
 " Faster repeat command
 nnoremap <C-P> :<C-P><CR>
 "Quickfix mappings
@@ -311,15 +311,15 @@ nnoremap A a
 " Zip current char to the last char
 nmap ze xNp
 " Easier system copy and paste
-vmap <Leader>y "+y
-vmap <Leader>k "+d
+xmap <Leader>y "+y
+xmap <Leader>k "+d
 nmap <Leader>p "+p
 nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
+xmap <Leader>p "+p
+xmap <Leader>P "+P
 " Make y jump to the end of the selection
-vnoremap <silent> y y`]
-vnoremap <silent> p p`]
+xnoremap <silent> y y`]
+xnoremap <silent> p p`]
 nnoremap <silent> p p`]
 " Go to tag
 nnoremap gt <C-]>
@@ -343,7 +343,8 @@ set mouse=nicr
 " Fix unwanted action in normal mode
 nnoremap <C-f> :echo "Not in insert mode!"<CR>
 " Read the file, useful for proofreading
-command! Read :! say -v kate -f %
+command! Read  -range=% :! say -v ava -f %
+xnoremap st "xy :call system('say -v ava '. shellescape(@x) .' &')<CR>
 " Go to the next buffer
 nnoremap <Tab> :bn<CR>
 " Faster semicolon insert
@@ -569,7 +570,7 @@ endfunction
 command! -nargs=1 CreateFold call CreateFold(<f-args>)
 nnoremap <Leader>f :CreateFold<Space>
 command! -range -nargs=1 CreateFoldSection call CreateFoldSection(<f-args>)
-vnoremap <Leader>f :CreateFoldSection<Space>
+xnoremap <Leader>f :CreateFoldSection<Space>
 
 " NeatFoldText -------------------------------------------------- {{{
 
@@ -1172,11 +1173,11 @@ nnoremap <Leader>ap :Tabularize /\|<CR> | " Align Pipe
 nnoremap <Leader>at :Tabularize /\|<CR> | " Align Table
 nnoremap <Leader>aa :Tabularize /       | " Align Choice
 nnoremap <Leader>av :Tab /\|\ "<CR>     | " Align Vim inline comment
-vmap <Leader>ap :Tabularize /\|<CR>     | " Align Pipe
-vmap <Leader>at :Tabularize /\|<CR>     | " Align Table
-vmap <Leader>aa :Tabularize /           | " Align Choice
-vmap <Leader>av :Tab /\|\ "<CR>         | " Align Vim inline comment
-vmap <Leader>ae :Tab /=<CR>             | " Align equals
+xmap <Leader>ap :Tabularize /\|<CR>     | " Align Pipe
+xmap <Leader>at :Tabularize /\|<CR>     | " Align Table
+xmap <Leader>aa :Tabularize /           | " Align Choice
+xmap <Leader>av :Tab /\|\ "<CR>         | " Align Vim inline comment
+xmap <Leader>ae :Tab /=<CR>             | " Align equals
 
 " }}}
 " UltiSnips -------------------------------------------------- {{{
@@ -1285,8 +1286,8 @@ let g:EasyMotion_use_upper = 1
 " End vim easymotion ------------------------------------------------------- }}}
 " vim expand region -------------------------------------------------- {{{
 
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
+xmap v <Plug>(expand_region_expand)
+xmap <C-v> <Plug>(expand_region_shrink)
 
 " }}}
 " vim gitgutter -------------------------------------------------- {{{
