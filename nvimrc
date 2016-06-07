@@ -179,8 +179,8 @@ set softtabstop=4
 
 " Map dvorak keys everywhere with noremap explicitly
 " noremap as opposed to nnoremap maps a command in every mode
-noremap h gj
-noremap t gk
+noremap <silent> <expr> h (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> t (v:count == 0 ? 'gk' : 'k')
 noremap d <Left>
 noremap n <Right>
 
