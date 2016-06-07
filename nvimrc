@@ -213,10 +213,6 @@ xmap n <Right>
 
 "<Ctrl-l> redraws the screen and removes any search highlighting
 nnoremap <silent> <C-l> :nohl<CR><C-l>
-" Set insert mode timeout, returns to normal mode after 15 seconds
-au CursorHoldI * stopinsert
-au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
-au InsertLeave * let &updatetime=updaterestore
 "Changing number incrementing
 nnoremap <C-j> <C-a>
 nnoremap <C-k> <C-x>
