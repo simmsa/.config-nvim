@@ -185,14 +185,10 @@ noremap d <Left>
 noremap n <Right>
 
 " Quicker Movement
-nnoremap H /
-nnoremap T ?
 nnoremap D ^
 nnoremap N g_
 vnoremap D ^
 vnoremap N g_
-vnoremap H /
-vnoremap T ?
 
 " j is now jump, swapping with t
 noremap j t
@@ -210,6 +206,8 @@ noremap - :
 " I Fudged up
 noremap f u
 
+xmap n <Right>
+
 " }}}
 " Convience Mappings ------------------------------------------------- {{{
 
@@ -224,7 +222,7 @@ nnoremap <C-j> <C-a>
 nnoremap <C-k> <C-x>
 "Quicker Commands
 nnoremap ; :
-vmap ; :
+xmap ; :
 nnoremap : ;
 " Insert multiple lines (o stays in normal mode and works with a count)
 nnoremap o o<Esc>S
