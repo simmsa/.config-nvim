@@ -245,7 +245,15 @@ inoremap <C-l> <ESC>mzgUiw`zi<Right>
 " Faster save
 nnoremap sa :w<CR>
 " Faster window switching
-nnoremap ss <C-w><C-w>
+function! SmartSwitchWindow()
+    let l:switch_command = ':winc w'
+    let l:skip_buftypes = ['quickfix']
+    exe l:switch_command
+    while(index(l:skip_buftypes, &buftype) != -1)
+        exe l:switch_command
+    endwhile
+endfunction
+nnoremap ss :silent call SmartSwitchWindow()<CR>
 nnoremap sx :call SmartBufferDelete()<CR>
 function! SmartBufferDelete()
     " Clear the command line
