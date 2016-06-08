@@ -339,8 +339,8 @@ function! NoDistractions()
     :silent AirlineToggleWhitespace
 endfunction
 command! Nd :silent call NoDistractions()
-" Quit!
-nnoremap Q :qall<CR>
+" Exit
+nnoremap X :qall<CR>
 " I never use ; in any commands, but I use : all the time
 cnoremap ; :
 cnoremap : ;
