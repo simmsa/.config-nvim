@@ -55,6 +55,10 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/CmdlineComplete'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'rhysd/vim-clang-format'
+Plug 'drmikehenry/vim-headerguard'
+Plug 'vim-utils/vim-man'
+
 call plug#end()
 filetype plugin indent on
 
@@ -747,6 +751,14 @@ au FileType cpp syn match Operator /=/
 au FileType cpp syn match Todo /==/
 au FileType cpp syn match Exception />\|</
 au FileType cpp setlocal commentstring=//\ %s
+function! CppMan()
+    exe "Sman std::" . expand("<cword>")
+    exe "res 10"
+endfunction
+
+command! -nargs=+ Cppman silent! call CppMan(<f-args>)
+
+    au FileType cpp nnoremap <silent><buffer> M :call CppMan()<CR>
 
 " }}}
 " CSS -------------------------------------------------- {{{
