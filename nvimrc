@@ -341,6 +341,11 @@ endfunction
 command! Nd :silent call NoDistractions()
 " Exit
 nnoremap X :qall<CR>
+" navigate quickfix / location list
+" Macros can still be used, just not the ones below
+nnoremap qq :cfirst<CR>
+nnoremap qh :cnext<CR>
+nnoremap qt :cprevious<CR>
 " I never use ; in any commands, but I use : all the time
 cnoremap ; :
 cnoremap : ;
