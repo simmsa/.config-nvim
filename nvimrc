@@ -354,8 +354,34 @@ set mouse=nicr
 " Fix unwanted action in normal mode
 nnoremap <C-f> :echo "Not in insert mode!"<CR>
 " Read the file, useful for proofreading
-command! Read  -range=% :! say -v ava -f %
-xnoremap st "xy :call system('say -v ava '. shellescape(@x) .' &')<CR>
+function! SpeakText(input)
+    " Stop any voices
+    call StopSpeakText()
+    let l:voice = "ava"
+    let l:text = ""
+    if a:input == "line"
+        let l:text = getline(line("."))
+    elseif a:input == "selection"
+        let l:text = GetVisualSelection()
+    elseif a:input == "buffer"
+        let l:end = search("^$") - 1
+        let l:text = join(getline(1, end), " ")
+    else
+        let l:text = a:input
+    endif
+
+    call jobstart('say -v ' . l:voice . ' ' . shellescape(l:text), {})
+    return
+endfunction
+
+function! StopSpeakText()
+    call system("killall say")
+endfunction
+
+command! Read call SpeakText("buffer")
+xnoremap <silent> st :call SpeakText("selection")<CR>
+nnoremap <silent> sk :call StopSpeakText()<CR>
+nnoremap <silent> st :call SpeakText("line")<CR>
 " Go to the next buffer
 nnoremap <Tab> :bn<CR>
 " Faster semicolon insert
@@ -776,6 +802,17 @@ augroup END
 " Git -------------------------------------------------- {{{
 
 au FileType gitcommit setlocal spell
+
+function! SpeakCommit()
+    " Mark the current position
+    exe "normal! mp"
+    let l:commit_text_end = search('\n# ') - 1
+    let l:text = join(getline(1, l:commit_text_end), " ")
+    call SpeakText(l:text)
+    exe "normal 'p"
+endfunction
+
+au FileType gitcommit nnoremap <silent> st :call SpeakCommit()<CR>
 
 " }}}
 " Html -------------------------------------------------- {{{
