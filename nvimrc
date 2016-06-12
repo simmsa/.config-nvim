@@ -1290,6 +1290,7 @@ inoremap <return> <C-r>=Ulti_ExpandOrEnter()<CR>
 " vim airline -------------------------------------------------- {{{
 
 let g:airline_powerline_fonts=1
+let g:airline_skip_empty_sections = 1
 let g:airline_theme='relative'
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#branch#enabled=1
