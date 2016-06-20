@@ -65,7 +65,6 @@ filetype plugin indent on
 " }}}
 " Basic Options {{{
 
-set modelines=0
 set textwidth=0
 set wrap
 set autoindent
@@ -1460,4 +1459,5 @@ call SourceDirectory()
 
 " }}}
 " Fold Settings -------------------------------------------------- {{{
-" vim:foldmethod=marker:foldlevel=0 }}}
+" vim:foldmethod=marker:foldlevel=0
+" }}}
