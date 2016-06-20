@@ -133,6 +133,7 @@ endif
 set iskeyword+=\-,\_
 " Don't highlight really long lines
 set synmaxcol=500
+" Use gui colors in the terminal
 set termguicolors
 " Window titles for tmux
 function! TruncateFilename(max_len)
