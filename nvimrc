@@ -65,8 +65,13 @@ filetype plugin indent on
 " }}}
 " Basic Options {{{
 
-set textwidth=0
+" Automatically break newly inserted lines at 78 characters
+set textwidth=78
+" Wrap lines that are too wide for the current window
 set wrap
+" Shift wrapped lines by 4 characters
+set breakindent
+set breakindentopt=shift:4
 set autoindent
 set cindent
 set hidden
