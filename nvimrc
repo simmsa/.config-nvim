@@ -58,6 +58,9 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'rhysd/vim-clang-format'
 Plug 'drmikehenry/vim-headerguard'
 Plug 'vim-utils/vim-man'
+Plug 'artoj/qmake-syntax-vim'
+Plug 'sunaku/vim-dasht'
+Plug 'peterhoeg/vim-qml'
 
 call plug#end()
 filetype plugin indent on
@@ -1336,6 +1339,16 @@ nmap gcp gccyypgcc
 nmap gcu gccyytpgcc
 
 " End vim commentary ------------------------------------------------------- }}}
+" vim dasht ------------------------------------------------------------ {{{
+
+au TermOpen term://*dasht* tmap <buffer> h <Down>
+au TermOpen term://*dasht* tmap <buffer> t <Up>
+
+let g:dasht_filetype_docsets = {
+    \ 'cpp': ['^c$', 'qt']
+\ }
+
+" End vim-dasht -------------------------------------------------------- }}}
 " vim easymotion ----------------------------------------------------------- {{{
 
 " Disable easy motion mappings
