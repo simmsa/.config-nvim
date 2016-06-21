@@ -380,6 +380,8 @@ nnoremap <Tab> :bn<CR>
 inoremap <C-s> <End>;
 " Navigate the quickfix list
 nnoremap cc :cc<CR>
+" Seriously go to the end of the line in insert mode
+inoremap <C-e> <End>
 
 " Leader Mappings -------------------------------------------------- {{{
 
