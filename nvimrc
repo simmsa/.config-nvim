@@ -113,10 +113,6 @@ endif
 set wildmenu
 "Faster Macros
 set lazyredraw
-"Break Indent 'Woo!'
-set breakindent
-" let &showbreak='  ▶'
-set breakindentopt=shift:4,sbr
 " Turn off parentheses matching, its driving me crazy
 let loaded_matchparen = 1
 " Toggle from relative numbering to regular numbering in normal/insert
