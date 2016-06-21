@@ -118,7 +118,7 @@ set lazyredraw
 let loaded_matchparen = 1
 " Toggle from relative numbering to regular numbering in normal/insert
 set relativenumber
-autocmd InsertEnter * set norelativenumber
+autocmd InsertEnter * set norelativenumber number
 autocmd InsertLeave * set relativenumber
 " Fixing Delays?
 set ttimeoutlen=10
