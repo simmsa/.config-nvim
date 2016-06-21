@@ -72,7 +72,9 @@ set wrap
 " Shift wrapped lines by 4 characters
 set breakindent
 set breakindentopt=shift:4
+" Copy indent from current line to new line
 set autoindent
+" Enables automatic C program indenting
 set cindent
 " Allow buffers to be put in the 'background' without saving them
 set hidden
