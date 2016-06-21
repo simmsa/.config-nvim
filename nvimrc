@@ -120,7 +120,9 @@ autocmd InsertLeave * set relativenumber
 " Fixing Delays?
 set ttimeoutlen=10
 set timeoutlen=300
-" Better tab completion?
+"Autocomplete matches in the command line
+set wildmenu
+" Better tab completion in the command line
 set wildmode=longest,list,full
 " Ignore directories
 set wildignore+=*/.git/*,*/.sass-cache/*,*/lib/*,*/migrations/*
