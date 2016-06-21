@@ -246,8 +246,8 @@ function! SmartSwitchWindow()
         exe l:switch_command
     endwhile
 endfunction
-nnoremap ss :silent call SmartSwitchWindow()<CR>
-nnoremap sx :call SmartBufferDelete()<CR>
+nnoremap <silent> ss :call SmartSwitchWindow()<CR>
+nnoremap <silent> sx :call SmartBufferDelete()<CR>
 function! SmartBufferDelete()
     " Clear the command line
     echo ""
