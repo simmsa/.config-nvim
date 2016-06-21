@@ -48,7 +48,6 @@ Plug 'tpope/vim-abolish'
 Plug 'rdolgushin/gitignore.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'vim-scripts/lh-vim-lib'
-Plug '~/.nvim/bundle/simple-org-mode'
 Plug 'airblade/vim-rooter'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-unimpaired'
@@ -61,7 +60,10 @@ Plug 'vim-utils/vim-man'
 Plug 'artoj/qmake-syntax-vim'
 Plug 'sunaku/vim-dasht'
 Plug 'peterhoeg/vim-qml'
-Plug '~/.nvim/bundle/syntax-highlight-html-code'
+
+let g:plugin_dir = '~/.nvim/plugin'
+Plug g:plugin_dir . 'simple-org-mode'
+Plug g:plugin_dir . 'syntax-highlight-html-code'
 
 call plug#end()
 filetype plugin indent on
