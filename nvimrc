@@ -61,6 +61,7 @@ Plug 'vim-utils/vim-man'
 Plug 'artoj/qmake-syntax-vim'
 Plug 'sunaku/vim-dasht'
 Plug 'peterhoeg/vim-qml'
+Plug '~/.nvim/bundle/syntax-highlight-html-code'
 
 call plug#end()
 filetype plugin indent on
