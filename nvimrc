@@ -122,7 +122,6 @@ set ttimeoutlen=10
 set timeoutlen=300
 " Better tab completion?
 set wildmode=longest,list,full
-set wildmenu
 " Ignore directories
 set wildignore+=*/.git/*,*/.sass-cache/*,*/lib/*,*/migrations/*
 " Ignore files
