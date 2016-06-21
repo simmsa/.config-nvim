@@ -83,7 +83,7 @@ set laststatus=2
 "Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 "Store lots of :cmdline history
-set history=1000
+set history=10000
 "Show incomplete cmds down the bottom
 set showcmd
 "Show current mode down the bottom
