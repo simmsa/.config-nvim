@@ -141,17 +141,6 @@ set iskeyword+=\-,\_
 set synmaxcol=500
 " Use gui colors in the terminal
 set termguicolors
-" Window titles for tmux
-function! TruncateFilename(max_len)
-    let filename=expand("%:t")
-    if len(filename) <= a:max_len
-        return filename
-    else
-        let filename_len=len(filename)
-        let half = a:max_len / 2
-        return filename[0:half-1] . "…" . filename[filename_len-(half):filename_len-1]
-endfunction
-autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . TruncateFilename($TRUNCATE_MAX_WORD_LEN))
 let g:terminal_scrollback_buffer_size = 100000
 " Prefer splits to open below and on the right
 set splitbelow
@@ -462,6 +451,18 @@ let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 
 " Vertically split current file and scroll with it
 nnoremap <silent> sf :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
+
+" Window titles for tmux
+function! TruncateFilename(max_len)
+    let filename=expand("%:t")
+    if len(filename) <= a:max_len
+        return filename
+    else
+        let filename_len=len(filename)
+        let half = a:max_len / 2
+        return filename[0:half-1] . "…" . filename[filename_len-(half):filename_len-1]
+endfunction
+autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . TruncateFilename($TRUNCATE_MAX_WORD_LEN))
 
 " Functions for making the term more customizable
 
