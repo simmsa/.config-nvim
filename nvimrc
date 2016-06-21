@@ -74,6 +74,7 @@ set breakindent
 set breakindentopt=shift:4
 set autoindent
 set cindent
+" Allow buffers to be put in the 'background' without saving them
 set hidden
 "Turn on status line
 set laststatus=2
