@@ -72,6 +72,10 @@ set wrap
 " Shift wrapped lines by 4 characters
 set breakindent
 set breakindentopt=shift:4
+" Wrap long lines at a character in 'breakat' rather than the last character
+" that fits on the screen. Only affects the way the file is displayed, not its
+" contents.
+set linebreak
 " Copy indent from current line to new line
 set autoindent
 " Enables automatic C program indenting
@@ -93,7 +97,6 @@ set number
 "Display tabs and trailing spaces
 set list " Messes up line break, but shows list chars
 set listchars=tab:▷⋅,trail:⋅,nbsp:⋅,extends:,precedes:
-set linebreak
 " Configuring backup and related
 set backup
 set noswapfile
