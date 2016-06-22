@@ -255,8 +255,6 @@ endfunction
 nnoremap <silent> ss :call SmartSwitchWindow()<CR>
 nnoremap <silent> sx :call SmartBufferDelete()<CR>
 function! SmartBufferDelete()
-    " Clear the command line
-    echo ""
     " If the buffer is of the following filetypes close it and exit function
     let l:quick_close_ft_array = ['git', 'org', 'gitcommit']
     if index(l:quick_close_ft_array, &filetype) > -1
@@ -266,7 +264,7 @@ function! SmartBufferDelete()
 
     " There are some buffer types that I want to close no matter what
     " window I am in
-    let l:buftype_close_keywords = ['nofile', 'quickfix']
+    let l:buftype_close_keywords = ['nofile', 'quickfix', 'help']
     let l:max_buffers_open = 20
     for i in range(max_buffers_open)
         if index(l:buftype_close_keywords, getbufvar(i, "&buftype")) > -1
