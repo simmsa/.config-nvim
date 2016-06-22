@@ -1224,11 +1224,6 @@ command! H :Helptags
 nnoremap g- :Helptags<CR>
 
 " }}}
-" Git Gutter -------------------------------------------------- {{{
-
-nnoremap sh :GitGutterStageHunk<CR>
-
-" }}}
 " Gundo -------------------------------------------------- {{{
 
 nnoremap <Leader>u :GundoToggle<CR>
@@ -1443,8 +1438,9 @@ function! JumpToHunkAndUnfold(keypress)
     call repeat#set("c" . a:keypress)
 endfunction
 
-nnoremap cn :call JumpToHunkAndUnfold("n")<CR>
-nnoremap cp :call JumpToHunkAndUnfold("p")<CR>
+nnoremap <silent> sh :GitGutterStageHunk<CR>
+nnoremap <silent> cn :call JumpToHunkAndUnfold("n")<CR>
+nnoremap <silent> cp :call JumpToHunkAndUnfold("p")<CR>
 
 let g:gitgutter_sign_removed = '-'
 
