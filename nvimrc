@@ -505,8 +505,68 @@ function! SourceDirectory()
     let vim_dir_file = "vim_dir_commands.vim"
     if filereadable(vim_dir_file)
         exe "source " . vim_dir_file
-    endif
+
+function! NumActiveWindows(max)
+    let l:buffers = split(capture("ls!"), '\n')
+    let l:windows_active = []
+    for buf in l:buffers
+        " We are looking for an 'a' in the first part of the string which
+        " indicates that that buffer is active (visible)
+        let l:match_pos = match(buf, 'a.*"')
+        if l:match_pos < 9 && l:match_pos != -1
+            call insert(l:windows_active, buf)
+            if len(l:windows_active) > a:max
+                return -1
+            endif
+        endif
+    endfor
+    return len(windows_active)
 endfunction
+
+function! DynamicallyChangeLayout()
+    " If there are two windows open side by side and the whole term gets
+    " smaller make two horizontal windows and vice versa
+
+    " For this to work there needs to be exactly two open windows
+    if NumActiveWindows(2) != 2
+        return
+    endif
+
+    let l:full_height = 33
+    let l:full_width = 173
+    let l:term_height = system("echo $LINES")
+    let l:term_width = system("echo $COLUMNS")
+
+    " Go to the first window, either the window on the top or the left
+    let l:current_win = winnr()
+    exe "1winc w"
+
+    if abs(winwidth(1) + winwidth(2)) > l:term_width
+        " There are two horizontal splits open one on top of the other
+        if abs(l:full_width - l:term_width) < 20
+            " The window is open fully, we can turn this into two vertical
+            " splits
+            exe "winc H"
+        endif
+    else
+        " There are two vertical splits open next to each other
+        if abs((l:full_width / 2) - l:term_width) < 10
+            " The window is half width
+            " Change the two vertically split windows to horizontal splits
+            exe "winc K"
+
+            " Make the bottom split a little bit smaller than the top
+            exe "2winc w"
+            exe "res 12"
+            exe "1winc w"
+        endif
+    endif
+
+    " Return to the previous window
+    exe l:current_win . "winc w"
+endfunction
+
+autocmd VimResized * :call DynamicallyChangeLayout()
 
 " }}}
 " Searching and Movement {{{
