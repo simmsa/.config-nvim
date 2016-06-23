@@ -908,6 +908,13 @@ augroup ft_html
 
 augroup END
 
+function! ReloadChrome()
+    exe ":w"
+    silent execute ":! chrome_reload"
+endfunction
+
+au FileType html,css nnoremap <Leader>r :silent call ReloadChrome()<CR>
+
 " }}}
 " Java -------------------------------------------------- {{{
 
