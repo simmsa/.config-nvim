@@ -967,7 +967,8 @@ au FileType cpp syn match Emphasize /==/
 au FileType cpp syn match Emphasize /\*/
 au FileType cpp syn match Emphasize /&/
 au FileType cpp syn match Identifier /\w\+::/me=e-2
-au FileType cpp setlocal commentstring=//\ %s
+au FileType cpp setlocal commentstring=/*%s*/
+
 function! CppMan()
     exe "Sman std::" . expand("<cword>")
     exe "res 10"
