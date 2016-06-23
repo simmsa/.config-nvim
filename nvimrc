@@ -1390,7 +1390,7 @@ endfunction
 
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-let g:rainbow#include = [':', ';', ',', '=']
+let g:rainbow#include = [': ', ' ; ',  ', ', ' = ', ' \. ',  ', ', ' < ', ' > ', ' !', ' & ', ' | ', ' + ', ' - ', ' += ', ' -= ', ' >= ', '<= ', ' \\ ', ';\n', '; ', '::', ' \* ', '++', '\.', '->', '!=', '==', ',\_$', ' && ', ' || ']
 
 let g:rainbow#colors = {'dark': g:sustain_kien_rainbow_parens, 'light': g:sustain_kien_rainbow_parens}
 
