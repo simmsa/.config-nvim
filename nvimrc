@@ -242,6 +242,7 @@ autocmd BufReadPost quickfix nnoremap <buffer> <C-T> <Up>
 " Get to the shell faster
 if has("nvim")
     nnoremap S :Term<Space>
+    nnoremap <C-s> :TermStayOpen<Space>
 else
     nnoremap S :!<Space>
 endif
@@ -500,20 +501,48 @@ function! TermAutoExit.on_exit(id, code)
     endif
 endfunction
 
-function! StartTermAutoExit(command, exit_message)
-    exe "10sp | enew"
+let s:true = 1
+let s:false = 0
+
+function! StartTermAutoExit(command, exit_message, open_new_buffer)
+    if a:open_new_buffer
+        exe "10sp | enew"
+    else
+        exe "enew"
+        exe "winc r"
+    endif
     let auto_exit_dict = extend(copy(g:TermAutoExit), {'bufid': bufnr("%"), 'exit_message': a:exit_message})
     call termopen(a:command, auto_exit_dict)
+
+    if !a:open_new_buffer
+        exe "startinsert"
+    endif
+endfunction
+
+
+function! TermSameBuf(command)
+    call StartTermAutoExit(a:command, "", s:false)
 endfunction
 
 function! Term(command)
+    exe StartTermAutoExit(a:command, a:command . " completed cleanly!", s:true)
+endfunction
+
+function! TermStayOpen(command)
     " Open term in a split
     silent exe "10sp | enew"
     " Commands are split for TermClose feedkeys compatability
     silent exe "te " . a:command
 endfunction
 
+function! BackgroundTerm(command)
+    call jobstart(a:command)
+endfunction
+
 command! -bar -nargs=* Term :call Term(<q-args>)
+command! -bar -nargs=* TermSameBuf :call TermSameBuf(<q-args>)
+command! -bar -nargs=* TermStayOpen :call TermStayOpen(<q-args>)
+command! -bar -nargs=* BackgroundTerm :call BackgroundTerm(<q-args>)
 
 " Don't show term process exited
 au TermClose * call feedkeys('<cr>')
