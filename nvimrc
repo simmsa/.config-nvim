@@ -1327,6 +1327,7 @@ nnoremap kd :bd fugitive*<CR>zAz.
 " FZF -------------------------------------------------- {{{
 
 nnoremap go :GitFiles<CR>
+nnoremap g. :Files<CR>
 
 au TermOpen term://*fzf* tmap <buffer> <C-t> <Up>
 au TermOpen term://*fzf* tmap <buffer> <Esc> <Esc>
