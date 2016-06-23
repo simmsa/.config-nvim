@@ -1268,7 +1268,6 @@ function! StopAsyncGulp()
     endif
 endfunction
 
-" autocmd! BufEnter *.ts call StartAsyncGulp("gulp chrome-watch")
 " autocmd! VimLeave call StopAsyncGulp()
 
 
