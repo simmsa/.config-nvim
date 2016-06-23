@@ -1676,11 +1676,9 @@ map J <Plug>Sneak_T
 " }}}
 " YouCompleteMe ------------------------------ {{{
 
-let g:ycm_key_list_select_completion = [ '<C-n>', '<Down>' , '<Enter>']
+let g:ycm_key_list_select_completion = [ '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = [ '<C-p>', '<Up>' ]
 let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" let g:ycm_key_invoke_completion = '<C-o>'
 
 let g:ycm_min_num_identifier_candidate_chars = 2
 let g:ycm_complete_in_comments = 1
@@ -1701,6 +1699,9 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
 let g:ycm_open_loc_list_on_ycm_diags = 1
+
+let g:ycm_error_symbol = "Er"
+let g:ycm_warning_symbol = "Wn"
 
 " }}}
 

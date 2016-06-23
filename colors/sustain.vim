@@ -413,4 +413,14 @@ if $NVIM_TUI_ENABLE_TRUE_COLOR == 1
 endif
 
 " }}}
+" You Complete Me Errors ----------------------------------------------- {{{
+
+" Errors Have Red Background
+hi YcmErrorSection ctermbg=52 ctermfg=NONE cterm=NONE guibg=#330000 guifg=NONE gui=NONE
+hi YcmErrorSign ctermbg=52 ctermfg=255 cterm=NONE guibg=#330000 guifg=#ffffff gui=NONE
+" Warnings Have Purple Background
+hi YcmWarningSection ctermbg=53 ctermfg=NONE cterm=NONE guibg=#180033 guifg=NONE gui=NONE
+hi YcmWarningSection ctermbg=53 ctermfg=255 cterm=NONE guibg=#180033 guifg=#ffffff gui=NONE
+
+" End You Complete Me Errors ------------------------------------------- }}}
 " }}}
