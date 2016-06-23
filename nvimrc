@@ -174,6 +174,14 @@ set softtabstop=4
 " }}}
 
 " }}}
+" Should Be Built In -------------------------------------------------- {{{
+
+
+function! GetCurrentBufferVar(var)
+    return getbufvar(bufnr(bufname("%")), a:var)
+endfunction
+
+" End Should Be Built In ---------------------------------------------- }}}
 " Dvorak -------------------------------------------------- {{{
 
 " Map dvorak keys everywhere with noremap explicitly
