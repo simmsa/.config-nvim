@@ -520,9 +520,15 @@ au TermClose * call feedkeys('<cr>')
 
 " Enable custom vim commands in any directory
 function! SourceDirectory()
-    let vim_dir_file = "vim_dir_commands.vim"
+    let vim_dir_file = ".lvimrc"
+    let vim_parent_file = '../' . vim_dir_file
     if filereadable(vim_dir_file)
-        exe "source " . vim_dir_file
+        exe ":source " . vim_dir_file
+    endif
+    if filereadable(vim_parent_file)
+        exe ":source " . vim_parent_file
+    endif
+endfunction
 
 function! NumActiveWindows(max)
     let l:buffers = split(capture("ls!"), '\n')
