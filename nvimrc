@@ -1393,10 +1393,19 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 let g:rainbow#include = [': ', ' ; ',  ', ', ' = ', ' \. ',  ', ', ' < ', ' > ', ' !', ' & ', ' | ', ' + ', ' - ', ' += ', ' -= ', ' >= ', '<= ', ' \\ ', ';\n', '; ', '::', ' \* ', '++', '\.', '->', '!=', '==', ',\_$', ' && ', ' || ']
 
 let g:rainbow#colors = {'dark': g:sustain_kien_rainbow_parens, 'light': g:sustain_kien_rainbow_parens}
-
+let g:rainbow#ft_exclude = ["help", "gitcommit"]
+function! InitRainbowParens()
+    let l:current_buf_ft = GetCurrentBufferVar('&ft')
+    if index(g:rainbow#ft_exclude, l:current_buf_ft) == -1
+        exe "RainbowParentheses"
+    else
+        " Turn off Rainbow Parens
+        exe "RainbowParentheses!"
+    endif
+endfunction
 augroup rainbow_ft
     autocmd!
-    autocmd FileType vim,typescript RainbowParentheses
+    autocmd FileType * call InitRainbowParens()
 augroup END
 
 " End Rainbow Parens ------------------------------------------------------- }}}
