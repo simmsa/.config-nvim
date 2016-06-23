@@ -360,6 +360,11 @@ let s:sustain_airline_teals = s:MergeColors([[reverse(copy(s:teals[0][5:9])), [2
 call s:HiGroup(s:airline_terminal, s:GetShade(s:white, "solid", "none"), s:sustain_airline_teals)
 
 " }}}
+" C & C++ -------------------------------------------------------------- {{{
+
+call s:HiGroup(['Emphasize'], s:GetShade(s:yellows, "accent", "bold"))
+
+" End C & C++ ---------------------------------------------------------- }}}
 " Python{{{
 call s:HiGroup(['pythonColon'], s:GetShade(s:pinks, "accent", "bold"))
 " }}}

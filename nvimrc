@@ -940,6 +940,10 @@ augroup ft_c
     au FileType c setlocal foldmethod=syntax
     au FileType c setlocal commentstring=//\ %s
     au FileType c syn match Function /\w\+(/me=e-1
+    au FileType c syn match Emphasize /\w\+\*/
+    au FileType c syn match Emphasize /\*\w\+/
+    au FileType c syn match Emphasize /==/
+    au FileType c syn match Type /\w\+_t\s/
     au FileType c setlocal makeprg=make\ f=%:r
     au FileType c nnoremap <buffer> cp :Make<bar>Run<CR><CR>
     au FileType c nnoremap <buffer> cv :Make<bar>RunValgrind<CR><CR>
@@ -957,8 +961,12 @@ augroup END
 
 au FileType cpp syn match Special /*\s\|+\s\|-\s\|\/\s\|%\s/
 au FileType cpp syn match Operator /=/
-au FileType cpp syn match Todo /==/
 au FileType cpp syn match Exception />\|</
+au FileType cpp syn match Emphasize /==/
+" Make pointers and references stand out
+au FileType cpp syn match Emphasize /\*/
+au FileType cpp syn match Emphasize /&/
+au FileType cpp syn match Identifier /\w\+::/me=e-2
 au FileType cpp setlocal commentstring=//\ %s
 function! CppMan()
     exe "Sman std::" . expand("<cword>")
