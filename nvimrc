@@ -1004,8 +1004,16 @@ function! CreateIncludeFile()
         return
     endif
     let filename = matchstr(line, '".*"')[1:-2]
+    call MakeDirsForNewFile(filename)
     execute ":e " . filename
     return
+endfunction
+
+function! MakeDirsForNewFile(filename)
+    try
+        let l:dir = join(split(a:filename, "/")[0:-2], "/")
+        call mkdir(l:dir, "p")
+    endtry
 endfunction
 
 augroup ft_md
