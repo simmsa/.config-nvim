@@ -1037,7 +1037,7 @@ augroup ft_md
     au FileType markdown setl noai nocin nosi inde=
 augroup END
 
-let g:markdown_fenced_languages = ['python', 'bash=sh', 'c', 'html', 'css', 'javascript', 'java', 'xml']
+let g:markdown_fenced_languages = ['python', 'bash=sh', 'c', 'html', 'css', 'javascript', 'java', 'xml', 'cpp']
 
 " }}}
 " Python -------------------------------------------------- {{{
