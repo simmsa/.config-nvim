@@ -569,6 +569,15 @@ function! SourceDirectory()
     endif
 endfunction
 
+function! AsyncCTags()
+    let l:ctags_command = "ctags -R"
+    let l:ctags_job_id = jobstart(l:ctags_command, {"on_exit": function('AsyncCTagsComplete')})
+endfunction
+
+function! AsyncCTagsComplete()
+    echo "Tags generated successfully!"
+endfunction
+
 function! NumActiveWindows(max)
     let l:buffers = split(capture("ls!"), '\n')
     let l:windows_active = []
