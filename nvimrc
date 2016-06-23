@@ -1005,6 +1005,12 @@ function! CreateIncludeFile()
     endif
     let filename = matchstr(line, '".*"')[1:-2]
     call MakeDirsForNewFile(filename)
+
+    if winwidth(0) > 90
+        exe "vs"
+    else
+        exe "10sp"
+    endif
     execute ":e " . filename
     return
 endfunction
