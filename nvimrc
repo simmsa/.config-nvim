@@ -1188,6 +1188,8 @@ nnoremap <Leader>gc :Gcommit<CR>
 nnoremap sd :call RunOrUpdateGDiff()<CR>
 nnoremap cm :Gcommit<CR>
 nnoremap gl :Term tig<CR>
+" Kill diff
+nnoremap kd :bd fugitive*<CR>zAz.
 
 " }}}
 " FZF -------------------------------------------------- {{{
