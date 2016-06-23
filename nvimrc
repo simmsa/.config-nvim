@@ -823,6 +823,10 @@ function! MakeC(check_syntax)
     execute ":silent ! make f=" . l:filename
 endfunction
 
+function! NoWarnMake()
+    execute ":silent ! make no_warn f=" . expand("%:r")
+endfunction
+
 function! MakeRunC(option)
     if IsQuickWindowOpen() > 0
         return
@@ -888,6 +892,7 @@ endfunction
 
 command! -bar Make :call MakeC("true")
 command! -bar ForceMake :call MakeC("false")
+command! -bar NoWarnMake :call NoWarnMake()
 command! Run :call MakeRunC("normal")
 command! RunValgrind :call MakeRunC("valgrind")
 command! RunScanBuild :call MakeRunC("scan-build")
