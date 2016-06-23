@@ -839,6 +839,7 @@ function! MakeRunC(option)
     let l:gdv_command = "gdv ./" . l:filename
     let l:gdh_command = "gdh ./" . l:filename
     let l:gds_command = "gds ./" . l:filename
+    let l:lldb_command = "make lldb f=" . l:filename
     if(a:option == "valgrind")
         let l:run_command = l:valgrind_command
     elseif(a:option == "scan-build")
@@ -851,16 +852,28 @@ function! MakeRunC(option)
         let l:run_command = l:gdh_command
     elseif(a:option == "gds")
         let l:run_command = l:gds_command
+    elseif(a:option == "lldb")
+        let l:run_command = l:lldb_command
+        set norelativenumber
     endif
     if has("nvim") && !(index(["gdv", "gdh", "gds"], a:option) >= 0)
-        " gdb tui mode works best with the full screen
-        if(a:option != "gdb")
+        if(a:option == "gdb")
+            " Do Nothing, gdb tui works best with fullscreen
+        elseif(a:option == "lldb" && (winwidth(0) > 90))
+            execute "vs"
+            execute "winc r"
+        else
             execute ":10sp"
         endif
-        execute ":term " . l:run_command
+        if (index(["lldb", "gdb"], a:option) >= 0)
+            execute ":TermSameBuf " . l:run_command
+        else
+            execute ":term " . l:run_command
+        endif
     else
         execute ":! " . l:run_command
     endif
+    set norelativenumber
     " Cleanup files when the buffer is deleted
     au! BufDelete <buffer> call MakeClean()
 endfunction
@@ -900,6 +913,7 @@ command! RunGDB :call MakeRunC("gdb")
 command! RunGDV :call MakeRunC("gdv")
 command! RunGDH :call MakeRunC("gdh")
 command! RunGDS :call MakeRunC("gds")
+command! RunLLDB :call MakeRunC("lldb")
 command! -nargs=* RunWithArgs :call MakeRunCWithArgs(<f-args>)
 augroup ft_c
     autocmd!
@@ -910,9 +924,8 @@ augroup ft_c
     au FileType c setlocal makeprg=make\ f=%:r
     au FileType c nnoremap <buffer> cp :Make<bar>Run<CR><CR>
     au FileType c nnoremap <buffer> cv :Make<bar>RunValgrind<CR><CR>
-    au FileType c nnoremap <buffer> cd :Make<bar>RunScanBuild<CR><CR>
+    au FileType c nnoremap <buffer> cd :Make<bar>RunLLDB<CR><CR>
     au FileType c nnoremap <buffer> cg :Make<bar>RunGDB<CR><CR>
-    au FileType c nnoremap <buffer> cv :Make<bar>RunGDV<CR><CR>
     au FileType c nnoremap <buffer> ch :Make<bar>RunGDH<CR><CR>
     au FileType c nnoremap <buffer> cm :Make<bar>RunGDS<CR><CR>
     au FileType c nnoremap <buffer> co :ForceMake<bar>Run<CR><CR>
