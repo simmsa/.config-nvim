@@ -1196,8 +1196,8 @@ endfunction
 augroup ft_python
     autocmd!
     au BufNewFile,BufRead *.py set keywordprg=pydoc
-    au Filetype python nnoremap <buffer> cp :call RunPython("normal")<CR>
-    au Filetype python nnoremap <buffer> cn :call RunPython("input")<CR>
+    au FileType python nnoremap <buffer> cp :call RunPython("normal")<CR>
+    au FileType python nnoremap <buffer> cn :call RunPython("input")<CR>
 augroup end
 
 " }}}
