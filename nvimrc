@@ -1178,7 +1178,7 @@ function! RunOrUpdateGDiff()
     exe "silent! bd *fugitive*"
     exe ":Gdiff"
     call feedkeys("ss")
-    call feedkeys("]c")
+    exe "normal! z."
 endfunction
 
 command! ToggleGStatus :call ToggleGStatus()
