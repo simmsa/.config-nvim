@@ -897,10 +897,28 @@ function! MakeRunCWithArgs(...)
     au! BufDelete <buffer> call MakeClean()
 endfunction
 
+function! RunWithInput(input)
+    let l:filename = expand("%:r")
+    let l:directory = ""
+    let l:split_filename = split(l:filename, "/")
+    if len(l:split_filename) > 1
+        let l:directory = join(l:split_filename[:-2], "/") . "/"
+    endif
+    let l:input_file = l:directory . a:input
+    let l:run_command = "./" . l:filename . " < " . l:input_file
+    if has("nvim")
+        execute ":10sp"
+        execute ":term " . run_command
+    else
+        execute ":! " . run_command
+    endif
+    " Cleanup files when the buffer is deleted
+    au! BufDelete <buffer> call MakeClean()
+endfunction
+
 function! MakeClean()
     let l:filename = expand("%:r")
     execute ":silent ! make clean f=" . l:filename
-    echo l:filename
 endfunction
 
 command! -bar Make :call MakeC("true")
@@ -914,6 +932,7 @@ command! RunGDV :call MakeRunC("gdv")
 command! RunGDH :call MakeRunC("gdh")
 command! RunGDS :call MakeRunC("gds")
 command! RunLLDB :call MakeRunC("lldb")
+command! -nargs=1 RunWithInput :call RunWithInput(<f-args>)
 command! -nargs=* RunWithArgs :call MakeRunCWithArgs(<f-args>)
 augroup ft_c
     autocmd!
@@ -930,7 +949,7 @@ augroup ft_c
     au FileType c nnoremap <buffer> cm :Make<bar>RunGDS<CR><CR>
     au FileType c nnoremap <buffer> co :ForceMake<bar>Run<CR><CR>
     au FileType c nnoremap <buffer> ca :Make<bar>RunWithArgs<Space>
-    au FileType c setlocal nofoldenable
+    au FileType c nnoremap <buffer> ci :Make<bar>RunWithInput<Space>
 augroup END
 
 " }}}
