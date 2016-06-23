@@ -1033,6 +1033,8 @@ augroup ft_md
     au Filetype markdown nnoremap <buffer> ch :silent call CompileHtmlAndOpen()<CR>
     au Filetype markdown nnoremap <buffer> cr :silent call CompileHtmlAndReload()<CR>
     au Filetype markdown nnoremap <buffer> gi :call CreateIncludeFile()<CR>
+    " Concise way to kill all indenting
+    au FileType markdown setl noai nocin nosi inde=
 augroup END
 
 let g:markdown_fenced_languages = ['python', 'bash=sh', 'c', 'html', 'css', 'javascript', 'java', 'xml']
