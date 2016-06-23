@@ -60,6 +60,7 @@ Plug 'vim-utils/vim-man'
 Plug 'artoj/qmake-syntax-vim'
 Plug 'sunaku/vim-dasht'
 Plug 'peterhoeg/vim-qml'
+Plug 'junegunn/gv.vim'
 
 let g:plugin_dir = '~/.nvim/plugin'
 Plug g:plugin_dir . 'simple-org-mode'
@@ -1204,7 +1205,6 @@ nnoremap gs :ToggleGStatus<CR>
 nnoremap <Leader>gc :Gcommit<CR>
 nnoremap sd :call RunOrUpdateGDiff()<CR>
 nnoremap cm :Gcommit<CR>
-nnoremap gl :Term tig<CR>
 " Kill diff
 nnoremap kd :bd fugitive*<CR>zAz.
 
@@ -1266,6 +1266,13 @@ command! H :Helptags
 nnoremap g- :Helptags<CR>
 
 " }}}
+" GV (Git Log Viewer) -------------------------------------------------- {{{
+
+nnoremap <silent> gl :GV<CR>
+" Display patches properly
+autocmd FileType git setlocal nofoldenable nolist
+
+" End GV (Git Log Viewer) ---------------------------------------------- }}}
 " Gundo -------------------------------------------------- {{{
 
 nnoremap <Leader>u :GundoToggle<CR>
