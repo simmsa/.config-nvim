@@ -1242,6 +1242,7 @@ augroup END
 au FileType typescript setlocal makeprg=tsc
 au FileType typescript nnoremap <buffer> sj :call ToggleTSComments()<CR>
 au FileType typescript nnoremap <buffer> M :YcmCompleter GetDoc<CR>
+au FileType typescript nnoremap <buffer> cp :Term gulp<CR>
 
 " Allow toggling between jsx comments and typescript comments
 function! ToggleTSComments()
