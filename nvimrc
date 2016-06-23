@@ -114,8 +114,6 @@ endif
 if !isdirectory(expand(&backupdir))
     call mkdir(expand(&backupdir), "p")
 endif
-"Autocomplete matches
-set wildmenu
 "Faster Macros
 set lazyredraw
 " Turn off parentheses matching, its driving me crazy
@@ -778,7 +776,7 @@ function! NeatFoldText()
   let foldtextend = lines_count_text
   let foldtextlength = strlen(substitute(foldtextstart, '.', 'x', 'g')) + &foldcolumn
   let foldtextstartlength = strlen(substitute(foldtextstart, '.', 'x', 'g')) + strlen(foldtextend) + &foldcolumn
-  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength - 17) . foldtextend . "      "
+  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength - 17) . foldtextend . "    "
 endfunction
 set foldtext=NeatFoldText()
 
@@ -1712,5 +1710,5 @@ call SourceDirectory()
 
 " }}}
 " Fold Settings -------------------------------------------------- {{{
-" vim:foldmethod=marker:foldlevel=0
+" vim:foldmethod=marker
 " }}}
