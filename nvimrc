@@ -403,10 +403,19 @@ let maplocalleader = "\<Space>"
 " <Space> w to save a file
 nnoremap <Leader>w :w<CR>
 "<Space> s to source VIMRC
-nnoremap <Leader>s :so ~/.nvimrc<CR>
+" A Complete source sources the current vimrc and resets the filetype to the
+" current filetype
+if(!exists("*AbsoluteSource"))
+    function! AbsoluteSource()
+        let l:vimrc = $MYVIMRC
+        exe "source " . l:vimrc
+        let l:ft = GetCurrentBufferVar('&filetype')
+        exe "set ft=" . l:ft
+    endfunction
+    command! AbsoluteSource call AbsoluteSource()
+endif
+nnoremap <Leader>s :AbsoluteSource<CR>
 "Easy buffer switching
-" nnoremap <Leader>n :bn<CR>
-" nnoremap <Leader>p :bp<CR>
 nnoremap <Leader>d :bd<CR>
 " Substitute like * (\< and \> select only that word)
 nnoremap <Leader>; :%s:\<<C-R><C-W>\>:
