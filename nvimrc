@@ -976,7 +976,17 @@ endfunction
 
 command! -nargs=+ Cppman silent! call CppMan(<f-args>)
 
+augroup ft_cpp
+    autocmd!
+    au FileType cpp setlocal makeprg=make\ f=%:r
     au FileType cpp nnoremap <silent><buffer> M :call CppMan()<CR>
+    au FileType cpp nnoremap <buffer> cp :Make<bar>Run<CR><CR>
+    au FileType cpp nnoremap <buffer> co :NoWarnMake<bar>Run<CR><CR>
+    au FileType cpp nnoremap <buffer> ca :Make<bar>RunWithArgs<Space>
+    au FileType cpp nnoremap <buffer> ci :Make<bar>RunWithInput<Space>
+    au FileType cpp nnoremap <buffer> cg :Make<bar>RunGDB<CR><CR>
+    au FileType cpp nnoremap <buffer> cd :Make<bar>RunLLDB<CR><CR>
+augroup END
 
 " }}}
 " CSS -------------------------------------------------- {{{
