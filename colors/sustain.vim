@@ -36,20 +36,797 @@ let g:colors_name = "sustain"
 
 " }}}
 " Colors {{{
-" Term colors are approximated as Light, Normal, Dark, and Accent
-" Gui colors used are 3, 0, 8, 12
+" Term colors approximated with https://gist.github.com/MicahElliott/719710
+" from @MicahElliott
+" Color Palate from www.google.com/design/spec/style/color.html
 
-function! TermColors()
-    let l:all_colors = [s:ambers, s:yellows, s:limes, s:light_greens, s:greens, s:teals, s:cyans, s:light_blues, s:blues, s:indigos, s:deep_purples, s:purples, s:pinks, s:reds, s:sustain_gui_elements]
-    let l:py_command = "python color_approx/colortrans.py "
-    let l:command_string = ""
-    for color in range(5, 9)
-        let l:command_string .= (l:py_command . l:all_colors[-1][0][color][1:6] . ' && ')
-    endfor
-    execute ":10sp"
-    execute ":winc r"
-    execute ":term " . l:command_string
-endfunction
+" Structure:
+" Colors are separated into gui (hex) and cterm dictionaries. There
+" are two intensities of colors, normal with 10 shades per color, and
+" accent with 4 shades per color. This allows for 4 contrast levels
+"
+" Contrast (Darkness Level):
+" Colors are arranged from light to dark within their respective dictionaries
+" with the lightest being the lowest index (0) and darkest being the highest
+" index (9 for normal and 3 for accent)
+"
+" Access:
+" This is abstracted away from the user inside s:Hi, but to access a color:
+"
+" let x = `color`.`gui or term`.`normal or accent`[`0 - 9 (4 for accent)`]
+"
+" let gui_light_red = s:red.gui.normal[0]
+" let term_accent_blue = s:blue.term.accent[1]
+
+let s:red = {
+\    'gui': {
+\        'normal': [
+\            '#ffebee',
+\            '#ffcdd2',
+\            '#ef9a9a',
+\            '#e57373',
+\            '#ef5350',
+\            '#f44337',
+\            '#e53935',
+\            '#d32f2f',
+\            '#c62828',
+\            '#b71c1c'
+\        ],
+\        'accent': [
+\            '#ff8a80',
+\            '#ff5252',
+\            '#ff1744',
+\            '#d50000'
+\        ],
+\    },
+\    'term': {
+\        'normal': [
+\            '231',
+\            '224',
+\            '210',
+\            '174',
+\            '203',
+\            '203',
+\            '167',
+\            '160',
+\            '160',
+\            '124'
+\        ],
+\        'accent': [
+\            '210',
+\            '203',
+\            '197',
+\            '160'
+\        ],
+\    },
+\}
+
+let s:pink = {
+\    'gui': {
+\        'normal': [
+\            '#fce4ec',
+\            '#f8bbd0',
+\            '#f48fb1',
+\            '#f06292',
+\            '#ec407a',
+\            '#e91e63',
+\            '#d81b60',
+\            '#c2185b',
+\            '#ad1457',
+\            '#880e4f'
+\        ],
+\        'accent': [
+\            '#ff80ab',
+\            '#ff4081',
+\            '#f50057',
+\            '#c51162'
+\        ],
+\    },
+\    'term': {
+\        'normal': [
+\            '225',
+\            '218',
+\            '211',
+\            '204',
+\            '204',
+\            '161',
+\            '161',
+\            '125',
+\            '125',
+\            '89'
+\        ],
+\        'accent': [
+\            '211',
+\            '204',
+\            '197',
+\            '161'
+\        ],
+\    },
+\}
+
+let s:purple = {
+\    'gui': {
+\        'normal': [
+\            '#f3e5f5',
+\            '#e1bee7',
+\            '#ce93d8',
+\            '#ba68c8',
+\            '#ab47bc',
+\            '#9c27b0',
+\            '#8e24aa',
+\            '#7b1fa2',
+\            '#6a1b9a',
+\            '#4a148c'
+\        ],
+\        'accent': [
+\            '#ea80fc',
+\            '#e040fb',
+\            '#d500f9',
+\            '#aa00ff'
+\        ],
+\    },
+\    'term': {
+\        'normal': [
+\            '225',
+\            '182',
+\            '176',
+\            '134',
+\            '133',
+\            '127',
+\            '91',
+\            '91',
+\            '54',
+\            '54'
+\        ],
+\        'accent': [
+\            '177',
+\            '171',
+\            '165',
+\            '129'
+\        ],
+\    },
+\}
+
+let s:deep_purple = {
+\    'gui': {
+\        'normal': [
+\            '#ede7f6',
+\            '#d1c4e9',
+\            '#b39ddb',
+\            '#9575cd',
+\            '#7e57c2',
+\            '#673ab7',
+\            '#5e35b1',
+\            '#512da8',
+\            '#4527a0',
+\            '#311b92'
+\        ],
+\        'accent': [
+\            '#b388ff',
+\            '#7c4dff',
+\            '#651fff',
+\            '#6200ea'
+\        ],
+\    },
+\    'term': {
+\        'normal': [
+\            '225',
+\            '188',
+\            '146',
+\            '104',
+\            '97',
+\            '61',
+\            '61',
+\            '55',
+\            '55',
+\            '54'
+\        ],
+\        'accent': [
+\            '141',
+\            '99',
+\            '57',
+\            '56'
+\        ],
+\    },
+\}
+
+let s:indigo = {
+\    'gui': {
+\        'normal': [
+\            '#e8eaf6',
+\            '#c5cae9',
+\            '#9fa8da',
+\            '#7986cb',
+\            '#5c6bc0',
+\            '#3f51b5',
+\            '#3949ab',
+\            '#303f9f',
+\            '#283593',
+\            '#1a237e'
+\        ],
+\        'accent': [
+\            '#8c9eff',
+\            '#536dfe',
+\            '#3d5afe',
+\            '#304ffe'
+\        ],
+\    },
+\    'term': {
+\        'normal': [
+\            '189',
+\            '188',
+\            '146',
+\            '104',
+\            '61',
+\            '61',
+\            '61',
+\            '61',
+\            '24',
+\            '18'
+\        ],
+\        'accent': [
+\            '111',
+\            '63',
+\            '63',
+\            '63'
+\        ],
+\    },
+\}
+
+let s:blue = {
+\    'gui': {
+\        'normal': [
+\            '#e3f2fd',
+\            '#bbdefb',
+\            '#90caf9',
+\            '#64b5f6',
+\            '#42a5f5',
+\            '#2196f3',
+\            '#1e88e5',
+\            '#1976d2',
+\            '#1565c0',
+\            '#0d47a1'
+\        ],
+\        'accent': [
+\            '#82b1ff',
+\            '#448aff',
+\            '#2979ff',
+\            '#2962ff'
+\        ],
+\    },
+\    'term': {
+\        'normal': [
+\            '195',
+\            '153',
+\            '117',
+\            '75',
+\            '75',
+\            '33',
+\            '32',
+\            '32',
+\            '25',
+\            '25'
+\        ],
+\        'accent': [
+\            '111',
+\            '69',
+\            '33',
+\            '27'
+\        ],
+\    },
+\}
+
+let s:light_blue = {
+\    'gui': {
+\        'normal': [
+\            '#e1f5fe',
+\            '#b3e5fc',
+\            '#81d4fa',
+\            '#4fc3f7',
+\            '#29b6f6',
+\            '#03a9f4',
+\            '#039be5',
+\            '#0288d1',
+\            '#0277bd',
+\            '#01579b'
+\        ],
+\        'accent': [
+\            '#80d8ff',
+\            '#40c4ff',
+\            '#00b0ff',
+\            '#0091ea'
+\        ],
+\    },
+\    'term': {
+\        'normal': [
+\            '195',
+\            '153',
+\            '117',
+\            '81',
+\            '39',
+\            '39',
+\            '38',
+\            '32',
+\            '31',
+\            '25'
+\        ],
+\        'accent': [
+\            '117',
+\            '81',
+\            '39',
+\            '32'
+\        ],
+\    },
+\}
+
+let s:cyan = {
+\    'gui': {
+\        'normal': [
+\            '#e0f7fa',
+\            '#b2ebf2',
+\            '#80deea',
+\            '#4dd0e1',
+\            '#26c6da',
+\            '#00bcd4',
+\            '#00acc1',
+\            '#0097a7',
+\            '#00838f',
+\            '#006064'
+\        ],
+\        'accent': [
+\            '#84ffff',
+\            '#18ffff',
+\            '#00e5ff',
+\            '#00b8d4'
+\        ],
+\    },
+\    'term': {
+\        'normal': [
+\            '195',
+\            '159',
+\            '116',
+\            '80',
+\            '44',
+\            '38',
+\            '37',
+\            '31',
+\            '30',
+\            '23'
+\        ],
+\        'accent': [
+\            '123',
+\            '14',
+\            '45',
+\            '38'
+\        ],
+\    },
+\}
+
+let s:teal = {
+\    'gui': {
+\        'normal': [
+\            '#e0f2f1',
+\            '#b2dfdb',
+\            '#80cbc4',
+\            '#4db6ac',
+\            '#26a69a',
+\            '#009688',
+\            '#00897b',
+\            '#00796b',
+\            '#00695c',
+\            '#004d40'
+\        ],
+\        'accent': [
+\            '#a7ffeb',
+\            '#64ffda',
+\            '#1de9b6',
+\            '#00bfa5'
+\        ],
+\    },
+\    'term': {
+\        'normal': [
+\            '195',
+\            '152',
+\            '116',
+\            '73',
+\            '36',
+\            '30',
+\            '30',
+\            '29',
+\            '23',
+\            '23'
+\        ],
+\        'accent': [
+\            '159',
+\            '86',
+\            '43',
+\            '37'
+\        ],
+\    },
+\}
+
+let s:green = {
+\    'gui': {
+\        'normal': [
+\            '#e8f5e9',
+\            '#c8e6c9',
+\            '#a5d6a7',
+\            '#81c784',
+\            '#66bb6a',
+\            '#4caf50',
+\            '#43a047',
+\            '#388e3c',
+\            '#2e7d32',
+\            '#1b5e20'
+\        ],
+\        'accent': [
+\            '#b9f6ca',
+\            '#69f0ae',
+\            '#00e676',
+\            '#00c853'
+\        ],
+\    },
+\    'term': {
+\        'normal': [
+\            '194',
+\            '188',
+\            '151',
+\            '114',
+\            '71',
+\            '71',
+\            '71',
+\            '65',
+\            '29',
+\            '22'
+\        ],
+\        'accent': [
+\            '158',
+\            '85',
+\            '42',
+\            '41'
+\        ],
+\    },
+\}
+
+let s:light_green = {
+\    'gui': {
+\        'normal': [
+\            '#f1f8e9',
+\            '#dcedc8',
+\            '#c5e1a5',
+\            '#aed581',
+\            '#9ccc65',
+\            '#8bc34a',
+\            '#7cb342',
+\            '#689f38',
+\            '#558b2f',
+\            '#33691e'
+\        ],
+\        'accent': [
+\            '#ccff90',
+\            '#b2ff59',
+\            '#76ff03',
+\            '#64dd17'
+\        ],
+\    },
+\    'term': {
+\        'normal': [
+\            '230',
+\            '194',
+\            '187',
+\            '150',
+\            '149',
+\            '113',
+\            '107',
+\            '71',
+\            '64',
+\            '58'
+\        ],
+\        'accent': [
+\            '192',
+\            '155',
+\            '118',
+\            '76'
+\        ],
+\    },
+\}
+
+let s:lime = {
+\    'gui': {
+\        'normal': [
+\            '#f9fbe7',
+\            '#f0f4c3',
+\            '#e6ee9c',
+\            '#dce775',
+\            '#d4e157',
+\            '#cddc39',
+\            '#c0ca33',
+\            '#afb42b',
+\            '#9e9d24',
+\            '#827717'
+\        ],
+\        'accent': [
+\            '#f4ff81',
+\            '#eeff41',
+\            '#c6ff00',
+\            '#aeea00'
+\        ],
+\    },
+\    'term': {
+\        'normal': [
+\            '230',
+\            '230',
+\            '193',
+\            '186',
+\            '185',
+\            '185',
+\            '149',
+\            '142',
+\            '142',
+\            '100'
+\        ],
+\        'accent': [
+\            '228',
+\            '227',
+\            '190',
+\            '148'
+\        ],
+\    },
+\}
+
+let s:yellow = {
+\    'gui': {
+\        'normal': [
+\            '#fffde7',
+\            '#fff9c4',
+\            '#fff59d',
+\            '#fff176',
+\            '#ffee58',
+\            '#ffeb3b',
+\            '#fdd835',
+\            '#fbc02d',
+\            '#f9a825',
+\            '#f57f17'
+\        ],
+\        'accent': [
+\            '#ffff8d',
+\            '#ffff00',
+\            '#ffea00',
+\            '#ffd600'
+\        ],
+\    },
+\    'term': {
+\        'normal': [
+\            '230',
+\            '230',
+\            '229',
+\            '228',
+\            '227',
+\            '227',
+\            '221',
+\            '214',
+\            '214',
+\            '208'
+\        ],
+\        'accent': [
+\            '228',
+\            '11',
+\            '220',
+\            '220'
+\        ],
+\    },
+\}
+
+let s:amber = {
+\    'gui': {
+\        'normal': [
+\            '#fff8e1',
+\            '#ffecb3',
+\            '#ffe082',
+\            '#ffd54f',
+\            '#ffca28',
+\            '#ffc107',
+\            '#ffb300',
+\            '#ffa000',
+\            '#ff8f00',
+\            '#ff6f00'
+\        ],
+\        'accent': [
+\            '#ffe57f',
+\            '#ffd740',
+\            '#ffc400',
+\            '#ffab00'
+\        ],
+\    },
+\    'term': {
+\        'normal': [
+\            '230',
+\            '229',
+\            '222',
+\            '221',
+\            '220',
+\            '214',
+\            '214',
+\            '214',
+\            '208',
+\            '202'
+\        ],
+\        'accent': [
+\            '222',
+\            '221',
+\            '220',
+\            '214'
+\        ],
+\    },
+\}
+
+let s:orange = {
+\    'gui': {
+\        'normal': [
+\            '#fff3e0',
+\            '#ffe0b2',
+\            '#ffcc80',
+\            '#ffb74d',
+\            '#ffa726',
+\            '#ff9800',
+\            '#fb8c00',
+\            '#f57c00',
+\            '#ef6c00',
+\            '#e65100'
+\        ],
+\        'accent': [
+\            '#ffd180',
+\            '#ffab40',
+\            '#ff9100',
+\            '#ff6d00'
+\        ],
+\    },
+\    'term': {
+\        'normal': [
+\            '230',
+\            '223',
+\            '222',
+\            '215',
+\            '214',
+\            '208',
+\            '208',
+\            '208',
+\            '202',
+\            '166'
+\        ],
+\        'accent': [
+\            '222',
+\            '215',
+\            '208',
+\            '202'
+\        ],
+\    },
+\}
+
+let s:deep_orange = {
+\    'gui': {
+\        'normal': [
+\            '#fbe9e7',
+\            '#ffccbc',
+\            '#ffab91',
+\            '#ff8a65',
+\            '#ff7043',
+\            '#ff5722',
+\            '#f4511e',
+\            '#e64a19',
+\            '#d84315',
+\            '#bf360c'
+\        ],
+\        'accent': [
+\            '#ff9e80',
+\            '#ff6e40',
+\            '#ff3d00',
+\            '#dd2c00'
+\        ],
+\    },
+\    'term': {
+\        'normal': [
+\            '224',
+\            '223',
+\            '216',
+\            '209',
+\            '203',
+\            '202',
+\            '202',
+\            '166',
+\            '166',
+\            '130'
+\        ],
+\        'accent': [
+\            '216',
+\            '203',
+\            '202',
+\            '160'
+\        ],
+\    },
+\}
+
+\" No Accents
+let s:grey = {
+\    'gui': [
+\        '#fafafa',
+\        '#f5f5f5',
+\        '#eeeeee',
+\        '#e0e0e0',
+\        '#bdbdbd',
+\        '#9e9e9e',
+\        '#757575',
+\        '#616161',
+\        '#424242',
+\        '#212121'
+\    ],
+\    'term': [
+\        '231',
+\        '231',
+\        '231',
+\        '188',
+\        '145',
+\        '145',
+\        '102',
+\        '59',
+\        '59',
+\        '16'
+\    ],
+\}
+
+let s:blue_grey = {
+\    'gui': [
+\        '#eceff1',
+\        '#cfd8dc',
+\        '#b0bec5',
+\        '#90a4ae',
+\        '#78909c',
+\        '#607d8b',
+\        '#546e7a',
+\        '#455a64',
+\        '#37474f',
+\        '#263238'
+\    ],
+\    'term': [
+\        '231',
+\        '188',
+\        '146',
+\        '109',
+\        '103',
+\        '66',
+\        '60',
+\        '59',
+\        '59',
+\        '23'
+\    ],
+\}
+
+let s:brown = {
+\    'gui': [
+\        '#efebe9',
+\        '#d7ccc8',
+\        '#bcaaa4',
+\        '#a1887f',
+\        '#8d6e63',
+\        '#795548',
+\        '#6d4c41',
+\        '#5d4037',
+\        '#4e342e',
+\        '#3e2723'
+\    ],
+\    'term': [
+\        '230',
+\        '188',
+\        '145',
+\        '138',
+\        '95',
+\        '95',
+\        '59',
+\        '59',
+\        '58',
+\        '52'
+\    ],
+\}
 
 let s:white        = [['#dddddd'], [255]]
 let s:black        = [['#000000'], [232]]
