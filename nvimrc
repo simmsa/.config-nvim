@@ -62,7 +62,7 @@ Plug 'sunaku/vim-dasht'
 Plug 'peterhoeg/vim-qml'
 Plug 'junegunn/gv.vim'
 
-let g:plugin_dir = '~/.nvim/plugin'
+let g:plugin_dir = '~/.nvim/bundle/'
 Plug g:plugin_dir . 'simple-org-mode'
 Plug g:plugin_dir . 'syntax-highlight-html-code'
 
