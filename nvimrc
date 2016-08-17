@@ -638,6 +638,14 @@ autocmd VimResized * :call DynamicallyChangeLayout()
 
 nnoremap <silent> s. :call SyntaxAttr()<CR>
 
+function! FixTrailingWhitespace()
+    let l:save_pos = winsaveview()
+    exe '%s:\s\+$::e'
+    call winrestview(l:save_pos)
+endfunction
+
+command! FixTrailingWhitespace call FixTrailingWhitespace()
+
 " }}}
 " Searching and Movement {{{
 
