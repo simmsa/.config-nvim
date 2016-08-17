@@ -636,6 +636,8 @@ endfunction
 
 autocmd VimResized * :call DynamicallyChangeLayout()
 
+nnoremap <silent> s. :call SyntaxAttr()<CR>
+
 " }}}
 " Searching and Movement {{{
 
