@@ -575,7 +575,7 @@ function! AsyncCTagsComplete()
 endfunction
 
 function! NumActiveWindows(max)
-    let l:buffers = split(capture("ls!"), '\n')
+    let l:buffers = split(execute("ls!"), '\n')
     let l:windows_active = []
     for buf in l:buffers
         " We are looking for an 'a' in the first part of the string which
