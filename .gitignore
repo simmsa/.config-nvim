@@ -44,9 +44,9 @@ tmp
 view/*
 spell/*
 
-# Plugins managed by Vundle
+# Plugins managed by vim-plug
 bundle/*
 
-# Plugins not managed by vundle
-eclim/*
-
+# Vim-plug
+autoload/plug.vim
+autoload/plug.vim.old
