@@ -341,7 +341,8 @@ nnoremap <silent> p p`]
 " Go to tag
 nnoremap gt <C-]>
 " Go to previous buffer
-nnoremap gp :bp<CR>
+nnoremap gp <C-^>
+nnoremap <S-tab> :bp<CR>
 " Use full width of the screen
 function! NoDistractions()
     :set nornu
