@@ -4,7 +4,8 @@
 
 " set nocompatible
 " filetype off
-call plug#begin('~/.nvim/bundle')
+let g:plugin_dir = '~/.config/nvim/bundle'
+call plug#begin(g:plugin_dir)
 Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
 Plug 'benekastah/neomake'
@@ -63,7 +64,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'mxw/vim-jsx'
 Plug 'kassio/neoterm'
 
-let g:plugin_dir = '~/.nvim/bundle/'
 Plug g:plugin_dir . 'simple-org-mode'
 Plug g:plugin_dir . 'syntax-highlight-html-code'
 
