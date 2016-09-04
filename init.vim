@@ -591,10 +591,10 @@ function! BackgroundTerm(command)
     call jobstart(a:command)
 endfunction
 
-command! -bar -nargs=* Term :call Term(<q-args>)
-command! -bar -nargs=* TermSameBuf :call TermSameBuf(<q-args>)
-command! -bar -nargs=* TermStayOpen :call TermStayOpen(<q-args>)
-command! -bar -nargs=* BackgroundTerm :call BackgroundTerm(<q-args>)
+command! -bar -nargs=* -complete=shellcmd Term :call Term(<q-args>)
+command! -bar -nargs=* -complete=shellcmd TermSameBuf :call TermSameBuf(<q-args>)
+command! -bar -nargs=* -complete=shellcmd TermStayOpen :call TermStayOpen(<q-args>)
+command! -bar -nargs=* -complete=shellcmd BackgroundTerm :call BackgroundTerm(<q-args>)
 
 " Don't show term process exited
 au TermClose * exe expand('<abuf>') . 'bd!'
