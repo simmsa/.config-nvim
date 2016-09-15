@@ -4,7 +4,7 @@
 
 " set nocompatible
 " filetype off
-let g:plugin_dir = '~/.config/nvim/bundle'
+let g:plugin_dir = '~/.config/nvim/bundle/'
 call plug#begin(g:plugin_dir)
 Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
