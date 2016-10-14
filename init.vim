@@ -156,6 +156,7 @@ set splitright
 let g:loaded_vimballPlugin = 1
 let g:loaded_rrhelper = 1
 let g:did_install_default_menus = 1 " avoid stupid menu.vim (saves ~100ms)
+set completeopt-=preview
 
 " Tabs and Spaces -------------------------------------------------- {{{
 
