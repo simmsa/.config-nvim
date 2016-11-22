@@ -1402,7 +1402,7 @@ nnoremap <Leader>g :ToggleGStatus<CR>
 nnoremap gs :ToggleGStatus<CR>
 nnoremap <Leader>gc :Gcommit<CR>
 nnoremap sd :call RunOrUpdateGDiff()<CR>
-nnoremap cm :Gcommit<CR>
+nnoremap cm :Gcommit --verbose<CR>
 " Kill diff
 nnoremap kd :bd fugitive*<CR>zAz.
 
