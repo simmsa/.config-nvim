@@ -430,6 +430,8 @@ inoremap <C-s> <End>;
 nnoremap cc :cc<CR>
 " Seriously go to the end of the line in insert mode
 inoremap <C-e> <End>
+" Make bottom horizontal split vertical and reverse
+nnoremap <Leader>h <C-w>H<C-W>r
 
 " Leader Mappings -------------------------------------------------- {{{
 
