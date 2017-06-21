@@ -236,7 +236,8 @@ noremap j t
 " k is now kill swapping with d
 noremap k d
 " l is now look up next swapping with n
-noremap l n
+noremap <silent> l :normal! nzz<CR>
+noremap <silent> L :normal! Nzz<CR>
 " Consistent behavior with C
 noremap K d$
 noremap Y y$
