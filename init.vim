@@ -813,10 +813,7 @@ function! NeatFoldText()
     let win_width = winwidth(0)
     let lines_count = v:foldend - v:foldstart + 1 - 4
     " Separator character between start and end
-    " This character slows iterm2 a lot!
-    " let foldchar = "─"
-    " This character is close but does not slow down iterm2
-    let foldchar = "―"
+    let foldchar = "─"
 
     " Remove comments, foldmarkers and dashes from the foldstart line
     let fold_text_removal_array = []
