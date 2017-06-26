@@ -120,8 +120,11 @@ set lazyredraw
 let loaded_matchparen = 1
 " Toggle from relative numbering to regular numbering in normal/insert
 set relativenumber
-autocmd InsertEnter * set norelativenumber number
-autocmd InsertLeave * set relativenumber
+augroup num_toggle
+    autocmd!
+    autocmd InsertEnter * set norelativenumber number
+    autocmd InsertLeave * set relativenumber
+augroup END
 " Fixing Delays?
 set ttimeoutlen=10
 set timeoutlen=300
@@ -270,8 +273,11 @@ xnoremap > >gv
 " Faster repeat command
 nnoremap <C-P> :<C-P><CR>
 "Quickfix mappings
-autocmd BufReadPost quickfix nnoremap <buffer> <C-N> <Down>
-autocmd BufReadPost quickfix nnoremap <buffer> <C-T> <Up>
+augroup qf_map
+    autocmd!
+    autocmd BufReadPost quickfix nnoremap <buffer> <C-N> <Down>
+    autocmd BufReadPost quickfix nnoremap <buffer> <C-T> <Up>
+augroup END
 " Get to the shell faster
 if has("nvim")
     nnoremap S :Term<Space>
@@ -541,7 +547,10 @@ function! TruncateFilename(max_len)
         let half = a:max_len / 2
         return filename[0:half-1] . "…" . filename[filename_len-(half):filename_len-1]
 endfunction
-autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window " . TruncateFilename($TRUNCATE_MAX_WORD_LEN))
+augroup tmux_rename_window
+    autocmd!
+    autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call jobstart("tmux rename-window " . TruncateFilename($TRUNCATE_MAX_WORD_LEN))
+augroup END
 
 " Functions for making the term more customizable
 
@@ -1286,8 +1295,11 @@ augroup end
 " Ruby -------------------------------------------------- {{{
 
 " 2 space tabs in ruby
-autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
-autocmd Filetype eruby setlocal ts=3 sw=2 expandtab
+augroup ft_ruby
+    autocmd!
+    autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
+    autocmd Filetype eruby setlocal ts=3 sw=2 expandtab
+augroup END
 
 " }}}
 " Swift -------------------------------------------------- {{{
@@ -1737,9 +1749,12 @@ nmap l <Plug>(Oblique-n)
 nmap L <Plug>(Oblique-N)
 
 " Center cursor after search
-autocmd! User Oblique normal! zz
-autocmd! User ObliqueStar normal! zz
-autocmd! User ObliqueRepeat normal! zz
+augroup plug_oblique
+    autocmd!
+    autocmd! User Oblique normal! zz
+    autocmd! User ObliqueStar normal! zz
+    autocmd! User ObliqueRepeat normal! zz
+augroup END
 
 hi! link ObliquePrompt Search
 
