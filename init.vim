@@ -30,7 +30,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-expand-region'
 Plug 'zaiste/tmux.vim'
 Plug 'scrooloose/nerdtree' , { 'on': 'NERDTreeToggle' }
-Plug 'marijnh/tern_for_vim'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -52,7 +51,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/CmdlineComplete'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'rhysd/vim-clang-format'
 Plug 'drmikehenry/vim-headerguard'
 Plug 'vim-utils/vim-man'
 Plug 'artoj/qmake-syntax-vim'
@@ -1505,13 +1503,6 @@ let g:jedi#show_call_signatures = "1"
 runtime macros/matchit.vim
 
 " }}}
-" Neoterm -------------------------------------------------------------- {{{
-
-let g:neoterm_size = 10
-let g:neoterm_keep_open = 0
-let g:neoterm_autoinsert = 1
-
-" End Neoterm ---------------------------------------------------------- }}}
 " Nerdtree -------------------------------------------------- {{{
 
 nnoremap <C-b> :NERDTreeToggle<CR>
