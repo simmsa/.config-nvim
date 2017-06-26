@@ -8,7 +8,6 @@ let g:plugin_dir = '~/.config/nvim/bundle/'
 call plug#begin(g:plugin_dir)
 Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
-Plug 'benekastah/neomake'
 Plug 'tpope/vim-fugitive'
 Plug 'jplaut/vim-arduino-ino'
 Plug 'tpope/vim-surround'
@@ -1494,21 +1493,6 @@ let g:jedi#show_call_signatures = "1"
 runtime macros/matchit.vim
 
 " }}}
-" Neomake ------------------------------------------------------------------ {{{
-
-" Only run neomake on the current file, basically syntax checking
-autocmd! BufWritePost *.js,*.json Neomake
-" Run neomake using makeprg in the cwd
-autocmd! BufWritePost *.ts,*.tsx Neomake!
-
-let g:neomake_list_height = 3
-let g:neomake_open_list = 2
-let g:neomake_error_sign = { 'text': "✗>", 'texthl': 'Error' }
-let g:neomake_warning_sign = { 'text': "?>", 'texthl': 'Visual' }
-
-let g:neomake_javascript_enabled_makers = ["eslint"]
-
-" End Neomake -------------------------------------------------------------- }}}
 " Neoterm -------------------------------------------------------------- {{{
 
 let g:neoterm_size = 10
