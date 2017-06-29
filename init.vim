@@ -118,7 +118,7 @@ set lazyredraw
 " Turn off parentheses matching, its driving me crazy
 let loaded_matchparen = 1
 " Toggle from relative numbering to regular numbering in normal/insert
-set relativenumber
+set relativenumber number
 augroup num_toggle
     autocmd!
     autocmd InsertEnter * set norelativenumber number
