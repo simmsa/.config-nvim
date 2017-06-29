@@ -615,6 +615,11 @@ command! -bar -nargs=* -complete=shellcmd BackgroundTerm :call BackgroundTerm(<q
 " Don't show term process exited
 " au TermClose * exe expand('<abuf>') . 'bd!'
 
+augroup Term
+    au!
+    au TermOpen setlocal nonumber norelativenumber
+augroup END
+
 " Enable custom vim commands in any directory
 function! SourceDirectory()
     let vim_dir_file = ".lvimrc"
