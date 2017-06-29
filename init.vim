@@ -63,6 +63,7 @@ Plug 'kassio/neoterm'
 
 Plug g:plugin_dir . 'simple-org-mode'
 Plug g:plugin_dir . 'syntax-highlight-html-code'
+Plug g:plugin_dir . 'sustain'
 
 call plug#end()
 filetype plugin indent on
