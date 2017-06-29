@@ -291,6 +291,8 @@ cnoremap <C-T> <Up>
 inoremap <C-l> <ESC>mzgUiw`zi<Right>
 " Faster save
 nnoremap sa :w<CR>
+" Save All
+nnoremap sl :wa<CR>
 " Faster window switching
 function! SmartSwitchWindow()
     let l:switch_command = ':winc w'
