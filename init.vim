@@ -613,7 +613,7 @@ command! -bar -nargs=* -complete=shellcmd TermStayOpen :call TermStayOpen(<q-arg
 command! -bar -nargs=* -complete=shellcmd BackgroundTerm :call BackgroundTerm(<q-args>)
 
 " Don't show term process exited
-au TermClose * exe expand('<abuf>') . 'bd!'
+" au TermClose * exe expand('<abuf>') . 'bd!'
 
 " Enable custom vim commands in any directory
 function! SourceDirectory()
