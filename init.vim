@@ -160,6 +160,7 @@ let g:did_install_default_menus = 1 " avoid stupid menu.vim (saves ~100ms)
 set completeopt-=preview
 " Open diffs + fugitive vertically
 set diffopt+=vertical
+set fillchars=vert:│
 
 " Tabs and Spaces -------------------------------------------------- {{{
 
