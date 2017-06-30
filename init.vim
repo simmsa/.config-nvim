@@ -124,9 +124,9 @@ augroup num_toggle
     autocmd InsertEnter * set norelativenumber number
     autocmd InsertLeave * set relativenumber
 augroup END
-" Fixing Delays?
+" Fixing Delays
 set ttimeoutlen=10
-set timeoutlen=300
+set timeoutlen=400
 "Autocomplete matches in the command line
 set wildmenu
 " Better tab completion in the command line
