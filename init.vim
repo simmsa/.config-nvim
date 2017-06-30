@@ -187,15 +187,12 @@ let g:sustain#code#brightness = 5
 let g:sustain#code#contrast = 1
 let g:sustain#ui#brightness = 5
 let g:sustain#ui#contrast = 2
-
 let g:sustain#link_colors = 1
-
-let g:sustain#custom_colors_file = "~/.nvim/sustain_settings.txt"
+let g:sustain#enable_maps = 0
+colorscheme sustain
 
 " Highlight current line
 set cursorline
-
-colorscheme sustain
 
 " }}}
 " Should Be Built In -------------------------------------------------- {{{
