@@ -299,15 +299,19 @@ nnoremap sa :w<CR>
 " Save All
 nnoremap sl :wa<CR>
 " Faster window switching
-function! SmartSwitchWindow()
-    let l:switch_command = ':winc w'
+function! SmartSwitchWindow(direction)
+    if a:direction == "right"
+        let l:switch_command = ':winc w'
+    elseif a:direction == "left"
+        let l:switch_command = ':winc h'
+    endif
     let l:skip_buftypes = ['quickfix']
     exe l:switch_command
     while(index(l:skip_buftypes, &buftype) != -1)
         exe l:switch_command
     endwhile
 endfunction
-nnoremap <silent> ss :call SmartSwitchWindow()<CR>
+nnoremap <silent> ss :call SmartSwitchWindow("right")<CR>
 nnoremap <silent> sx :call SmartBufferDelete()<CR>
 function! SmartBufferDelete()
     " If the buffer is of the following filetypes close it and exit function
