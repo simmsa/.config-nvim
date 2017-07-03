@@ -448,6 +448,9 @@ nnoremap cc :cc<CR>
 inoremap <C-e> <End>
 " Make bottom horizontal split vertical and reverse
 nnoremap <Leader>h <C-w>H<C-W>r
+" Faster window switching
+nnoremap <silent> ) :call SmartSwitchWindow("right")<CR>
+nnoremap <silent> ( :call SmartSwitchWindow("left")<CR>
 
 " Leader Mappings -------------------------------------------------- {{{
 
