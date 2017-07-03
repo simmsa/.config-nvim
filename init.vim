@@ -666,50 +666,17 @@ function! NumActiveWindows(max)
     return len(windows_active)
 endfunction
 
-function! DynamicallyChangeLayout()
-    " If there are two windows open side by side and the whole term gets
-    " smaller make two horizontal windows and vice versa
 
-    " For this to work there needs to be exactly two open windows
-    if NumActiveWindows(2) != 2
         return
     endif
 
-    let l:full_height = 33
-    let l:full_width = 173
-    let l:term_height = system("echo $LINES")
-    let l:term_width = system("echo $COLUMNS")
-
-    " Go to the first window, either the window on the top or the left
-    let l:current_win = winnr()
-    exe "1winc w"
-
-    if abs(winwidth(1) + winwidth(2)) > l:term_width
-        " There are two horizontal splits open one on top of the other
-        if abs(l:full_width - l:term_width) < 20
-            " The window is open fully, we can turn this into two vertical
-            " splits
-            exe "winc H"
         endif
     else
-        " There are two vertical splits open next to each other
-        if abs((l:full_width / 2) - l:term_width) < 10
-            " The window is half width
-            " Change the two vertically split windows to horizontal splits
-            exe "winc K"
-
-            " Make the bottom split a little bit smaller than the top
-            exe "2winc w"
-            exe "res 12"
-            exe "1winc w"
         endif
     endif
 
-    " Return to the previous window
-    exe l:current_win . "winc w"
 endfunction
 
-autocmd VimResized * :call DynamicallyChangeLayout()
 
 nnoremap <silent> s. :call SyntaxAttr()<CR>
 
