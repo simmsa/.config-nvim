@@ -381,8 +381,6 @@ xmap <Leader>P "+P
 xnoremap <silent> y y`]
 xnoremap <silent> p p`]
 nnoremap <silent> p p`]
-" Go to tag
-nnoremap gt <C-]>
 " Go to previous buffer
 nnoremap gp <C-^>
 nnoremap <S-tab> :bp<CR>
