@@ -1,9 +1,6 @@
-" .vimrc
 " Author: Andrew Simms <andrew@andrewdsimms.com> <https://github.com/simmsa>
 " vim plug --------------------------------------- {{{
 
-" set nocompatible
-" filetype off
 let g:plugin_dir = '~/.config/nvim/bundle/'
 call plug#begin(g:plugin_dir)
 Plug 'tpope/vim-commentary'
@@ -66,7 +63,6 @@ Plug g:plugin_dir . 'syntax-highlight-html-code'
 Plug g:plugin_dir . 'sustain'
 
 call plug#end()
-filetype plugin indent on
 
 " }}}
 " Basic Options {{{
