@@ -55,6 +55,7 @@ Plug 'sunaku/vim-dasht'
 Plug 'peterhoeg/vim-qml'
 Plug 'junegunn/gv.vim'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'isRuslan/vim-es6'
 Plug 'mxw/vim-jsx'
 Plug 'kassio/neoterm'
 
