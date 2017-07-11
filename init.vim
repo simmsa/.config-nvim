@@ -59,6 +59,8 @@ Plug 'isRuslan/vim-es6'
 Plug 'mxw/vim-jsx'
 Plug 'kassio/neoterm'
 Plug 'majutsushi/tagbar'
+Plug 'kana/vim-textobj-user'
+Plug 'glts/vim-textobj-comment'
 
 Plug g:plugin_dir . 'simple-org-mode'
 Plug g:plugin_dir . 'syntax-highlight-html-code'
