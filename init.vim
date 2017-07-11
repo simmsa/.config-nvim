@@ -314,7 +314,7 @@ endfunction
 nnoremap <silent> ss :call SmartSwitchWindow("right")<CR>
 function! SmartBufferDelete()
     " If the buffer is of the following filetypes close it and exit function
-    let l:quick_close_ft_array = ['git', 'org', 'gitcommit']
+    let l:quick_close_ft_array = ['git', 'org', 'gitcommit', 'qf']
     if index(l:quick_close_ft_array, &filetype) > -1
         exe "bd"
         return
