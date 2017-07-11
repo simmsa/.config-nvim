@@ -312,7 +312,6 @@ function! SmartSwitchWindow(direction)
     endwhile
 endfunction
 nnoremap <silent> ss :call SmartSwitchWindow("right")<CR>
-nnoremap <silent> sx :call SmartBufferDelete()<CR>
 function! SmartBufferDelete()
     " If the buffer is of the following filetypes close it and exit function
     let l:quick_close_ft_array = ['git', 'org', 'gitcommit']
@@ -358,6 +357,7 @@ function! SmartBufferDelete()
         exe ":b#|bd#"
     endif
 endfunction
+nnoremap <silent> sx :call SmartBufferDelete()<CR>
 " Vertically split the current file
 nnoremap sv :vs<CR>
 " Remap man command
