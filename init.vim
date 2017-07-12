@@ -57,7 +57,7 @@ Plug 'junegunn/gv.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'isRuslan/vim-es6'
 Plug 'mxw/vim-jsx'
-Plug 'kassio/neoterm'
+Plug 'w0rp/ale'
 Plug 'majutsushi/tagbar'
 Plug 'kana/vim-textobj-user'
 Plug 'glts/vim-textobj-comment'
@@ -225,11 +225,58 @@ endfunction
 " Dvorak -------------------------------------------------- {{{
 
 " Map dvorak keys everywhere with noremap explicitly
-" noremap as opposed to nnoremap maps a command in every mode
-noremap <silent> <expr> h (v:count == 0 ? 'gj' : 'j')
-noremap <silent> <expr> t (v:count == 0 ? 'gk' : 'k')
-noremap d <Left>
-noremap n <Right>
+" Yeah this is weird but it keeps me from getting lazy!
+let g:h_t_repeat_message = 'Stop Spamming h/t! Use H, /, *, Tags to Navigate!'
+let g:d_n_repeat_message = 'Stop Spamming d/n! Use u, e, to Navigate!'
+let g:w_b_repeat_message = 'Stop Spamming w/b! Use u, e, to Navigate!'
+nnoremap <silent> h :<C-U>call WarnOnRepeat("h", "VCountZero\ gj\ j", g:h_t_repeat_message)<CR>
+nnoremap <silent> t :<C-U>call WarnOnRepeat("t", "VCountZero\ gk\ k", g:h_t_repeat_message)<CR>
+nnoremap <silent> d :call WarnOnRepeat("left", 'normal! h', g:d_n_repeat_message)<CR>
+nnoremap <silent> n :call WarnOnRepeat("right", 'normal! l', g:d_n_repeat_message)<CR>
+nnoremap <silent> w :call WarnOnRepeat("w", 'normal! w', g:w_b_repeat_message)<CR>
+nnoremap <silent> b :call WarnOnRepeat("b", 'normal! b', g:w_b_repeat_message)<CR>
+
+xnoremap <silent> <expr> h (v:count == 0 ? 'gj' : 'j')
+xnoremap <silent> <expr> t (v:count == 0 ? 'gk' : 'k')
+xnoremap d <Left>
+xnoremap n <Right>
+
+function! VCountZero(isZero, notZero)
+    if v:count == 0
+        exe 'normal! ' . a:isZero
+    else
+        for l:i in range(v:count)
+            exe 'normal! ' . a:notZero
+        endfor
+
+    endif
+endfunction
+command! -bar -nargs=* VCountZero call VCountZero(<f-args>)
+
+let g:WarnOnRepeatDict = {}
+let g:WarnOnRepeatPassTimes = 0
+
+function! WarnOnRepeat(input, command, warn_message)
+    let l:max_repeats = 5
+    if !has_key(g:WarnOnRepeatDict, a:input)
+        let g:WarnOnRepeatDict[a:input] = []
+    endif
+
+    call add(g:WarnOnRepeatDict[a:input], localtime())
+
+    if len(g:WarnOnRepeatDict[a:input]) > l:max_repeats
+        call remove(g:WarnOnRepeatDict[a:input], 0)
+    endif
+
+    let l:isWithinRepeatRange = len(g:WarnOnRepeatDict[a:input]) < l:max_repeats
+    let l:isWithinTimeRange = g:WarnOnRepeatDict[a:input][0] != g:WarnOnRepeatDict[a:input][-1]
+
+    if l:isWithinRepeatRange || l:isWithinTimeRange
+        exe a:command
+    else
+        echohl Error | echo a:warn_message | echohl None
+    endif
+endfunction
 
 " Quicker Movement
 nnoremap D ^
