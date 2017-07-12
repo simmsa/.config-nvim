@@ -604,6 +604,7 @@ function! TruncateFilename(max_len)
         let filename_len=len(filename)
         let half = a:max_len / 2
         return filename[0:half-1] . "…" . filename[filename_len-(half):filename_len-1]
+    endif
 endfunction
 augroup tmux_rename_window
     autocmd!
