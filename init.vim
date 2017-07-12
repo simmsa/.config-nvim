@@ -65,6 +65,7 @@ Plug 'glts/vim-textobj-comment'
 Plug g:plugin_dir . 'simple-org-mode'
 Plug g:plugin_dir . 'syntax-highlight-html-code'
 Plug g:plugin_dir . 'sustain'
+Plug g:plugin_dir . 'innerblock'
 
 call plug#end()
 
