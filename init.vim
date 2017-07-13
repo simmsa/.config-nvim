@@ -541,7 +541,7 @@ function! ToggleSpellCheck()
         echo "Spell Check Off!"
     endif
 endfunction
-nnoremap sc :call ToggleSpellCheck()<CR>
+nnoremap <silent> cos :call ToggleSpellCheck()<CR>
 " Spelling suggestions
 nnoremap sg z=
 " Navigate misspelled words
