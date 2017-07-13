@@ -84,20 +84,10 @@ set breakindentopt=shift:4
 " that fits on the screen. Only affects the way the file is displayed, not its
 " contents.
 set linebreak
-" Copy indent from current line to new line
-set autoindent
 " Enables automatic C program indenting
 set cindent
 " Allow buffers to be put in the 'background' without saving them
 set hidden
-"Turn on status line
-set laststatus=2
-"Allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-"Store lots of :cmdline history
-set history=10000
-"Show incomplete cmds down the bottom
-set showcmd
 "Don't show current mode down the bottom, airline does this better
 set noshowmode
 "Display tabs and trailing spaces
@@ -106,15 +96,6 @@ set listchars=tab:▷⋅,trail:⋅,nbsp:⋅,extends:,precedes:
 " Configuring backup and related
 set backup
 set noswapfile
-set undodir=~/.vim/tmp/undo//
-set backupdir=~/.vim/tmp/backup//
-" Make directory folders
-if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
-endif
-if !isdirectory(expand(&backupdir))
-    call mkdir(expand(&backupdir), "p")
-endif
 " No redraws in macros
 set lazyredraw
 " Turn off parentheses matching, its driving me crazy
@@ -129,8 +110,6 @@ augroup END
 " Fixing Delays
 set ttimeoutlen=10
 set timeoutlen=400
-"Autocomplete matches in the command line
-set wildmenu
 " Better tab completion in the command line
 set wildmode=longest,list,full
 " Ignore directories
@@ -732,10 +711,6 @@ command! FixTrailingWhitespace call FixTrailingWhitespace()
 " }}}
 " Searching and Movement {{{
 
-"Find the next match as we type the search
-set incsearch
-"Highlight searches by default
-" set hlsearch
 set smartcase
 set ignorecase
 set showmatch
