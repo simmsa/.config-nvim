@@ -1,4 +1,4 @@
-let g:pomo_settings_file = fnamemodify(expand('$MYVIMRC'), ':p:h') . '/pomo_save.txt'
+let g:pomo_settings_file = fnamemodify(expand('~/.local/share/nvim'), ':p:h') . '/pomo_save.txt'
 let g:pomo_minutes = 25
 let g:pomo_seconds = g:pomo_minutes * 60
 let g:pomo_is_active = get(g:, 'pomo_is_active', v:false)
