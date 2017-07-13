@@ -419,13 +419,6 @@ nnoremap A a
 " Zipping
 " Zip current char to the last char
 nmap ze xNp
-" Easier system copy and paste
-xmap <Leader>y "+y
-xmap <Leader>k "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-xmap <Leader>p "+p
-xmap <Leader>P "+P
 " Make y jump to the end of the selection
 xnoremap <silent> y y`]
 xnoremap <silent> p p`]
