@@ -416,10 +416,39 @@ command! Nd :silent call NoDistractions()
 " Exit
 nnoremap X :qall<CR>
 " navigate quickfix / location list
-" Macros can still be used, just not the ones below
-nnoremap qq :cfirst<CR>
-nnoremap qh :cnext<CR>
-nnoremap qt :cprevious<CR>
+" I don't like that the quickfix and location list maps are different. This
+" combines them into a single mapping by trying each command in order until
+" one works. Also centers, opens folds and calls repeat
+function! QuickfixMap(inputs, map, ...)
+    let l:post_inputs = ['normal! zO', 'normal! zz']
+    for l:input in a:inputs
+        try
+            execute l:input
+            call add(l:post_inputs, printf('call repeat#set("%s")', a:map))
+            if a:000[0] > 1 && a:000[1] !=# 'skip_post_input'
+                for l:post_input in l:post_inputs
+                    try
+                        execute l:post_input
+                    catch
+                    endtry
+                endfor
+                return
+            endif
+        catch
+            " try next input
+        endtry
+    endfor
+endfunction
+
+" q Macros can still be used, just not the ones below
+" YCM uses the location list to show errors and ale uses the quickfix list
+" We first want to navigate to YCM Errors, then ALE warnings than other
+" quickfix list items
+nnoremap <silent> qq :call QuickfixMap(['lfirst', 'ALEFirst', 'cfirst'], 'qq')<CR>
+nnoremap <silent> qh :call QuickfixMap(['lnext', 'ALENextWrap', 'cnext'], 'qh')<CR>
+nnoremap <silent> qt :call QuickfixMap(['lprev', 'ALEPrevWrap', 'cprev'], 'qt')<CR>
+nnoremap <silent> qo :call QuickfixMap(['lopen', 'copen'], 'qo', 'skip_post_input')<CR>
+nnoremap <silent> qc :call QuickfixMap(['lclose', 'cclose'], 'qc', 'skip_post_input')<CR>
 " I never use ; in any commands, but I use : all the time
 cnoremap ; :
 cnoremap : ;
