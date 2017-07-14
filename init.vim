@@ -494,8 +494,16 @@ inoremap <C-s> <End>;
 nnoremap cc :cc<CR>
 " Seriously go to the end of the line in insert mode
 inoremap <C-e> <End>
-" Make bottom horizontal split vertical and reverse
-nnoremap <Leader>h <C-w>H<C-W>r
+" " Make bottom horizontal split vertical and reverse
+function! HorizontalToVerticalSplit()
+    execute 'winc H'
+    execute 'winc r'
+endfunction
+augroup leader_h_map
+    au VimEnter * nnoremap <silent> <Leader>h :call HorizontalToVerticalSplit()<CR>
+augroup END
+" Faster window resizing
+nnoremap = <C-w>=
 " Faster window switching
 nnoremap <silent> ) :call SmartSwitchWindow("right")<CR>
 nnoremap <silent> ( :call SmartSwitchWindow("left")<CR>
