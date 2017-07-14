@@ -844,28 +844,36 @@ xnoremap <Leader>f :CreateFoldSection<Space>
 
 function! NeatFoldText()
     " If this function is slow scrolling will be painfully slow
-    let line = getline(v:foldstart)
-    let win_width = winwidth(0)
-    let lines_count = v:foldend - v:foldstart + 1 - 4
+    let l:line = getline(v:foldstart)
+    let l:win_width = winwidth(0)
+    let l:lines_count = v:foldend - v:foldstart + 1 - 4
     " Separator character between start and end
-    let foldchar = "─"
+    let l:foldchar = '─'
 
     " Remove comments, foldmarkers and dashes from the foldstart line
-    let fold_text_removal_array = []
-    call extend(fold_text_removal_array, split(escape(&commentstring, "*"), "%s"))
-    call extend(fold_text_removal_array, split(&foldmarker, ","))
-    call add(fold_text_removal_array, "-")
-    for x in range(len(fold_text_removal_array))
-        let line = substitute(line, fold_text_removal_array[x], '', 'g')
+    let l:fold_text_removal_array = []
+    call extend(l:fold_text_removal_array, split(escape(&commentstring, '*'), '%s'))
+    call extend(l:fold_text_removal_array, split(&foldmarker, ','))
+    call add(l:fold_text_removal_array, '-')
+    for l:x in range(len(l:fold_text_removal_array))
+        let l:line = substitute(l:line, l:fold_text_removal_array[l:x], '', 'g')
     endfor
 
-    let foldtextstart = line
+    " Don't let the first character be a space
+    let l:foldtextstart = l:line[0] ==# ' ' ? l:line[1:-1] : l:line
 
-    let lines_count_text = printf("  %s line%s ", lines_count > 0 ? lines_count : 0, lines_count != 1 ? "s" : "")
-    let foldtextend = lines_count_text
+    let l:lines_count_text = printf(' %s line%s', l:lines_count > 0 ? l:lines_count : 0, l:lines_count != 1 ? 's' : '')
+    let l:foldtextend = l:lines_count_text
 
-    let foldtextlength = strlen(foldtextstart) + &foldcolumn
-    return foldtextstart . repeat(foldchar, win_width - foldtextlength - 17) . foldtextend . "    "
+    let l:foldtext_start_len = strlen(l:foldtextstart)
+    let l:foldtext_end_len = strlen(l:foldtextend)
+
+    " Lines up the end numbers accounting for:
+    " 1. A 4 digit line length which makes lines_count_text 12 chars long
+    " 2. A Gutter that is 8 characters wide
+    let l:line_up_ending = 20
+    " Add spaces at the end to make up for foldtextends shorter than 12 chars
+    return l:foldtextstart . repeat(l:foldchar, l:win_width - l:foldtext_start_len - l:line_up_ending) . l:foldtextend . repeat(' ', 8)
 endfunction
 
 set foldtext=NeatFoldText()
