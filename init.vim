@@ -1120,8 +1120,6 @@ augroup END
 " }}}
 " Git -------------------------------------------------- {{{
 
-au FileType gitcommit setlocal spell
-
 function! SpeakCommit()
     " Mark the current position
     exe "normal! mp"
@@ -1131,7 +1129,11 @@ function! SpeakCommit()
     exe "normal 'p"
 endfunction
 
-au FileType gitcommit nnoremap <silent> st :call SpeakCommit()<CR>
+augroup ft_git
+    au!
+    au FileType gitcommit setlocal spell
+    au FileType gitcommit nnoremap <silent> st :call SpeakCommit()<CR>
+augroup END
 
 " }}}
 " Html -------------------------------------------------- {{{
