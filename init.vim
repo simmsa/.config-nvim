@@ -1466,8 +1466,6 @@ nnoremap kd :bd fugitive*<CR>zAz.
 " }}}
 " FZF -------------------------------------------------- {{{
 
-nnoremap go :GitFiles<CR>
-nnoremap g. :Files<CR>
 
 au TermOpen term://*fzf* tmap <buffer> <C-t> <Up>
 au TermOpen term://*fzf* tmap <buffer> <Esc> <Esc>
@@ -1475,14 +1473,58 @@ au TermOpen term://*fzf* tmap <buffer> <Esc> <Esc>
 nnoremap <silent> gu :Buffers<CR>
 nnoremap <silent> gw :Windows<CR>
 
+function! GoToWindowOrOpenFile(args)
+    let l:fzf_action = a:args[0]
+    let l:filename = a:args[1]
+
+    " Avoid any weirdness from trying to edit files from a preview window
+    let l:started_in_preview_window = &previewwindow == 1
+
+    if (match(l:filename, expand('%')) != -1) || (match(expand('%'), l:filename) != -1)
+        return
+    endif
+
+    let l:useful_open_windows = eval(join(map(range(1, tabpagenr()), 'tabpagebuflist(v:val)'), '+'))
+    let l:filenames_open_in_windows = map(copy(l:useful_open_windows), 'bufname(v:val)')
+
+    let l:file_window = match(l:filenames_open_in_windows, l:filename)
+
+    if l:file_window != -1
+        " Oddly enough win_getid uses the actual window position listed from
+        " left to right starting at 1 and not the window numbers from
+        " useful_open_windows
+        let l:win_num = l:file_window + 1
+        let l:win_id = win_getid(l:win_num)
+        call win_gotoid(l:win_id)
+    else
+        if l:started_in_preview_window
+            execute 'vsplit ' . l:filename
+        else
+            execute get(g:fzf_action, l:fzf_action, 'e') . ' ' . l:filename
         endif
-endfunction
-
-
     endif
 endfunction
 
+"
+function! SmartFiles()
+    let l:expect = ' --expect=' . join(keys(g:fzf_action), ',')
+    let l:prompt = ' --prompt="File> "'
+    let l:fzf_dict = {'sink*': function('GoToWindowOrOpenFile'), 'options': l:expect . l:prompt}
 
+    " If we are in a git project use git. systemlist chomps the system output
+    if systemlist('git rev-parse --git-dir')[0] ==# '.git'
+        " Include git files and git untracked files
+        let l:fzf_dict.source = 'git ls-files -co --exclude-standard'
+    else
+        let l:fzf_dict.source = 'ag --hidden -g ""'
+    endif
+
+    call fzf#run(fzf#wrap(l:fzf_dict))
+endfunction
+
+nnoremap <silent> go :call SmartFiles()<CR>
+
+let g:fzf_buffers_jump = 1
 nnoremap gt :Tags<CR>
 
 " fzf.vim Ag search
