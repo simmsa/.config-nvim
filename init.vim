@@ -1120,12 +1120,7 @@ augroup END
 " }}}
 " Git -------------------------------------------------- {{{
 
-function! VSGitCommit()
-    call DynamicallyChangeLayout()
-endfunction
-
 au FileType gitcommit setlocal spell
-au FileType gitcommit call VSGitCommit()
 
 function! SpeakCommit()
     " Mark the current position
