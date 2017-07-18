@@ -1565,6 +1565,11 @@ function! Mod_NerdTree_Maps()
 endfunction
 
 " }}}
+" pomo ------------------------------------------------------------------{{{
+
+nnoremap <silent> <Leader>p :call pomo#ShowMenu()<CR>
+
+" End pomo --------------------------------------------------------------}}}
 " Rainbow Parens ----------------------------------------------------------- {{{
 
 let g:rainbow#max_level = 16
