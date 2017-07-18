@@ -1177,7 +1177,8 @@ function! CompileJava(input_type)
     let runcommand = "java -cp '.' " . filename
     let runcommand_escaped = TermEscape(runcommand)
     " Syntastic has to compile the file to run the checker
-    :w|SyntasticCheck
+    " :w|SyntasticCheck
+    :w
 
     " If the quickfix window is open there are errors so don't
     " run anything.
@@ -1200,9 +1201,9 @@ function! CompileJava(input_type)
 endfunction
 
 augroup ft_java
-    au Filetype java nnoremap <buffer> cp :call CompileJava("normal")<CR>
-    au Filetype java nnoremap <buffer> cn :call CompileJava("input")<CR>
-    au Filetype java nnoremap <buffer> <Leader>w :w<bar>SyntasticCheck<CR>
+    " au Filetype java nnoremap <buffer> cp :call CompileJava("normal")<CR>
+    " au Filetype java nnoremap <buffer> cn :call CompileJava("input")<CR>
+    " au Filetype java nnoremap <buffer> <Leader>w :w<bar>SyntasticCheck<CR>
 augroup end
 
 " }}}
