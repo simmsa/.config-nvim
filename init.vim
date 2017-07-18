@@ -1472,46 +1472,16 @@ nnoremap g. :Files<CR>
 au TermOpen term://*fzf* tmap <buffer> <C-t> <Up>
 au TermOpen term://*fzf* tmap <buffer> <Esc> <Esc>
 
-" Open buffer list with fzf, modified from fzf wiki
-" Removes the current buffer from the list and automatically
-" goes to the next buffer if there is only one result.
-function! FZF_buflist()
-    redir => ls
-    silent ls
-    redir END
-    " Remove the current active buffer from the buffer list
-    let FZF_all_buffers = split(ls, '\n')
-    let current_list_item = 0
-    for FZF_buf in FZF_all_buffers
-        if match(FZF_buf, "\%a") > 0
-            call remove(FZF_all_buffers, current_list_item)
+nnoremap <silent> gu :Buffers<CR>
+nnoremap <silent> gw :Windows<CR>
+
         endif
-        let current_list_item += 1
-    endfor
-    return FZF_all_buffers
 endfunction
 
-function! FZF_bufopen(e)
-    execute 'buffer ' matchstr(a:e, '^[ 0-9]*')
-endfunction
 
-function! FZF_should_run_bufopen()
-    let l:current_buf_list = FZF_buflist()
-    if len(l:current_buf_list) > 1
-        call fzf#run({
-        \ 'down': len(l:current_buf_list) + 2,
-        \ 'source': reverse(l:current_buf_list),
-        \ 'sink': function('FZF_bufopen'),
-        \ 'options': '+m -1 -0'
-        \ })
-    elseif len(l:current_buf_list) == 1
-        call FZF_bufopen(l:current_buf_list[0])
-    else
-        echo "Cannot switch buffers: There are no other active buffers!"
     endif
 endfunction
 
-nnoremap <silent> gu :call FZF_should_run_bufopen()<CR>
 
 nnoremap gt :Tags<CR>
 
