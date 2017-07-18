@@ -1390,6 +1390,36 @@ endfunction
 nnoremap gh :A<CR>
 
 " }}}
+" ALE -------------------------------------------------------------------{{{
+
+let g:ale_linters = {
+    \ 'javascript': ['eslint'],
+    \ 'typescript': ['tslint', 'prettier'],
+    \ 'json': ['jsonlint'],
+    \ 'vim': ['vint'],
+\ }
+
+let g:ale_fixers = {
+    \ 'typescript': ['tslint', 'prettier'],
+\ }
+let g:ale_fix_on_save = 0
+
+let g:ale_javascript_prettier_use_global = 1
+let g:ale_javascript_prettier_options = '--trailing-comma all'
+
+" Ale uses the quickfix list, ycm uses the loc list
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+
+let g:ale_sign_error = '▶'
+let g:ale_sign_warning = '▶'
+hi link ALEErrorSign PluginWarningSign
+hi link ALEWarningSign PluginWarningSign
+hi link ALEError PluginWarning
+hi link ALEWarning PluginWarning
+let g:ale_echo_msg_format = '%linter% %severity%: %s'
+
+" End ALE ---------------------------------------------------------------}}}
 " auto pairs -------------------------------------------------- {{{
 
 let g:AutoPairsCenterLine = 0
