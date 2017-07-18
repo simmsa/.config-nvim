@@ -740,18 +740,6 @@ function! NumActiveWindows(max)
     return len(windows_active)
 endfunction
 
-
-        return
-    endif
-
-        endif
-    else
-        endif
-    endif
-
-endfunction
-
-
 nnoremap <silent> s. :call SyntaxAttr()<CR>
 
 function! FixTrailingWhitespace()
