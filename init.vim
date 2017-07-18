@@ -696,7 +696,9 @@ command! -bar -nargs=* -complete=shellcmd BackgroundTerm :call BackgroundTerm(<q
 
 augroup Term
     au!
-    au TermOpen setlocal nonumber norelativenumber
+    " Turn off line numbers in the terminal
+    " See https://github.com/neovim/neovim/issues/6832
+    au TermOpen * setlocal nonumber norelativenumber
 augroup END
 
 " Enable custom vim commands in any directory
