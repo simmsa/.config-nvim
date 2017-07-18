@@ -1525,7 +1525,8 @@ endfunction
 nnoremap <silent> go :call SmartFiles()<CR>
 
 let g:fzf_buffers_jump = 1
-nnoremap gt :Tags<CR>
+
+nnoremap gt <C-]>
 
 " fzf.vim Ag search
 nnoremap g/ :Ag<CR>
