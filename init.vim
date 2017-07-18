@@ -1211,27 +1211,6 @@ augroup end
 
 augroup ft_javascript
     au!
-    " Force matches in javascript, my solution to add syntax highlights to ES6
-    " and jsx while still allowing rainbow parentheses
-    " These regexes are admitally weird see zero-width for regex help
-    " regex matches whats before it up to the = sign
-    " <NotHere this={not.this} />
-    au FileType javascript :call matchadd('Keyword', '\w\+\(=\)\@=')
-    " Match word( to add function highlight
-    " thisFunctionName()
-    au FileType javascript :call matchadd('Function', '\w\+\((\)\@=')
-    " thisFunctionName()
-    au FileType javascript :call matchadd('Statement', '\(if\|return\)\((\)\@=')
-    " <This notThis={test}>
-    au FileType javascript :call matchadd('Type', '\(<\)\@<=\w\+\s')
-    " </This>
-    au FileType javascript :call matchadd('Type', '\(</\)\@<=\w\+')
-    " <This
-    "   notThis={thing}
-    au FileType javascript :call matchadd('Type', '\(<\)\@<=\w\+$')
-    " <This>
-    au FileType javascript :call matchadd('Type', '\(<\)\@<=\w\+\(>\)\@=')
-
     " Add indent settings for jsx
     au FileType javascript setlocal nosmartindent
     " docuMentation
