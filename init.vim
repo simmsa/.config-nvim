@@ -1700,18 +1700,11 @@ function! AirlineNull()
 endfunction
 let g:airline_section_y="%{AirlineNull()}"
 
-function! FileProgress(total_lines)
-    let current_line = str2nr(line("."))
-    let total_lines = str2nr(line("$"))
-    let percent_of_file = (current_line * a:total_lines / total_lines)
-    let actual_percent = (current_line * 100) / (total_lines * 1)
-    let percent_left = a:total_lines - percent_of_file
-    let indicator = "█"
-    let non_indicator = "░"
-    let delim="-"
-    return repeat(indicator, percent_of_file) . delim . actual_percent . "%" . delim . repeat(non_indicator, percent_left)
+function! SimpleFileProgress()
+    return printf('%s/%s', str2nr(line('.')), str2nr(line('$')))
 endfunction
-let g:airline_section_z="%{FileProgress(10)}"
+
+let g:airline_section_z='%{SimpleFileProgress()}'
 
 " }}}
 " vim abolish -------------------------------------------------- {{{
