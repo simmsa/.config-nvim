@@ -635,51 +635,55 @@ augroup tmux_rename_window
     autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call jobstart("tmux rename-window " . TruncateFilename($TRUNCATE_MAX_WORD_LEN))
 augroup END
 
-" Functions for making the term more customizable
+" Open terminals in a vertical buffer 80 chars wide.
+" Note: Resizing a terminal does not re wrap the lines.
+let s:term_open_cmd = '80vnew'
 
-" Close a :term when the process is complete
-let g:TermAutoExit = {}
-function! TermAutoExit.on_exit(id, code)
-    " If the command fails, i.e. the exit code is not zero don't close the buffer
-    if (a:code == 0)
-        " exe 'bd!' self.bufid
-        " echo self.exit_message
-        " call feedkeys("\<CR>")
+let s:Term = {}
+function! s:Term.on_exit(job_id, exit_code, event_type)
+    echom printf('"%s" completed with status %s!', l:self.command, a:exit_code)
+
+    " If the command completed successfully close the buffer
+    if (a:exit_code == 0)
+        exe 'bd!'
     endif
 endfunction
 
-let s:true = 1
-let s:false = 0
-
-function! StartTermAutoExit(command, exit_message, open_new_buffer)
+function! StartTermAutoExit(command, open_new_buffer)
     if a:open_new_buffer
-        exe "10sp | enew"
+        exe s:term_open_cmd
     else
-        exe "enew"
-        exe "winc r"
+        exe s:term_open_cmd
+        exe 'winc p'
     endif
-    let auto_exit_dict = extend(copy(g:TermAutoExit), {'bufid': bufnr("%"), 'exit_message': a:exit_message})
-    call termopen(a:command, auto_exit_dict)
 
-    if !a:open_new_buffer
-        exe "startinsert"
-    endif
+    let l:term_options = {
+        \'command': a:command,
+    \}
+
+    let l:auto_exit_dict = extend(copy(s:Term), l:term_options)
+    call termopen(a:command, l:auto_exit_dict)
+
+    exe 'startinsert'
 endfunction
 
 
 function! TermSameBuf(command)
-    call StartTermAutoExit(a:command, "", s:false)
+    call StartTermAutoExit(a:command, '', v:false)
 endfunction
 
 function! Term(command)
-    exe StartTermAutoExit(a:command, a:command . " completed cleanly!", s:true)
+    if empty(a:command)
+        exe s:term_open_cmd
+        exe 'term'
+    else
+        call StartTermAutoExit(a:command, v:true)
+    endif
 endfunction
 
 function! TermStayOpen(command)
-    " Open term in a split
-    silent exe "10sp | enew"
-    " Commands are split for TermClose feedkeys compatability
-    silent exe "te " . a:command
+    exe s:term_open_cmd
+    silent exe 'te ' . a:command
 endfunction
 
 function! BackgroundTerm(command)
@@ -690,9 +694,6 @@ command! -bar -nargs=* -complete=shellcmd Term :call Term(<q-args>)
 command! -bar -nargs=* -complete=shellcmd TermSameBuf :call TermSameBuf(<q-args>)
 command! -bar -nargs=* -complete=shellcmd TermStayOpen :call TermStayOpen(<q-args>)
 command! -bar -nargs=* -complete=shellcmd BackgroundTerm :call BackgroundTerm(<q-args>)
-
-" Don't show term process exited
-" au TermClose * exe expand('<abuf>') . 'bd!'
 
 augroup Term
     au!
