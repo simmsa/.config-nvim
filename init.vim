@@ -1233,16 +1233,6 @@ augroup ft_javascript
     au FileType javascript :call matchadd('Type', '\(<\)\@<=\w\+\(>\)\@=')
 
     " Add indent settings for jsx
-    " Relevant indent settings
-    " autoindent: take indent for new line from previous line
-    " cindent: do C program indenting (I think the problem is here)
-    " au FileType javascript setlocal nocindent
-    " cinkeys
-    " cinoptions
-    " cinwords
-    " indentexpr: expression used to optain the indent of a line
-    " indent keys: keys that trigger indenting with 'indentexpr'
-    " smartindent: smart autoindenting for c programs
     au FileType javascript setlocal nosmartindent
     " docuMentation
     " au FileType javascript nnoremap <buffer> gm :JsDoc<CR>
