@@ -538,9 +538,6 @@ if(!exists("*AbsoluteSource"))
 endif
 nnoremap <Leader>s :AbsoluteSource<CR>
 
-" Reset colors
-nnoremap <Leader>c :colorscheme sustain<CR>
-
 "Easy buffer switching
 nnoremap <Leader>d :bd<CR>
 " Substitute like * (\< and \> select only that word)
