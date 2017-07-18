@@ -508,6 +508,15 @@ nnoremap = <C-w>=
 nnoremap <silent> ) :call SmartSwitchWindow("right")<CR>
 nnoremap <silent> ( :call SmartSwitchWindow("left")<CR>
 
+augroup qf_mods
+    au!
+    autocmd FileType qf execute("winc H|vertical resize 80")
+    " Ycm resized the window to the number of errors, this is bad if the
+    " location list is opened vertically, this reverses that
+    autocmd User YcmLocationOpened execute("resize 100")
+    autocmd User YcmQuickFixOpened execute("resize 100")
+augroup END
+
 " Leader Mappings -------------------------------------------------- {{{
 
 " Map leader key to space
