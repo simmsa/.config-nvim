@@ -577,19 +577,27 @@ endfunction
 command! PreviousMisspelledWord call PreviousMisspelledWord()
 nnoremap sp :PreviousMisspelledWord<CR>
 
-function! ToggleVerbose()
-    if !&verbose
-        echo "Turning on logging"
-        set verbosefile=~/.nvim/verbose.log
-        set verbose=15
-    else
-        echo "Turning off logging"
-        set verbose=0
-        set verbosefile=
-    endif
+let g:log_file = '~/.local/share/nvim/verbose.log'
+
+function! StartLogging()
+    call system('rm ' . g:log_file)
+    echo 'Turning on logging'
+    exe 'profile start ' . g:log_file
+    exe 'profile func *'
 endfunction
-nnoremap <silent> <Leader>l :call ToggleVerbose()<CR>
-nnoremap <silent> <Leader>L :e ~/.nvim/verbose.log<CR>
+
+function! StopLogging()
+    echo 'Turning off logging'
+    exe 'profile stop'
+endfunction
+
+function! OpenLog()
+    exe 'e ' . g:log_file
+endfunction
+
+nnoremap <silent> <Leader>ls :call StartLogging()<CR>
+nnoremap <silent> <Leader>lk :call StopLogging()<CR>
+nnoremap <silent> <Leader>lo :call OpenLog()<CR>
 
 " }}}
 
