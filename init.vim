@@ -751,6 +751,28 @@ endfunction
 
 command! FixTrailingWhitespace call FixTrailingWhitespace()
 
+" Add to vim unimpaired co mappings
+let g:toggle_opts = {}
+function! ToggleOption(key, command, ...)
+    " Plugins are loaded after vimrc, this forces any plugin mapping to be
+    " overridden
+    execute printf("autocmd VimEnter * nnoremap <silent> co%s :call ExecuteToggleOption('%s', '%s', '%s')<CR>", a:key, a:key, a:command, len(a:000) > 0 ? a:000[0] : a:command)
+endfunction
+
+function! ExecuteToggleOption(key, first_cmd, second_cmd)
+    if a:first_cmd != a:second_cmd
+        let l:cmd_pos = get(g:toggle_opts, a:key, 0)
+        let l:cmd = l:cmd_pos % 2 == 0 ? a:first_cmd : a:second_cmd
+        let g:toggle_opts[a:key] = l:cmd_pos + 1
+    else
+        let l:cmd = a:first_cmd
+    endif
+    execute l:cmd
+endfunction
+
+call ToggleOption('p', 'set paste!')
+call ToggleOption('r', 'RainbowParenthesesDeactivate', 'RainbowParenthesesActivate')
+call ToggleOption('a', 'ALEToggle')
 " }}}
 " Searching and Movement {{{
 
