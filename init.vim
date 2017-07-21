@@ -792,6 +792,9 @@ call CloseBuffer('h', 'helpclose')
 call CloseBuffer('u', 'bd')
 " Close the window to the right
 call CloseBuffer('r', 'winc l <bar> bd')
+
+nnoremap sf :vs <bar> winc w <bar> normal gp<CR>:winc w<CR>
+
 " }}}
 " Searching and Movement {{{
 
