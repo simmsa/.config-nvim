@@ -1890,17 +1890,34 @@ let g:rooter_silent_chdir = 1
 
 let g:sneak#label = 0
 
-let g:sneak#streak = 1
+noremap <silent> <C-E> :normal! e<CR>
+nmap e <Plug>Sneak_s
+nmap E <Plug>Sneak_S
+xmap e <Plug>Sneak_s
+xmap E <Plug>Sneak_S
+omap e <Plug>Sneak_s
+omap E <Plug>Sneak_S
 
-noremap <C-E> :normal! e<CR>
-map e <Plug>Sneak_s
-map E <Plug>Sneak_S
-map - <Plug>SneakNext
-map _ <Plug>SneakPrevious
-map u <Plug>Sneak_f
-map U <Plug>Sneak_F
-map j <Plug>Sneak_t
-map J <Plug>Sneak_T
+nmap - <Plug>SneakNext
+nmap _ <Plug>SneakPrevious
+xmap - <Plug>SneakNext
+xmap _ <Plug>SneakPrevious
+omap - <Plug>SneakNext
+omap _ <Plug>SneakPrevious
+
+nmap u <Plug>Sneak_f
+nmap U <Plug>Sneak_F
+xmap u <Plug>Sneak_f
+xmap U <Plug>Sneak_F
+omap u <Plug>Sneak_f
+omap U <Plug>Sneak_F
+
+nmap j <Plug>Sneak_t
+nmap J <Plug>Sneak_T
+xmap j <Plug>Sneak_t
+xmap J <Plug>Sneak_T
+omap j <Plug>Sneak_t
+omap J <Plug>Sneak_T
 
 " }}}
 " YouCompleteMe ------------------------------ {{{
