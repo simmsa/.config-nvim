@@ -1,3 +1,8 @@
 snippet cl
 console.log($0);
 endsnippet
+
+# Console log a variable
+snippet cov
+console.log("${1:VarToPrint}: ", `!p snip.rv = t[1]`);
+endsnippet
