@@ -148,6 +148,8 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
   \,sm:block-blinkwait175-blinkoff150-blinkon175
 let g:python_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
+" Allow terminal window name to be set from vim via titlestring
+set title
 
 " Tabs and Spaces -------------------------------------------------- {{{
 
@@ -631,9 +633,11 @@ function! TruncateFilename(max_len)
         return filename[0:half-1] . "…" . filename[filename_len-(half):filename_len-1]
     endif
 endfunction
+
 augroup tmux_rename_window
     autocmd!
     autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call jobstart("tmux rename-window " . TruncateFilename($TRUNCATE_MAX_WORD_LEN))
+    autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * let &titlestring = printf('Vim: %s', expand('%'))
 augroup END
 
 " Open terminals in a vertical buffer 80 chars wide.
