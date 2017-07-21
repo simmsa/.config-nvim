@@ -1888,6 +1888,8 @@ let g:rooter_silent_chdir = 1
 " End vim rooter ----------------------------------------------------------- }}}
 " vim-sneak -------------------------------------------------- {{{
 
+let g:sneak#label = 0
+
 let g:sneak#streak = 1
 
 noremap <C-E> :normal! e<CR>
