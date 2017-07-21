@@ -779,6 +779,19 @@ endfunction
 call ToggleOption('p', 'set paste!')
 call ToggleOption('r', 'RainbowParenthesesDeactivate', 'RainbowParenthesesActivate')
 call ToggleOption('a', 'ALEToggle')
+
+function! CloseBuffer(key, command)
+    let l:start_of_map = 'cu'
+    execute printf('nnoremap <silent> %s%s :%s<CR>', l:start_of_map, a:key, a:command)
+endfunction
+
+call CloseBuffer('q', 'cclose<bar>lclose')
+call CloseBuffer('p', 'pclose')
+call CloseBuffer('t', 'bd! *term*')
+call CloseBuffer('h', 'helpclose')
+call CloseBuffer('u', 'bd')
+" Close the window to the right
+call CloseBuffer('r', 'winc l <bar> bd')
 " }}}
 " Searching and Movement {{{
 
