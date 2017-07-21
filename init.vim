@@ -1504,8 +1504,35 @@ endfunction
 " Show/Kill diff
 nnoremap sd :call RunOrUpdateGDiff()<CR>
 nnoremap kd :bd fugitive*<CR>zAz.
+
+function! SternlyWarnIfThereAreLotsOfChanges()
+    let l:max_inserts = 100
+    let l:max_deletions = 100
+    let l:max_files_changed = 5
+    let l:temp_file = 'git_diff_stats.txt'
+
+    " Get the stats from git, relevant line is the last line
+    try
+        let l:diff_stats = systemlist('git diff --stat')[-1]
+
+        let l:diff_stats = split(l:diff_stats, ' ')
+        let l:files_changed = str2nr(split(l:diff_stats[0], ' ')[0])
+        let l:insertions = str2nr(split(l:diff_stats[3], ' ')[0])
+        let l:deletions = str2nr(split(l:diff_stats[5], ' ')[0])
+
+        if (l:files_changed > l:max_files_changed) || (l:insertions > l:max_inserts) || (l:deletions > l:max_deletions)
+            let l:message = printf('Large Commit Warning: %s', join(l:diff_stats, ' '))
+            echohl WarningMsg | echo l:message | echohl None
+        endif
+    catch
+        return
+    endtry
 endfunction
 
+augroup commit_warning
+    au!
+    au BufWritePost * call SternlyWarnIfThereAreLotsOfChanges()
+augroup END
 nnoremap <Leader>gc :Gcommit<CR>
 nnoremap sd :call RunOrUpdateGDiff()<CR>
 nnoremap cm :Gcommit --verbose<CR>
