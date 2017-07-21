@@ -1549,6 +1549,8 @@ nnoremap cd :Gcommit --amend --verbose<CR>
 nnoremap cm :Gcommit --verbose<CR>
 nnoremap cf :Gwrite<CR>
 
+" Status Update
+nnoremap <silent> su :Gstatus<CR>
 " }}}
 " FZF -------------------------------------------------- {{{
 
