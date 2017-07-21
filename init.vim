@@ -150,6 +150,8 @@ let g:python_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
 " Allow terminal window name to be set from vim via titlestring
 set title
+" Disable swap files `~`
+set noswapfile
 
 " Tabs and Spaces -------------------------------------------------- {{{
 
