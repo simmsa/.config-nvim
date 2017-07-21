@@ -1544,12 +1544,10 @@ function! GoToNextGitFile()
 endfunction
 
 nnoremap <silent> gn :call GoToNextGitFile()<CR>
-nnoremap <Leader>gc :Gcommit<CR>
-nnoremap sd :call RunOrUpdateGDiff()<CR>
-nnoremap cm :Gcommit --verbose<CR>
+
 nnoremap cd :Gcommit --amend --verbose<CR>
-" Kill diff
-nnoremap kd :bd fugitive*<CR>zAz.
+nnoremap cm :Gcommit --verbose<CR>
+nnoremap cf :Gwrite<CR>
 
 " }}}
 " FZF -------------------------------------------------- {{{
