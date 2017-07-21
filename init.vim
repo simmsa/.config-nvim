@@ -68,6 +68,7 @@ Plug g:plugin_dir . 'syntax-highlight-html-code'
 Plug g:plugin_dir . 'sustain'
 Plug g:plugin_dir . 'innerblock'
 Plug g:plugin_dir . 'pomo'
+Plug g:plugin_dir . 'google'
 
 call plug#end()
 

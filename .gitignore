@@ -46,6 +46,8 @@ spell/*
 
 # Plugins managed by vim-plug
 bundle/*
+!bundle/pomo
+!bundle/google
 
 # Vim-plug
 autoload/plug.vim
