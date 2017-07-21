@@ -640,7 +640,6 @@ endfunction
 augroup tmux_rename_window
     autocmd!
     autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call jobstart("tmux rename-window " . TruncateFilename($TRUNCATE_MAX_WORD_LEN))
-    autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * let &titlestring = printf('Vim: %s', expand('%'))
 augroup END
 
 " Open terminals in a vertical buffer 80 chars wide.
