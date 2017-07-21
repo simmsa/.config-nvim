@@ -1484,9 +1484,7 @@ function! ToggleGStatus()
     if buflisted(bufname('.git/index'))
         bd .git/index
     else
-        Gstatus
-        " Move to the first file in the list
-        exe "normal \<C-n>"
+        exe 'Gstatus | winc H | vertical resize 78'
     endif
 endfunction
 
