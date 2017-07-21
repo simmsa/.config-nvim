@@ -1513,6 +1513,10 @@ nnoremap kd :bd fugitive*<CR>zAz.
 " }}}
 " FZF -------------------------------------------------- {{{
 
+let g:fzf_action = {
+    \ 'ctrl-s': 'vsplit',
+\}
+
 
 au TermOpen term://*fzf* tmap <buffer> <C-t> <Up>
 au TermOpen term://*fzf* tmap <buffer> <Esc> <Esc>
