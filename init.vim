@@ -1533,6 +1533,17 @@ augroup commit_warning
     au!
     au BufWritePost * call SternlyWarnIfThereAreLotsOfChanges()
 augroup END
+
+function! GoToNextGitFile()
+    if buflisted(bufname('.git/index'))
+        execute 'winc P'
+        call feedkeys("\<C-n>\<CR>")
+    else
+        exe 'normal! gn'
+    endif
+endfunction
+
+nnoremap <silent> gn :call GoToNextGitFile()<CR>
 nnoremap <Leader>gc :Gcommit<CR>
 nnoremap sd :call RunOrUpdateGDiff()<CR>
 nnoremap cm :Gcommit --verbose<CR>
