@@ -1492,12 +1492,18 @@ nnoremap <Leader>g :ToggleGStatus<CR>
 nnoremap gs :ToggleGStatus<CR>
 
 function! RunOrUpdateGDiff()
-    " clear cmd line
-    echo ""
-    exe "silent! bd *fugitive*"
-    exe ":Gdiff"
-    call feedkeys("ss")
-    exe "normal! z."
+    " Clear the cmd line
+    echo ''
+    " Close any fugitive windows, Gdiff will not update a diff window
+    exe 'silent! bd *fugitive*'
+    exe 'Gdiff'
+    " Go to the last window (A hack due to `exe winc p` not working correctly)
+    call feedkeys('ss')
+    exe 'normal! z.'
+endfunction
+" Show/Kill diff
+nnoremap sd :call RunOrUpdateGDiff()<CR>
+nnoremap kd :bd fugitive*<CR>zAz.
 endfunction
 
 nnoremap <Leader>gc :Gcommit<CR>
