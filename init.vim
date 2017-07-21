@@ -1556,6 +1556,7 @@ augroup plug_fugitive
     au!
     au FileType gitcommit setlocal nolist nonu nornu nofoldenable
     au FileType gitcommit let g:airline#extensions#whitespace#enabled = 0
+    au BufWinEnter .git/index call feedkeys("\<C-n>")
 augroup END
 
 " }}}
