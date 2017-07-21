@@ -831,8 +831,9 @@ nnoremap zt zk
 
 function! CreateFold(fold_name)
     let fold_line_len = 75
-    let fold_marker_start = " {{{"
-    let fold_marker_end = " }}}"
+    let fold_markers = split(&foldmarker, ',')
+    let fold_marker_start = fold_markers[0]
+    let fold_marker_end = fold_markers[1]
     let current_line = line(".")
     let current_line_content = getline(".")
     " Number of spaces before the first non whitespace character
