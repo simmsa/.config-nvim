@@ -1590,7 +1590,10 @@ nnoremap g- :Helptags<CR>
 
 nnoremap <silent> gl :GV<CR>
 " Display patches properly
-autocmd FileType git setlocal nofoldenable nolist
+augroup plug_gv
+    autocmd!
+    autocmd FileType git setlocal nofoldenable nolist
+augroup END
 
 " End GV (Git Log Viewer) ---------------------------------------------- }}}
 " Gundo -------------------------------------------------- {{{
