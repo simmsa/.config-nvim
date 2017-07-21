@@ -1487,6 +1487,9 @@ function! ToggleGStatus()
         exe 'Gstatus | winc H | vertical resize 78'
     endif
 endfunction
+command! ToggleGStatus :call ToggleGStatus()
+nnoremap <Leader>g :ToggleGStatus<CR>
+nnoremap gs :ToggleGStatus<CR>
 
 function! RunOrUpdateGDiff()
     " clear cmd line
@@ -1497,9 +1500,6 @@ function! RunOrUpdateGDiff()
     exe "normal! z."
 endfunction
 
-command! ToggleGStatus :call ToggleGStatus()
-nnoremap <Leader>g :ToggleGStatus<CR>
-nnoremap gs :ToggleGStatus<CR>
 nnoremap <Leader>gc :Gcommit<CR>
 nnoremap sd :call RunOrUpdateGDiff()<CR>
 nnoremap cm :Gcommit --verbose<CR>
