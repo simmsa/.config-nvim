@@ -1551,6 +1551,13 @@ nnoremap cf :Gwrite<CR>
 
 " Status Update
 nnoremap <silent> su :Gstatus<CR>
+
+augroup plug_fugitive
+    au!
+    au FileType gitcommit setlocal nolist nonu nornu nofoldenable
+    au FileType gitcommit let g:airline#extensions#whitespace#enabled = 0
+augroup END
+
 " }}}
 " FZF -------------------------------------------------- {{{
 
