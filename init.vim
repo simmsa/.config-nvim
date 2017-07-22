@@ -1943,6 +1943,8 @@ hi! link ObliquePrompt Search
 " vim rooter --------------------------------------------------------------- {{{
 
 let g:rooter_silent_chdir = 1
+" Disable rooter for projects without version control
+let g:rooter_change_directory_for_non_project_files = 'current'
 
 " End vim rooter ----------------------------------------------------------- }}}
 " vim-sneak -------------------------------------------------- {{{
