@@ -795,6 +795,8 @@ call CloseBuffer('r', 'winc l <bar> bd')
 
 nnoremap sf :vs <bar> winc w <bar> normal gp<CR>:winc w<CR>
 
+let g:triangle = '▸'
+
 " }}}
 " Searching and Movement {{{
 
@@ -1457,8 +1459,8 @@ let g:ale_javascript_prettier_options = '--trailing-comma all'
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 
-let g:ale_sign_error = '▶'
-let g:ale_sign_warning = '▶'
+let g:ale_sign_error = g:triangle
+let g:ale_sign_warning = g:triangle
 hi link ALEErrorSign PluginWarningSign
 hi link ALEWarningSign PluginWarningSign
 hi link ALEError PluginWarning
@@ -2006,6 +2008,9 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
 let g:ycm_open_loc_list_on_ycm_diags = 1
+
+let g:ycm_error_symbol = g:triangle
+let g:ycm_warning_symbol = g:triangle
 
 let g:ycm_error_symbol = "Er"
 let g:ycm_warning_symbol = "Wn"
