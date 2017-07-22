@@ -1888,7 +1888,11 @@ nnoremap <silent> sh :GitGutterStageHunk<CR>
 nnoremap <silent> cn :call JumpToHunkAndUnfold("n")<CR>
 nnoremap <silent> cp :call JumpToHunkAndUnfold("p")<CR>
 
-let g:gitgutter_sign_removed = '-'
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = '~'
+let g:gitgutter_sign_removed = 'x'
+let g:gitgutter_sign_modified_removed = '~ˣ'
+
 let g:gitgutter_max_signs = 5000
 
 " }}}
