@@ -1894,6 +1894,7 @@ let g:gitgutter_sign_removed = 'x'
 let g:gitgutter_sign_modified_removed = '~ˣ'
 
 let g:gitgutter_max_signs = 5000
+let g:gitgutter_map_keys = 0
 
 " }}}
 " vim go -------------------------------------------------- {{{
