@@ -1875,6 +1875,13 @@ let g:airline#extensions#branch#displayed_head_limit=35
 let g:airline#extensions#branch#empty_message = ''
 let g:airline#extensions#branch#format = 0
 let g:airline#extensions#ycm#enabled = 0
+
+augroup vim_airline
+    au!
+    " Remove '[No Name]' buffers
+    autocmd BufEnter * call airline#extensions#tabline#buflist#invalidate()
+augroup END
+
 function! AirlineFilename()
     return "/" . TruncateFilename(24)
 endfunction
