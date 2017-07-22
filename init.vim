@@ -1871,8 +1871,9 @@ let g:airline_skip_empty_sections = 1
 let g:airline_theme='relative'
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#branch#enabled=1
-let g:airline#extensions#branch#displayed_head_limit=7
-let g:airline#extensions#syntastic#enabled=1
+let g:airline#extensions#branch#displayed_head_limit=35
+let g:airline#extensions#branch#empty_message = ''
+let g:airline#extensions#branch#format = 0
 function! AirlineFilename()
     return "/" . TruncateFilename(24)
 endfunction
