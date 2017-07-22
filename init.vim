@@ -2079,6 +2079,7 @@ let g:ycm_always_populate_location_list = 1
 let g:ycm_error_symbol = g:triangle
 let g:ycm_warning_symbol = g:triangle
 
+let g:ycm_goto_buffer_command = 'vertical-split'
 let g:ycm_error_symbol = "Er"
 let g:ycm_warning_symbol = "Wn"
 
