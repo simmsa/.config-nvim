@@ -2074,6 +2074,7 @@ let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_autoclose_preview_window_after_insertion = 0
 
 let g:ycm_open_loc_list_on_ycm_diags = 1
+let g:ycm_always_populate_location_list = 1
 
 let g:ycm_error_symbol = g:triangle
 let g:ycm_warning_symbol = g:triangle
