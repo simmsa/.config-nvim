@@ -2080,8 +2080,9 @@ let g:ycm_error_symbol = g:triangle
 let g:ycm_warning_symbol = g:triangle
 
 let g:ycm_goto_buffer_command = 'vertical-split'
-let g:ycm_error_symbol = "Er"
-let g:ycm_warning_symbol = "Wn"
+
+let g:ycm_allow_changing_updatetime = 0
+set updatetime=10000
 
 " }}}
 
