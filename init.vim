@@ -1857,6 +1857,8 @@ let g:EasyMotion_use_upper = 1
 " vim easy align ------------------------------------------------------- {{{
 
 nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+xmap gA :EasyAlign<Space>
 
 " End vim easy align --------------------------------------------------- }}}
 " vim expand region -------------------------------------------------- {{{
