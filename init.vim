@@ -2069,8 +2069,9 @@ let g:ycm_min_num_of_chars_for_completion = 3
 
 " Preview window options
 " let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
+" let g:ycm_autoclose_preview_window_after_completion = 1
+" This closes any preview window
+let g:ycm_autoclose_preview_window_after_insertion = 0
 
 let g:ycm_open_loc_list_on_ycm_diags = 1
 
