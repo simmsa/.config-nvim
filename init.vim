@@ -101,7 +101,7 @@ set noswapfile
 " No redraws in macros
 set lazyredraw
 " Turn off parentheses matching, its driving me crazy
-let loaded_matchparen = 1
+let g:loaded_matchparen = 1
 " Toggle from relative numbering to regular numbering in normal/insert
 set relativenumber number
 augroup num_toggle
@@ -122,7 +122,7 @@ set wildignore+=*.pyc,*.jpg,*.png,*.log,*.o,*.so,*.gif,*.class
 set dictionary=/usr/share/dict/words
 set spelllang=en_us
 " Use zsh if available
-if system("which zsh")
+if system('which zsh')
     set shell=`echo system("which zsh")`
 endif
 " Make test_name auto completable
@@ -187,23 +187,23 @@ set cursorline
 function! GetVisualSelection()
     " from xolox @
     " http://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript
-    let [lnum1, col1] = getpos("'<")[1:2]
-    let [lnum2, col2] = getpos("'>")[1:2]
-    let lines = getline(lnum1, lnum2)
-    let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
-    let lines[0] = lines[0][col1 - 1:]
-    return join(lines, "\n")
+    let [l:lnum1, l:col1] = getpos("'<")[1:2]
+    let [l:lnum2, l:col2] = getpos("'>")[1:2]
+    let l:lines = getline(l:lnum1, l:lnum2)
+    let l:lines[-1] = l:lines[-1][: l:col2 - (&selection ==# 'inclusive' ? 1 : 2)]
+    let l:lines[0] = l:lines[0][l:col1 - 1:]
+    return join(l:lines, "\n")
 endfunction
 
 function! GetCurrentBufferVar(var)
-    return getbufvar(bufnr(bufname("%")), a:var)
+    return getbufvar(bufnr(bufname('%')), a:var)
 endfunction
 
 function! HexToCTerm()
     let l:hex_color = '"' . expand('<cword>') . '"'
-    let l:result = system("python colors/colortrans.py " . l:hex_color)
+    let l:result = system('python colors/colortrans.py ' . l:hex_color)
     let l:result = split(l:result, ' ')[6]
-    call feedkeys("cw")
+    call feedkeys('cw')
     call feedkeys(l:result)
     call feedkeys("\<Esc>")
 endfunction
@@ -317,7 +317,7 @@ augroup qf_map
     autocmd BufReadPost quickfix nnoremap <buffer> <C-T> <Up>
 augroup END
 " Get to the shell faster
-if has("nvim")
+if has('nvim')
     nnoremap S :Term<Space>
     nnoremap <C-s> :TermStayOpen<Space>
 else
@@ -334,9 +334,9 @@ nnoremap sa :w<CR>
 nnoremap sl :wa<CR>
 " Faster window switching
 function! SmartSwitchWindow(direction)
-    if a:direction == "right"
+    if a:direction ==# 'right'
         let l:switch_command = ':winc w'
-    elseif a:direction == "left"
+    elseif a:direction ==# 'left'
         let l:switch_command = ':winc h'
     endif
     let l:skip_buftypes = ['quickfix']
@@ -350,7 +350,7 @@ function! SmartBufferDelete()
     " If the buffer is of the following filetypes close it and exit function
     let l:quick_close_ft_array = ['git', 'org', 'gitcommit', 'qf']
     if index(l:quick_close_ft_array, &filetype) > -1
-        exe "bd"
+        exe 'bd'
         return
     endif
 
@@ -358,9 +358,9 @@ function! SmartBufferDelete()
     " window I am in
     let l:buftype_close_keywords = ['nofile', 'quickfix', 'help']
     let l:max_buffers_open = 20
-    for i in range(max_buffers_open)
-        if index(l:buftype_close_keywords, getbufvar(i, "&buftype")) > -1
-            exe "bd " . i
+    for l:i in range(l:max_buffers_open)
+        if index(l:buftype_close_keywords, getbufvar(l:i, '&buftype')) > -1
+            exe 'bd ' . l:i
             return
         endif
     endfor
@@ -375,20 +375,20 @@ function! SmartBufferDelete()
     " If there is only one (or none) buffer(s) open quit vim and only one
     " window open
     if l:buffers_open <= 1 && l:windows_open <= 1
-        exe ":q"
-    " If there is only window open, close the current window
+        exe ':q'
+    ' If there is only window open, close the current window
     elseif l:windows_open == 1
-        exe ":bd"
-    " If one file is open but split between windows
+        exe ':bd'
+    ' If one file is open but split between windows
     elseif l:windows_open > 1 && l:buffers_open == 1
-        exe "winc q"
-    " If there are only two windows (splits) open and two buffers close the current buffer
+        exe 'winc q'
+    ' If there are only two windows (splits) open and two buffers close the current buffer
     elseif l:buffers_open == 2 && l:windows_open == 2
-        exe ":bd"
-    " If there is a split window and more than two buffers, keep the split there just
-    " close the current file and put another file in that split
+        exe ':bd'
+    ' If there is a split window and more than two buffers, keep the split there just
+    ' close the current file and put another file in that split
     elseif l:buffers_open > 2 && l:windows_open >= 2
-        exe ":b#|bd#"
+        exe ':b#|bd#'
     endif
 endfunction
 nnoremap <silent> sx :call SmartBufferDelete()<CR>
@@ -413,8 +413,8 @@ nnoremap gp <C-^>
 nnoremap <S-tab> :bp<CR>
 " Use full width of the screen
 function! NoDistractions()
-    :set nornu
-    :set nonu
+    :set norelativenumber
+    :set nonumber
     :set nolist
     :silent AirlineToggleWhitespace
 endfunction
@@ -466,15 +466,15 @@ nnoremap <C-f> :echo "Not in insert mode!"<CR>
 function! SpeakText(input)
     " Stop any voices
     call StopSpeakText()
-    let l:voice = "ava"
-    let l:text = ""
-    if a:input == "line"
-        let l:text = getline(line("."))
-    elseif a:input == "selection"
+    let l:voice = 'ava'
+    let l:text = ''
+    if a:input ==# 'line'
+        let l:text = getline(line('.'))
+    elseif a:input ==# 'selection'
         let l:text = GetVisualSelection()
-    elseif a:input == "buffer"
-        let l:end = search("^$") - 1
-        let l:text = join(getline(1, end), " ")
+    elseif a:input ==# 'buffer'
+        let l:end = search('^$') - 1
+        let l:text = join(getline(1, l:end), ' ')
     else
         let l:text = a:input
     endif
@@ -484,7 +484,7 @@ function! SpeakText(input)
 endfunction
 
 function! StopSpeakText()
-    call system("killall say")
+    call system('killall say')
 endfunction
 
 command! Read call SpeakText("buffer")
@@ -526,19 +526,19 @@ augroup END
 " Leader Mappings -------------------------------------------------- {{{
 
 " Map leader key to space
-let mapleader = "\<Space>"
-let maplocalleader = "\<Space>"
+let g:mapleader = "\<Space>"
+let g:maplocalleader = "\<Space>"
 " <Space> w to save a file
 nnoremap <Leader>w :w<CR>
 "<Space> s to source VIMRC
 " A Complete source sources the current vimrc and resets the filetype to the
 " current filetype
-if(!exists("*AbsoluteSource"))
+if(!exists('*AbsoluteSource'))
     function! AbsoluteSource()
         let l:vimrc = $MYVIMRC
-        exe "source " . l:vimrc
+        exe 'source ' . l:vimrc
         let l:ft = GetCurrentBufferVar('&filetype')
-        exe "set ft=" . l:ft
+        exe 'set ft=' . l:ft
     endfunction
     command! AbsoluteSource call AbsoluteSource()
 endif
@@ -554,12 +554,12 @@ function! ToggleSpellCheck()
         setlocal spell
         hi Cursorline ctermfg=NONE ctermbg=NONE cterm=underline
         setlocal complete+=kspell
-        echo "Spell Check On!"
+        echo 'Spell Check On!'
     else
         setlocal nospell
         hi Cursorline ctermfg=NONE ctermbg=8 cterm=NONE
         setlocal complete-=kspell
-        echo "Spell Check Off!"
+        echo 'Spell Check Off!'
     endif
 endfunction
 nnoremap <silent> cos :call ToggleSpellCheck()<CR>
@@ -567,18 +567,18 @@ nnoremap <silent> cos :call ToggleSpellCheck()<CR>
 nnoremap sg z=
 " Navigate misspelled words
 function! NextMisspelledWord()
-    normal ]s
-    normal zv
-    normal z.
-    call repeat#set("sn")
+    normal! ]s
+    normal! zv
+    normal! z.
+    call repeat#set('sn')
 endfunction
 command! NextMisspelledWord call NextMisspelledWord()
 nnoremap sn :NextMisspelledWord<CR>
 function! PreviousMisspelledWord()
-    normal [s
-    normal zv
-    normal z.
-    call repeat#set("sp")
+    normal! [s
+    normal! zv
+    normal! z.
+    call repeat#set('sp')
 endfunction
 command! PreviousMisspelledWord call PreviousMisspelledWord()
 nnoremap sp :PreviousMisspelledWord<CR>
@@ -627,13 +627,13 @@ nnoremap <silent> sf :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl 
 
 " Window titles for tmux
 function! TruncateFilename(max_len)
-    let filename=expand("%:t")
-    if len(filename) <= a:max_len
-        return filename
+    let l:filename = expand('%:t')
+    if len(l:filename) <= a:max_len
+        return l:filename
     else
-        let filename_len=len(filename)
-        let half = a:max_len / 2
-        return filename[0:half-1] . "…" . filename[filename_len-(half):filename_len-1]
+        let l:filename_len = len(l:filename)
+        let l:half = a:max_len / 2
+        return l:filename[0:l:half-1] . '…' . l:filename[l:filename_len-(l:half):l:filename_len-1]
     endif
 endfunction
 
@@ -711,40 +711,40 @@ augroup END
 
 " Enable custom vim commands in any directory
 function! SourceDirectory()
-    let vim_dir_file = ".lvimrc"
-    let vim_parent_file = '../' . vim_dir_file
-    if filereadable(vim_dir_file)
-        exe ":source " . vim_dir_file
+    let l:vim_dir_file = '.lvimrc'
+    let l:vim_parent_file = '../' . l:vim_dir_file
+    if filereadable(l:vim_dir_file)
+        exe ':source ' . l:vim_dir_file
     endif
-    if filereadable(vim_parent_file)
-        exe ":source " . vim_parent_file
+    if filereadable(l:vim_parent_file)
+        exe ':source ' . l:vim_parent_file
     endif
 endfunction
 
 function! AsyncCTags()
-    let l:ctags_command = "ctags -R"
-    let l:ctags_job_id = jobstart(l:ctags_command, {"on_exit": function('AsyncCTagsComplete')})
+    let l:ctags_command = 'ctags -R'
+    let l:ctags_job_id = jobstart(l:ctags_command, {'on_exit': function('AsyncCTagsComplete')})
 endfunction
 
 function! AsyncCTagsComplete()
-    echo "Tags generated successfully!"
+    echo 'Tags generated successfully!'
 endfunction
 
 function! NumActiveWindows(max)
-    let l:buffers = split(execute("ls!"), '\n')
+    let l:buffers = split(execute('ls!'), '\n')
     let l:windows_active = []
-    for buf in l:buffers
+    for l:buf in l:buffers
         " We are looking for an 'a' in the first part of the string which
         " indicates that that buffer is active (visible)
-        let l:match_pos = match(buf, 'a.*"')
+        let l:match_pos = match(l:buf, 'a.*"')
         if l:match_pos < 9 && l:match_pos != -1
-            call insert(l:windows_active, buf)
+            call insert(l:windows_active, l:buf)
             if len(l:windows_active) > a:max
                 return -1
             endif
         endif
     endfor
-    return len(windows_active)
+    return len(l:windows_active)
 endfunction
 
 nnoremap <silent> s. :call SyntaxAttr()<CR>
@@ -832,52 +832,52 @@ nnoremap zh zj
 nnoremap zt zk
 
 function! CreateFold(fold_name)
-    let fold_line_len = 75
-    let fold_markers = split(&foldmarker, ',')
-    let fold_marker_start = fold_markers[0]
-    let fold_marker_end = fold_markers[1]
-    let current_line = line(".")
-    let current_line_content = getline(".")
+    let l:fold_line_len = 75
+    let l:fold_markers = split(&foldmarker, ',')
+    let l:fold_marker_start = l:fold_markers[0]
+    let l:fold_marker_end = l:fold_markers[1]
+    let l:current_line = line('.')
+    let l:current_line_content = getline('.')
     " Number of spaces before the first non whitespace character
-    let current_line_indent = match(current_line_content, '\S')
+    let l:current_line_indent = match(l:current_line_content, '\S')
 
-    if &ts != 0
-        let indent_number = current_line_indent / &ts
+    if &tabstop != 0
+        let l:indent_number = l:current_line_indent / &tabstop
     else
-        let indent_number = 0
+        let l:indent_number = 0
     endif
 
-    let comment_string = &commentstring
-    let last_fold_name = "End " . a:fold_name
+    let l:comment_string = &commentstring
+    let l:last_fold_name = 'End ' . a:fold_name
 
     " Account for space after comment
-    let comment_len = len(substitute(comment_string, "%s", "", "")) + 1
-    let name_len = len(a:fold_name)
+    let l:comment_len = len(substitute(l:comment_string, '%s', '', '')) + 1
+    let l:name_len = len(a:fold_name)
 
     " Create First Line
-    let first_line_repeat = fold_line_len - len(a:fold_name) - comment_len - 1 - len(fold_marker_start) - current_line_indent
-    let first_line_content = " " . a:fold_name . " " . repeat("-", first_line_repeat) . fold_marker_start
-    let first_line = substitute(comment_string, "%s", first_line_content, "")
+    let l:first_line_repeat = l:fold_line_len - len(a:fold_name) - l:comment_len - 1 - len(l:fold_marker_start) - l:current_line_indent
+    let l:first_line_content = ' ' . a:fold_name . ' ' . repeat('-', l:first_line_repeat) . l:fold_marker_start
+    let l:first_line = substitute(l:comment_string, '%s', l:first_line_content, '')
     " Add indent spaces
-    let first_line = repeat(" ", current_line_indent) . first_line
+    let l:first_line = repeat(' ', l:current_line_indent) . l:first_line
 
     " Create Last Line
-    let last_line_repeat = fold_line_len - len(last_fold_name) - comment_len - 1 - len(fold_marker_end) - current_line_indent
-    let last_line_content = " " . last_fold_name . " " . repeat("-", last_line_repeat) . fold_marker_end
-    let last_line = substitute(comment_string, "%s", last_line_content, "")
+    let l:last_line_repeat = l:fold_line_len - len(l:last_fold_name) - l:comment_len - 1 - len(l:fold_marker_end) - l:current_line_indent
+    let l:last_line_content = ' ' . l:last_fold_name . ' ' . repeat('-', l:last_line_repeat) . l:fold_marker_end
+    let l:last_line = substitute(l:comment_string, '%s', l:last_line_content, '')
     " Add indent spaces
-    let last_line = repeat(" ", current_line_indent) . last_line
+    let l:last_line = repeat(' ', l:current_line_indent) . l:last_line
 
     " Add the fold
-    let complete_create_fold = [first_line, "", "", "", last_line]
-    call append(current_line, complete_create_fold)
+    let l:complete_create_fold = [l:first_line, '', '', '', l:last_line]
+    call append(l:current_line, l:complete_create_fold)
 
     " Move to the middle
-    exe "normal! jjj"
+    exe 'normal! jjj'
 
     " Tab in to current indent level
-    exe "startinsert"
-    for x in range(indent_number)
+    exe 'startinsert'
+    for l:x in range(l:indent_number)
         call feedkeys("\<Tab>")
     endfor
     call feedkeys("\<Esc>")
@@ -888,11 +888,11 @@ function! CreateFoldSection(fold_name)
     set nofoldenable
     " Save selection into the z register
     execute ":'<,'>delete z"
-    exe "normal! k"
+    exe 'normal! k'
     call CreateFold(a:fold_name)
     " Clean up some weirdness here
-    exe "normal! ddk"
-    execute "put z"
+    exe 'normal! ddk'
+    execute 'put z'
     set foldenable
 endfunction
 
@@ -946,18 +946,18 @@ set foldtext=NeatFoldText()
 
 " C -------------------------------------------------- {{{
 
-if has("nvim")
+if has('nvim')
     tnoremap <Esc> <C-\><C-n>
 endif
 
 function! TermEscape(str)
-    return substitute(a:str, " ", "\\\\ ", "g")
+    return substitute(a:str, ' ', '\\\\ ', 'g')
 endfunction
 
 function! IsQuickWindowOpen()
-    for i in range(1, winnr('$'))
-        let bnum = winbufnr(i)
-        if getbufvar(bnum, '&buftype') == 'quickfix'
+    for l:i in range(1, winnr('$'))
+        let l:bnum = winbufnr(l:i)
+        if getbufvar(l:bnum, '&buftype') ==# 'quickfix'
             return 1
         endif
     endfor
@@ -965,74 +965,77 @@ function! IsQuickWindowOpen()
 endfunction
 
 function! MakeC(check_syntax)
-    if(a:check_syntax != "false")
-        execute ":w | silent YcmDiags"
+    if(a:check_syntax !=# 'false')
+        execute ':w | silent YcmDiags'
     else
         :w
     endif
     if IsQuickWindowOpen() > 0
         " Compilation failed, handle appropriately
-        echoerr "Compilation failed! See loc list for errors"
+        echoerr 'Compilation failed! See loc list for errors'
         execute 'sleep 2 | call feedkeys("\<CR>")'
         return
     endif
-    let l:filename = expand("%:r")
-    execute ":silent ! make f=" . l:filename
+    let l:filename = expand('%:r')
+    execute ':silent ! make f=' . l:filename
 endfunction
 
 function! NoWarnMake()
-    execute ":silent ! make no_warn f=" . expand("%:r")
+    execute ':silent ! make no_warn f=' . expand('%:r')
 endfunction
 
 function! MakeRunC(option)
     if IsQuickWindowOpen() > 0
         return
     endif
-    let l:filename = expand("%:r")
-    let l:run_command = "make run f=" . l:filename
-    let l:valgrind_command = "make valgrind f=" . l:filename
-    let l:scan_build_command = "make scan-build f=" . l:filename
-    let l:gdb_command = "make gdb f=" . l:filename
-    let l:gdv_command = "gdv ./" . l:filename
-    let l:gdh_command = "gdh ./" . l:filename
-    let l:gds_command = "gds ./" . l:filename
-    let l:lldb_command = "make lldb f=" . l:filename
-    if(a:option == "valgrind")
+    let l:filename = expand('%:r')
+    let l:run_command = 'make run f=' . l:filename
+    let l:valgrind_command = 'make valgrind f=' . l:filename
+    let l:scan_build_command = 'make scan-build f=' . l:filename
+    let l:gdb_command = 'make gdb f=' . l:filename
+    let l:gdv_command = 'gdv ./' . l:filename
+    let l:gdh_command = 'gdh ./' . l:filename
+    let l:gds_command = 'gds ./' . l:filename
+    let l:lldb_command = 'make lldb f=' . l:filename
+    if(a:option ==# 'valgrind')
         let l:run_command = l:valgrind_command
-    elseif(a:option == "scan-build")
+    elseif(a:option ==# 'scan-build')
         let l:run_command = l:scan_build_command
-    elseif(a:option == "gdb")
+    elseif(a:option ==# 'gdb')
         let l:run_command = l:gdb_command
-    elseif(a:option == "gdv")
+    elseif(a:option ==# 'gdv')
         let l:run_command = l:gdv_command
-    elseif(a:option == "gdh")
+    elseif(a:option ==# 'gdh')
         let l:run_command = l:gdh_command
-    elseif(a:option == "gds")
+    elseif(a:option ==# 'gds')
         let l:run_command = l:gds_command
-    elseif(a:option == "lldb")
+    elseif(a:option ==# 'lldb')
         let l:run_command = l:lldb_command
         set norelativenumber
     endif
-    if has("nvim") && !(index(["gdv", "gdh", "gds"], a:option) >= 0)
-        if(a:option == "gdb")
-            " Do Nothing, gdb tui works best with fullscreen
-        elseif(a:option == "lldb" && (winwidth(0) > 90))
-            execute "vs"
-            execute "winc r"
+    if has('nvim') && !(index(['gdv', 'gdh', 'gds'], a:option) >= 0)
+        if(a:option ==# 'gdb')
+            ' Do Nothing, gdb tui works best with fullscreen
+        elseif(a:option ==# 'lldb' && (winwidth(0) > 90))
+            execute 'vs'
+            execute 'winc r'
         else
-            execute ":10sp"
+            execute ':10sp'
         endif
-        if (index(["lldb", "gdb"], a:option) >= 0)
-            execute ":TermSameBuf " . l:run_command
+        if (index(['lldb', 'gdb'], a:option) >= 0)
+            execute ':TermSameBuf ' . l:run_command
         else
-            execute ":term " . l:run_command
+            execute ':term ' . l:run_command
         endif
     else
-        execute ":! " . l:run_command
+        execute ':! ' . l:run_command
     endif
     set norelativenumber
     " Cleanup files when the buffer is deleted
-    au! BufDelete <buffer> call MakeClean()
+    augroup c_cleanup
+        au!
+        au! BufDelete <buffer> call MakeClean()
+    augroup END
 endfunction
 
 function! MakeRunCWithArgs(...)
@@ -1040,42 +1043,48 @@ function! MakeRunCWithArgs(...)
         return
     endif
     " a:000 is a list of the given args
-    let l:args = join(a:000, " ")
-    let l:filename = expand("%:r")
-    let l:run_command = "./" . l:filename . " " . l:args
+    let l:args = join(a:000, ' ')
+    let l:filename = expand('%:r')
+    let l:run_command = './' . l:filename . ' ' . l:args
     echo l:run_command
-    if has("nvim")
-        execute ":10sp"
-        execute ":term " . run_command
+    if has('nvim')
+        execute ':10sp'
+        execute ':term ' . l:run_command
     else
-        execute ":! " . run_command
+        execute ':! ' . l:run_command
     endif
     " Cleanup files when the buffer is deleted
-    au! BufDelete <buffer> call MakeClean()
+    augroup c_cleanup
+        au!
+        au! BufDelete <buffer> call MakeClean()
+    augroup END
 endfunction
 
 function! RunWithInput(input)
-    let l:filename = expand("%:r")
-    let l:directory = ""
-    let l:split_filename = split(l:filename, "/")
+    let l:filename = expand('%:r')
+    let l:directory = ''
+    let l:split_filename = split(l:filename, '/')
     if len(l:split_filename) > 1
-        let l:directory = join(l:split_filename[:-2], "/") . "/"
+        let l:directory = join(l:split_filename[:-2], '/') . '/'
     endif
     let l:input_file = l:directory . a:input
-    let l:run_command = "./" . l:filename . " < " . l:input_file
-    if has("nvim")
-        execute ":10sp"
-        execute ":term " . run_command
+    let l:run_command = './' . l:filename . ' < ' . l:input_file
+    if has('nvim')
+        execute ':10sp'
+        execute ':term ' . l:run_command
     else
-        execute ":! " . run_command
+        execute ':! ' . l:run_command
     endif
     " Cleanup files when the buffer is deleted
-    au! BufDelete <buffer> call MakeClean()
+    augroup c_cleanup
+        au!
+        au! BufDelete <buffer> call MakeClean()
+    augroup END
 endfunction
 
 function! MakeClean()
-    let l:filename = expand("%:r")
-    execute ":silent ! make clean f=" . l:filename
+    let l:filename = expand('%:r')
+    execute ':silent ! make clean f=' . l:filename
 endfunction
 
 command! -bar Make :call MakeC("true")
@@ -1116,19 +1125,22 @@ augroup END
 " }}}
 " C++ -------------------------------------------------- {{{
 
-au FileType cpp syn match Special /*\s\|+\s\|-\s\|\/\s\|%\s/
-au FileType cpp syn match Operator /=/
-au FileType cpp syn match Exception />\|</
-au FileType cpp syn match Emphasize /==/
-" Make pointers and references stand out
-au FileType cpp syn match Emphasize /\*/
-au FileType cpp syn match Emphasize /&/
-au FileType cpp syn match Identifier /\w\+::/me=e-2
-au FileType cpp setlocal commentstring=/*%s*/
+augroup ft_cpp
+    au!
+    au FileType cpp syn match Special /*\s\|+\s\|-\s\|\/\s\|%\s/
+    au FileType cpp syn match Operator /=/
+    au FileType cpp syn match Exception />\|</
+    au FileType cpp syn match Emphasize /==/
+    " Make pointers and references stand out
+    au FileType cpp syn match Emphasize /\*/
+    au FileType cpp syn match Emphasize /&/
+    au FileType cpp syn match Identifier /\w\+::/me=e-2
+    au FileType cpp setlocal commentstring=/*%s*/
+augroup END
 
 function! CppMan()
-    exe "Sman std::" . expand("<cword>")
-    exe "res 10"
+    exe 'Sman std::' . expand('<cword>')
+    exe 'res 10'
 endfunction
 
 command! -nargs=+ Cppman silent! call CppMan(<f-args>)
@@ -1158,9 +1170,9 @@ augroup END
 
 function! SpeakCommit()
     " Mark the current position
-    exe "normal! mp"
+    exe 'normal! mp'
     let l:commit_text_end = search('\n# ') - 1
-    let l:text = join(getline(1, l:commit_text_end), " ")
+    let l:text = join(getline(1, l:commit_text_end), ' ')
     call SpeakText(l:text)
     exe "normal 'p"
 endfunction
@@ -1175,7 +1187,7 @@ augroup END
 " Html -------------------------------------------------- {{{
 
 " Let html comments have fold markers and whatever else
-let html_wrong_comments = 1
+let g:html_wrong_comments = 1
 augroup ft_html
     au!
 
@@ -1197,42 +1209,45 @@ augroup ft_html
 augroup END
 
 function! ReloadChrome()
-    exe ":w"
-    silent execute ":! chrome_reload"
+    exe ':w'
+    silent execute ':! chrome_reload'
 endfunction
 
-au FileType html,css nnoremap <Leader>r :silent call ReloadChrome()<CR>
+augroup ft_html
+    au!
+    au FileType html,css nnoremap <Leader>r :silent call ReloadChrome()<CR>
+augroup END
 
 " }}}
 " Java -------------------------------------------------- {{{
 
 function! CompileJava(input_type)
-    let filename = expand("%:r")
-    let dot_filename = substitute(filename, "/", ".", "g")
-    let compilecommand = "javac -cp '.'" . filename . ".java"
-    let runcommand = "java -cp '.' " . filename
-    let runcommand_escaped = TermEscape(runcommand)
+    let l:filename = expand('%:r')
+    let l:dot_filename = substitute(l:filename, '/', '.', 'g')
+    let l:compilecommand = 'javac -cp '.'' . l:filename . '.java'
+    let l:runcommand = 'java -cp '.' ' . l:filename
+    let l:runcommand_escaped = TermEscape(l:runcommand)
     " Syntastic has to compile the file to run the checker
     " :w|SyntasticCheck
     :w
 
     " If the quickfix window is open there are errors so don't
     " run anything.
-    for i in range(1, winnr('$'))
-        let bnum = winbufnr(i)
-        if getbufvar(bnum, '&buftype') == 'quickfix'
+    for l:i in range(1, winnr('$'))
+        let l:bnum = winbufnr(l:i)
+        if getbufvar(l:bnum, '&buftype') ==# 'quickfix'
             return
         endif
     endfor
 
-    if has("nvim")
-        execute ":10sp term://" . runcommand_escaped
+    if has('nvim')
+        execute ':10sp term://' . l:runcommand_escaped
         :winc r
-        if(a:input_type =="normal")
+        if(a:input_type ==# 'normal')
             :startinsert
         endif
     else
-        execute ":! java " . filename
+        execute ':! java ' . l:filename
     endif
 endfunction
 
@@ -1259,53 +1274,53 @@ augroup end
 " Markdown -------------------------------------------------- {{{
 
 function! CompileMDPDF()
-    execute ":! md2pdf " . expand("%:r")
+    execute ':! md2pdf ' . expand('%:r')
 endfunction
 
 function! CompileMDHtml()
-    let filename_with_extension = expand("%")
-    let filename = expand("%:r")
+    let l:filename_with_extension = expand('%')
+    let l:filename = expand('%:r')
     " Create the comp for include files
-    silent execute ":w"
-    silent execute ":! cp " . filename . ".md " . filename . ".mdpp"
-    silent execute ":! markdown-pp " . filename . ".mdpp " . filename . "_comp.md"
-    silent execute ":! md2html " . filename . "_comp.md > " . filename . ".html"
-    silent execute ":! rm " . filename . "_comp.md"
+    silent execute ':w'
+    silent execute ':! cp ' . l:filename . '.md ' . l:filename . '.mdpp'
+    silent execute ':! markdown-pp ' . l:filename . '.mdpp ' . l:filename . '_comp.md'
+    silent execute ':! md2html ' . l:filename . '_comp.md > ' . l:filename . '.html'
+    silent execute ':! rm ' . l:filename . '_comp.md'
 endfunction
 
 function! CompileHtmlAndOpen()
     silent call CompileMDHtml()
-    silent execute ":! open " . expand("%:r") . ".html"
+    silent execute ':! open ' . expand('%:r') . '.html'
 endfunction
 
 function! CompileHtmlAndReload()
     silent call CompileMDHtml()
-    silent execute ":! chrome_reload"
+    silent execute ':! chrome_reload'
 endfunction
 
 function! CreateIncludeFile()
-    " !INCLUDE "File Path"
-    let line = getline(".")
-    if(match(line, "!INCLUDE") < 0)
-        echo("Error: Not an includes line!")
+    ' !INCLUDE 'File Path'
+    let l:line = getline('.')
+    if(match(l:line, '!INCLUDE') < 0)
+        echo('Error: Not an includes line!')
         return
     endif
-    let filename = matchstr(line, '".*"')[1:-2]
-    call MakeDirsForNewFile(filename)
+    let l:filename = matchstr(l:line, '".*"')[1:-2]
+    call MakeDirsForNewFile(l:filename)
 
     if winwidth(0) > 90
-        exe "vs"
+        exe 'vs'
     else
-        exe "10sp"
+        exe '10sp'
     endif
-    execute ":e " . filename
+    execute ':e ' . l:filename
     return
 endfunction
 
 function! MakeDirsForNewFile(filename)
     try
-        let l:dir = join(split(a:filename, "/")[0:-2], "/")
-        call mkdir(l:dir, "p")
+        let l:dir = join(split(a:filename, '/')[0:-2], '/')
+        call mkdir(l:dir, 'p')
     endtry
 endfunction
 
@@ -1329,21 +1344,21 @@ let g:markdown_fenced_languages = ['python', 'bash=sh', 'c', 'html', 'css', 'jav
 " }}}
 " Python -------------------------------------------------- {{{
 
-let python_highlight_all = 1
+let g:python_highlight_all = 1
 
 function! RunPython(input_type)
     :w
-    let filename = expand("%")
-    let command = "python " . filename
-    let command_escaped = "python\\ " . filename
-    if has("nvim")
-        execute ":10sp term://" . command_escaped
+    let l:filename = expand('%')
+    let l:command = 'python ' . l:filename
+    let l:command_escaped = 'python\\ ' . l:filename
+    if has('nvim')
+        execute ':10sp term://' . l:command_escaped
         :winc r
-        if(a:input_type == "normal")
+        if(a:input_type ==# 'normal')
             :startinsert
         endif
     else
-        execute ":! " . command
+        execute ':! ' . l:command
     endif
 endfunction
 
@@ -1368,18 +1383,18 @@ augroup END
 " Swift -------------------------------------------------- {{{
 
 function! RunSwift()
-    execute ":w"
+    execute ':w'
     if IsQuickWindowOpen()
         return
     endif
-    let s:fname = expand("%")
-    let s:command = "swift " . s:fname
-    if has("nvim")
-        execute ":10sp"
-        execute ":winc r"
-        execute ":term " . s:command
+    let l:fname = expand('%')
+    let l:command = 'swift ' . l:fname
+    if has('nvim')
+        execute ':10sp'
+        execute ':winc r'
+        execute ':term ' . l:command
     else
-        execute ":! " . s:command
+        execute ':! ' . l:command
     endif
 endfunction
 
@@ -1396,16 +1411,19 @@ augroup END
 " }}}
 " Typescript --------------------------------------------------------------- {{{
 
-au FileType typescript setlocal makeprg=tsc
-au FileType typescript nnoremap <buffer> sj :call ToggleTSComments()<CR>
-au FileType typescript nnoremap <buffer> M :YcmCompleter GetDoc<CR>
-au FileType typescript nnoremap <buffer> cp :Term gulp<CR>
+augroup ft_ts
+    au!
+    au FileType typescript setlocal makeprg=tsc
+    au FileType typescript nnoremap <buffer> sj :call ToggleTSComments()<CR>
+    au FileType typescript nnoremap <buffer> M :YcmCompleter GetDoc<CR>
+    au FileType typescript nnoremap <buffer> cp :Term gulp<CR>
+augroup END
 
 " Allow toggling between jsx comments and typescript comments
 function! ToggleTSComments()
-    if &commentstring == "// %s"
+    if &commentstring ==? '// %s'
         setlocal commentstring={/*\ %s\ */}
-    elseif &commentstring == "{/*\ %s\ */}"
+    elseif &commentstring ==? '{/*\ %s\ */}'
         setlocal commentstring=//\ %s
     endif
 endfunction
@@ -1415,7 +1433,7 @@ let g:gulp_async_id = 0
 function! StartAsyncGulp(command)
     if g:gulp_async_id == 0
         let g:gulp_async_id = jobstart(a:command)
-        echo "Starting Async Command: " . a:command
+        echo 'Starting Async Command: ' . a:command
     endif
 endfunction
 
@@ -1657,13 +1675,13 @@ nnoremap <Leader>u :GundoToggle<CR>
 " }}}
 " Jedi -------------------------------------------------- {{{
 
-let g:jedi#completions_command = "<C-P>"
-let g:jedi#goto_assignments_command = "<Leader>pg"
-let g:jedi#goto_definitions_command = "<Leader>pg"
-let g:jedi#documentation_command = "<Leader>pd"
-let g:jedi#rename_command = "<Leader>pr"
-let g:jedi#usages_command = "<Leader>pu"
-let g:jedi#show_call_signatures = "1"
+let g:jedi#completions_command = '<C-P>'
+let g:jedi#goto_assignments_command = '<Leader>pg'
+let g:jedi#goto_definitions_command = '<Leader>pg'
+let g:jedi#documentation_command = '<Leader>pd'
+let g:jedi#rename_command = '<Leader>pr'
+let g:jedi#usages_command = '<Leader>pu'
+let g:jedi#show_call_signatures = '1'
 
 " }}}
 " Matchit -------------------------------------------------- {{{
@@ -1816,8 +1834,8 @@ let g:tagbar_type_typescript = {
 " UltiSnips -------------------------------------------------- {{{
 
 " UltiSnips Config
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<tab>'
 " let g:UltiSnipsExpandTrigger="<C-s>"
 " let g:UltiSnipsJumpForwardTrigger="<C-s>"
 
@@ -1844,10 +1862,13 @@ function! g:UltiSnips_Complete()
             " endif
         endif
     endif
-    return ""
+    return ''
 endfunction
 
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<CR>"
+augroup plug_ultisnips
+    au!
+    au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<CR>"
+augroup END
 
 " Expand snippet or return
 let g:ulti_expand_res = 0
@@ -1883,14 +1904,14 @@ augroup vim_airline
 augroup END
 
 function! AirlineFilename()
-    return "/" . TruncateFilename(24)
+    return '/' . TruncateFilename(24)
 endfunction
-let g:airline_section_c="%{AirlineFilename()}"
+let g:airline_section_c='%{AirlineFilename()}'
 
 function! AirlineNull()
-    return ""
+    return ''
 endfunction
-let g:airline_section_y="%{AirlineNull()}"
+let g:airline_section_y='%{AirlineNull()}'
 
 function! SimpleFileProgress()
     return printf('%s/%s', str2nr(line('.')), str2nr(line('$')))
@@ -1926,7 +1947,7 @@ let g:dasht_filetype_docsets = {
 let g:EasyMotion_do_mapping = 0
 map H <Plug>(easymotion-bd-jk)
 map T <Plug>(easymotion-jumptoanywhere)
-let g:EasyMotion_keys = "HUTENOPGCRYFLBKJWQVZXIDSA"
+let g:EasyMotion_keys = 'HUTENOPGCRYFLBKJWQVZXIDSA'
 let g:EasyMotion_use_upper = 1
 
 " End vim easymotion ------------------------------------------------------- }}}
@@ -1946,18 +1967,18 @@ xmap <C-v> <Plug>(expand_region_shrink)
 " vim gitgutter -------------------------------------------------- {{{
 
 function! JumpToHunkAndUnfold(keypress)
-    if(a:keypress == "n")
+    if(a:keypress ==# 'n')
         :GitGutterNextHunk
     endif
 
-    if(a:keypress == "p")
+    if(a:keypress ==# 'p')
         :GitGutterPrevHunk
     endif
-    " Unfold just where the cursor is (supposed to be)
-    normal zv
-    " Move cursor to the middle of the screen
-    normal z.
-    call repeat#set("c" . a:keypress)
+    ' Unfold just where the cursor is (supposed to be)
+    normal! zv
+    ' Move cursor to the middle of the screen
+    normal! z.
+    call repeat#set('c' . a:keypress)
 endfunction
 
 nnoremap <silent> sh :GitGutterStageHunk<CR>
@@ -1980,8 +2001,8 @@ let g:go_disable_autoinstall = 1
 " }}}
 " vim journal -------------------------------------------------- {{{
 
-let g:journal_directory="~/.journal"
-let g:journal_extension="md"
+let g:journal_directory='~/.journal'
+let g:journal_extension='md'
 
 " }}}
 " vim js doc -------------------------------------------------- {{{
