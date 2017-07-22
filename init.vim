@@ -1766,15 +1766,15 @@ let g:rainbow#ft_exclude = ['help', 'org', 'xml']
 function! InitRainbowParens()
     let l:current_buf_ft = GetCurrentBufferVar('&ft')
     if index(g:rainbow#ft_exclude, l:current_buf_ft) == -1
-        exe "RainbowParentheses"
+        exe 'RainbowParenthesesActivate'
     else
         " Turn off Rainbow Parens
-        exe "RainbowParentheses!"
+        exe 'RainbowParenthesesDeactivate'
     endif
 endfunction
 augroup rainbow_ft
     autocmd!
-    autocmd FileType * call InitRainbowParens()
+    autocmd BufReadPost,BufEnter * call InitRainbowParens()
 augroup END
 
 " End Rainbow Parens ------------------------------------------------------- }}}
