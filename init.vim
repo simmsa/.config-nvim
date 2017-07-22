@@ -1761,7 +1761,8 @@ let g:rainbow#additional_regions = ['']
 
 let g:rainbow#colors = {'dark': g:sustain#rainbow_parens, 'light': g:sustain#rainbow_parens}
 let g:rainbow#single = {'dark': g:sustain#rainbow_single, 'light': g:sustain#rainbow_single}
-let g:rainbow#ft_exclude = ["help", "gitcommit"]
+let g:rainbow#ft_exclude = ['help', 'org', 'xml']
+
 function! InitRainbowParens()
     let l:current_buf_ft = GetCurrentBufferVar('&ft')
     if index(g:rainbow#ft_exclude, l:current_buf_ft) == -1
