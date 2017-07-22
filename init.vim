@@ -1508,6 +1508,9 @@ nnoremap sd :call RunOrUpdateGDiff()<CR>
 nnoremap kd :bd fugitive*<CR>zAz.
 
 function! SternlyWarnIfThereAreLotsOfChanges()
+    if &filetype ==# 'gcommit'
+        return
+    endif
     let l:max_inserts = 100
     let l:max_deletions = 100
     let l:max_files_changed = 5
