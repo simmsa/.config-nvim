@@ -1976,16 +1976,16 @@ function! JumpToHunkAndUnfold(keypress)
     if(a:keypress ==# 'p')
         :GitGutterPrevHunk
     endif
-    ' Unfold just where the cursor is (supposed to be)
+    " Unfold just where the cursor is (supposed to be)
     normal! zv
-    ' Move cursor to the middle of the screen
+    " Move cursor to the middle of the screen
     normal! z.
     call repeat#set('c' . a:keypress)
 endfunction
 
 nnoremap <silent> sh :GitGutterStageHunk<CR>
-nnoremap <silent> cn :call JumpToHunkAndUnfold("n")<CR>
-nnoremap <silent> cp :call JumpToHunkAndUnfold("p")<CR>
+nnoremap <silent> cn :call JumpToHunkAndUnfold('n')<CR>
+nnoremap <silent> cp :call JumpToHunkAndUnfold('p')<CR>
 
 let g:gitgutter_sign_added = '+'
 let g:gitgutter_sign_modified = '~'
