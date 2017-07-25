@@ -122,8 +122,9 @@ set wildignore+=*.pyc,*.jpg,*.png,*.log,*.o,*.so,*.gif,*.class
 set dictionary=/usr/share/dict/words
 set spelllang=en_us
 " Use zsh if available
-if system('which zsh')
-    set shell=`echo system("which zsh")`
+let s:zsh_path = systemlist('which zsh')[0]
+if !empty(s:zsh_path)
+    let &shell = s:zsh_path
 endif
 " Make test_name auto completable
 set iskeyword+=\_
