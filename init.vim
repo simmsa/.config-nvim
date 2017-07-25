@@ -1545,6 +1545,8 @@ function! SternlyWarnIfThereAreLotsOfChanges()
 
         if (l:files_changed > l:max_files_changed) || (l:insertions > l:max_inserts) || (l:deletions > l:max_deletions)
             let l:message = printf('Large Commit Warning: %s', join(l:diff_stats, ' '))
+            " Dismiss the file written message
+            redraw
             echohl WarningMsg | echo l:message | echohl None
         endif
     catch
