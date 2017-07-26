@@ -152,8 +152,19 @@ let g:python_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
 " Allow terminal window name to be set from vim via titlestring
 set title
-" Disable swap files `~`
-set noswapfile
+set undodir=~/.local/share/nvim/undo//
+set backupdir=~/.local/share/nvim/backup//
+" swapfile dir
+set directory=~/.local/share/nvim/swap//
+" Make directory folders
+function! CreateDirIfNecessary(dirname)
+    if !isdirectory(expand(a:dirname))
+        call mkdir(expand(a:dirname), 'p')
+    endif
+endfunction
+call CreateDirIfNecessary(&undodir)
+call CreateDirIfNecessary(&backupdir)
+call CreateDirIfNecessary(&directory)
 
 " Tabs and Spaces -------------------------------------------------- {{{
 
