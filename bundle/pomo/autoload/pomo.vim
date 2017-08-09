@@ -5,7 +5,7 @@ function! pomo#GetPomoLastStart()
             let g:pomo_is_active = v:true
             let g:pomo_start = l:pomo_saved_time
             let l:pomo_time_elapsed = localtime() - g:pomo_start
-            let g:pomo_timer_id = timer_start(l:pomo_time_elapsed * 1000, function('OsxNotifyPomoEnd'))
+            let g:pomo_timer_id = timer_start((g:pomo_seconds - l:pomo_time_elapsed) * 1000, function('OsxNotifyPomoEnd'))
             echo 'Restarting Pomodoro ...'
             call timer_start(3000, function('ClearCmdLine'))
         endif
