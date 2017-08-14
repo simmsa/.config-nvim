@@ -1671,6 +1671,11 @@ nnoremap g/ :Ag<CR>
 command! H :Helptags
 nnoremap g- :Helptags<CR>
 
+augroup plug_fzf
+    au!
+    au VimEnter * nnoremap g* :Ag <C-r><C-w><CR>
+augroup END
+
 " }}}
 " GV (Git Log Viewer) -------------------------------------------------- {{{
 
