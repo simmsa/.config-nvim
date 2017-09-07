@@ -255,7 +255,7 @@ command! -bar -nargs=* VCountZero call VCountZero(<f-args>)
 let g:WarnOnRepeatDict = {}
 let g:WarnOnRepeatPassTimes = 0
 
-function! WarnOnRepeat(input, command, warn_message)
+function! WarnOnRepeat(input, cmd, warn_message)
     let l:max_repeats = 5
     if !has_key(g:WarnOnRepeatDict, a:input)
         let g:WarnOnRepeatDict[a:input] = []
@@ -271,7 +271,7 @@ function! WarnOnRepeat(input, command, warn_message)
     let l:isWithinTimeRange = g:WarnOnRepeatDict[a:input][0] != g:WarnOnRepeatDict[a:input][-1]
 
     if l:isWithinRepeatRange || l:isWithinTimeRange
-        exe a:command
+        exe a:cmd
     else
         echohl Error | echo a:warn_message | echohl None
     endif
@@ -1442,10 +1442,10 @@ endfunction
 
 " Run gulp command in the background while vim is running
 let g:gulp_async_id = 0
-function! StartAsyncGulp(command)
+function! StartAsyncGulp(cmd)
     if g:gulp_async_id == 0
-        let g:gulp_async_id = jobstart(a:command)
-        echo 'Starting Async Command: ' . a:command
+        let g:gulp_async_id = jobstart(a:cmd)
+        echo 'Starting Async cmd: ' . a:cmd
     endif
 endfunction
 
