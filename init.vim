@@ -1217,18 +1217,13 @@ augroup ft_html
 
     " Set comments
     au FileType htmldjango setlocal commentstring={#\ %s\ #}
-
+    au FileType html,css nnoremap <Leader>r :silent call ReloadChrome()<CR>
 augroup END
 
 function! ReloadChrome()
     exe ':w'
     silent execute ':! chrome_reload'
 endfunction
-
-augroup ft_html
-    au!
-    au FileType html,css nnoremap <Leader>r :silent call ReloadChrome()<CR>
-augroup END
 
 " }}}
 " Java -------------------------------------------------- {{{
