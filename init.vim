@@ -1425,6 +1425,8 @@ augroup ft_ts
     au FileType typescript nnoremap <buffer> M :YcmCompleter GetDoc<CR>
     au FileType typescript nnoremap <buffer> cp :Term gulp<CR>
     au FileType typescript setlocal ts=2 sw=2
+    au FileType typescript nnoremap <buffer> gt :YcmCompleter GetType<CR>
+    au FileType typescript nnoremap <buffer> gd :YcmCompleter GetDoc<CR>
 augroup END
 
 " Allow toggling between jsx comments and typescript comments
