@@ -352,7 +352,7 @@ function! SmartSwitchWindow(direction)
     endif
     let l:skip_buftypes = ['quickfix']
     exe l:switch_command
-    while(index(l:skip_buftypes, &buftype) != -1)
+    while (index(l:skip_buftypes, &buftype) != -1)
         exe l:switch_command
     endwhile
 endfunction
