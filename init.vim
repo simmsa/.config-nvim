@@ -436,12 +436,12 @@ nnoremap X :qall<CR>
 " I don't like that the quickfix and location list maps are different. This
 " combines them into a single mapping by trying each command in order until
 " one works. Also centers, opens folds and calls repeat
-function! QuickfixMap(inputs, map, ...)
+function! QuickfixMap(inputs, input_map, ...)
     let l:post_inputs = ['normal! zO', 'normal! zz']
     for l:input in a:inputs
         try
             execute l:input
-            call add(l:post_inputs, printf('call repeat#set("%s")', a:map))
+            call add(l:post_inputs, printf('call repeat#set("%s")', a:input_map))
             if a:000[0] > 1 && a:000[1] !=# 'skip_post_input'
                 for l:post_input in l:post_inputs
                     try
@@ -770,10 +770,10 @@ command! FixTrailingWhitespace call FixTrailingWhitespace()
 
 " Add to vim unimpaired co mappings
 let g:toggle_opts = {}
-function! ToggleOption(key, command, ...)
+function! ToggleOption(key, input_command, ...)
     " Plugins are loaded after vimrc, this forces any plugin mapping to be
     " overridden
-    execute printf("autocmd VimEnter * nnoremap <silent> co%s :call ExecuteToggleOption('%s', '%s', '%s')<CR>", a:key, a:key, a:command, len(a:000) > 0 ? a:000[0] : a:command)
+    execute printf("autocmd VimEnter * nnoremap <silent> co%s :call ExecuteToggleOption('%s', '%s', '%s')<CR>", a:key, a:key, a:input_command, len(a:000) > 0 ? a:000[0] : a:input_command)
 endfunction
 
 function! ExecuteToggleOption(key, first_cmd, second_cmd)
@@ -791,9 +791,9 @@ call ToggleOption('p', 'set paste!')
 call ToggleOption('r', 'RainbowParenthesesDeactivate', 'RainbowParenthesesActivate')
 call ToggleOption('a', 'ALEToggle')
 
-function! CloseBuffer(key, command)
+function! CloseBuffer(key, input_command)
     let l:start_of_map = 'cu'
-    execute printf('nnoremap <silent> %s%s :%s<CR>', l:start_of_map, a:key, a:command)
+    execute printf('nnoremap <silent> %s%s :%s<CR>', l:start_of_map, a:key, a:input_command)
 endfunction
 
 call CloseBuffer('q', 'cclose<bar>lclose')
@@ -1250,7 +1250,8 @@ function! CompileJava(input_type)
         execute ':10sp term://' . l:runcommand_escaped
         :winc r
         if(a:input_type ==# 'normal')
-            :startinsert
+            execute('startinsert')
+            " :startinsert
         endif
     else
         execute ':! java ' . l:filename
@@ -1261,7 +1262,7 @@ augroup ft_java
     " au Filetype java nnoremap <buffer> cp :call CompileJava("normal")<CR>
     " au Filetype java nnoremap <buffer> cn :call CompileJava("input")<CR>
     " au Filetype java nnoremap <buffer> <Leader>w :w<bar>SyntasticCheck<CR>
-augroup end
+augroup END
 
 " }}}
 " JavaScript -------------------------------------------------- {{{
@@ -1274,7 +1275,7 @@ augroup ft_javascript
     " au FileType javascript nnoremap <buffer> gm :JsDoc<CR>
     " Have tern and Ycm play nicely together
     " au FileType javascript setlocal omnifunc=tern#Complete
-augroup end
+augroup END
 
 " }}}
 " Markdown -------------------------------------------------- {{{
