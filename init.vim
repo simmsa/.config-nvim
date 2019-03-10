@@ -387,17 +387,17 @@ function! SmartBufferDelete()
     " window open
     if l:buffers_open <= 1 && l:windows_open <= 1
         exe ':q'
-    ' If there is only window open, close the current window
+    " If there is only window open, close the current window
     elseif l:windows_open == 1
         exe ':bd'
-    ' If one file is open but split between windows
+    " If one file is open but split between windows
     elseif l:windows_open > 1 && l:buffers_open == 1
         exe 'winc q'
-    ' If there are only two windows (splits) open and two buffers close the current buffer
+    " If there are only two windows (splits) open and two buffers close the current buffer
     elseif l:buffers_open == 2 && l:windows_open == 2
         exe ':bd'
-    ' If there is a split window and more than two buffers, keep the split there just
-    ' close the current file and put another file in that split
+    " If there is a split window and more than two buffers, keep the split there just
+    " close the current file and put another file in that split
     elseif l:buffers_open > 2 && l:windows_open >= 2
         exe ':b#|bd#'
     endif
