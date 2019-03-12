@@ -1342,6 +1342,9 @@ augroup ft_md
     au Filetype markdown setlocal foldcolumn=4
     au Filetype markdown setlocal breakat-=\*
     au Filetype markdown setlocal textwidth=1000
+    au Filetype markdown setlocal spell spelllang=en_us
+    " Actually spell check
+    au Filetype markdown setlocal syntax spell toplevel
     " Concise way to kill all indenting
     au FileType markdown setlocal noai nocin nosi inde=
     au Filetype markdown nnoremap <buffer> cp :call CompileMDPDF()<CR>
