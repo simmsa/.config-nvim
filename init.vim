@@ -164,6 +164,9 @@ endfunction
 call CreateDirIfNecessary(&undodir)
 call CreateDirIfNecessary(&backupdir)
 call CreateDirIfNecessary(&directory)
+" Default plus save 1000 previously edited, used to make v:oldfiles more
+" useful for custom mru plugin
+set shada=!,'1000,<50,s10,h
 
 " Tabs and Spaces -------------------------------------------------- {{{
 
