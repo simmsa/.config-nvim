@@ -1339,8 +1339,11 @@ augroup ft_md
     " Forcing vim to read .md as markdown and not as 'modula2' or whatever
     au BufNewFile,BufReadPost *.md set filetype=markdown
     " Folding for markdown
-    au Filetype markdown set foldcolumn=4
-    au Filetype markdown set breakat-=\*
+    au Filetype markdown setlocal foldcolumn=4
+    au Filetype markdown setlocal breakat-=\*
+    au Filetype markdown setlocal textwidth=1000
+    " Concise way to kill all indenting
+    au FileType markdown setlocal noai nocin nosi inde=
     au Filetype markdown nnoremap <buffer> cp :call CompileMDPDF()<CR>
     au Filetype markdown nnoremap <buffer> ch :silent call CompileHtmlAndOpen()<CR>
     au Filetype markdown nnoremap <buffer> cr :silent call CompileHtmlAndReload()<CR>
