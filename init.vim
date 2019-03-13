@@ -721,6 +721,7 @@ augroup Term
     " Turn off line numbers in the terminal
     " See https://github.com/neovim/neovim/issues/6832
     au TermOpen * setlocal nonumber norelativenumber
+    au TermOpen * startinsert
 augroup END
 
 " Enable custom vim commands in any directory
