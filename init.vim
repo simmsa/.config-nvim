@@ -661,7 +661,7 @@ let s:term_open_cmd = '80vnew'
 
 let s:Term = {}
 function! s:Term.on_exit(job_id, exit_code, event_type)
-    echom printf('"%s" completed with status %s!', l:self.command, a:exit_code)
+    echom printf('"%s" completed with status %s!', l:self.input_command, a:exit_code)
 
     " If the command completed successfully close the buffer
     if (a:exit_code == 0)
@@ -669,7 +669,7 @@ function! s:Term.on_exit(job_id, exit_code, event_type)
     endif
 endfunction
 
-function! StartTermAutoExit(command, open_new_buffer)
+function! StartTermAutoExit(input_command, open_new_buffer)
     if a:open_new_buffer
         exe s:term_open_cmd
     else
@@ -678,36 +678,36 @@ function! StartTermAutoExit(command, open_new_buffer)
     endif
 
     let l:term_options = {
-        \'command': a:command,
+        \'input_command': a:input_command,
     \}
 
     let l:auto_exit_dict = extend(copy(s:Term), l:term_options)
-    call termopen(a:command, l:auto_exit_dict)
+    call termopen(a:input_command, l:auto_exit_dict)
 
     exe 'startinsert'
 endfunction
 
 
-function! TermSameBuf(command)
-    call StartTermAutoExit(a:command, '', v:false)
+function! TermSameBuf(cmd)
+    call StartTermAutoExit(a:cmd, '', v:false)
 endfunction
 
-function! Term(command)
-    if empty(a:command)
+function! Term(cmd)
+    if empty(a:cmd)
         exe s:term_open_cmd
         exe 'term'
     else
-        call StartTermAutoExit(a:command, v:true)
+        call StartTermAutoExit(a:cmd, v:true)
     endif
 endfunction
 
 function! TermStayOpen(command)
     exe s:term_open_cmd
-    silent exe 'te ' . a:command
+    call termopen(a:cmd, {'cwd': a:cwd})
 endfunction
 
-function! BackgroundTerm(command)
-    call jobstart(a:command)
+function! BackgroundTerm(cmd)
+    call jobstart(a:cmd)
 endfunction
 
 command! -bar -nargs=* -complete=shellcmd Term :call Term(<q-args>)
