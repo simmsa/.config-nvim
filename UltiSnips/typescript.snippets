@@ -6,3 +6,19 @@ endsnippet
 snippet cov
 console.log("${1:VarToPrint}: ", `!p snip.rv = t[1]`);
 endsnippet
+
+snippet describe
+describe("${1:Test Block Description}", () => {
+  ${2}
+});
+endsnippet
+
+snippet test
+test("${1:Test Description}", () => {
+  ${2}
+});
+endsnippet
+
+snippet expect
+expect(${1:value}).toBe(${2:expected value});
+endsnippet
