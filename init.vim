@@ -92,7 +92,7 @@ set hidden
 set noshowmode
 "Display tabs and trailing spaces
 set list " Messes up line break, but shows list chars
-set listchars=tab:▷⋅,trail:⋅,nbsp:⋅,extends:,precedes:
+set listchars=tab:\ \ ,trail:⋅,nbsp:⋅,extends:,precedes:
 " Configuring backup and related
 set backup
 set noswapfile
