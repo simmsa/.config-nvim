@@ -655,11 +655,6 @@ augroup tmux_rename_window
     autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call jobstart("tmux rename-window " . TruncateFilename($TRUNCATE_MAX_WORD_LEN))
 augroup END
 
-" Make the neovim terminal behave like a buffer
-if has('nvim')
-    tnoremap <Esc> <C-\><C-n>
-endif
-
 " Open terminals in a vertical buffer 80 chars wide.
 " Note: Resizing a terminal does not re wrap the lines.
 let s:term_open_cmd = '80vnew'
@@ -726,6 +721,8 @@ augroup Term
     " See https://github.com/neovim/neovim/issues/6832
     au TermOpen * setlocal nonumber norelativenumber
     au TermOpen * startinsert
+    " Make the neovim terminal behave like a buffer
+    au TermOpen * tnoremap <Esc> <C-\><C-n>
 augroup END
 
 " Enable custom vim commands in any directory
