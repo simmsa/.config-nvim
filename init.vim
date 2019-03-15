@@ -655,6 +655,11 @@ augroup tmux_rename_window
     autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call jobstart("tmux rename-window " . TruncateFilename($TRUNCATE_MAX_WORD_LEN))
 augroup END
 
+" Make the neovim terminal behave like a buffer
+if has('nvim')
+    tnoremap <Esc> <C-\><C-n>
+endif
+
 " Open terminals in a vertical buffer 80 chars wide.
 " Note: Resizing a terminal does not re wrap the lines.
 let s:term_open_cmd = '80vnew'
@@ -959,10 +964,6 @@ set foldtext=NeatFoldText()
 " Filetype Specific -------------------------------------------------- {{{
 
 " C -------------------------------------------------- {{{
-
-if has('nvim')
-    tnoremap <Esc> <C-\><C-n>
-endif
 
 function! TermEscape(str)
     return substitute(a:str, ' ', '\\\\ ', 'g')
