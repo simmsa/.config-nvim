@@ -556,6 +556,9 @@ if(!exists('*AbsoluteSource'))
     command! AbsoluteSource call AbsoluteSource()
 endif
 nnoremap <Leader>s :AbsoluteSource<CR>
+" Yank to the system register
+vmap <Leader>y "+y
+vnoremap <Leader>y "+y
 
 "Easy buffer switching
 nnoremap <Leader>d :bd<CR>
