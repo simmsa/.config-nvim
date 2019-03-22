@@ -816,6 +816,27 @@ nnoremap sf :vs <bar> winc w <bar> normal gp<CR>:winc w<CR>
 
 let g:triangle = '▸'
 
+function! Link()
+    let l:text = GetVisualSelection()
+    let l:result = ''
+    echo 'Fetching url for "' . l:text . '"...'
+
+python3 << EOF
+import vim
+from googlesearch import search
+
+query = vim.eval("l:text")
+result = next(search(query))
+vim.command("let l:result = '{}'".format(result))
+EOF
+
+    let l:replacement_text = printf('[%s](%s)', l:text, l:result)
+    let l:line_num = line('.')
+    let l:current_line = getline(l:line_num)
+    let l:fixed_line = substitute(l:current_line, l:text, l:replacement_text, '')
+    call setline(l:line_num, l:fixed_line)
+endfunction
+command! -range Link :call Link()
 " }}}
 " Searching and Movement {{{
 
