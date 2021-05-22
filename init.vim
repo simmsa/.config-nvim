@@ -28,7 +28,6 @@ Plug 'zaiste/tmux.vim'
 Plug 'scrooloose/nerdtree' , { 'on': 'NERDTreeToggle' }
 Plug 'heavenshell/vim-jsdoc'
 Plug 'vim-scripts/SyntaxAttr.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-oblique'
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --ts-completer' }
@@ -45,6 +44,7 @@ Plug 'airblade/vim-rooter'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/CmdlineComplete'
+Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'drmikehenry/vim-headerguard'
