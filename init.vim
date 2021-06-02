@@ -74,8 +74,6 @@ call plug#end()
 " }}}
 " Basic Options {{{
 
-" Automatically break newly inserted lines at 78 characters
-set textwidth=78
 " Wrap lines that are too wide for the current window
 set wrap
 " Shift wrapped lines by 4 characters
