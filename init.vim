@@ -256,7 +256,7 @@ let g:WarnOnRepeatDict = {}
 let g:WarnOnRepeatPassTimes = 0
 
 function! WarnOnRepeat(input, cmd, warn_message)
-    let l:max_repeats = 5
+    let l:max_repeats = 5000
     if !has_key(g:WarnOnRepeatDict, a:input)
         let g:WarnOnRepeatDict[a:input] = []
     endif
