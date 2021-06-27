@@ -46,7 +46,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/CmdlineComplete'
 Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'drmikehenry/vim-headerguard'
 Plug 'vim-utils/vim-man'
 Plug 'artoj/qmake-syntax-vim'
@@ -69,6 +68,7 @@ Plug g:plugin_dir . 'sustain'
 Plug g:plugin_dir . 'innerblock'
 Plug g:plugin_dir . 'pomo'
 Plug g:plugin_dir . 'google'
+Plug g:plugin_dir . 'customizable_rainbow_parens'
 
 call plug#end()
 
