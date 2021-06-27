@@ -69,6 +69,7 @@ Plug g:plugin_dir . 'innerblock'
 Plug g:plugin_dir . 'pomo'
 Plug g:plugin_dir . 'google'
 Plug g:plugin_dir . 'customizable_rainbow_parens'
+Plug g:plugin_dir . 'fzf-mru'
 
 call plug#end()
 
