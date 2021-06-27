@@ -61,6 +61,7 @@ Plug 'majutsushi/tagbar'
 Plug 'kana/vim-textobj-user'
 Plug 'glts/vim-textobj-comment'
 Plug 'rust-lang/rust.vim'
+Plug 'tpope/vim-endwise'
 
 Plug g:plugin_dir . 'simple-org-mode'
 Plug g:plugin_dir . 'syntax-highlight-html-code'
