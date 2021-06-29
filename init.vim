@@ -1255,7 +1255,7 @@ function! CompileJava(input_type)
         execute ':10sp term://' . l:runcommand_escaped
         :winc r
         if(a:input_type ==# 'normal')
-            :startinsert
+            exec("startinsert")
         endif
     else
         execute ':! java ' . l:filename
@@ -1263,6 +1263,7 @@ function! CompileJava(input_type)
 endfunction
 
 augroup ft_java
+    au!
     " au Filetype java nnoremap <buffer> cp :call CompileJava("normal")<CR>
     " au Filetype java nnoremap <buffer> cn :call CompileJava("input")<CR>
     " au Filetype java nnoremap <buffer> <Leader>w :w<bar>SyntasticCheck<CR>
