@@ -195,6 +195,8 @@ colorscheme sustain
 " Highlight current line
 set cursorline
 
+sign define numhl=SignColumn
+
 " }}}
 " Should Be Built In -------------------------------------------------- {{{
 
