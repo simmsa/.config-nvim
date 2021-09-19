@@ -2072,6 +2072,12 @@ omap j <Plug>Sneak_t
 omap J <Plug>Sneak_T
 
 " }}}
+" vim test --------------------------------------------------------------{{{
+
+let g:test#strategy = 'neovim'
+let g:test#typescript#jest#file_pattern = '\v(tests/.*|(spec|test))\.(js|jsx|ts|tsx;)$'
+
+" End vim test ----------------------------------------------------------}}}
 " YouCompleteMe ------------------------------ {{{
 
 let g:ycm_key_list_select_completion = [ '<C-n>', '<Down>']
