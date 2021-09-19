@@ -8,6 +8,13 @@ function! google#Google(text)
     call jobstart(printf("%s \"%s%s\"", g:google_open_browser_command, l:google_query_url, l:query_string))
 endfunction
 
+function! google#GoogleGetLucky(text)
+    let l:google_query_url = 'https://www.google.com/search?q='
+    let l:query_string = google#UriEncode(a:text)
+    let l:get_lucky_postfix = '&btnI'
+    call jobstart(printf("%s \"%s%s%s\"", g:google_open_browser_command, l:google_query_url, l:query_string, l:get_lucky_postfix))
+endfunction
+
 function! google#FindQuickfixErrorAtLocation(input_list)
     let l:current_line_num = line('.')
     let l:current_col_num = col('.')
@@ -66,5 +73,5 @@ function! google#GoogleCursorWithFiletype()
     let l:mapped_ft = get(l:ft_map, l:filetype, l:filetype)
 
     let l:word = expand('<cword>')
-    call google#Google(l:mapped_ft . ' ' . l:word)
+    call google#GoogleGetLucky(l:mapped_ft . ' ' . l:word)
 endfunction
