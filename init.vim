@@ -1201,6 +1201,29 @@ augroup ft_git
 augroup END
 
 " }}}
+" Go --------------------------------------------------------------------{{{
+
+function! GoRun()
+    let l:filename = expand('%')
+    execute ':TermStayOpen go run ' . l:filename
+endfunction
+
+
+let g:go_fmt_command = ''
+let g:go_auto_type_info = 1
+let g:go_info_mode = 'guru'
+
+augroup ft_go
+    au FileType go set shiftwidth=2 tabstop=2 softtabstop=2
+    au FileType go let g:ale_fix_on_save=1
+    au FileType go let g:airline#extensions#whitespace#enabled=0
+    au FileType go execute("imap <C-T> := ")
+    au FileType go nnoremap gr :call GoRun()<CR>
+    au FileType go nnoremap gi :GoImport<Space>
+augroup END
+
+
+" End Go ----------------------------------------------------------------}}}
 " Html -------------------------------------------------- {{{
 
 " Let html comments have fold markers and whatever else
