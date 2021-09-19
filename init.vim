@@ -1367,10 +1367,13 @@ augroup ft_md
     " Folding for markdown
     au Filetype markdown set foldcolumn=4
     au Filetype markdown set breakat-=\*
+    au Filetype markdown set textwidth=1000
     au Filetype markdown nnoremap <buffer> cp :call CompileMDPDF()<CR>
     au Filetype markdown nnoremap <buffer> ch :silent call CompileHtmlAndOpen()<CR>
     au Filetype markdown nnoremap <buffer> cr :silent call CompileHtmlAndReload()<CR>
     au Filetype markdown nnoremap <buffer> gi :call CreateIncludeFile()<CR>
+    au Filetype markdown nnoremap <buffer> mh :call CompileMDHtml()<CR>
+    au FileType markdown let g:ale_javascript_prettier_options = '--trailing-comma all --prose-wrap preserve --tab-width 4 --parser markdown'
     " Concise way to kill all indenting
     au FileType markdown setl noai nocin nosi inde=
 augroup END
