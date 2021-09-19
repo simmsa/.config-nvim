@@ -1499,20 +1499,35 @@ nnoremap gh :A<CR>
 " }}}
 " ALE -------------------------------------------------------------------{{{
 
+" \ 'typescript': ['tslint', 'prettier'],
 let g:ale_linters = {
     \ 'javascript': ['eslint'],
-    \ 'typescript': ['tslint', 'prettier'],
+    \ 'typescript': [''],
     \ 'json': ['jsonlint'],
     \ 'vim': ['vint'],
+    \ 'html': ['htmlhint'],
+    \ 'markdown': ['proselint'],
+    \ 'python': ['flake8'],
 \ }
 
 let g:ale_fixers = {
-    \ 'typescript': ['tslint', 'prettier'],
+    \ 'go': ['gofmt'],
+    \ 'typescript': ['prettier'],
+    \ 'typescriptreact': ['prettier'],
+    \ 'markdown': ['prettier'],
+    \ 'json': ['prettier'],
+    \ 'python': ['black'],
 \ }
-let g:ale_fix_on_save = 0
+
+let g:ale_fix_on_save = 1
 
 let g:ale_javascript_prettier_use_global = 1
-let g:ale_javascript_prettier_options = '--trailing-comma all'
+" let g:ale_javascript_prettier_options = '--trailing-comma all --arrow-parens always --single-quote'
+" let g:ale_javascript_prettier_options = '--trailing-comma all'
+" let g:ale_javascript_prettier_options = '--trailing-comma all --prose-wrap preserve --tab-width 4 --parser markdown'
+" let g:ale_javascript_prettier_options = '--tab-width 8 --prose-wrap never --use-tabs'
+
+let g:ale_go_govet_options = '-composites'
 
 " Ale uses the quickfix list, ycm uses the loc list
 let g:ale_set_loclist = 0
