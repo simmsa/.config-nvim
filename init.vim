@@ -1703,7 +1703,7 @@ function! SmartFiles()
     call fzf#run(fzf#wrap(l:fzf_dict))
 endfunction
 
-nnoremap <silent> go :call SmartFiles()<CR>
+nnoremap <silent> go :call mru#MRUFiles()<CR>
 
 let g:fzf_buffers_jump = 1
 
