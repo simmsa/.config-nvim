@@ -1,17 +1,33 @@
-function! pomo#GetPomoLastStart()
+function! pomo#Setup()
     try
-        let l:pomo_saved_time = str2nr(readfile(g:pomo_settings_file)[0])
-        if (localtime() - l:pomo_saved_time) < g:pomo_seconds
-            let g:pomo_is_active = v:true
-            let g:pomo_start = l:pomo_saved_time
-            let l:pomo_time_elapsed = localtime() - g:pomo_start
-            let g:pomo_timer_id = timer_start((g:pomo_seconds - l:pomo_time_elapsed) * 1000, function('OsxNotifyPomoEnd'))
-            echo 'Restarting Pomodoro ...'
-            call timer_start(3000, function('ClearCmdLine'))
+        let g:pomo_info = json_decode(readfile(g:pomo_settings_file))
+        if !g:pomo_info.is_running
+            call pomo#RestartIfNecessary(g:pomo_info.last_start)
         endif
-        return l:pomo_saved_time
-    catch
-        return 0
+    catch /E484*/
+        return
+    endtry
+endfunction
+
+function! pomo#Teardown()
+    let g:pomo_info.is_running = v:false
+    let g:pomo_info = json_decode(readfile(g:pomo_settings_file))
+endfunction
+
+function! pomo#Save()
+    call writefile([json_encode(g:pomo_info)], g:pomo_settings_file)
+endfunction
+
+function! pomo#RestartIfNecessary(last_start)
+    try
+        if (localtime() - a:last_start) < g:pomo_seconds
+            let g:pomo_info.is_running = v:true
+            call pomo#Save()
+            let l:pomo_time_elapsed = localtime() - a:last_start
+            let g:pomo_timer_id = timer_start((g:pomo_seconds - l:pomo_time_elapsed) * 1000, function('OsxNotifyPomoEnd'))
+            " echo 'Restarting Pomodoro ...'
+            " call timer_start(3000, function('ClearCmdLine'))
+        endif
     endtry
 endfunction
 
@@ -24,14 +40,15 @@ function! StartPomo()
     call PomoRunOsxKeystroke('StartTomighty')
     call timer_start(3000, function('ClearCmdLine'))
     let g:pomo_timer_id = timer_start(g:pomo_minutes * 60 * 1000, function('OsxNotifyPomoEnd'))
-    let g:pomo_start = localtime()
-    let g:pomo_is_active = v:true
+    let g:pomo_info.last_start = localtime()
+    let g:pomo_info.is_running = v:true
 
-    call writefile([g:pomo_start], g:pomo_settings_file)
+    call pomo#Save()
+    " call writefile([g:pomo_start], g:pomo_settings_file)
 endfunction
 
 function! ClearCmdLine(timer)
-    echo ''
+    redraw!
 endfunction
 
 function! EndPomo(show_message)
@@ -40,10 +57,12 @@ function! EndPomo(show_message)
         call PomoOsxNotif('Pomodoro Cancelled!')
     endif
 
-    let g:pomo_is_active = v:false
-    let g:pomo_start = 0
-    let g:pomo_count = -1
-    call writefile([0], g:pomo_settings_file)
+    let g:pomo_info.is_running = v:false
+    call pomo#Save()
+    " let g:pomo_is_active = v:false
+    " let g:pomo_start = 0
+    " let g:pomo_count = -1
+    " call writefile([0], g:pomo_settings_file)
 
     if g:pomo_timer_id > -1
         call timer_stop(g:pomo_timer_id)
