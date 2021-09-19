@@ -1759,7 +1759,7 @@ nnoremap <C-b> :NERDTreeToggle<CR>
 augroup nerdtree_fix
     autocmd!
     autocmd filetype nerdtree call Mod_NerdTree_Maps()
-augroup end
+augroup END
 
 function! Mod_NerdTree_Maps()
     nnoremap <buffer> h gj
