@@ -12,7 +12,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'sjl/gundo.vim'
 Plug 'SirVer/ultisnips'
 Plug 'jiangmiao/auto-pairs'
-Plug 'calendar.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tpope/vim-markdown'
@@ -441,12 +440,12 @@ nnoremap X :qall<CR>
 " I don't like that the quickfix and location list maps are different. This
 " combines them into a single mapping by trying each command in order until
 " one works. Also centers, opens folds and calls repeat
-function! QuickfixMap(inputs, map, ...)
+function! QuickfixMap(inputs, input_map, ...)
     let l:post_inputs = ['normal! zO', 'normal! zz']
     for l:input in a:inputs
         try
             execute l:input
-            call add(l:post_inputs, printf('call repeat#set("%s")', a:map))
+            call add(l:post_inputs, printf('call repeat#set("%s")', a:input_map))
             if a:000[0] > 1 && a:000[1] !=# 'skip_post_input'
                 for l:post_input in l:post_inputs
                     try
@@ -559,6 +558,9 @@ if(!exists('*AbsoluteSource'))
     command! AbsoluteSource call AbsoluteSource()
 endif
 nnoremap <Leader>s :AbsoluteSource<CR>
+" Yank to the system register
+vmap <Leader>y "+y
+vnoremap <Leader>y "+y
 
 "Easy buffer switching
 nnoremap <Leader>d :bd<CR>
@@ -664,7 +666,7 @@ let s:term_open_cmd = '80vnew'
 
 let s:Term = {}
 function! s:Term.on_exit(job_id, exit_code, event_type)
-    echom printf('"%s" completed with status %s!', l:self.command, a:exit_code)
+    echom printf('"%s" completed with status %s!', l:self.input_command, a:exit_code)
 
     " If the command completed successfully close the buffer
     if (a:exit_code == 0)
@@ -672,7 +674,7 @@ function! s:Term.on_exit(job_id, exit_code, event_type)
     endif
 endfunction
 
-function! StartTermAutoExit(command, open_new_buffer)
+function! StartTermAutoExit(input_command, open_new_buffer)
     if a:open_new_buffer
         exe s:term_open_cmd
     else
@@ -681,36 +683,36 @@ function! StartTermAutoExit(command, open_new_buffer)
     endif
 
     let l:term_options = {
-        \'command': a:command,
+        \'input_command': a:input_command,
     \}
 
     let l:auto_exit_dict = extend(copy(s:Term), l:term_options)
-    call termopen(a:command, l:auto_exit_dict)
+    call termopen(a:input_command, l:auto_exit_dict)
 
     exe 'startinsert'
 endfunction
 
 
-function! TermSameBuf(command)
-    call StartTermAutoExit(a:command, '', v:false)
+function! TermSameBuf(cmd)
+    call StartTermAutoExit(a:cmd, '', v:false)
 endfunction
 
-function! Term(command)
-    if empty(a:command)
+function! Term(cmd)
+    if empty(a:cmd)
         exe s:term_open_cmd
         exe 'term'
     else
-        call StartTermAutoExit(a:command, v:true)
+        call StartTermAutoExit(a:cmd, v:true)
     endif
 endfunction
 
 function! TermStayOpen(command)
     exe s:term_open_cmd
-    silent exe 'te ' . a:command
+    call termopen(a:cmd, {'cwd': a:cwd})
 endfunction
 
-function! BackgroundTerm(command)
-    call jobstart(a:command)
+function! BackgroundTerm(cmd)
+    call jobstart(a:cmd)
 endfunction
 
 command! -bar -nargs=* -complete=shellcmd Term :call Term(<q-args>)
@@ -776,10 +778,10 @@ command! FixTrailingWhitespace call FixTrailingWhitespace()
 
 " Add to vim unimpaired co mappings
 let g:toggle_opts = {}
-function! ToggleOption(key, command, ...)
+function! ToggleOption(key, input_command, ...)
     " Plugins are loaded after vimrc, this forces any plugin mapping to be
     " overridden
-    execute printf("autocmd VimEnter * nnoremap <silent> co%s :call ExecuteToggleOption('%s', '%s', '%s')<CR>", a:key, a:key, a:command, len(a:000) > 0 ? a:000[0] : a:command)
+    execute printf("autocmd VimEnter * nnoremap <silent> co%s :call ExecuteToggleOption('%s', '%s', '%s')<CR>", a:key, a:key, a:input_command, len(a:000) > 0 ? a:000[0] : a:input_command)
 endfunction
 
 function! ExecuteToggleOption(key, first_cmd, second_cmd)
@@ -797,9 +799,9 @@ call ToggleOption('p', 'set paste!')
 call ToggleOption('r', 'RainbowParenthesesDeactivate', 'RainbowParenthesesActivate')
 call ToggleOption('a', 'ALEToggle')
 
-function! CloseBuffer(key, command)
+function! CloseBuffer(key, input_command)
     let l:start_of_map = 'cu'
-    execute printf('nnoremap <silent> %s%s :%s<CR>', l:start_of_map, a:key, a:command)
+    execute printf('nnoremap <silent> %s%s :%s<CR>', l:start_of_map, a:key, a:input_command)
 endfunction
 
 call CloseBuffer('q', 'cclose<bar>lclose')
@@ -814,6 +816,27 @@ nnoremap sf :vs <bar> winc w <bar> normal gp<CR>:winc w<CR>
 
 let g:triangle = '▸'
 
+function! Link()
+    let l:text = GetVisualSelection()
+    let l:result = ''
+    echo 'Fetching url for "' . l:text . '"...'
+
+python3 << EOF
+import vim
+from googlesearch import search
+
+query = vim.eval("l:text")
+result = next(search(query))
+vim.command("let l:result = '{}'".format(result))
+EOF
+
+    let l:replacement_text = printf('[%s](%s)', l:text, l:result)
+    let l:line_num = line('.')
+    let l:current_line = getline(l:line_num)
+    let l:fixed_line = substitute(l:current_line, l:text, l:replacement_text, '')
+    call setline(l:line_num, l:fixed_line)
+endfunction
+command! -range Link :call Link()
 " }}}
 " Searching and Movement {{{
 
@@ -962,10 +985,6 @@ set foldtext=NeatFoldText()
 " Filetype Specific -------------------------------------------------- {{{
 
 " C -------------------------------------------------- {{{
-
-if has('nvim')
-    tnoremap <Esc> <C-\><C-n>
-endif
 
 function! TermEscape(str)
     return substitute(a:str, ' ', '\\\\ ', 'g')
@@ -1291,7 +1310,7 @@ augroup ft_java
     " au Filetype java nnoremap <buffer> cp :call CompileJava("normal")<CR>
     " au Filetype java nnoremap <buffer> cn :call CompileJava("input")<CR>
     " au Filetype java nnoremap <buffer> <Leader>w :w<bar>SyntasticCheck<CR>
-augroup end
+augroup END
 
 " }}}
 " JavaScript -------------------------------------------------- {{{
@@ -1304,7 +1323,7 @@ augroup ft_javascript
     " au FileType javascript nnoremap <buffer> gm :JsDoc<CR>
     " Have tern and Ycm play nicely together
     " au FileType javascript setlocal omnifunc=tern#Complete
-augroup end
+augroup END
 
 " }}}
 " Markdown -------------------------------------------------- {{{
@@ -1378,7 +1397,7 @@ augroup ft_md
     au FileType markdown setl noai nocin nosi inde=
 augroup END
 
-let g:markdown_fenced_languages = ['python', 'bash=sh', 'c', 'html', 'css', 'javascript', 'java', 'xml', 'cpp']
+let g:markdown_fenced_languages = ['python', 'bash=sh', 'c', 'html', 'css', 'javascript', 'java', 'xml', 'cpp', 'vim', 'typescript']
 
 " }}}
 " Python -------------------------------------------------- {{{
