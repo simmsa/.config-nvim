@@ -2003,6 +2003,12 @@ let g:journal_extension='md'
 let g:jsx_ext_required = 0
 
 " End vim jsx --------------------------------------------------------- }}}
+" vim license -----------------------------------------------------------{{{
+
+let g:licenses_copyright_holders_name = 'Andrew Simms'
+let g:licenses_authors_name = 'Andrew Simms <simms.andrew@gmail.com>'
+
+" End vim license -------------------------------------------------------}}}
 " vim markdown folding ----------------------------------------------- {{{
 
 let g:markdown_fold_style = 'nested'
