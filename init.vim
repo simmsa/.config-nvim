@@ -2111,8 +2111,11 @@ let g:ycm_warning_symbol = g:triangle
 
 let g:ycm_goto_buffer_command = 'vertical-split'
 
-let g:ycm_allow_changing_updatetime = 0
-set updatetime=10000
+" let g:ycm_python_binary_path = '/usr/local/bin/python3'
+let g:ycm_python_binary_path = 'python3'
+
+" let g:ycm_allow_changing_updatetime = 0
+" set updatetime=10000
 
 " }}}
 
