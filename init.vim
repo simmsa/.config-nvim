@@ -1873,10 +1873,17 @@ let g:airline_skip_empty_sections = 1
 let g:airline_theme='relative'
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#branch#enabled=1
+let g:airline#extensions#branch#notexists = ' (Untracked)'
 let g:airline#extensions#branch#displayed_head_limit=35
 let g:airline#extensions#branch#empty_message = ''
 let g:airline#extensions#branch#format = 0
-let g:airline#extensions#ycm#enabled = 0
+
+let g:airline#extensions#ycm#enabled = 1
+let g:airline#extensions#ycm#error_symbol = 'tsc:'
+let g:airline#extensions#ycm#warning_symbol = 'tsc:'
+
+let g:airline#extensions#ale#error_symbol = 'tslint:'
+let g:airline#extensions#ale#warning_symbol = 'tslint:'
 
 augroup vim_airline
     au!
