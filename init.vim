@@ -1387,14 +1387,15 @@ let g:python_highlight_all = 1
 
 function! RunPython(input_type)
     :w
-    let l:filename = expand('%')
-    let l:command = 'python ' . l:filename
-    let l:command_escaped = 'python\\ ' . l:filename
+    let l:filename = expand('%:p')
+    " let l:command = 'python3 ' . l:filename
+    let l:command = 'python3 %'
+    let l:command_escaped = 'python3\\ ' . l:filename
     if has('nvim')
-        execute ':10sp term://' . l:command_escaped
+        execute ':10sp term://' . l:command
         :winc r
         if(a:input_type ==# 'normal')
-            :startinsert
+            exe('startinsert')
         endif
     else
         execute ':! ' . l:command
@@ -1406,7 +1407,7 @@ augroup ft_python
     au BufNewFile,BufRead *.py set keywordprg=pydoc
     au FileType python nnoremap <buffer> cp :call RunPython("normal")<CR>
     au FileType python nnoremap <buffer> cn :call RunPython("input")<CR>
-augroup end
+augroup END
 
 " }}}
 " Ruby -------------------------------------------------- {{{
