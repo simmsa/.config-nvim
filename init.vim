@@ -60,6 +60,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'glts/vim-textobj-comment'
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-endwise'
+Plug 'Vimjas/vim-python-pep8-indent'
 
 Plug g:plugin_dir . 'simple-org-mode'
 Plug g:plugin_dir . 'syntax-highlight-html-code'
@@ -1411,7 +1412,7 @@ function! RunPython(input_type)
     let l:command = 'python3 %'
     let l:command_escaped = 'python3\\ ' . l:filename
     if has('nvim')
-        execute ':10sp term://' . l:command
+        execute ':15sp term://' . l:command
         :winc r
         if(a:input_type ==# 'normal')
             exe('startinsert')
