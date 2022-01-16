@@ -1396,6 +1396,8 @@ augroup ft_md
     au FileType markdown let g:ale_javascript_prettier_options = '--trailing-comma all --prose-wrap preserve --tab-width 4 --parser markdown'
     " Concise way to kill all indenting
     au FileType markdown setl noai nocin nosi inde=
+    " Autosave markdown files when you leave insert mode - Not sure if this is a good idea yet...
+    au FileType markdown au InsertLeave <buffer> silent write
 augroup END
 
 let g:markdown_fenced_languages = ['python', 'bash=sh', 'c', 'html', 'css', 'javascript', 'java', 'xml', 'cpp', 'vim', 'typescript']
