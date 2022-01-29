@@ -27,8 +27,6 @@ Plug 'zaiste/tmux.vim'
 Plug 'scrooloose/nerdtree' , { 'on': 'NERDTreeToggle' }
 Plug 'heavenshell/vim-jsdoc'
 Plug 'vim-scripts/SyntaxAttr.vim'
-Plug 'junegunn/vim-pseudocl'
-Plug 'junegunn/vim-oblique'
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --ts-completer' }
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'gregsexton/MatchTag'
@@ -838,6 +836,25 @@ EOF
     call setline(l:line_num, l:fixed_line)
 endfunction
 command! -range Link :call Link()
+
+" Center search result
+function! CenteredFindNext(forward)
+    let s:so_curr = &scrolloff
+    set scrolloff=999
+    try
+        if a:forward
+            silent normal! n
+        else
+            silent normal! N
+        endif
+    finally
+        "Restore scrolloff
+        let &scrolloff = s:so_curr
+    endtry
+endfunction
+
+nnoremap <silent>l :call CenteredFindNext(1)<CR>
+nnoremap <silent>L :call CenteredFindNext(0)<CR>
 " }}}
 " Searching and Movement {{{
 
@@ -2035,22 +2052,6 @@ let g:licenses_authors_name = 'Andrew Simms <simms.andrew@gmail.com>'
 
 let g:markdown_fold_style = 'nested'
 let g:markdown_fold_override_foldtext = 0
-
-" }}}
-" vim oblique  -------------------------------------------------- {{{
-
-nmap l <Plug>(Oblique-n)
-nmap L <Plug>(Oblique-N)
-
-" Center cursor after search
-augroup plug_oblique
-    autocmd!
-    autocmd! User Oblique normal! zz
-    autocmd! User ObliqueStar normal! zz
-    autocmd! User ObliqueRepeat normal! zz
-augroup END
-
-hi! link ObliquePrompt Search
 
 " }}}
 " vim rooter --------------------------------------------------------------- {{{
