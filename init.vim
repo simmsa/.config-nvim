@@ -536,6 +536,7 @@ augroup qf_mods
     autocmd User YcmQuickFixOpened execute("resize 100")
 augroup END
 
+" }}}
 " Leader Mappings -------------------------------------------------- {{{
 
 " Map leader key to space
@@ -620,8 +621,6 @@ endfunction
 nnoremap <silent> <Leader>ls :call StartLogging()<CR>
 nnoremap <silent> <Leader>lk :call StopLogging()<CR>
 nnoremap <silent> <Leader>lo :call OpenLog()<CR>
-
-" }}}
 
 " }}}
 " Cool Functions -------------------------------------------------- {{{
