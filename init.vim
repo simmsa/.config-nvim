@@ -1779,17 +1779,6 @@ augroup plug_gv
 augroup END
 
 " End GV (Git Log Viewer) ---------------------------------------------- }}}
-" Jedi -------------------------------------------------- {{{
-
-let g:jedi#completions_command = '<C-P>'
-let g:jedi#goto_assignments_command = '<Leader>pg'
-let g:jedi#goto_definitions_command = '<Leader>pg'
-let g:jedi#documentation_command = '<Leader>pd'
-let g:jedi#rename_command = '<Leader>pr'
-let g:jedi#usages_command = '<Leader>pu'
-let g:jedi#show_call_signatures = '1'
-
-" }}}
 " Matchit -------------------------------------------------- {{{
 
 runtime macros/matchit.vim
