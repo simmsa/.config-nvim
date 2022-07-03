@@ -55,6 +55,7 @@ Plug 'tpope/vim-endwise'
 " FYI: This plugin makes coding in python significantly laggy, especially when
 " adding new lines
 " Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug g:plugin_dir . 'simple-org-mode'
 Plug g:plugin_dir . 'syntax-highlight-html-code'
@@ -1553,6 +1554,40 @@ cmap <C-N> <Plug>CmdlineCompleteForward
 cmap <C-S> <Plug>CmdlineCompleteBackward
 
 " End CmdlineComplete ------------------------------------------------------ }}}
+" COC.nvim --------------------------------------------------------------{{{
+
+set hidden
+set nobackup
+set nowritebackup
+set cmdheight=1
+set updatetime=300
+set shortmess+=c
+
+let g:coc_enable_locationlist = 1
+
+" set signcolumn=number
+" inoremap <silent><expr> <TAB>
+"             \ pumvisible() ? "\<C-n>" :
+"             \ <SID>check_back_space() ? "\<TAB>" : 
+"             \ coc#refresh()
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1] =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+" End COC.nvim ----------------------------------------------------------}}}
 " Fugitive --------------------------------------------------" {{{
 
 " Fugitive custom mappings
