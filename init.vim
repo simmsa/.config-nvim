@@ -18,7 +18,6 @@ Plug 'nelstrom/vim-markdown-folding'
 Plug 'tpope/vim-repeat'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-speeddating'
-Plug 'ervandew/supertab'
 Plug 'justinmk/vim-sneak'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-expand-region'
@@ -2103,7 +2102,6 @@ let g:test#typescript#jest#file_pattern = '\v(tests/.*|(spec|test))\.(js|jsx|ts|
 
 let g:ycm_key_list_select_completion = [ '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = [ '<C-p>', '<Up>' ]
-let g:SuperTabDefaultCompletionType = '<C-n>'
 
 let g:ycm_min_num_identifier_candidate_chars = 2
 let g:ycm_complete_in_comments = 1
