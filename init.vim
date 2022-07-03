@@ -25,8 +25,6 @@ Plug 'zaiste/tmux.vim'
 Plug 'scrooloose/nerdtree' , { 'on': 'NERDTreeToggle' }
 Plug 'heavenshell/vim-jsdoc'
 Plug 'vim-scripts/SyntaxAttr.vim'
-Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --ts-completer' }
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'gregsexton/MatchTag'
 Plug 'JulesWang/css.vim'
 Plug 'vim-scripts/a.vim'
@@ -338,7 +336,7 @@ endif
 " Make <C-P> behave like it should and also zsh like
 cnoremap <C-P> <Up>
 cnoremap <C-T> <Up>
-" Easier uppercase (ycm bricks <C-u>)
+" Easier uppercase
 inoremap <C-l> <ESC>mzgUiw`zi<Right>
 " Faster save
 nnoremap sa :w<CR>
@@ -458,11 +456,9 @@ function! QuickfixMap(inputs, input_map, ...)
     endfor
 endfunction
 
-" q Macros can still be used, just not the ones below
-" YCM uses the location list to show errors and ale uses the quickfix list
-" We first want to navigate to YCM Errors, then ALE warnings than other
-" quickfix list items
-nnoremap <silent> qq :call QuickfixMap(['lfirst', 'ALEFirst', 'cfirst'], 'qq')<CR>
+" q Macros can still be used, just not the ones below We first want to
+" navigate to errors, warnings than other quickfix list items
+nnoremap <silent> qq :call QuickfixMap(['lfirst', 'ALEFirst', 'cfirst', 'normal! ]s'], 'qq')<CR>
 nnoremap <silent> qh :call QuickfixMap(['lnext', 'ALENextWrap', 'cnext'], 'qh')<CR>
 nnoremap <silent> qt :call QuickfixMap(['lprev', 'ALEPrevWrap', 'cprev'], 'qt')<CR>
 nnoremap <silent> qo :call QuickfixMap(['lopen', 'copen'], 'qo', 'skip_post_input')<CR>
@@ -529,10 +525,6 @@ nnoremap <silent> ( :call SmartSwitchWindow("left")<CR>
 augroup qf_mods
     au!
     autocmd FileType qf execute("winc H|vertical resize 80")
-    " Ycm resized the window to the number of errors, this is bad if the
-    " location list is opened vertically, this reverses that
-    autocmd User YcmLocationOpened execute("resize 100")
-    autocmd User YcmQuickFixOpened execute("resize 100")
 augroup END
 
 " }}}
@@ -1914,10 +1906,6 @@ let g:airline#extensions#branch#displayed_head_limit=35
 let g:airline#extensions#branch#empty_message = ''
 let g:airline#extensions#branch#format = 0
 
-let g:airline#extensions#ycm#enabled = 1
-let g:airline#extensions#ycm#error_symbol = 'tsc:'
-let g:airline#extensions#ycm#warning_symbol = 'tsc:'
-
 let g:airline#extensions#ale#error_symbol = 'tslint:'
 let g:airline#extensions#ale#warning_symbol = 'tslint:'
 
@@ -2098,45 +2086,6 @@ let g:test#strategy = 'neovim'
 let g:test#typescript#jest#file_pattern = '\v(tests/.*|(spec|test))\.(js|jsx|ts|tsx;)$'
 
 " End vim test ----------------------------------------------------------}}}
-" YouCompleteMe ------------------------------ {{{
-
-let g:ycm_key_list_select_completion = [ '<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = [ '<C-p>', '<Up>' ]
-
-let g:ycm_min_num_identifier_candidate_chars = 2
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_use_ultisnips_completer = 0
-
-let g:ycm_seed_identifiers_with_syntax = 1
-
-" Opens automatic popup menu at 3 characters
-let g:ycm_min_num_of_chars_for_completion = 3
-
-" Preview window options
-" let g:ycm_add_preview_to_completeopt = 1
-" let g:ycm_autoclose_preview_window_after_completion = 1
-" This closes any preview window
-let g:ycm_autoclose_preview_window_after_insertion = 0
-
-let g:ycm_open_loc_list_on_ycm_diags = 1
-let g:ycm_always_populate_location_list = 1
-
-let g:ycm_error_symbol = g:triangle
-let g:ycm_warning_symbol = g:triangle
-
-let g:ycm_goto_buffer_command = 'vertical-split'
-
-" let g:ycm_python_binary_path = '/usr/local/bin/python3'
-let g:ycm_python_binary_path = 'python3'
-
-" let g:ycm_allow_changing_updatetime = 0
-" set updatetime=10000
-
-" }}}
 
 " }}}
 " Directory Specific Commands {{{
