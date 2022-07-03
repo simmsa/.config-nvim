@@ -9,7 +9,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'jplaut/vim-arduino-ino'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
-Plug 'sjl/gundo.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-markdown'
@@ -1782,11 +1781,6 @@ augroup plug_gv
 augroup END
 
 " End GV (Git Log Viewer) ---------------------------------------------- }}}
-" Gundo -------------------------------------------------- {{{
-
-nnoremap <Leader>u :GundoToggle<CR>
-
-" }}}
 " Jedi -------------------------------------------------- {{{
 
 let g:jedi#completions_command = '<C-P>'
