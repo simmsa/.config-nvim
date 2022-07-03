@@ -52,7 +52,9 @@ Plug 'kana/vim-textobj-user'
 Plug 'glts/vim-textobj-comment'
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-endwise'
-Plug 'Vimjas/vim-python-pep8-indent'
+" FYI: This plugin makes coding in python significantly laggy, especially when
+" adding new lines
+" Plug 'Vimjas/vim-python-pep8-indent'
 
 Plug g:plugin_dir . 'simple-org-mode'
 Plug g:plugin_dir . 'syntax-highlight-html-code'
