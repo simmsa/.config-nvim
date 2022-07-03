@@ -1,0 +1,158 @@
+# Headers -------------------------------------------------- {{{
+snippet 1h
+# ${0}
+endsnippet
+
+snippet 2h
+## ${0}
+endsnippet
+
+snippet 3h
+### ${0}
+endsnippet
+
+snippet 4h
+#### ${0}
+endsnippet
+
+snippet 5h
+##### ${0}
+endsnippet
+
+snippet 6h
+###### ${0}
+endsnippet
+
+snippet h
+# ${0}
+endsnippet
+
+snippet hh
+## ${0}
+endsnippet
+
+snippet hhh
+### ${0}
+endsnippet
+
+snippet hhhh
+#### ${0}
+endsnippet
+
+snippet hhhhh
+##### ${0}
+endsnippet
+
+snippet hhhhhh
+###### ${0}
+endsnippet
+# }}}
+# Formatting Snippets -------------------------------------------- {{{
+snippet b
+**${0}**
+endsnippet
+
+snippet i
+*${0}*
+endsnippet
+
+snippet s
+* ${0}
+endsnippet
+
+snippet c
+\`${1}\`${0}
+endsnippet
+
+snippet inc
+!INCLUDE "${0:File Path}"
+endsnippet
+
+snippet d
+* **${1:Term}**:
+    * ${2:Definition}
+
+${0}
+endsnippet
+
+# Latex
+snippet l
+\\\\[ ${0} \\\\]
+endsnippet
+
+# Inline Latex
+snippet il
+\\\\( ${0} \\\\)
+endsnippet
+
+# }}}
+# Code Snippet Styles ------------------------------------------- {{{
+snippet r
+\`\`\`{r}
+${0}
+\`\`\`
+endsnippet
+# Tables -------------------------------------------------- {{{
+
+snippet 2cts
+| ${1:Col 1} | ${2:Col 2} |
+| --- | --- |
+endsnippet
+snippet 2ct
+| ${1:Col 1} | ${2:Col 2} |
+endsnippet
+
+snippet 3cts
+| ${1:Col 1} | ${2:Col 2} | ${3:Col 3} |
+| --- | --- | --- |
+endsnippet
+snippet 3ct
+| ${1:Col 1} | ${2:Col 2} | ${3:Col 3} |
+endsnippet
+
+snippet 4cts
+| ${1:Col 1} | ${2:Col 2} | ${3:Col 3} | ${4:Col 4} |
+| --- | --- | --- | --- |
+endsnippet
+snippet 4ct
+| ${1:Col 1} | ${2:Col 2} | ${3:Col 3} | ${4:Col 4} |
+endsnippet
+
+snippet 5cts
+| ${1:Col 1} | ${2:Col 2} | ${3:Col 3} | ${4:Col 4} | ${5:Col 5} |
+| --- | --- | --- | --- | --- |
+endsnippet
+snippet 5ct
+| ${1:Col 1} | ${2:Col 2} | ${3:Col 3} | ${4:Col 4} | ${5:Col 5} |
+endsnippet
+
+snippet 6cts
+| ${1:Col 1} | ${2:Col 2} | ${3:Col 3} | ${4:Col 4} | ${5:Col 5} | ${6:Col 6} |
+| --- | --- | --- | --- | --- | --- |
+endsnippet
+snippet 6ct
+| ${1:Col 1} | ${2:Col 2} | ${3:Col 3} | ${4:Col 4} | ${5:Col 5} | ${6:Col 6} |
+endsnippet
+# }}}
+
+snippet meta
+---
+title: "${1: Title Text}"
+author: "Andrew Simms"
+date: "`!v strftime("%Y-%m-%d")`"
+output:
+    pdf_document: default
+---
+
+\`\`\`{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+\`\`\`
+endsnippet
+
+snippet p
+%>%
+endsnippet
+
+# vim:foldmethod=marker
+
