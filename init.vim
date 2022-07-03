@@ -58,6 +58,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jamespeapen/Nvim-R', {'branch': 'stable'}
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug g:plugin_dir . 'simple-org-mode'
 Plug g:plugin_dir . 'syntax-highlight-html-code'
@@ -1819,6 +1820,23 @@ function! Mod_NerdTree_Maps()
 endfunction
 
 " }}}
+" Nvim-R ----------------------------------------------------------------{{{
+
+" let R_assign = 0
+
+" End Nvim-R ------------------------------------------------------------}}}
+" nvim treesitter -------------------------------------------------------{{{
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+    },
+}
+EOF
+
+" End nvim treesitter ---------------------------------------------------}}}
 " pomo ------------------------------------------------------------------{{{
 
 nnoremap <silent> <Leader>p :call pomo#ShowMenu()<CR>
