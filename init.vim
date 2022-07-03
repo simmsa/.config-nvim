@@ -48,8 +48,6 @@ Plug 'junegunn/gv.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'isRuslan/vim-es6'
 Plug 'mxw/vim-jsx'
-Plug 'dense-analysis/ale'
-Plug 'majutsushi/tagbar'
 Plug 'kana/vim-textobj-user'
 Plug 'glts/vim-textobj-comment'
 Plug 'rust-lang/rust.vim'
@@ -458,9 +456,9 @@ endfunction
 
 " q Macros can still be used, just not the ones below We first want to
 " navigate to errors, warnings than other quickfix list items
-nnoremap <silent> qq :call QuickfixMap(['lfirst', 'ALEFirst', 'cfirst', 'normal! ]s'], 'qq')<CR>
-nnoremap <silent> qh :call QuickfixMap(['lnext', 'ALENextWrap', 'cnext'], 'qh')<CR>
-nnoremap <silent> qt :call QuickfixMap(['lprev', 'ALEPrevWrap', 'cprev'], 'qt')<CR>
+nnoremap <silent> qq :call QuickfixMap(['lfirst', 'cfirst', 'normal! ]s'], 'qq')<CR>
+nnoremap <silent> qh :call QuickfixMap(['lnext', 'cnext'], 'qh')<CR>
+nnoremap <silent> qt :call QuickfixMap(['lprev', 'cprev'], 'qt')<CR>
 nnoremap <silent> qo :call QuickfixMap(['lopen', 'copen'], 'qo', 'skip_post_input')<CR>
 nnoremap <silent> qc :call QuickfixMap(['lclose', 'cclose'], 'qc', 'skip_post_input')<CR>
 " I never use ; in any commands, but I use : all the time
@@ -785,7 +783,6 @@ endfunction
 
 call ToggleOption('p', 'set paste!')
 call ToggleOption('r', 'RainbowParenthesesDeactivate', 'RainbowParenthesesActivate')
-call ToggleOption('a', 'ALEToggle')
 
 function! CloseBuffer(key, input_command)
     let l:start_of_map = 'cu'
@@ -1241,7 +1238,6 @@ let g:go_info_mode = 'guru'
 
 augroup ft_go
     au FileType go set shiftwidth=2 tabstop=2 softtabstop=2
-    au FileType go let g:ale_fix_on_save=1
     au FileType go let g:airline#extensions#whitespace#enabled=0
     au FileType go execute("imap <C-T> := ")
     au FileType go nnoremap gr :call GoRun()<CR>
@@ -1525,51 +1521,6 @@ endfunction
 nnoremap gh :A<CR>
 
 " }}}
-" ALE -------------------------------------------------------------------{{{
-
-" \ 'typescript': ['tslint', 'prettier'],
-let g:ale_linters = {
-    \ 'javascript': ['eslint'],
-    \ 'typescript': [''],
-    \ 'json': ['jsonlint'],
-    \ 'vim': ['vint'],
-    \ 'html': ['htmlhint'],
-    \ 'markdown': ['proselint'],
-    \ 'python': ['flake8'],
-\ }
-
-let g:ale_fixers = {
-    \ 'go': ['gofmt'],
-    \ 'typescript': ['prettier'],
-    \ 'typescriptreact': ['prettier'],
-    \ 'markdown': ['prettier'],
-    \ 'json': ['prettier'],
-    \ 'python': ['black'],
-\ }
-
-let g:ale_fix_on_save = 1
-
-let g:ale_javascript_prettier_use_global = 1
-" let g:ale_javascript_prettier_options = '--trailing-comma all --arrow-parens always --single-quote'
-" let g:ale_javascript_prettier_options = '--trailing-comma all'
-" let g:ale_javascript_prettier_options = '--trailing-comma all --prose-wrap preserve --tab-width 4 --parser markdown'
-" let g:ale_javascript_prettier_options = '--tab-width 8 --prose-wrap never --use-tabs'
-
-let g:ale_go_govet_options = '-composites'
-
-" Ale uses the quickfix list, ycm uses the loc list
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-
-let g:ale_sign_error = g:triangle
-let g:ale_sign_warning = g:triangle
-hi link ALEErrorSign PluginWarningSign
-hi link ALEWarningSign PluginWarningSign
-hi link ALEError PluginWarning
-hi link ALEWarning PluginWarning
-let g:ale_echo_msg_format = '%linter% %severity%: %s'
-
-" End ALE ---------------------------------------------------------------}}}
 " auto pairs -------------------------------------------------- {{{
 
 let g:AutoPairsCenterLine = 0
@@ -1906,8 +1857,6 @@ let g:airline#extensions#branch#displayed_head_limit=35
 let g:airline#extensions#branch#empty_message = ''
 let g:airline#extensions#branch#format = 0
 
-let g:airline#extensions#ale#error_symbol = 'tslint:'
-let g:airline#extensions#ale#warning_symbol = 'tslint:'
 
 augroup vim_airline
     au!
