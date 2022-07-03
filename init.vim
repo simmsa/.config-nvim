@@ -10,7 +10,6 @@ Plug 'jplaut/vim-arduino-ino'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'sjl/gundo.vim'
-Plug 'SirVer/ultisnips'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-markdown'
@@ -1863,60 +1862,6 @@ let g:tagbar_type_typescript = {
   \ }
 
 " End Tagbar ------------------------------------------------------------}}}
-" UltiSnips -------------------------------------------------- {{{
-
-" UltiSnips Config
-let g:UltiSnipsExpandTrigger='<tab>'
-let g:UltiSnipsJumpForwardTrigger='<tab>'
-" let g:UltiSnipsExpandTrigger="<C-s>"
-" let g:UltiSnipsJumpForwardTrigger="<C-s>"
-
-" Enable tabbing through list of results
-function! g:UltiSnips_Complete()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res == 0
-        " Execute ycm complete key
-        " execute 'startinsert! | call feedkeys("\<C-o>")'
-        " execute 'startinsert | call feedkeys("\<Right>\<C-o>")'
-        if pumvisible()
-            return "\<C-n>"
-            " return ""
-        else
-            " execute 'startinsert! | call feedkeys("\<C-x>\<C-n>")'
-            " if pumvisible()
-            "     return ""
-            " else
-                call UltiSnips#JumpForwards()
-                if g:ulti_jump_forwards_res == 0
-                    return "\<Tab>"
-                    " return ""
-                endif
-            " endif
-        endif
-    endif
-    return ''
-endfunction
-
-augroup plug_ultisnips
-    au!
-    au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<CR>"
-augroup END
-
-" Expand snippet or return
-let g:ulti_expand_res = 0
-function! Ulti_ExpandOrEnter()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res
-        return ''
-    else
-        return "\<return>"
-    endif
-endfunction
-
-" Set <return> as primary trigger
-inoremap <return> <C-r>=Ulti_ExpandOrEnter()<CR>
-
-" }}}
 " vim airline -------------------------------------------------- {{{
 
 let g:airline_powerline_fonts=1
