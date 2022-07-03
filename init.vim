@@ -56,6 +56,7 @@ Plug 'tpope/vim-endwise'
 " adding new lines
 " Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'jamespeapen/Nvim-R', {'branch': 'stable'}
 
 Plug g:plugin_dir . 'simple-org-mode'
 Plug g:plugin_dir . 'syntax-highlight-html-code'
@@ -1456,6 +1457,21 @@ augroup ft_python
 augroup END
 
 " }}}
+" R ---------------------------------------------------------------------{{{
+
+function! BuildRMarkdownPDF()
+    execute("w")
+    call RMakeRmd("pdf_document")
+endfunction
+
+augroup ft_R
+    autocmd!
+    au FileType R,rmd nnoremap <buffer> cp :call BuildRMarkdownPDF()<CR>
+    " au BufWritePost *.rmd call BuildRMarkdownPDF()<CR>
+    au BufRead,BufNewFile *.rmd setlocal textwidth=80
+augroup END
+
+" End R -----------------------------------------------------------------}}}
 " Ruby -------------------------------------------------- {{{
 
 " 2 space tabs in ruby
