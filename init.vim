@@ -1568,7 +1568,7 @@ let g:coc_enable_locationlist = 1
 " set signcolumn=number
 " inoremap <silent><expr> <TAB>
 "             \ pumvisible() ? "\<C-n>" :
-"             \ <SID>check_back_space() ? "\<TAB>" : 
+"             \ <SID>check_back_space() ? "\<TAB>" :
 "             \ coc#refresh()
 
 inoremap <silent><expr> <TAB>
