@@ -56,6 +56,8 @@ Plug 'tpope/vim-endwise'
 " Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jamespeapen/Nvim-R', {'branch': 'stable'}
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 
 Plug g:plugin_dir . 'simple-org-mode'
 Plug g:plugin_dir . 'syntax-highlight-html-code'
@@ -2005,6 +2007,16 @@ let g:markdown_fold_style = 'nested'
 let g:markdown_fold_override_foldtext = 0
 
 " }}}
+" vim pandoc ------------------------------------------------------------{{{
+
+let g:pandoc#modules#enabled  = ["folding"]
+
+" End vim pandoc --------------------------------------------------------}}}
+" vim pandoc syntax -----------------------------------------------------{{{
+
+let g:pandoc#syntax#conceal#use = 0
+
+" End vim pandoc syntax -------------------------------------------------}}}
 " vim rooter --------------------------------------------------------------- {{{
 
 let g:rooter_silent_chdir = 1
