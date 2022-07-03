@@ -711,7 +711,7 @@ function! Term(cmd)
     endif
 endfunction
 
-function! TermStayOpen(command)
+function! TermStayOpen(cmd)
     exe s:term_open_cmd
     call termopen(a:cmd, {'cwd': a:cwd})
 endfunction
