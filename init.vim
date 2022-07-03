@@ -649,6 +649,7 @@ augroup END
 " Open terminals in a vertical buffer 80 chars wide.
 " Note: Resizing a terminal does not re wrap the lines.
 let s:term_open_cmd = '80vnew'
+let s:h_term_open_cmd = '15new'
 
 let s:Term = {}
 function! s:Term.on_exit(job_id, exit_code, event_type)
@@ -665,6 +666,24 @@ function! StartTermAutoExit(input_command, open_new_buffer)
         exe s:term_open_cmd
     else
         exe s:term_open_cmd
+        exe 'winc p'
+    endif
+
+    let l:term_options = {
+        \'input_command': a:input_command,
+    \}
+
+    let l:auto_exit_dict = extend(copy(s:Term), l:term_options)
+    call termopen(a:input_command, l:auto_exit_dict)
+
+    exe 'startinsert'
+endfunction
+
+function! StartHTermAutoExit(input_command, open_new_buffer)
+    if a:open_new_buffer
+        exe s:h_term_open_cmd
+    else
+        exe s:h_term_open_cmd
         exe 'winc p'
     endif
 
