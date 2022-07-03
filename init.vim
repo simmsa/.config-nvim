@@ -1420,7 +1420,6 @@ augroup ft_md
     au Filetype markdown nnoremap <buffer> cr :silent call CompileHtmlAndReload()<CR>
     au Filetype markdown nnoremap <buffer> gi :call CreateIncludeFile()<CR>
     au Filetype markdown nnoremap <buffer> mh :call CompileMDHtml()<CR>
-    au FileType markdown let g:ale_javascript_prettier_options = '--trailing-comma all --prose-wrap preserve --tab-width 4 --parser markdown'
     " Concise way to kill all indenting
     au FileType markdown setl noai nocin nosi inde=
     " Autosave markdown files when you leave insert mode - Not sure if this is a good idea yet...
@@ -1519,7 +1518,6 @@ augroup ft_ts
     au!
     au FileType typescript setlocal makeprg=tsc
     au FileType typescript nnoremap <buffer> sj :call ToggleTSComments()<CR>
-    au FileType typescript nnoremap <buffer> M :YcmCompleter GetDoc<CR>
     au FileType typescript nnoremap <buffer> cp :Term gulp<CR>
     au FileType typescript syn match Emphasize /!/
 augroup END
@@ -1898,7 +1896,7 @@ let g:airline#extensions#branch#format = 0
 augroup vim_airline
     au!
     " Remove '[No Name]' buffers
-    autocmd BufEnter * call airline#extensions#tabline#buflist#invalidate()
+    " autocmd BufEnter * call airline#extensions#tabline#buflist#invalidate()
 augroup END
 
 function! AirlineFilename()
@@ -1983,6 +1981,7 @@ nnoremap <silent> sh :GitGutterStageHunk<CR>
 nnoremap <silent> cn :call JumpToHunkAndUnfold('n')<CR>
 nnoremap <silent> cp :call JumpToHunkAndUnfold('p')<CR>
 
+let g:gitgutter_set_sign_backgrounds = 1
 let g:gitgutter_sign_added = '+'
 let g:gitgutter_sign_modified = '~'
 let g:gitgutter_sign_removed = 'x'
