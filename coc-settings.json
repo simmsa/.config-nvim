@@ -2,5 +2,6 @@
     "coc.preferences.formatOnSaveFiletypes": ["python"],
     "python.formatting.provider": "black",
     "python.formatting.blackPath": "/Users/macuser/Library/Python/3.9/bin/black",
+    "python.pythonPath": "/usr/local/bin/python3",
     "r.lsp.path": "/usr/local/bin/R"
 }
