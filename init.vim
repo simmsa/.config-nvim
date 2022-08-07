@@ -806,6 +806,8 @@ endfunction
 call ToggleOption('p', 'set paste!')
 call ToggleOption('r', 'RainbowParenthesesDeactivate', 'RainbowParenthesesActivate')
 
+nnoremap <silent> coh :noh<CR>
+
 function! CloseBuffer(key, input_command)
     let l:start_of_map = 'cu'
     execute printf('nnoremap <silent> %s%s :%s<CR>', l:start_of_map, a:key, a:input_command)
