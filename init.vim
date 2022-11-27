@@ -865,6 +865,15 @@ endfunction
 
 nnoremap <silent>l :call CenteredFindNext(1)<CR>
 nnoremap <silent>L :call CenteredFindNext(0)<CR>
+
+function TrimWhitespace()
+    let l:current_window_position = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:current_window_position)
+endfunction
+
+command! TrimWhitespace call TrimWhitespace()
+
 " }}}
 " Searching and Movement {{{
 
