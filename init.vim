@@ -533,7 +533,7 @@ augroup END
 
 " Map leader key to space
 let g:mapleader = "\<Space>"
-let g:maplocalleader = "\<Space>"
+let g:maplocalleader = ","
 " <Space> w to save a file
 nnoremap <Leader>w :w<CR>
 "<Space> s to source VIMRC
