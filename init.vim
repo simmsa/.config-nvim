@@ -52,7 +52,7 @@ Plug 'tpope/vim-endwise'
 " adding new lines
 " Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'jamespeapen/Nvim-R', {'branch': 'stable'}
+Plug 'jamespeapen/Nvim-R', {'branch': 'master'}
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
