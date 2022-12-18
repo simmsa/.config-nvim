@@ -1522,6 +1522,16 @@ augroup END
 
 
 " }}}
+" TeX -------------------------------------------------- {{{
+
+augroup ft_tex
+    autocmd!
+    au FileType tex set tabstop=2 shiftwidth=2 softtabstop=2
+    " au FileType tex set textwidth=72
+    au FileType tex set textwidth=5000
+augroup END
+
+" }}}
 " Typescript --------------------------------------------------------------- {{{
 
 augroup ft_ts
