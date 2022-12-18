@@ -2005,7 +2005,7 @@ endfunction
 
 nnoremap <silent> sh :GitGutterStageHunk<CR>
 nnoremap <silent> cn :call JumpToHunkAndUnfold('n')<CR>
-nnoremap <silent> cp :call JumpToHunkAndUnfold('p')<CR>
+" nnoremap <silent> cp :call JumpToHunkAndUnfold('p')<CR>
 
 let g:gitgutter_set_sign_backgrounds = 1
 let g:gitgutter_sign_added = '+'
