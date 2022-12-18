@@ -92,6 +92,11 @@ snippet r
 ${0}
 \`\`\`
 endsnippet
+snippet py 
+\`\`\`{python}
+${0}
+\`\`\`
+endsnippet
 # Tables -------------------------------------------------- {{{
 
 snippet 2cts
@@ -152,6 +157,29 @@ endsnippet
 
 snippet p
 %>%
+endsnippet
+
+# snippet img
+# <p>![${1:Caption}](${2:File Location})</>
+# endsnippet
+
+snippet img
+\begin{figure}[H]
+    \includegraphics{${2: File Location}}
+    \caption{${1:Caption}}
+\end{figure}
+endsnippet
+
+snippet link
+[${1:Text}](${2:href})
+endsnippet
+
+snippet a
+[${1:Text}](${2:href})
+endsnippet
+
+snippet href
+[${1:Text}](${2:href})
 endsnippet
 
 # vim:foldmethod=marker
