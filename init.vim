@@ -56,6 +56,7 @@ Plug 'jamespeapen/Nvim-R', {'branch': 'stable'}
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'lervag/vimtex'
 
 Plug g:plugin_dir . 'simple-org-mode'
 Plug g:plugin_dir . 'syntax-highlight-html-code'
@@ -2076,6 +2077,22 @@ let g:test#strategy = 'neovim'
 let g:test#typescript#jest#file_pattern = '\v(tests/.*|(spec|test))\.(js|jsx|ts|tsx;)$'
 
 " End vim test ----------------------------------------------------------}}}
+" vimtex ----------------------------------------------------------------{{{
+
+let g:vimtex_view_method = 'skim'
+let g:vimtex_view_sync_skim = 1
+
+let g:vimtex_quickfix_ignore_filters = [
+\  'arrayparboxrestore',
+\  'tocloft',
+\  'perthousand',
+\  'micro',
+\  'Underfull',
+\  "<namepart>inits",
+\]
+" \  "Conflicting options. '<namepart>inits' conflicts with 'uniquename=minfull'",
+
+" End vimtex ------------------------------------------------------------}}}
 
 " }}}
 " Directory Specific Commands {{{
