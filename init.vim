@@ -654,7 +654,7 @@ augroup END
 " Open terminals in a vertical buffer 80 chars wide.
 " Note: Resizing a terminal does not re wrap the lines.
 let s:term_open_cmd = '80vnew'
-let s:h_term_open_cmd = '15new'
+let s:h_term_open_cmd = '10new'
 
 let s:Term = {}
 function! s:Term.on_exit(job_id, exit_code, event_type)
