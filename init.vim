@@ -1444,9 +1444,10 @@ let g:python_highlight_all = 1
 function! RunPython(input_type)
     :w
     let l:filename = expand('%:p')
-    " let l:command = 'python3 ' . l:filename
-    let l:command = 'python3 %'
+    let l:command = 'python3 ' . l:filename
     let l:command_escaped = 'python3\\ ' . l:filename
+    let l:root_directory = FindRootDirectory()
+    execute ':cd %:p:h'
     if has('nvim')
         execute ':15sp term://' . l:command
         :winc r
@@ -1456,6 +1457,7 @@ function! RunPython(input_type)
     else
         execute ':! ' . l:command
     endif
+    execute ":cd " . l:root_directory
 endfunction
 
 augroup ft_python
