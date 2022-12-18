@@ -56,6 +56,7 @@ Plug 'jamespeapen/Nvim-R', {'branch': 'stable'}
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'quarto-dev/quarto-vim'
 Plug 'lervag/vimtex'
 
 Plug g:plugin_dir . 'simple-org-mode'
@@ -1469,18 +1470,47 @@ augroup ft_python
 augroup END
 
 " }}}
-" R ---------------------------------------------------------------------{{{
+" Quarto ----------------------------------------------------------------{{{
 
-function! BuildRMarkdownPDF()
-    execute("w")
-    call RMakeRmd("pdf_document")
+function! PreviewQuarto()
+    :w
+    let l:filename = expand('%:p')
+    let l:command = 'quarto preview ' . l:filename
+    call StartHTermAutoExit(l:command, v:true)
+    :winc p
 endfunction
 
-augroup ft_R
+augroup myNvimQuarto
     autocmd!
-    au FileType R,rmd nnoremap <buffer> cp :call BuildRMarkdownPDF()<CR>
-    " au BufWritePost *.rmd call BuildRMarkdownPDF()<CR>
-    au BufRead,BufNewFile *.rmd setlocal textwidth=80
+    au BufRead,BufNewFile *.qmd set ft=quarto
+    au FileType quarto set textwidth=100
+    au FileType quarto nnoremap <buffer> cp :call PreviewQuarto()<CR>
+augroup END
+
+" End Quarto ------------------------------------------------------------}}}
+" R ---------------------------------------------------------------------{{{
+
+" function! BuildRMarkdownPDF()
+"     execute("w")
+"     call RMakeRmd("pdf_document")
+"     call RMakeRmd("html_document")
+" endfunction
+
+" augroup ft_R
+"     autocmd!
+"     au FileType R,rmd nnoremap <buffer> cp :call BuildRMarkdownPDF()<CR>
+"     " au BufWritePost *.rmd call BuildRMarkdownPDF()<CR>
+"     au BufRead,BufNewFile *.rmd setlocal textwidth=80
+" augroup END
+
+function! s:customNvimRMappings()
+   nmap <buffer> cp <Plug>RMakePDF
+   imap <buffer> cp <Plug>RMakePDF
+   vmap <buffer> cp <Plug>RMakePDF
+endfunction
+augroup myNvimR
+   au!
+   autocmd filetype rmd call s:customNvimRMappings()
 augroup END
 
 " End R -----------------------------------------------------------------}}}
