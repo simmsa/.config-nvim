@@ -1,0 +1,114 @@
+# Headers -------------------------------------------------- {{{
+snippet chapter
+\chapter\{${0:Name}\}
+endsnippet
+
+snippet ch
+\chapter\{${0:Name}\}
+endsnippet
+
+snippet section
+\section\{${0:Name}\}
+endsnippet
+
+snippet sec
+\section\{${0:Name}\}
+endsnippet
+
+snippet subsection
+\subsection\{${0:Name}\}
+endsnippet
+
+snippet subsec
+\section\{${0:Name}\}
+endsnippet
+
+
+# Lists -----------------------------------------------------------------{{{
+
+snippet itemize
+\begin{itemize}
+	\item ${0:Item}
+\end{itemize}
+endsnippet
+
+snippet enumerate
+\begin{enumerate}
+	\item ${0:Item}
+\end{enumerate}
+endsnippet
+
+# End Lists -------------------------------------------------------------}}}
+
+
+# Images ----------------------------------------------------------------{{{
+
+snippet img
+\begin\{figure\}[H]
+  \centering
+  \includegraphics[width=\columnwidth]\{${1:Path}\}
+  \nrelcaption\{${2:Caption}\}\{${3:Photographer}\}
+  \label\{fig:${4:label}\}
+\end\{figure\}
+endsnippet
+
+
+# End Images ------------------------------------------------------------}}}
+
+
+# }}}
+# Formatting Snippets -------------------------------------------- {{{
+snippet b
+**${0}**
+endsnippet
+
+snippet i
+*${0}*
+endsnippet
+
+snippet s
+* ${0}
+endsnippet
+
+snippet c
+\`${1}\`${0}
+endsnippet
+
+snippet inc
+!INCLUDE "${0:File Path}"
+endsnippet
+
+
+# Latex
+snippet l
+\\\\[ ${0} \\\\]
+endsnippet
+
+# Inline Latex
+snippet il
+\\\\( ${0} \\\\)
+endsnippet
+
+# }}}
+
+snippet img
+\begin{figure}[H]
+    \includegraphics{${2: File Location}}
+    \caption{${1:Caption}}
+\end{figure}
+endsnippet
+
+snippet link
+[${1:Text}](${2:href})
+endsnippet
+
+snippet a
+[${1:Text}](${2:href})
+endsnippet
+
+snippet href
+[${1:Text}](${2:href})
+endsnippet
+
+# vim:foldmethod=marker
+
