@@ -75,3 +75,21 @@ function! google#GoogleCursorWithFiletype()
     let l:word = expand('<cword>')
     call google#GoogleGetLucky(l:mapped_ft . ' ' . l:word)
 endfunction
+
+function google#GoogleSelection() range
+    " Get the line and column of the visual selection marks
+    let [l:lnum1, l:col1] = getpos("'<")[1:2]
+    let [l:lnum2, l:col2] = getpos("'>")[1:2]
+
+    " Get all the lines represented by this range
+    let l:lines = getline(l:lnum1, l:lnum2)
+
+    " The last line might need to be cut if the visual selection didn't end on the last column
+    let l:lines[-1] = l:lines[-1][: l:col2 - (&selection == 'inclusive' ? 1 : 2)]
+    " The first line might need to be trimmed if the visual selection didn't start on the first column
+    let l:lines[0] = l:lines[0][l:col1 - 1:]
+
+    " Get the desired text
+    let l:selected_text = join(l:lines, " ")
+    call google#Google(l:selected_text)
+endfunction
