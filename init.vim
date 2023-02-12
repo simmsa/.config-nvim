@@ -1647,15 +1647,7 @@ inoremap <silent><expr> <TAB>
 
 let g:coc_snippet_next = '<tab>'
 
-
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1] =~# '\s'
-endfunction
-
-let g:coc_snippet_next = '<tab>'
 
 " Use K to show documentation in preview window
 nnoremap <silent> M :call <SID>show_documentation()<CR>
