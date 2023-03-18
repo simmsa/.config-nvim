@@ -58,6 +58,7 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'quarto-dev/quarto-vim'
 Plug 'lervag/vimtex'
+Plug 'dense-analysis/ale'
 
 Plug g:plugin_dir . 'simple-org-mode'
 Plug g:plugin_dir . 'syntax-highlight-html-code'
@@ -1940,6 +1941,12 @@ let g:airline_section_z='%{SimpleFileProgress()}'
 " Abolish abbreviations are in ~/.nvim/after/plugins/abolish.vim
 
 " }}}
+" vim ale ---------------------------------------------------------------{{{
+
+let g:ale_disable_lsp = 1
+let g:ale_use_neovim_diagnostics_api = 1
+
+" End vim ale -----------------------------------------------------------}}}
 " vim commentary ----------------------------------------------------------- {{{
 
 nmap gcp gccyypgcc
