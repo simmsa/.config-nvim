@@ -1486,6 +1486,7 @@ augroup myNvimQuarto
     au BufRead,BufNewFile *.qmd set ft=quarto
     au FileType quarto set textwidth=100
     au FileType quarto nnoremap <buffer> cp :call PreviewQuarto()<CR>
+    au FileType quarto setlocal formatprg=python3\ -m\ macchiato
 augroup END
 
 " End Quarto ------------------------------------------------------------}}}
