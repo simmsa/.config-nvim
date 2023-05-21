@@ -1483,12 +1483,21 @@ function! PreviewQuarto()
     :winc p
 endfunction
 
+" Do not dynamically set quarto comments
+" Note: this is probably a bug where the rmd plugin does not recognize a
+" python code block, so it does not set the comment string properly
+" https://github.com/neovim/neovim/blob/2e2101cf7b0e4a70f5670d9d1317860a47bb8385/runtime/ftplugin/rmd.vim#L43-L51
+let g:rmd_dynamic_comments = 0
+
 augroup myNvimQuarto
     autocmd!
     au BufRead,BufNewFile *.qmd set ft=quarto
     au FileType quarto set textwidth=100
     au FileType quarto nnoremap <buffer> cp :call PreviewQuarto()<CR>
     au FileType quarto setlocal formatprg=python3\ -m\ macchiato
+    au FileType quarto setlocal commentstring=#\ %s
+    " Same as the runtime but removes the . for easier code editing
+    au FileType quarto setlocal iskeyword=@,48-57,_
 augroup END
 
 " End Quarto ------------------------------------------------------------}}}
