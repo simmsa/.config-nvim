@@ -230,8 +230,10 @@ endfunction
 let g:h_t_repeat_message = 'Stop Spamming h/t! Use H, /, *, Tags to Navigate!'
 let g:d_n_repeat_message = 'Stop Spamming d/n! Use u, e, to Navigate!'
 let g:w_b_repeat_message = 'Stop Spamming w/b! Use u, e, to Navigate!'
-nnoremap <silent> h :<C-U>call WarnOnRepeat("h", "VCountZero\ gj\ j", g:h_t_repeat_message)<CR>
-nnoremap <silent> t :<C-U>call WarnOnRepeat("t", "VCountZero\ gk\ k", g:h_t_repeat_message)<CR>
+" nnoremap <silent> h :<C-U>call WarnOnRepeat("h", "VCountZero\ gj\ j", g:h_t_repeat_message)<CR>
+nnoremap <silent> <expr> h (v:count == 0 ? 'gj' : 'j')
+nnoremap <silent> <expr> t (v:count == 0 ? 'gk' : 'k')
+" nnoremap <silent> t :<C-U>call WarnOnRepeat("t", "VCountZero\ gk\ k", g:h_t_repeat_message)<CR>
 nnoremap <silent> d :call WarnOnRepeat("left", 'normal! h', g:d_n_repeat_message)<CR>
 nnoremap <silent> n :call WarnOnRepeat("right", 'normal! l', g:d_n_repeat_message)<CR>
 nnoremap <silent> w :call WarnOnRepeat("w", 'normal! w', g:w_b_repeat_message)<CR>
