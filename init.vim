@@ -1673,6 +1673,8 @@ function! s:show_documentation()
   endif
 endfunction
 
+command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+
 " End COC.nvim ----------------------------------------------------------}}}
 " Fugitive --------------------------------------------------" {{{
 
