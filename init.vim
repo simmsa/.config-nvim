@@ -1828,7 +1828,7 @@ nnoremap <silent> go :call mru#MRUFiles()<CR>
 
 let g:fzf_buffers_jump = 1
 
-nnoremap gt <C-]>
+" nnoremap gt <C-]>
 
 " fzf.vim Ag search
 nnoremap g/ :Ag<CR>
