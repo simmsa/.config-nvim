@@ -1923,6 +1923,7 @@ let g:airline#extensions#branch#notexists = ' (Untracked)'
 let g:airline#extensions#branch#displayed_head_limit=35
 let g:airline#extensions#branch#empty_message = ''
 let g:airline#extensions#branch#format = 0
+let g:airline#extensions#tabline#show_tabs = 0
 
 
 augroup vim_airline
