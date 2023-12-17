@@ -482,7 +482,7 @@ nnoremap <C-f> :echo "Not in insert mode!"<CR>
 function! SpeakText(input)
     " Stop any voices
     call StopSpeakText()
-    let l:voice = 'ava'
+    let l:voice = 'Zoe'
     let l:text = ''
     if a:input ==# 'line'
         let l:text = getline(line('.'))
@@ -495,7 +495,8 @@ function! SpeakText(input)
         let l:text = a:input
     endif
 
-    call jobstart('say -v ' . l:voice . ' ' . shellescape(l:text), {})
+   call jobstart('say -v ' . l:voice . ' ' . shellescape(l:text), {})
+
     return
 endfunction
 
