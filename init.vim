@@ -1493,6 +1493,18 @@ endfunction
 " https://github.com/neovim/neovim/blob/2e2101cf7b0e4a70f5670d9d1317860a47bb8385/runtime/ftplugin/rmd.vim#L43-L51
 let g:rmd_dynamic_comments = 0
 
+function! ToggleQuartoFormatPrg()
+    let l:current_formatprg = &formatprg
+
+    if(match(l:current_formatprg, "py") > -1)
+        :setlocal formatprg=fmt\ -w\ 100
+    else
+        :setlocal formatprg=python3\ -m\ macchiato
+    endif
+    let l:current_formatprg = &formatprg
+    echom "Formatter set to: ".l:current_formatprg
+endfunction
+
 augroup myNvimQuarto
     autocmd!
     au BufRead,BufNewFile *.qmd set ft=quarto
@@ -1502,6 +1514,7 @@ augroup myNvimQuarto
     au FileType quarto setlocal commentstring=#\ %s
     " Same as the runtime but removes the . for easier code editing
     au FileType quarto setlocal iskeyword=@,48-57,_
+    au FileType quarto nnoremap <buffer> cof :call ToggleQuartoFormatPrg()<CR>
 augroup END
 
 " End Quarto ------------------------------------------------------------}}}
