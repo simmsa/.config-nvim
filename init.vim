@@ -1481,6 +1481,7 @@ augroup END
 function! PreviewQuarto()
     :w
     let l:filename = expand('%:p')
+    let l:filename = expand('%')
     let l:command = 'quarto preview ' . l:filename
     call StartHTermAutoExit(l:command, v:true)
     :winc p
