@@ -182,20 +182,14 @@ set softtabstop=4
 " }}}
 " Color Scheme -------------------------------------------------- {{{
 
-syntax on
+" }}}
+" Basic Options {{{
 
-let g:sustain#code#brightness = 5
-let g:sustain#code#contrast = 1
-let g:sustain#ui#brightness = 5
-let g:sustain#ui#contrast = 2
-let g:sustain#link_colors = 1
-let g:sustain#enable_maps = 0
-colorscheme sustain
+lua << EOF
 
-" Highlight current line
-set cursorline
+require('startup')
 
-sign define numhl=SignColumn
+EOF
 
 " }}}
 " Should Be Built In -------------------------------------------------- {{{
