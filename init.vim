@@ -650,6 +650,7 @@ endfunction
 
 call ToggleOption('p', 'set paste!')
 call ToggleOption('r', 'RainbowParenthesesDeactivate', 'RainbowParenthesesActivate')
+call ToggleOption('c', 'set conceallevel=0', 'set conceallevel=2')
 
 nnoremap <silent> coh :noh<CR>
 
