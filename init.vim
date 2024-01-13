@@ -619,7 +619,7 @@ function! NumActiveWindows(max)
     return len(l:windows_active)
 endfunction
 
-nnoremap <silent> s. :call SyntaxAttr()<CR>
+nnoremap <silent> s. :Inspect<CR>
 
 function! FixTrailingWhitespace()
     let l:save_pos = winsaveview()
