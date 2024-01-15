@@ -426,7 +426,7 @@ nnoremap sg z=
 function! NextMisspelledWord()
     normal! ]s
     normal! zv
-    normal! z.
+    normal! zz
     call repeat#set('sn')
 endfunction
 command! NextMisspelledWord call NextMisspelledWord()
