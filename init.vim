@@ -1941,6 +1941,7 @@ let g:pandoc#modules#enabled  = ["folding"]
 " vim pandoc syntax -----------------------------------------------------{{{
 
 let g:pandoc#syntax#conceal#use = 0
+let g:pandoc#syntax#use_definition_lists = 0
 
 " End vim pandoc syntax -------------------------------------------------}}}
 " vim rooter --------------------------------------------------------------- {{{
