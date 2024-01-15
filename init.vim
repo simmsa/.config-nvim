@@ -11,19 +11,11 @@ EOF
 " End Plugin Manager ----------------------------------------------------}}}
 " Color Scheme -------------------------------------------------- {{{
 
-" Tabs and Spaces -------------------------------------------------- {{{
+lua << EOF
 
-"Use spaces instead of tabs
-set expandtab
-"1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
+require('syntax_colors')
 
-" }}}
-
-" }}}
-" Color Scheme -------------------------------------------------- {{{
+EOF
 
 " }}}
 " Basic Options {{{
