@@ -56,25 +56,14 @@ endfunction
 " End Should Be Built In ---------------------------------------------- }}}
 " Dvorak -------------------------------------------------- {{{
 
+lua << EOF
+
+require("keymaps")
+
+EOF
+
 " Map dvorak keys everywhere with noremap explicitly
 " Yeah this is weird but it keeps me from getting lazy!
-let g:h_t_repeat_message = 'Stop Spamming h/t! Use H, /, *, Tags to Navigate!'
-let g:d_n_repeat_message = 'Stop Spamming d/n! Use u, e, to Navigate!'
-let g:w_b_repeat_message = 'Stop Spamming w/b! Use u, e, to Navigate!'
-" nnoremap <silent> h :<C-U>call WarnOnRepeat("h", "VCountZero\ gj\ j", g:h_t_repeat_message)<CR>
-nnoremap <silent> <expr> h (v:count == 0 ? 'gj' : 'j')
-nnoremap <silent> <expr> t (v:count == 0 ? 'gk' : 'k')
-" nnoremap <silent> t :<C-U>call WarnOnRepeat("t", "VCountZero\ gk\ k", g:h_t_repeat_message)<CR>
-nnoremap <silent> d :call WarnOnRepeat("left", 'normal! h', g:d_n_repeat_message)<CR>
-nnoremap <silent> n :call WarnOnRepeat("right", 'normal! l', g:d_n_repeat_message)<CR>
-nnoremap <silent> w :call WarnOnRepeat("w", 'normal! w', g:w_b_repeat_message)<CR>
-nnoremap <silent> b :call WarnOnRepeat("b", 'normal! b', g:w_b_repeat_message)<CR>
-
-xnoremap <silent> <expr> h (v:count == 0 ? 'gj' : 'j')
-xnoremap <silent> <expr> t (v:count == 0 ? 'gk' : 'k')
-xnoremap d <Left>
-xnoremap n <Right>
-
 function! VCountZero(isZero, notZero)
     if v:count == 0
         exe 'normal! ' . a:isZero
@@ -111,6 +100,27 @@ function! WarnOnRepeat(input, cmd, warn_message)
         echohl Error | echo a:warn_message | echohl None
     endif
 endfunction
+let g:h_t_repeat_message = 'Stop Spamming h/t! Use H, /, *, Tags to Navigate!'
+let g:d_n_repeat_message = 'Stop Spamming d/n! Use u, e, to Navigate!'
+let g:w_b_repeat_message = 'Stop Spamming w/b! Use u, e, to Navigate!'
+" nnoremap <silent> h :<C-U>call WarnOnRepeat("h", "VCountZero\ gj\ j", g:h_t_repeat_message)<CR>
+" nnoremap <silent> t :<C-U>call WarnOnRepeat("t", "VCountZero\ gk\ k", g:h_t_repeat_message)<CR>
+" nnoremap <silent> d :call WarnOnRepeat("left", 'normal! h', g:d_n_repeat_message)<CR>
+" nnoremap <silent> n :call WarnOnRepeat("right", 'normal! l', g:d_n_repeat_message)<CR>
+" nnoremap <silent> w :call WarnOnRepeat("w", 'normal! w', g:w_b_repeat_message)<CR>
+" nnoremap <silent> b :call WarnOnRepeat("b", 'normal! b', g:w_b_repeat_message)<CR>
+
+"nnoremap <silent> d <Left>
+"nnoremap <silent> n <Right>
+
+nnoremap <silent> <expr> h (v:count == 0 ? 'gj' : 'j')
+nnoremap <silent> <expr> t (v:count == 0 ? 'gk' : 'k')
+
+xnoremap <silent> <expr> h (v:count == 0 ? 'gj' : 'j')
+xnoremap <silent> <expr> t (v:count == 0 ? 'gk' : 'k')
+
+xnoremap d <Left>
+xnoremap n <Right>
 
 " Quicker Movement
 nnoremap D ^
@@ -119,7 +129,7 @@ xnoremap D ^
 xnoremap N g_
 
 " j is now jump, swapping with t
-noremap j t
+" noremap j t
 " k is now kill swapping with d
 noremap k d
 " l is now look up next swapping with n
@@ -135,7 +145,7 @@ noremap - :
 " I Fudged up
 noremap f u
 
-xmap n <Right>
+" xmap n <Right>
 
 " }}}
 " Convience Mappings ------------------------------------------------- {{{
@@ -369,8 +379,8 @@ augroup END
 " Leader Mappings -------------------------------------------------- {{{
 
 " Map leader key to space
-let g:mapleader = "\<Space>"
-let g:maplocalleader = ","
+" let g:mapleader = "\<Space>"
+" let g:maplocalleader = ","
 " <Space> w to save a file
 nnoremap <Leader>w :w<CR>
 "<Space> s to source VIMRC
