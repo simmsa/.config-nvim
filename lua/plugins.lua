@@ -48,7 +48,6 @@ require("lazy").setup({
     'vim-pandoc/vim-pandoc-syntax',
     -- 'tpope/vim-markdown',
     'quarto-dev/quarto-vim',
-    -- 'vim-scripts/SyntaxAttr.vim',
     'neovim/nvim-lspconfig',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-buffer',
