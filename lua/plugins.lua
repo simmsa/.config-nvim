@@ -27,7 +27,7 @@ require("lazy").setup({
     "mattn/emmet-vim",
     "tpope/vim-fugitive",
     'tpope/vim-surround',
-    'vim-airline/vim-airline',
+    -- 'vim-airline/vim-airline',
     'jiangmiao/auto-pairs',
     'justinmk/vim-sneak',
     'airblade/vim-gitgutter',
@@ -70,6 +70,7 @@ require("lazy").setup({
     'quarto-dev/quarto-nvim',
     'jmbuhr/otter.nvim',
     'simmsa/innerblock',
+    {'nvim-lualine/lualine.nvim', dependencies = {'nvim-tree/nvim-web-devicons'}},
     {
         'jackMort/ChatGPT.nvim',
         dependencies = {
