@@ -48,7 +48,6 @@ spell/*
 bundle/*
 !bundle/pomo
 !bundle/google
-!bundle/innerblock
 
 # Vim-plug
 autoload/plug.vim
