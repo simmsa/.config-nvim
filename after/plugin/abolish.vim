@@ -1,1 +1,0 @@
-:Abolish dobule double
