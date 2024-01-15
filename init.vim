@@ -1776,6 +1776,11 @@ xmap <Leader>av :Tab /\|\ "<CR>         | " Align Vim inline comment
 xmap <Leader>ae :Tab /=<CR>             | " Align equals
 
 " }}}
+" tex conceal -----------------------------------------------------------{{{
+
+let g:tex_conceal="abdgm"
+
+" End tex conceal -------------------------------------------------------}}}
 " vim airline -------------------------------------------------- {{{
 
 " let g:airline_powerline_fonts=1
@@ -2027,6 +2032,5 @@ require('plugin_definitions')
 require('plugin_settings')
 
 EOF
-
 
 " End Plugins ---------------------------------------------------------}}}
