@@ -1,0 +1,259 @@
+{
+  "ml_academic": {
+    "type": "chat",
+    "opts": {
+      "template": "You are a senior machine learning engineer writing a research paper on a novel machine learning algorithm for the Association of Computing Machinery (ACM). Edit (proofread, and improve the voice) the following Markdown text (after the colon) that is a section in this research paper to match the desired writing style of the ACM. The output of this prompt should use a text width of 100 characters. Do not change any Markdown symbols. Below the changed text add a bulleted list of changes.\n:\n{{input}}",
+      "strategy": "replace",
+      "params": {
+        "model": "gpt-3.5-turbo"
+      }
+    }
+  },
+  "ml_define": {
+    "type": "chat",
+    "opts": {
+      "template": "You are a senior machine learning engineer writing a research paper on a novel machine learning algorithm for the Association of Computing Machinery (ACM). Define the following Markdown text (after the colon) as succinctly and clear as possible using the desired writing style of the ACM. The output of this prompt should be raw Markdown using * for bullets, in the following order. 1. The input line 2. A new tabbed bulleted line with the definition 3. tabbed bulleted line with Other common names 4. tabbed bulleted line with Problems the definition solves. Please limit the output text width of each line 100 characters. Output your your result after the input text. Do not change any Markdown symbols. \n:\n{{input}}",
+      "strategy": "replace",
+      "params": {
+        "model": "gpt-3.5-turbo"
+      }
+    }
+  },
+  "proofread": {
+    "type": "chat",
+    "opts": {
+      "template": "You are an editor for the New York Times tasked with editing the Markdown text after the colon. The target audience of this text are graduate level academics. Please correct any spelling or grammer mistakes. Additionally, change the wording of any sentences that are unclear. Do not change any Markdown symbols. Below the changed text add a bulleted list of changes. The output must use a text width of 100 characters.\n:\n{{input}}",
+      "strategy": "replace",
+      "params": {
+        "model": "gpt-3.5-turbo"
+      }
+    }
+  },
+  "doc_python": {
+    "type": "chat",
+    "opts": {
+      "template": "You are a senior Python engineer with 15 years of experience working at FAANG. You have been tasked with properly documenting the code after the colon. Please add Sphinx style  docstrings and code comments to the python code code. Docstrings should be kept as short as possible and use a professional academic writing style. Output all of the input python code with the included docstrings. Do not include any extra python code or import any python libraries. \n:\n{{input}}",
+      "strategy": "replace",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "max_tokens": 3750
+      }
+    }
+  },
+  "type_py_inplace": {
+    "type": "chat",
+    "opts": {
+      "template": "You are a senior Python engineer with 15 years of experience working at FAANG. You have been tasked with adding types the Python 3.11 code after the colon. Please use built in python types and include any necessary code or libraries. Output valid Python 3.11 code. Do not output any thing that is not valid Python code.\n:\n{{input}}",
+      "strategy": "replace",
+      "params": {
+        "model": "gpt-3.5-turbo-1106"
+      }
+    }
+  },
+  "doc_py_inplace": {
+    "type": "chat",
+    "opts": {
+      "template": "You are a senior Python engineer with 15 years of experience working at FAANG. You have been tasked with properly documenting the Python code after the colon. Please add Sphinx style  docstrings and code comments to the python code code. Docstrings should be kept as short as possible and use a professional academic writing style. Output all of the input python code with the included docstrings. Do not include any extra python code or import any python libraries. \n:\n{{input}}",
+      "strategy": "replace",
+      "params": {
+        "model": "gpt-3.5-turbo-1106"
+      }
+    }
+  },
+  "py_finalize": {
+    "type": "chat",
+    "opts": {
+      "template": "You are a senior Python engineer with 15 years of experience working at FAANG. You have been tasked improving the Python 3.11 code after the colon. Please perform two tasks, 1. Add valid Python 3.11 typing/types to all code. 2. Add Sphinx style  docstrings and code comments. Docstrings should be kept as short as possible and use a professional academic writing style. Output all of the input python code with the included types and docstrings. Do not include any extra python code. Output valid Python 3.11 code. Do not output anything that is not valid Python code.\n:\n{{input}}",
+      "strategy": "replace",
+      "params": {
+        "model": "gpt-3.5-turbo-1106"
+      }
+    }
+  },
+  "doc_python_long": {
+    "type": "chat",
+    "opts": {
+      "template": "You are a senior python engineer tasked with properly documenting the following code at the end of this prompt. Using the 'Google Python Style Guide' as a style guide, format, fix, add docstrings and code code comments. Output all of the improved python code with the included changes. I have already imported the necessary libraries so do not import any libraries.\n\n{{input}}",
+      "strategy": "replace",
+      "params": {
+        "model": "gpt-3.5-turbo-16k"
+      }
+    }
+  },
+  "test_grammar_correction": {
+    "type": "chat",
+    "opts": {
+      "template": "Correct this to standard {{lang}}:\n\n{{input}}",
+      "strategy": "replace",
+      "params": {
+        "model": "gpt-3.5-turbo"
+      }
+    },
+    "args": {
+      "lang": {
+        "type": "string",
+        "optional": "true",
+        "default": "english"
+      }
+    }
+  },
+  "test_translate": {
+    "type": "chat",
+    "opts": {
+      "template": "Translate this into {{lang}}:\n\n{{input}}",
+      "strategy": "replace",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "temperature": 0.3
+      }
+    },
+    "args": {
+      "lang": {
+        "type": "string",
+        "optional": "true",
+        "default": "english"
+      }
+    }
+  },
+  "test_keywords": {
+    "type": "chat",
+    "opts": {
+      "template": "Extract the main keywords from the following text.\n\n{{input}}",
+      "strategy": "replace",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "temperature": 0.5,
+        "frequency_penalty": 0.8
+      }
+    }
+  },
+  "test_docstring": {
+    "type": "chat",
+    "opts": {
+      "template": "# An elaborate, high quality docstring for the above function:\n# Writing a good docstring\n\nThis is an example of writing a really good docstring that follows a best practice for the given language. Attention is paid to detailing things like\n* parameter and return types (if applicable)\n* any errors that might be raised or returned, depending on the language\n\nI received the following code:\n\n```{{filetype}}\n{{input}}\n```\n\nThe code with a really good docstring added is below:\n\n```{{filetype}}",
+      "strategy": "edit",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "stop": [
+          "```"
+        ]
+      }
+    }
+  },
+  "test_add_tests": {
+    "type": "chat",
+    "opts": {
+      "template": "Implement tests for the following code.\n\nCode:\n```{{filetype}}\n{{input}}\n```\n\nTests:\n```{{filetype}}",
+      "strategy": "append",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "stop": [
+          "```"
+        ]
+      }
+    }
+  },
+  "test_optimize_code": {
+    "type": "chat",
+    "opts": {
+      "template": "Optimize the following code.\n\nCode:\n```{{filetype}}\n{{input}}\n```\n\nOptimized version:\n```{{filetype}}",
+      "strategy": "edit",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "stop": [
+          "```"
+        ]
+      }
+    }
+  },
+  "test_summarize": {
+    "type": "chat",
+    "opts": {
+      "template": "Summarize the following text.\n\nText:\n\"\"\"\n{{input}}\n\"\"\"\n\nSummary:",
+      "strategy": "edit",
+      "params": {
+        "model": "gpt-3.5-turbo"
+      }
+    }
+  },
+  "test_fix_bugs": {
+    "type": "chat",
+    "opts": {
+      "template": "Fix bugs in the below code\n\nCode:\n```{{filetype}}\n{{input}}\n```\n\nFixed code:\n```{{filetype}}",
+      "strategy": "edit",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "stop": [
+          "```"
+        ]
+      }
+    }
+  },
+  "test_explain_code": {
+    "type": "chat",
+    "opts": {
+      "title": " Explain Code",
+      "template": "Explain the following code:\n\nCode:\n```{{filetype}}\n{{input}}\n```\n\nUse markdown format.\nHere's what the above code is doing:\n```",
+      "strategy": "display",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "stop": [
+          "```"
+        ]
+      }
+    }
+  },
+  "test_roxygen_edit": {
+    "type": "chat",
+    "opts": {
+      "template": "Insert a roxygen skeleton to document this R function:\n\n```{{filetype}}\n[insert]\n\n{{input}}\n\n```",
+      "strategy": "prepend",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "temperature": 0.5,
+        "max_tokens": 1024
+      }
+    }
+  },
+  "test_code_readability_analysis": {
+    "type": "chat",
+    "opts": {
+      "strategy": "quick_fix",
+      "template": "{{input}}",
+      "params": {
+        "model": "gpt-3.5-turbo",
+        "max_tokens": 2048,
+        "messages": [
+          {
+            "role": "system",
+            "content": "\nYou must identify any readability issues in the code snippet.\nSome readability issues to consider:\n- Unclear naming\n- Unclear purpose\n- Redundant or obvious comments\n- Lack of comments\n- Long or complex one liners\n- Too much nesting\n- Long variable names\n- Inconsistent naming and code style.\n- Code repetition\nYou may identify additional problems. The user submits a small section of code from a larger file.\nOnly list lines with readability issues, in the format <line_num>|<issue and proposed solution>\nYour commentary must fit on a single line\nDo not use the range of lines but just single line number\nIf there's no issues with code respond with only: <OK>\n"
+          },
+          {
+            "role": "user",
+            "content": "\n0 public class Logic {\n1      public static void main(String[] args) {\n2         Scanner sc = new Scanner(System.in);\n3         int n = sc.nextInt();\n4         int[] arr = new int[n];\n5         for (int i = 0; i < n; i++) {\n6             arr[i] = sc.nextInt();\n7         }\n8         int[] dp = new int[n];\n9         dp[0] = arr[0];\n10         dp[1] = Math.max(arr[0], arr[1]);\n11         for (int i = 2; i < n; i++) {\n12             dp[i] = Math.max(dp[i - 1], dp[i - 2] + arr[i]);\n13         }\n14         System.out.println(dp[n - 1]);\n15     }\n16 }"
+          },
+          {
+            "role": "assistant",
+            "content": "\n0: The class name 'Logic' is too generic. A more meaningful name could be 'DynamicProgramming'\n2: The variable name 'sc' is unclear. A more meaningful name could be 'scanner'.\n3: The variable name 'n' is unclear. A more meaningful name could be 'arraySize' or 'numElements'.\n4: The variable name 'arr' unclear. A more descriptive name could be 'inputArray' or 'elementValues'.\n8: The variable name 'dp' is unclear. A more informative name could be 'maxSum' or 'optimalSolution'.\n9: There are no comments explaining the meaning of the 'dp' array values and how they relate to the problem statement.\n11: There are no comments explaining the logic and purpose of the for loop"
+          },
+          {
+            "role": "user",
+            "content": "\n0    for (let i: number = 0; i < l; i++) {\n1       let notAddr: boolean = false;\n2       // non standard input\n3       if (items[i].scriptSig && !items[i].addr) {\n4         items[i].addr = 'Unparsed address [' + u++ + ']';\n5         items[i].notAddr = true;\n6         notAddr = true;\n7       }\n8 \n9       // non standard output\n10       if (items[i].scriptPubKey && !items[i].scriptPubKey.addresses) {\n11         items[i].scriptPubKey.addresses = ['Unparsed address [' + u++ + ']'];"
+          },
+          {
+            "role": "assistant",
+            "content": "\n0: The variable name 'i' and 'l' are unclear and easily confused with other characters like '1'. More meaningful names could be 'index' and 'length' respectively.\n1: The variable name 'notAddr' is unclear and a double negative. An alternative could be 'hasUnparsedAddress'.\n3: The comment \"non standard input\" is not very informative. It could be more descriptive, e.g., \"Check for non standard input address\"\n9: The comment \"non standard output\" is not very informative. It could be more descriptive, e.g., \"Check for non standard output address\"\n10: The variable name 'items' might be more informative if changed to 'transactions' or 'txItems'.\n11: The array element 'Unparsed address [' + u++ + ']' could use a more descriptive comment, e.g., \"Assign a unique identifier to non standard output addresses\"\n11: The variable name 'u' is unclear. A more meaningful name could be 'unparsedAddressCount' or 'unparsedAddressId'."
+          },
+          {
+            "role": "user",
+            "content": "\n0 function BaseAction:init(opts)\n1   self.opts = opts\n2 end"
+          },
+          {
+            "role": "assistant",
+            "content": "<OK>"
+          }
+        ]
+      }
+    }
+  }
+}
