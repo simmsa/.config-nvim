@@ -1962,14 +1962,6 @@ let g:rooter_change_directory_for_non_project_files = 'current'
 
 let g:sneak#label = 0
 
-noremap <silent> <C-E> :normal! e<CR>
-nmap e <Plug>Sneak_s
-nmap E <Plug>Sneak_S
-xmap e <Plug>Sneak_s
-xmap E <Plug>Sneak_S
-omap e <Plug>Sneak_s
-omap E <Plug>Sneak_S
-
 nmap - <Plug>SneakNext
 nmap _ <Plug>SneakPrevious
 xmap - <Plug>SneakNext
