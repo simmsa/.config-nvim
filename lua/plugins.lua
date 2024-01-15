@@ -88,12 +88,6 @@ require("lazy").setup({
             vim.cmd([[colorscheme sustain]])
         end,
     },
-    -- {
-    --     dir = local_plugin_dir .. "innerblock",
-    -- },
-    -- {
-    --     dir = local_plugin_dir .. "customizable_rainbow_parens",
-    -- },
     {
         dir = local_plugin_dir .. "fzf-mru",
     },
