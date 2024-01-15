@@ -1830,6 +1830,14 @@ let g:airline_section_z='%{SimpleFileProgress()}'
 
 let g:ale_disable_lsp = 1
 let g:ale_use_neovim_diagnostics_api = 1
+let g:ale_fix_on_save = 1
+
+  let g:ale_fixers = {
+  \   'json': [
+  \       'fixjson',
+  \   ],
+  \}
+
 
 " End vim ale -----------------------------------------------------------}}}
 " vim commentary ----------------------------------------------------------- {{{
