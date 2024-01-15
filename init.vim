@@ -1,14 +1,4 @@
 " Author: Andrew Simms <andrew@andrewdsimms.com> <https://github.com/simmsa>
-" Plugin Manager --------------------------------------------------------{{{
-
-lua << EOF
-
-require('plugins')
-
-EOF
-
-
-" End Plugin Manager ----------------------------------------------------}}}
 " Color Scheme -------------------------------------------------- {{{
 
 lua << EOF
