@@ -1366,6 +1366,8 @@ augroup END
 "     au BufRead,BufNewFile *.rmd setlocal textwidth=80
 " augroup END
 
+let g:rmd_dynamic_comments = 0
+
 function! s:customNvimRMappings()
    nmap <buffer> cp <Plug>RMakePDF
    imap <buffer> cp <Plug>RMakePDF
