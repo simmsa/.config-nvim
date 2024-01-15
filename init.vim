@@ -283,6 +283,7 @@ nnoremap X :qall<CR>
 " combines them into a single mapping by trying each command in order until
 " one works. Also centers, opens folds and calls repeat
 function! QuickfixMap(inputs, input_map, ...)
+    lua vim.diagnostic.setqflist()
     let l:post_inputs = ['normal! zO', 'normal! zz']
     for l:input in a:inputs
         try
@@ -303,8 +304,8 @@ function! QuickfixMap(inputs, input_map, ...)
     endfor
 endfunction
 
-" q Macros can still be used, just not the ones below We first want to
-" navigate to errors, warnings than other quickfix list items
+" q Macros can still be used, just not the ones below.
+" We first want to navigate to errors, warnings than other quickfix list items
 nnoremap <silent> qq :call QuickfixMap(['lfirst', 'cfirst', 'normal! ]s'], 'qq')<CR>
 nnoremap <silent> qh :call QuickfixMap(['lnext', 'cnext'], 'qh')<CR>
 nnoremap <silent> qt :call QuickfixMap(['lprev', 'cprev'], 'qt')<CR>
