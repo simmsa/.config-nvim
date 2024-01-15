@@ -1,6 +1,7 @@
--- Plugin Setup and Configuration
+-- Plugin Definitions
+-- Plugin Settings/Configuration in lua/plugin_settings.lua
 
---  Plugin Manager (lazy.nvim) Setup ------------------------------------------------{{{
+-- Plugin Manager (lazy.nvim) Setup ------------------------------------------------{{{
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
