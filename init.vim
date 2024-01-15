@@ -1502,43 +1502,60 @@ cmap <C-S> <Plug>CmdlineCompleteBackward
 " End CmdlineComplete ------------------------------------------------------ }}}
 " COC.nvim --------------------------------------------------------------{{{
 
-set hidden
-set nobackup
-set nowritebackup
-set cmdheight=1
-set updatetime=300
-set shortmess+=c
+" set hidden
+" set nobackup
+" set nowritebackup
+" set cmdheight=1
+" set updatetime=300
+" set shortmess+=c
 
-let g:coc_enable_locationlist = 1
+" let g:coc_enable_locationlist = 1
 
-function! CheckBackSpace() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
+" function! CheckBackSpace() abort
+"     let col = col('.') - 1
+"     return !col || getline('.')[col - 1]  =~ '\s'
+" endfunction
 
-inoremap <silent><expr> <TAB>
-\ coc#pum#visible() ? coc#_select_confirm() :
-\ coc#expandableOrJumpable() ?
-\ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-\ CheckBackSpace() ? "\<TAB>" :
-\ coc#refresh()
+" inoremap <silent><expr> <TAB>
+" \ coc#pum#visible() ? coc#_select_confirm() :
+" \ coc#expandableOrJumpable() ?
+" \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+" \ CheckBackSpace() ? "\<TAB>" :
+" \ coc#refresh()
 
-let g:coc_snippet_next = '<tab>'
+" let g:coc_snippet_next = '<tab>'
 
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-" Use K to show documentation in preview window
-nnoremap <silent> M :call <SID>show_documentation()<CR>
+" " Make <CR> to accept selected completion item or notify coc.nvim to format
+" " <C-g>u breaks current undo, please make your own choice
+" " The one downside of this is that if there is a completion at the end of a
+" " line and you don't want to use it there is no way to press enter to go to
+" " the next line
+" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+"                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+" " Use K to show documentation in preview window
+" nnoremap <silent> M :call <SID>show_documentation()<CR>
 
-command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
+" nnoremap <silent> gt :call CocActionAsync('doHover')<CR>
+
+" " Highlight the symbol and its references when holding the cursor
+" autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" function! s:show_documentation()
+"   if (index(['vim','help'], &filetype) >= 0)
+"     execute 'h '.expand('<cword>')
+"   else
+"     call CocAction('doHover')
+"   endif
+" endfunction
+
+" command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 
 " End COC.nvim ----------------------------------------------------------}}}
 " Fugitive --------------------------------------------------" {{{
