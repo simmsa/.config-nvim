@@ -2017,3 +2017,14 @@ call SourceDirectory()
 " Fold Settings -------------------------------------------------- {{{
 " vim:foldmethod=marker
 " }}}
+" Plugins -------------------------------------------------------------{{{
+
+lua << EOF
+
+require('plugin_definitions')
+require('plugin_settings')
+
+EOF
+
+
+" End Plugins ---------------------------------------------------------}}}
