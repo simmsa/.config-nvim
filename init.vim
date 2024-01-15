@@ -1269,7 +1269,8 @@ augroup ft_md
     au Filetype markdown set foldcolumn=4
     au Filetype markdown set breakat-=\*
     au Filetype markdown set textwidth=1000
-    au Filetype markdown nnoremap <buffer> cp :call CompileMDPDF()<CR>
+    " au Filetype markdown nnoremap <buffer> cp :call CompileMDPDF()<CR>
+    au Filetype markdown nnoremap <buffer> cp :call PreviewQuarto()<CR>
     au Filetype markdown nnoremap <buffer> ch :silent call CompileHtmlAndOpen()<CR>
     au Filetype markdown nnoremap <buffer> cr :silent call CompileHtmlAndReload()<CR>
     au Filetype markdown nnoremap <buffer> gi :call CreateIncludeFile()<CR>
