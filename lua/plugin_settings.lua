@@ -1,5 +1,5 @@
 -- Plugin Settings
--- Plugins are managed in lua/plugin_definitions.lua
+-- Plugins are defined in lua/plugin_definitions.lua
 
 --  dense-analysis/ale --------------------------------------------------{{{
 
@@ -94,3 +94,62 @@ require('lualine').setup {
 }
 
 --  End lualine.nvim ----------------------------------------------------}}}
+--  quarto-nvim ---------------------------------------------------------{{{
+
+require('quarto').setup({
+  debug = false,
+  closePreviewOnExit = true,
+  lspFeatures = {
+    enabled = true,
+    languages = { 'r', 'python', 'bash' },
+    chunks = 'curly', -- 'curly' or 'all'
+    diagnostics = {
+      enabled = true,
+      triggers = { "BufWritePost" }
+    },
+    completion = {
+      enabled = true,
+    },
+  },
+  codeRunner = {
+    enabled = false,
+    default_method = nil, -- 'molten' or 'slime'
+    ft_runners = {}, -- filetype to runner, ie. `{ python = "molten" }`.
+                     -- Takes precedence over `default_method`
+    never_run = { "yaml" }, -- filetypes which are never sent to a code runner
+  },
+  keymap = {
+    hover = 'M',
+    definition = 'gd',
+    -- rename = '<leader>lR',
+    references = 'gr',
+  }
+})
+
+--  End quarto-nvim -----------------------------------------------------}}}
+--  otter.nvim ----------------------------------------------------------{{{
+
+local otter = require'otter'
+otter.setup{
+  lsp = {
+    hover = {
+      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    },
+  },
+  buffers = {
+    -- if set to true, the filetype of the otterbuffers will be set.
+    -- otherwise only the autocommand of lspconfig that attaches
+    -- the language server will be executed without setting the filetype
+    set_filetype = false,
+  },
+  strip_wrapping_quote_characters = { "'", '"', "`" },
+}
+
+local otter_languages = {'python', 'r'}
+local otter_completion = true
+local otter_diagnostics = true
+local otter_use_treesitter = true
+
+otter.activate(otter_languages, otter_completion, otter_diagnostics, otter_use_treesitter)
+
+--  End otter.nvim ------------------------------------------------------}}}
