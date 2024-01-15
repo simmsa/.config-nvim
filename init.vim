@@ -1848,16 +1848,6 @@ let g:dasht_filetype_docsets = {
 \ }
 
 " End vim-dasht -------------------------------------------------------- }}}
-" vim easymotion ----------------------------------------------------------- {{{
-
-" Disable easy motion mappings
-let g:EasyMotion_do_mapping = 0
-map H <Plug>(easymotion-bd-jk)
-map T <Plug>(easymotion-jumptoanywhere)
-let g:EasyMotion_keys = 'HUTENOPGCRYFLBKJWQVZXIDSA'
-let g:EasyMotion_use_upper = 1
-
-" End vim easymotion ------------------------------------------------------- }}}
 " vim easy align ------------------------------------------------------- {{{
 
 nmap ga <Plug>(EasyAlign)
