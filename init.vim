@@ -1761,18 +1761,6 @@ endfunction
 " let R_assign = 0
 
 " End Nvim-R ------------------------------------------------------------}}}
-" nvim treesitter -------------------------------------------------------{{{
-
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-    highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-    },
-}
-EOF
-
-" End nvim treesitter ---------------------------------------------------}}}
 " pomo ------------------------------------------------------------------{{{
 
 nnoremap <silent> <Leader>p :call pomo#ShowMenu()<CR>
