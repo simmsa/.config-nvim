@@ -1565,7 +1565,7 @@ function! ToggleGStatus()
     if buflisted(bufname('.git/index'))
         bd .git/index
     else
-        exe 'Gstatus | winc H | vertical resize 78'
+        exe 'G | winc H | vertical resize 78'
     endif
 endfunction
 command! ToggleGStatus :call ToggleGStatus()
@@ -1631,12 +1631,12 @@ endfunction
 
 nnoremap <silent> gn :call GoToNextGitFile()<CR>
 
-nnoremap cd :Gcommit --amend --verbose<CR>
-nnoremap cm :Gcommit --verbose<CR>
-nnoremap cf :Gwrite<CR>
+nnoremap cd :G commit --amend --verbose<CR>
+nnoremap cm :G commit --verbose<CR>
+nnoremap cf :G write<CR>
 
 " Status Update
-nnoremap <silent> su :Gstatus<CR>
+nnoremap <silent> su :G<CR>
 
 augroup plug_fugitive
     au!
