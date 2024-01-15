@@ -1282,6 +1282,7 @@ augroup ft_md
 augroup END
 
 let g:markdown_fenced_languages = ['python', 'bash=sh', 'c', 'html', 'css', 'javascript', 'java', 'xml', 'cpp', 'vim', 'typescript']
+let g:markdown_syntax_conceal = 0
 
 " }}}
 " Python -------------------------------------------------- {{{
