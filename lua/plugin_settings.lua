@@ -9,7 +9,8 @@ vim.g.ale_use_neovim_diagnostics_api = 1
 vim.g.ale_fix_on_save = 1
 
 vim.g.ale_fixers = {
-    json = {'prettier'}
+    json = {'prettier'},
+    lua = {'stylua'}
 }
 
 --  End dense-analysis/ale ----------------------------------------------}}}
