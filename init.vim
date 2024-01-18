@@ -1569,7 +1569,7 @@ function! RunOrUpdateGDiff()
     echo ''
     " Close any fugitive windows, Gdiff will not update a diff window
     exe 'silent! bd *fugitive*'
-    exe 'Gdiff'
+    exe 'Gdiffsplit'
     " Go to the last window (A hack due to `exe winc p` not working correctly)
     call feedkeys('ss')
     exe 'normal! z.'
