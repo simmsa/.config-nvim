@@ -1,11 +1,11 @@
 local set_keymap = vim.api.nvim_set_keymap
 
 local function normal_remap(from, to)
-    set_keymap('n', from, to, {silent = true, noremap = true, nowait = true})
+	set_keymap("n", from, to, { silent = true, noremap = true, nowait = true })
 end
 
 local function normal_map(from, to)
-    set_keymap('n', from, to, {silent = true, nowait = true})
+	set_keymap("n", from, to, { silent = true, nowait = true })
 end
 
 vim.g.mapleader = " "
@@ -13,7 +13,9 @@ vim.g.maplocalleader = ","
 
 -- vim.api.nvim_set_keymap('v', '<Leader>ce', chatgpt.edit_with_instructions, {})
 -- vim.keymap.set('v', '<leader>ce', chatgpt.edit_with_instructions)
-vim.keymap.set('n', 'gb', function() print("real lua function") end)
+vim.keymap.set("n", "gb", function()
+	print("real lua function")
+end)
 -- I have to explicitly set space to use leader
 
 -- vim.keymap.set('v', '<space>ce', chatgpt.edit_with_instructions)
@@ -28,11 +30,11 @@ vim.keymap.set('n', 'gb', function() print("real lua function") end)
 
 -- vim.api.nvim_set_keymap('n', 'd', '<Left>', { silent = true , noremap = true})
 -- nnoremap <silent> d <Left>
-normal_remap('d', '<Left>')
+normal_remap("d", "<Left>")
 
 -- nnoremap <silent> n <Right>
 -- vim.api.nvim_set_keymap('n', 'n', '<Right>', { silent = true })
-normal_remap('n', '<Right>')
+normal_remap("n", "<Right>")
 
 -- nnoremap <silent> <expr> h (v:count == 0 ? 'gj' : 'j')
 -- vim.api.nvim_set_keymap('n', 'h', [[v:count == 0 ? 'gj' : 'j']], { expr = true, silent = true })
@@ -75,7 +77,6 @@ normal_remap('n', '<Right>')
 
 -- vim.api.nvim_set_keymap('x', 'n', '<Right>', {noremap = true})
 
-
 -- nnoremap <silent> d <Left>
 -- vim.api.nvim_set_keymap('n', 'd', '<Left>', { silent = true })
 -- -- nnoremap <silent> n <Right>
@@ -95,7 +96,6 @@ normal_remap('n', '<Right>')
 -- vim.api.nvim_set_keymap('x', 'd', '<Left>', { silent = true })
 -- -- xnoremap n <Right>
 -- vim.api.nvim_set_keymap('x', 'n', '<Right>', { silent = true })
-
 
 -- Quicker Movement
 -- set_keymap('n', 'D', '^', { silent = true })
@@ -123,4 +123,3 @@ normal_remap('n', '<Right>')
 -- set_keymap('x', 'n', '<Right>', {silent = true})
 
 -- test
-

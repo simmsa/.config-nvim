@@ -32,11 +32,11 @@ vim.opt.showmode = false
 -- Display tabs and trailing spaces
 vim.opt.list = true
 vim.opt.listchars = {
-  tab = ' \\ ',
-  trail = '⋅',
-  nbsp = '⋅',
-  extends = '',
-  precedes = ''
+	tab = " \\ ",
+	trail = "⋅",
+	nbsp = "⋅",
+	extends = "",
+	precedes = "",
 }
 -- Configuring backup and related
 vim.opt.backup = true
@@ -49,19 +49,18 @@ vim.g.loaded_matchparen = 1
 vim.opt.relativenumber = true
 vim.opt.number = true
 
+augroup("LineNumToggle", { clear = true })
 
-augroup('LineNumToggle', {clear = true})
-
-autocmd('InsertEnter', {
-    group='LineNumToggle',
-    pattern='*',
-    command ='set norelativenumber number'
+autocmd("InsertEnter", {
+	group = "LineNumToggle",
+	pattern = "*",
+	command = "set norelativenumber number",
 })
 
-autocmd('InsertLeave', {
-    group='LineNumToggle',
-    pattern='*',
-    command ='set relativenumber'
+autocmd("InsertLeave", {
+	group = "LineNumToggle",
+	pattern = "*",
+	command = "set relativenumber",
 })
 
 -- Fixing Delays
@@ -69,27 +68,27 @@ vim.opt.ttimeoutlen = 10
 vim.opt.timeoutlen = 400
 
 -- Better tab completion in the command line
-vim.opt.wildmode = {'longest', 'list', 'full'}
+vim.opt.wildmode = { "longest", "list", "full" }
 
 -- Ignore files
 vim.opt.wildignore = {
-    '*/.git/*',
-    '*/.ipynb_checkpoints/*',
-    '*/.jpg',
-    '*/.png',
-    '*/.gif',
+	"*/.git/*",
+	"*/.ipynb_checkpoints/*",
+	"*/.jpg",
+	"*/.png",
+	"*/.gif",
 }
 
 -- Set dictionary
-vim.o.dictionary = '/usr/share/dict/words'
+vim.o.dictionary = "/usr/share/dict/words"
 
 -- Set spell language
-vim.o.spelllang = 'en_us'
+vim.o.spelllang = "en_us"
 
 -- Use zsh if available
-local zsh_path = vim.fn.systemlist('which zsh')[1]
+local zsh_path = vim.fn.systemlist("which zsh")[1]
 if not vim.fn.empty(zsh_path) then
-    vim.o.shell = zsh_path
+	vim.o.shell = zsh_path
 end
 
 -- Make test_name auto completable
@@ -113,31 +112,31 @@ vim.g.loaded_rrhelper = 1
 vim.g.did_install_default_menus = 1
 
 -- Disable preview for completion
-vim.o.completeopt = vim.o.completeopt:gsub('preview,','')
+vim.o.completeopt = vim.o.completeopt:gsub("preview,", "")
 
 -- Open diffs + fugitive vertically
-vim.o.diffopt = vim.o.diffopt .. ',vertical'
+vim.o.diffopt = vim.o.diffopt .. ",vertical"
 
 -- Set fillchars for vertical splits
-vim.o.fillchars = 'vert:│'
+vim.o.fillchars = "vert:│"
 
 -- Set guicursor
-vim.o.guicursor= 'n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175'
+vim.o.guicursor =
+	"n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
 
 -- Set Python host program
-vim.g.python3_host_prog = '/opt/homebrew/bin/python3'
+vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
 
 -- Allow setting terminal window name from vim via titlestring
 vim.o.title = true
 
 -- Set undodir, backupdir, and swapfile dir
-vim.o.undodir = '~/.local/share/nvim/undo//'
-vim.o.backupdir = '~/.local/share/nvim/backup//'
-vim.o.directory = '~/.local/share/nvim/swap//'
+vim.o.undodir = "~/.local/share/nvim/undo//"
+vim.o.backupdir = "~/.local/share/nvim/backup//"
+vim.o.directory = "~/.local/share/nvim/swap//"
 
 -- Default plus save 1000 previously edited, used to make v:oldfiles more
 -- useful for custom mru plugin
 vim.o.shada = "!,'1000,<50,s10,h"
 
 --  End Misc Options ---------------------------------------------------}}}
-
