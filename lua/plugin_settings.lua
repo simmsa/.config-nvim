@@ -40,7 +40,7 @@ require("lualine").setup({
 		},
 	},
 	sections = {
-		lualine_a = { "mode" },
+		lualine_a = { "mode", "searchcount" },
 		-- lualine_b = {'branch', 'diff', 'diagnostics'},
 		lualine_b = { "branch", "diff" },
 		lualine_c = { "filename" },
