@@ -467,7 +467,6 @@ function ReturnToPreviousLine()
     endif
 endfunction
 
-
 augroup line_return
     au!
     au FileType * call ReturnToPreviousLine()

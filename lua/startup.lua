@@ -66,6 +66,7 @@ autocmd("InsertLeave", {
 -- Fixing Delays
 vim.opt.ttimeoutlen = 10
 vim.opt.timeoutlen = 400
+vim.opt.updatetime = 100
 
 -- Better tab completion in the command line
 vim.opt.wildmode = { "longest", "list", "full" }
