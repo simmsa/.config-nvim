@@ -38,9 +38,6 @@ vim.opt.listchars = {
 	extends = "",
 	precedes = "",
 }
--- Configuring backup and related
-vim.opt.backup = true
-vim.opt.swapfile = false
 -- No redraws in macros
 vim.opt.lazyredraw = true
 -- Turn off parentheses matching, it's driving me crazy
@@ -131,10 +128,27 @@ vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
 -- Allow setting terminal window name from vim via titlestring
 vim.o.title = true
 
+-- Enable backup
+vim.o.backup = true
+vim.o.swapfile = false
+
 -- Set undodir, backupdir, and swapfile dir
-vim.o.undodir = "~/.local/share/nvim/undo//"
-vim.o.backupdir = "~/.local/share/nvim/backup//"
-vim.o.directory = "~/.local/share/nvim/swap//"
+vim.o.undodir = vim.fn.expand("~/.local/share/nvim/undo//")
+vim.o.backupdir = vim.fn.expand("~/.local/share/nvim/backup//")
+vim.o.directory = vim.fn.expand("~/.local/share/nvim/swap//")
+
+local function createDirectoryIfNotExists(input_dir)
+	local complete_input_directory = vim.fn.expand(input_dir)
+	if type(complete_input_directory) == "string" then
+		if not vim.fn.isdirectory(complete_input_directory) then
+			vim.fn.mkdir(complete_input_directory, "p")
+		end
+	end
+end
+
+createDirectoryIfNotExists(vim.o.undodir)
+createDirectoryIfNotExists(vim.o.backupdir)
+createDirectoryIfNotExists(vim.o.directory)
 
 -- Default plus save 1000 previously edited, used to make v:oldfiles more
 -- useful for custom mru plugin
