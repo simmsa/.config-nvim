@@ -1350,7 +1350,7 @@ augroup myNvimQuarto
     autocmd!
     au BufRead,BufNewFile *.qmd set ft=quarto
     au FileType quarto set textwidth=100
-    au FileType quarto nnoremap <buffer> cp :call PreviewQuarto()<CR>
+    au FileType quarto nnoremap <buffer> cp :QuartoPreview<CR>
     au FileType quarto setlocal formatprg=python3\ -m\ macchiato
     au FileType quarto setlocal commentstring=#\ %s
     " Same as the runtime but removes the . for easier code editing
