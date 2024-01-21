@@ -27,6 +27,7 @@ plugin_manager.setup({
 	"tpope/vim-commentary",
 	"mattn/emmet-vim",
 	"tpope/vim-fugitive",
+	{ "junegunn/gv.vim", dependencies = { "tpope/vim-fugitive" } },
 	"tpope/vim-surround",
 	-- 'vim-airline/vim-airline',
 	"jiangmiao/auto-pairs",
