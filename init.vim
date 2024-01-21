@@ -1632,7 +1632,7 @@ endfunction
 nnoremap <silent> gn :call GoToNextGitFile()<CR>
 
 nnoremap cd :G commit --amend --verbose<CR>
-nnoremap cm :G commit --verbose<CR>
+nnoremap cm :G commit --verbose<bar>only<CR>
 nnoremap cf :G write<CR>
 
 " Status Update
