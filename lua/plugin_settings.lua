@@ -522,10 +522,26 @@ cmp.setup({
 		}),
 		-- From: https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings for vim-vsnip
 		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
+			local entries = cmp.get_entries()
+			local entry_count = #entries
+			local first_entry_type = nil
+
+			if entry_count > 0 then
+				local completion_item = entries[1]["completion_item"]
+				if completion_item and completion_item["data"] and completion_item["data"]["snippet"] then
+					first_entry_type = "snippet"
+				end
+			end
+
+			if entry_count == 1 or first_entry_type == "snippet" then
+				cmp.confirm({
+					behavior = cmp.ConfirmBehavior.Replace,
+					select = true,
+				})
 			elseif vim.fn["vsnip#available"](1) == 1 then
 				feedkey("<Plug>(vsnip-expand-or-jump)", "")
+			elseif cmp.visible() then
+				cmp.select_next_item()
 			elseif has_words_before() then
 				cmp.complete()
 			else
