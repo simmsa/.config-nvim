@@ -91,7 +91,7 @@ end
 
 -- Make test_name auto completable
 -- vim.bo.iskeyword = vim.bo.iskeyword .. '_'
--- vim.o.iskeyword = vim.o.iskeyword .. '_'
+vim.opt.iskeyword:append("_")
 
 -- Don't highlight really long lines
 vim.o.synmaxcol = 500
