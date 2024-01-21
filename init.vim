@@ -456,12 +456,21 @@ nnoremap <silent> <Leader>lo :call OpenLog()<CR>
 " Cool Functions -------------------------------------------------- {{{
 
 "Make sure vim returns to the same line when you reopen a file.
+function ReturnToPreviousLine()
+    " Skip these filetypes
+    if &filetype =~ 'gitcommit'
+        return
+    else
+        if line("'\"") > 0 && line("'\"") <= line("$")
+          execute 'normal! g`"zvzz' |
+        endif
+    endif
+endfunction
+
+
 augroup line_return
     au!
-    au BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \   execute 'normal! g`"zvzz' |
-        \ endif
+    au FileType * call ReturnToPreviousLine()
 augroup END
 
 " Center first search result
