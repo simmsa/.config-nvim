@@ -91,6 +91,24 @@ plugin_manager.setup({
 	{
 		dir = local_plugin_dir .. "google",
 	},
+}, {
+	rtp = {
+		disabled_plugins = {
+			"gzip",
+			"matchit",
+			"matchparen",
+			"netrwPlugin",
+			"tarPlugin",
+			"tohtml",
+			"tutor",
+			"zipPlugin",
+		},
+	},
+	change_detection = {
+		-- automatically check for config file changes and reload the ui
+		enabled = true,
+		notify = true, -- get a notification when changes are found
+	},
 })
 
 --  End Plugin List ----------------------------------------------------}}}
