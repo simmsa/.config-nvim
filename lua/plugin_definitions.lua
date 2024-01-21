@@ -56,7 +56,7 @@ require("lazy").setup({
 	"hrsh7th/nvim-cmp",
 	"hrsh7th/cmp-vsnip",
 	"hrsh7th/vim-vsnip",
-	-- 'godlygeek/tabular',
+	"godlygeek/tabular",
 	"preservim/vim-markdown",
 	-- 'hrsh7th/vim-vsnip-integ',
 	-- 'saadparwaiz1/cmp_luasnip',
