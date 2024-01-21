@@ -21,8 +21,9 @@ vim.opt.rtp:prepend(lazypath)
 --  Plugin List --------------------------------------------------------{{{
 
 local local_plugin_dir = "~/.config/nvim/bundle/"
+local plugin_manager = require("lazy")
 
-require("lazy").setup({
+plugin_manager.setup({
 	"tpope/vim-commentary",
 	"mattn/emmet-vim",
 	"tpope/vim-fugitive",
