@@ -32,7 +32,7 @@ vim.opt.showmode = false
 -- Display tabs and trailing spaces
 vim.opt.list = true
 vim.opt.listchars = {
-	tab = " \\ ",
+	tab = "→ ",
 	trail = "⋅",
 	nbsp = "⋅",
 	extends = "",
