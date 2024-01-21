@@ -116,7 +116,7 @@ vim.g.did_install_default_menus = 1
 vim.o.completeopt = vim.o.completeopt:gsub("preview,", "")
 
 -- Open diffs + fugitive vertically
-vim.o.diffopt = vim.o.diffopt .. ",vertical"
+vim.opt.diffopt:append({ "vertical" })
 
 -- Set fillchars for vertical splits
 vim.o.fillchars = "vert:│"
