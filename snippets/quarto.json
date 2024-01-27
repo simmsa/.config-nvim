@@ -180,6 +180,16 @@
     "body": ["::: {.callout-danger}", "", "$0", "", ":::"],
     "description": "Insert callout danger block"
   },
+  "1 Column Table": {
+    "prefix": "1ct",
+    "body": "| $1 |",
+    "description": "1 Column Table"
+  },
+  "1 Column Table Start": {
+    "prefix": "1cts",
+    "body": ["| $1 |", "| ----- |"],
+    "description": "1 Column Table Start"
+  },
   "2 Column Table": {
     "prefix": "2ct",
     "body": "| $1 | $2 |",
@@ -199,5 +209,41 @@
     "prefix": "3cts",
     "body": ["| $1 | $2 | $3 |", "| ----- | ----- | ----- |"],
     "description": "3 Column Table Start"
+  },
+  "4 Column Table": {
+    "prefix": "4ct",
+    "body": "| $1 | $2 | $3 | $4 |",
+    "description": "4 Column Table"
+  },
+  "4 Column Table Start": {
+    "prefix": "4cts",
+    "body": ["| $1 | $2 | $3 | $4 |", "| ----- | ----- | ----- | ----- |"],
+    "description": "4 Column Table Start"
+  },
+  "5 Column Table": {
+    "prefix": "5ct",
+    "body": "| $1 | $2 | $3 | $4 | $5 |",
+    "description": "5 Column Table"
+  },
+  "5 Column Table Start": {
+    "prefix": "5cts",
+    "body": [
+      "| $1 | $2 | $3 | $4 | $5 |",
+      "| ----- | ----- | ----- | ----- | ----- |"
+    ],
+    "description": "5 Column Table Start"
+  },
+  "6 Column Table": {
+    "prefix": "6ct",
+    "body": "| $1 | $2 | $3 | $4 | $5 | $6 |",
+    "description": "6 Column Table"
+  },
+  "6 Column Table Start": {
+    "prefix": "6cts",
+    "body": [
+      "| $1 | $2 | $3 | $4 | $5 | $6 |",
+      "| ----- | ----- | ----- | ----- | ----- | ----- |"
+    ],
+    "description": "6 Column Table Start"
   }
 }
