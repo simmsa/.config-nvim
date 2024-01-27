@@ -141,10 +141,10 @@
     "body": "[${TM_SELECTED_TEXT:${1:text}}](https://${2:link})$0",
     "description": "Insert link"
   },
-  "Insert image": {
-    "prefix": "image",
-    "body": "![${TM_SELECTED_TEXT:${1:alt}}](https://${2:link})$0",
-    "description": "Insert image"
+  "Image Snippet": {
+    "prefix": "img",
+    "body": ["![${1:Caption}](${2:Path}){#fig-${3:Ref}}"],
+    "description": "Insert an image snippet"
   },
   "Insert strikethrough": {
     "prefix": "strikethrough",
