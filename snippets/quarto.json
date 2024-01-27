@@ -165,6 +165,21 @@
     ],
     "description": "Insert callout block"
   },
+  "Insert note block": {
+    "prefix": "note",
+    "body": ["::: {.callout-note}", "", "$0", "", ":::"],
+    "description": "Insert callout note block"
+  },
+  "Insert warning block": {
+    "prefix": "warn",
+    "body": ["::: {.callout-warning}", "", "$0", "", ":::"],
+    "description": "Insert callout warning block"
+  },
+  "Insert danger block": {
+    "prefix": "danger",
+    "body": ["::: {.callout-danger}", "", "$0", "", ":::"],
+    "description": "Insert callout danger block"
+  },
   "2 Column Table": {
     "prefix": "2ct",
     "body": "| $1 | $2 |",
