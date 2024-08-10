@@ -1815,53 +1815,6 @@ xmap <Leader>ae :Tab /=<CR>             | " Align equals
 let g:tex_conceal="abdgm"
 
 " End tex conceal -------------------------------------------------------}}}
-" vim airline -------------------------------------------------- {{{
-
-" let g:airline_powerline_fonts=1
-" let g:airline_skip_empty_sections = 1
-" let g:airline_theme='relative'
-" let g:airline#extensions#tabline#enabled=1
-" let g:airline#extensions#branch#enabled=1
-" let g:airline#extensions#branch#notexists = ' (Untracked)'
-" let g:airline#extensions#branch#displayed_head_limit=35
-" let g:airline#extensions#branch#empty_message = ''
-" let g:airline#extensions#branch#format = 0
-
-" let g:airline#extensions#tabline#show_tabs = 0
-
-" if !exists('g:airline_symbols')
-"     let g:airline_symbols = {}
-" endif
-
-
-" let g:airline_symbols.maxlinenr = '☰'
-
-
-" augroup vim_airline
-"     au!
-"     " Remove '[No Name]' buffers
-"     " autocmd BufEnter * call airline#extensions#tabline#buflist#invalidate()
-
-" augroup END
-
-" function! AirlineFilename()
-"     return '/' . TruncateFilename(24)
-" endfunction
-" let g:airline_section_c='%{AirlineFilename()}'
-
-" function! SimpleFileProgress()
-"     return printf('%s/%s', line('.'), line('$'))
-" endfunction
-
-" function! AirlineNull()
-"     return ''
-" endfunction
-" let g:airline_section_y='%{SimpleFileProgress()}'
-
-
-" let g:airline_section_z='%{AirlineNull()}'
-
-" }}}
 " vim abolish -------------------------------------------------- {{{
 
 " Abolish abbreviations are in ~/.nvim/after/plugins/abolish.vim

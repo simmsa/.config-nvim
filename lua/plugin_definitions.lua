@@ -29,7 +29,6 @@ plugin_manager.setup({
 	"tpope/vim-fugitive",
 	{ "junegunn/gv.vim", dependencies = { "tpope/vim-fugitive" } },
 	"tpope/vim-surround",
-	-- 'vim-airline/vim-airline',
 	"jiangmiao/auto-pairs",
 	"justinmk/vim-sneak",
 	"tpope/vim-repeat",
