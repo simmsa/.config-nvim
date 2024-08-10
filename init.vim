@@ -1397,6 +1397,32 @@ augroup ft_ruby
 augroup END
 
 " }}}
+" Rust -------------------------------------------------- {{{
+
+function! RunRust(input_type)
+    :w
+    let l:filename = expand('%:p')
+    let l:command = 'cargo run ' . l:filename
+    let l:root_directory = FindRootDirectory()
+    execute ':cd %:p:h'
+    if has('nvim')
+        execute ':15sp term://' . l:command
+        :winc r
+        if(a:input_type ==# 'normal')
+            exe('startinsert')
+        endif
+    else
+        execute ':! ' . l:command
+    endif
+    execute ":cd " . l:root_directory
+endfunction
+
+augroup ft_rust
+    autocmd!
+    au FileType rust nnoremap <buffer> cp :call RunRust("normal")<CR>
+augroup END
+
+" }}}
 " Swift -------------------------------------------------- {{{
 
 function! RunSwift()
