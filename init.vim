@@ -242,7 +242,7 @@ nnoremap <silent> sx :call SmartBufferDelete()<CR>
 " Vertically split the current file
 nnoremap sv :vs<CR>
 " Remap man command
-nnoremap M K
+" nnoremap M K
 " Faster tab in insert mode.
 imap <C-t> <tab>
 " I always use A and never use a, so why not save a motion
