@@ -1896,37 +1896,6 @@ xmap v <Plug>(expand_region_expand)
 xmap <C-v> <Plug>(expand_region_shrink)
 
 " }}}
-" vim gitgutter -------------------------------------------------- {{{
-
-function! JumpToHunkAndUnfold(keypress)
-    if(a:keypress ==# 'n')
-        :GitGutterNextHunk
-    endif
-
-    if(a:keypress ==# 'p')
-        :GitGutterPrevHunk
-    endif
-    " Unfold just where the cursor is (supposed to be)
-    normal! zv
-    " Move cursor to the middle of the screen
-    normal! z.
-    call repeat#set('c' . a:keypress)
-endfunction
-
-nnoremap <silent> sh :GitGutterStageHunk<CR>
-nnoremap <silent> cn :call JumpToHunkAndUnfold('n')<CR>
-" nnoremap <silent> cp :call JumpToHunkAndUnfold('p')<CR>
-
-let g:gitgutter_set_sign_backgrounds = 1
-let g:gitgutter_sign_added = '+'
-let g:gitgutter_sign_modified = '~'
-let g:gitgutter_sign_removed = 'x'
-let g:gitgutter_sign_modified_removed = '~ˣ'
-
-let g:gitgutter_max_signs = 5000
-let g:gitgutter_map_keys = 0
-
-" }}}
 " vim go -------------------------------------------------- {{{
 
 let g:go_disable_autoinstall = 1
