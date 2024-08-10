@@ -73,7 +73,17 @@ plugin_manager.setup({
 			"nvim-telescope/telescope.nvim",
 		},
 	},
-	-- {'neoclide/coc.nvim', branch = 'release'},
+	{
+		"robitx/gp.nvim",
+		config = function()
+			local conf = {
+				-- For customization, refer to Install > Configuration in the Documentation/Readme
+			}
+			require("gp").setup(conf)
+
+			-- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
+		end,
+	},
 	{ "nvim-treesitter/nvim-treesitter" },
 	{
 		dir = local_plugin_dir .. "sustain",
