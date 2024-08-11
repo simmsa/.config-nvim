@@ -11,6 +11,8 @@ vim.g.ale_fix_on_save = 1
 vim.g.ale_fixers = {
 	json = { "prettier" },
 	lua = { "stylua" },
+	python = { "ruff", "black" },
+	r = { "formatR" },
 }
 
 --  End dense-analysis/ale ----------------------------------------------}}}
