@@ -1,4 +1,4 @@
--- Plugin Definitions
+-- Plugin Definitionns
 -- Plugin Settings/Configuration in lua/plugin_settings.lua
 
 -- Plugin Manager (lazy.nvim) Setup ------------------------------------------------{{{
@@ -41,14 +41,10 @@ plugin_manager.setup({
 	"junegunn/fzf",
 	"junegunn/fzf.vim",
 	"junegunn/vim-easy-align",
-	"norcalli/nvim-colorizer.lua",
-	-- 'lervag/vimtex',
 	"dense-analysis/ale",
 	"vim-pandoc/vim-pandoc",
 	"vim-pandoc/vim-pandoc-syntax",
-	-- 'tpope/vim-markdown',
-	"quarto-dev/quarto-vim",
-	"neovim/nvim-lspconfig",
+	{ "neovim/nvim-lspconfig", dependencies = { "nvimdev/lspsaga.nvim" } },
 	"hrsh7th/cmp-nvim-lsp",
 	"hrsh7th/cmp-buffer",
 	"hrsh7th/cmp-path",
@@ -58,9 +54,7 @@ plugin_manager.setup({
 	"hrsh7th/vim-vsnip",
 	"godlygeek/tabular",
 	"preservim/vim-markdown",
-	-- { 'KeitaNakamura/tex-conceal.vim',  ft = { "tex", "quarto" } },
-	-- 'github/copilot.vim',
-	"hiphish/rainbow-delimiters.nvim",
+	"derekstride/tree-sitter-sql",
 	"quarto-dev/quarto-nvim",
 	"jmbuhr/otter.nvim",
 	"simmsa/innerblock",
