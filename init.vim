@@ -17,6 +17,14 @@ require('startup')
 EOF
 
 " }}}
+" Quirky Hacks ----------------------------------------------------------{{{
+
+" iterm2 Specific Map Control-V to paste from system clipboard in Normal mode
+" nnoremap <C-V> "+p
+" inoremap <C-V> "+p
+
+
+" End Quirky Hacks ------------------------------------------------------}}}
 " Should Be Built In -------------------------------------------------- {{{
 
 function! GetVisualSelection()
