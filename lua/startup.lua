@@ -32,11 +32,11 @@ vim.opt.showmode = false
 -- Display tabs and trailing spaces
 vim.opt.list = true
 vim.opt.listchars = {
-	tab = "→ ",
-	trail = "⋅",
-	nbsp = "⋅",
-	extends = "",
-	precedes = "",
+    tab = "→ ",
+    trail = "⋅",
+    nbsp = "⋅",
+    extends = "",
+    precedes = "",
 }
 -- No redraws in macros
 vim.opt.lazyredraw = true
@@ -49,15 +49,15 @@ vim.opt.number = true
 augroup("LineNumToggle", { clear = true })
 
 autocmd("InsertEnter", {
-	group = "LineNumToggle",
-	pattern = "*",
-	command = "set norelativenumber number",
+    group = "LineNumToggle",
+    pattern = "*",
+    command = "set norelativenumber number",
 })
 
 autocmd("InsertLeave", {
-	group = "LineNumToggle",
-	pattern = "*",
-	command = "set relativenumber",
+    group = "LineNumToggle",
+    pattern = "*",
+    command = "set relativenumber",
 })
 
 -- Fixing Delays
@@ -70,11 +70,11 @@ vim.opt.wildmode = { "longest", "list", "full" }
 
 -- Ignore files
 vim.opt.wildignore = {
-	"*/.git/*",
-	"*/.ipynb_checkpoints/*",
-	"*/.jpg",
-	"*/.png",
-	"*/.gif",
+    "*/.git/*",
+    "*/.ipynb_checkpoints/*",
+    "*/.jpg",
+    "*/.png",
+    "*/.gif",
 }
 
 -- Set dictionary
@@ -86,7 +86,7 @@ vim.o.spelllang = "en_us"
 -- Use zsh if available
 local zsh_path = vim.fn.systemlist("which zsh")[1]
 if not vim.fn.empty(zsh_path) then
-	vim.o.shell = zsh_path
+    vim.o.shell = zsh_path
 end
 
 -- Make test_name auto completable
@@ -120,7 +120,7 @@ vim.o.fillchars = "vert:│"
 
 -- Set guicursor
 vim.o.guicursor =
-	"n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
+"n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
 
 -- Set Python host program
 -- vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
@@ -139,12 +139,12 @@ vim.o.backupdir = vim.fn.expand("~/.local/share/nvim/backup//")
 vim.o.directory = vim.fn.expand("~/.local/share/nvim/swap//")
 
 local function createDirectoryIfNotExists(input_dir)
-	local complete_input_directory = vim.fn.expand(input_dir)
-	if type(complete_input_directory) == "string" then
-		if not vim.fn.isdirectory(complete_input_directory) then
-			vim.fn.mkdir(complete_input_directory, "p")
-		end
-	end
+    local complete_input_directory = vim.fn.expand(input_dir)
+    if type(complete_input_directory) == "string" then
+        if not vim.fn.isdirectory(complete_input_directory) then
+            vim.fn.mkdir(complete_input_directory, "p")
+        end
+    end
 end
 
 createDirectoryIfNotExists(vim.o.undodir)
