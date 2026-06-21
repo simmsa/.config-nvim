@@ -1103,3 +1103,30 @@ vim.lsp.config('lua_ls', {
 --  End Neovim Lua LSP Setup -------------------------------------------}}}
 
 --  End LSP (nvim-lspconfig) Setup -------------------------------------------------------}}}
+--  CursorHold / Hover Customization ------------------------------------{{{
+
+-- Add this to your Neovim config (not in trouble.nvim opts)
+vim.diagnostic.config({
+    float = {
+        focusable = false,
+        style = "minimal",
+        border = "rounded",
+        source = "always",
+        header = "",
+        prefix = "",
+    },
+    virtual_text = true,
+    signs = true,
+    update_in_insert = false,
+    underline = true,
+    severity_sort = true,
+})
+
+-- Auto-show diagnostic on cursor hold
+vim.api.nvim_create_autocmd("CursorHold", {
+    callback = function()
+        vim.diagnostic.open_float(nil, { focus = false })
+    end
+})
+
+--  End CursorHold / Hover Customization --------------------------------}}}
