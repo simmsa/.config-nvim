@@ -304,11 +304,11 @@ endfunction
 
 " q Macros can still be used, just not the ones below.
 " We first want to navigate to errors, warnings than other quickfix list items
-nnoremap <silent> qq :call QuickfixMap(['lfirst', 'cfirst', 'normal! ]s'], 'qq')<CR>
-nnoremap <silent> qh :call QuickfixMap(['lnext', 'cnext'], 'qh')<CR>
-nnoremap <silent> qt :call QuickfixMap(['lprev', 'cprev'], 'qt')<CR>
-nnoremap <silent> qo :call QuickfixMap(['lopen', 'copen'], 'qo', 'skip_post_input')<CR>
-nnoremap <silent> qc :call QuickfixMap(['lclose', 'cclose'], 'qc', 'skip_post_input')<CR>
+" nnoremap <silent> qq :call QuickfixMap(['lfirst', 'cfirst', 'normal! ]s'], 'qq')<CR>
+" nnoremap <silent> qh :call QuickfixMap(['lnext', 'cnext'], 'qh')<CR>
+" nnoremap <silent> qt :call QuickfixMap(['lprev', 'cprev'], 'qt')<CR>
+" nnoremap <silent> qo :call QuickfixMap(['lopen', 'copen'], 'qo', 'skip_post_input')<CR>
+" nnoremap <silent> qc :call QuickfixMap(['lclose', 'cclose'], 'qc', 'skip_post_input')<CR>
 " I never use ; in any commands, but I use : all the time
 cnoremap ; :
 cnoremap : ;
