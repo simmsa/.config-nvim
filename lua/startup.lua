@@ -123,7 +123,8 @@ vim.o.guicursor =
 	"n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
 
 -- Set Python host program
-vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
+-- vim.g.python3_host_prog = "/opt/homebrew/bin/python3"
+vim.g.python3_host_prog = "/opt/homebrew/opt/python@3.11/libexec/bin"
 
 -- Allow setting terminal window name from vim via titlestring
 vim.o.title = true
