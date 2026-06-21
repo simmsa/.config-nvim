@@ -1969,6 +1969,14 @@ augroup plug_fzf
     au VimEnter * nnoremap g* :Ag <C-r><C-w><CR>
 augroup END
 
+command! -nargs=* RG call fzf#vim#grep(
+    \ 'rg --column --line-number --no-heading --color=always --smart-case ' . shellescape(<q-args>),
+    \ 1,
+    \ fzf#vim#with_preview(),
+    \ 0)
+
+nnoremap <silent> gre :RG<CR>
+
 " }}}
 " GV (Git Log Viewer) -------------------------------------------------- {{{
 
