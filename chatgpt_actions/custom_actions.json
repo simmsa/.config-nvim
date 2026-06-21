@@ -12,7 +12,27 @@
   "ml_define": {
     "type": "chat",
     "opts": {
-      "template": "You are a senior machine learning engineer writing a research paper on a novel machine learning algorithm for the Association of Computing Machinery (ACM). Define the following Markdown text (after the colon) as succinctly and clear as possible using the desired writing style of the ACM. The output of this prompt should be raw Markdown using * for bullets, in the following order. 1. The input line 2. A new tabbed bulleted line with the definition 3. tabbed bulleted line with Other common names 4. tabbed bulleted line with Problems the definition solves. Please limit the output text width of each line 100 characters. Output your your result after the input text. Do not change any Markdown symbols. \n:\n{{input}}",
+      "template": "You are a senior  writing a research paper on a novel machine learning algorithm for the Association of Computing Machinery (ACM). Define the following Markdown text (after the colon) as succinctly and clear as possible using the desired writing style of the ACM. The output of this prompt should be raw Markdown using * for bullets, in the following order. 1. The input line 2. A new tabbed bulleted line with the definition 3. tabbed bulleted line with Other common names 4. tabbed bulleted line with Problems the definition solves. Please limit the output text width of each line 100 characters. Output your your result after the input text. Do not change any Markdown symbols. \n:\n{{input}}",
+      "strategy": "replace",
+      "params": {
+        "model": "gpt-3.5-turbo"
+      }
+    }
+  },
+  "stat_define": {
+    "type": "chat",
+    "opts": {
+      "template": "You are a senior statistician. Define the following word after the colon as succinctly and clear as possible. The output of this prompt should be raw Markdown with the definition in a 'Definition List' as defined in markdown extended syntax.  Here is the word\n:\n{{input}}",
+      "strategy": "replace",
+      "params": {
+        "model": "gpt-3.5-turbo"
+      }
+    }
+  },
+  "pm_define": {
+    "type": "chat",
+    "opts": {
+      "template": "You are a senior Project Manager. Define the following word after the colon as succinctly and clear as possible. The output of this prompt should be raw Markdown with the definition in a 'Definition List' as defined in markdown extended syntax.  Here is the word\n:\n{{input}}",
       "strategy": "replace",
       "params": {
         "model": "gpt-3.5-turbo"
@@ -134,9 +154,7 @@
       "strategy": "edit",
       "params": {
         "model": "gpt-3.5-turbo",
-        "stop": [
-          "```"
-        ]
+        "stop": ["```"]
       }
     }
   },
@@ -147,9 +165,7 @@
       "strategy": "append",
       "params": {
         "model": "gpt-3.5-turbo",
-        "stop": [
-          "```"
-        ]
+        "stop": ["```"]
       }
     }
   },
@@ -160,9 +176,7 @@
       "strategy": "edit",
       "params": {
         "model": "gpt-3.5-turbo",
-        "stop": [
-          "```"
-        ]
+        "stop": ["```"]
       }
     }
   },
@@ -183,9 +197,7 @@
       "strategy": "edit",
       "params": {
         "model": "gpt-3.5-turbo",
-        "stop": [
-          "```"
-        ]
+        "stop": ["```"]
       }
     }
   },
@@ -197,9 +209,7 @@
       "strategy": "display",
       "params": {
         "model": "gpt-3.5-turbo",
-        "stop": [
-          "```"
-        ]
+        "stop": ["```"]
       }
     }
   },
