@@ -636,33 +636,33 @@ vim.g.ts_highlight_lua = true
 --  hphish/rainbow-delimiters.nvim --------------------------------------{{{
 
 -- This module contains a number of default definitions
-local rainbow_delimiters = require("rainbow-delimiters")
+-- local rainbow_delimiters = require("rainbow-delimiters")
 
-vim.g.rainbow_delimiters = {
-	strategy = {
-		[""] = rainbow_delimiters.strategy["global"],
-		commonlisp = rainbow_delimiters.strategy["local"],
-	},
-	query = {
-		[""] = "rainbow-delimiters",
-		lua = "rainbow-blocks",
-	},
-	priority = {
-		[""] = 110,
-		lua = 210,
-	},
-	highlight = {
-		"RainbowOne",
-		"RainbowTwo",
-		"RainbowThree",
-		"RainbowFour",
-		"RainbowFive",
-		"RainbowSix",
-		"RainbowSeven",
-		"RainbowEight",
-	},
-	-- blacklist = {'c', 'cpp'},
-}
+-- vim.g.rainbow_delimiters = {
+-- 	strategy = {
+-- 		[""] = rainbow_delimiters.strategy["global"],
+-- 		commonlisp = rainbow_delimiters.strategy["local"],
+-- 	},
+-- 	query = {
+-- 		[""] = "rainbow-delimiters",
+-- 		lua = "rainbow-blocks",
+-- 	},
+-- 	priority = {
+-- 		[""] = 110,
+-- 		lua = 210,
+-- 	},
+-- 	highlight = {
+-- 		"RainbowOne",
+-- 		"RainbowTwo",
+-- 		"RainbowThree",
+-- 		"RainbowFour",
+-- 		"RainbowFive",
+-- 		"RainbowSix",
+-- 		"RainbowSeven",
+-- 		"RainbowEight",
+-- 	},
+-- 	-- blacklist = {'c', 'cpp'},
+-- }
 
 --  End hphish/rainbow-delimiters.nvim ----------------------------------}}}
 --  nvim-cmp Autocomplete -----------------------------------------------{{{
