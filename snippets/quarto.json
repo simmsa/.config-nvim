@@ -250,5 +250,15 @@
       "| ----- | ----- | ----- | ----- | ----- | ----- |"
     ],
     "description": "6 Column Table Start"
+  },
+  "Type I Error": {
+    "prefix": "t1",
+    "body": ["\\$\\text{Type I Error}\\$"],
+    "description": "Type I Error"
+  },
+  "Type II Error": {
+    "prefix": "t2",
+    "body": ["\\$\\text{Type II Error}\\$"],
+    "description": "Type II Error"
   }
 }
