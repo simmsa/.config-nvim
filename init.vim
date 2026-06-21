@@ -1550,27 +1550,94 @@ augroup END
 " }}}
 " Rust -------------------------------------------------- {{{
 
+" Define a global variable to track split mode (horizontal by default)
+let g:split_mode = 'vertical'
+
+" Function to find Cargo.toml (project root) with max depth limit
+function! FindCargoRoot()
+    let l:current = expand('%:p:h')
+    let l:previous = ''
+    let l:max_depth = 10  " Maximum directories to traverse upward
+    let l:depth = 0
+
+    while l:current !=# l:previous && l:depth < l:max_depth
+        if filereadable(l:current . '/Cargo.toml')
+            return l:current
+        endif
+        let l:previous = l:current
+        let l:current = fnamemodify(l:current, ':h')
+        let l:depth += 1
+    endwhile
+
+    " If no Cargo.toml found within limit, return current file's directory
+    " and show a warning
+    echohl WarningMsg
+    echo "No Cargo.toml found within " . l:max_depth . " parent directories. Using current directory."
+    echohl None
+    return expand('%:p:h')
+endfunction
+
+" Function to run Rust with cargo
 function! RunRust(input_type)
     :w
-    let l:filename = expand('%:p')
-    let l:command = 'cargo run ' . l:filename
-    let l:root_directory = FindRootDirectory()
-    execute ':cd %:p:h'
+    let l:cargo_root = FindCargoRoot()
+    let l:current_dir = getcwd()
+    execute ':cd ' . l:cargo_root
+
     if has('nvim')
-        execute ':15sp term://' . l:command
+        " Use split mode based on the global variable
+        if g:split_mode ==# 'horizontal'
+            execute ':15sp term://cargo run'
+        else
+            execute ':vs'
+            execute ':winc r'
+            execute ':term cargo run'
+        endif
         :winc r
-        if(a:input_type ==# 'normal')
+        if a:input_type ==# 'normal'
             exe('startinsert')
         endif
     else
-        execute ':! ' . l:command
+        execute ':! cargo run'
     endif
-    execute ":cd " . l:root_directory
+
+    " Return to original directory
+    execute ':cd ' . l:current_dir
 endfunction
 
+" Function to test Rust with cargo
+function! TestRust(input_type)
+    :w
+    let l:cargo_root = FindCargoRoot()
+    let l:current_dir = getcwd()
+    execute ':cd ' . l:cargo_root
+
+    if has('nvim')
+        " Use split mode based on the global variable
+        if g:split_mode ==# 'horizontal'
+            execute ':15sp term://cargo test'
+        else
+            execute ':vs'
+            execute ':winc r'
+            execute ':term cargo test'
+        endif
+        :winc r
+        if a:input_type ==# 'normal'
+            exe('startinsert')
+        endif
+    else
+        execute ':! cargo test'
+    endif
+
+    " Return to original directory
+    execute ':cd ' . l:current_dir
+endfunction
+
+" Augroup for Rust filetype
 augroup ft_rust
     autocmd!
     au FileType rust nnoremap <buffer> cp :call RunRust("normal")<CR>
+    au FileType rust nnoremap <buffer> <Leader>tt :call TestRust("normal")<CR>
 augroup END
 
 " }}}
