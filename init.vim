@@ -352,7 +352,7 @@ nnoremap <Tab> :bn<CR>
 " Note, <C-punctuation> mappings don't work due to term issues
 inoremap <C-s> <End>;
 " Navigate the quickfix list
-nnoremap cc :cc<CR>
+" nnoremap cc :cc<CR>
 " Seriously go to the end of the line in insert mode
 inoremap <C-e> <End>
 " " Make bottom horizontal split vertical and reverse
