@@ -820,91 +820,284 @@ vim.g.vsnip_snippet_dir = "~/.config/nvim/snippets"
 --  End nvim-cmp Autocomplete -------------------------------------------}}}
 --  LSP (nvim-lspconfig) Setup -----------------------------------------------------------{{{
 
-local lspconfig = require("lspconfig")
+-- local lspconfig = require("lspconfig")
 
--- nvim-lspconfig recommended setup
-vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
+-- -- nvim-lspconfig recommended setup
+-- vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
+-- vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+-- vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+-- vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
 
--- Use LspAttach autocommand to only map the following keys
--- after the language server attaches to the current buffer
-vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-	callback = function(ev)
-		-- Enable completion triggered by <c-x><c-o>
-		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+-- -- Use LspAttach autocommand to only map the following keys
+-- -- after the language server attaches to the current buffer
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--     -- group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+--     callback = function(args)
+--         local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-		-- Buffer local mappings.
-		-- See `:help vim.lsp.*` for documentation on any of the below functions
-		local opts = { buffer = ev.buf }
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-		vim.keymap.set("n", "M", vim.lsp.buf.hover, opts)
-		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-		vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
-		vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
-		vim.keymap.set("n", "<space>wl", function()
-			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-		end, opts)
-		vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
-		vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
-		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
-		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-		-- vim.keymap.set('n', '<space>f', function()
-		--     vim.lsp.buf.format { async = true }
-		-- end, opts)
-	end,
-})
+--         -- if client:supports_method("textDocument/implementation") then
+--         -- 	-- Create a keymap for vim.lsp.buf.implementation
+--         -- end
+
+--         -- if client:supports_method("textDocument/completion") then
+--         -- 	-- Enable auto-completion
+--         -- 	vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+--         -- -- vim.lsp.
+--         -- end
+--         if client:supports_method("textDocument/formatting") then
+--             -- Format the current buffer on save
+--             vim.api.nvim_create_autocmd("BufWritePre", {
+--                 buffer = args.buf,
+--                 callback = function()
+--                     vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+--                 end,
+--             })
+--         end
+--         -- Enable completion triggered by <c-x><c-o>
+--         -- vim.bo[args.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+--         -- Buffer local mappings.
+--         -- See `:help vim.lsp.*` for documentation on any of the below functions
+--         local opts = { buffer = args.buf }
+--         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+--         vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+--         vim.keymap.set("n", "M", vim.lsp.buf.hover, opts)
+--         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+--         vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+--         vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
+--         vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
+--         vim.keymap.set("n", "<space>wl", function()
+--             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+--         end, opts)
+--         vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
+--         vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
+--         vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
+--         vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+--         -- vim.keymap.set('n', '<space>f', function()
+--         --     vim.lsp.buf.format { async = true }
+--         -- end, opts)
+--     end,
+-- })
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = {
-	"pyright",
-	"vale_ls",
-	"terraformls",
-	"r_language_server",
-}
+-- local servers = {
+--     -- "pyright",
+--     "ruff",
+--     -- "pylsp",
+--     -- "vale_ls",
+--     "terraformls",
+--     "r_language_server",
+--     "rust_analyzer",
+-- }
 
-for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup({
-		-- on_attach = my_custom_on_attach,
-		capabilities = capabilities,
-	})
+-- for _, lsp in ipairs(servers) do
+--     if lsp == "rust_analyzer" then
+--         lspconfig[lsp].setup({
+--             capabilities = capabilities,
+--             cmd = { "rust-analyzer" },
+--             settings = {
+--                 ["rust-analyzer"] = {
+--                     server = {
+--                         extraEnv = {
+--                             RA_LOG = "info" -- or "info" for less verbose, "debug" for more verbose
+--                         }
+--                     }
+--                 }
+--             }
+--         })
+--     else
+--         lspconfig[lsp].setup({
+--             -- on_attach = my_custom_on_attach,
+--             capabilities = capabilities,
+--         })
+--     end
+-- end
+
+-- for _, lsp in ipairs(servers) do
+--     lspconfig[lsp].setup({
+--         -- on_attach = my_custom_on_attach,
+--         capabilities = capabilities,
+--     })
+-- end
+
+-- Diagnostic keymaps (global)
+vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
+-- vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+-- vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
+
+-- LspAttach autocmd with newer API
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+    callback = function(args)
+        local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+
+        -- Enable auto-completion if supported
+        if client:supports_method("textDocument/completion") then
+            vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+        end
+
+        -- Auto-format on save with improved logic
+        if not client:supports_method("textDocument/willSaveWaitUntil")
+            and client:supports_method("textDocument/formatting") then
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = vim.api.nvim_create_augroup("UserLspConfig", { clear = false }),
+                buffer = args.buf,
+                callback = function()
+                    vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 })
+                end,
+            })
+        end
+
+        -- Buffer local keymaps
+        local opts = { buffer = args.buf }
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        vim.keymap.set("n", "M", vim.lsp.buf.hover, opts)
+        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+        vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+        vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
+        vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
+        vim.keymap.set("n", "<space>wl", function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        end, opts)
+        vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
+        vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
+        vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    end,
+})
+
+vim.lsp.enable('pyright')
+vim.lsp.enable('rust_analyzer')
+vim.lsp.enable('lua_ls')
+-- vim.lsp.enable('harper_ls')
+
+local on_attach = function(client, bufnr)
+    if client.name == "ruff" then
+        -- Disable hover in favor of Pyright
+        client.server_capabilities.hoverProvider = false
+    end
 end
+
+vim.lsp.config('pyright', {
+    settings = {
+        pyright = {
+            -- Using Ruff's import organizer
+            disableOrganizeImports = true,
+        },
+        python = {
+            analysis = {
+                -- Ignore all files for analysis to exclusively use Ruff for linting
+                ignore = { "*" },
+            },
+        },
+    },
+})
+-- require("lspconfig").ruff_lsp.setup({
+-- 	on_attach = on_attach,
+-- })
+
+-- require("lspconfig").pyright.setup({
+vim.lsp.config('pyright', {
+    settings = {
+        pyright = {
+            -- Using Ruff's import organizer
+            disableOrganizeImports = true,
+        },
+        python = {
+            analysis = {
+                -- Ignore all files for analysis to exclusively use Ruff for linting
+                ignore = { "*" },
+            },
+        },
+    },
+})
+
+vim.lsp.config('harper_ls', {
+    filetypes = { 'markdown', 'text', 'gitcommit', 'pandoc' },
+    settings = {
+        ["harper-ls"] = {
+            userDictPath = "",
+            workspaceDictPath = "",
+            fileDictPath = "",
+            linters = {
+                SpellCheck = true,
+                SpelledNumbers = false,
+                AnA = true,
+                SentenceCapitalization = true,
+                UnclosedQuotes = true,
+                WrongQuotes = false,
+                LongSentences = true,
+                RepeatedWords = true,
+                Spaces = true,
+                Matcher = true,
+                CorrectNumberSuffix = true
+            },
+            codeActions = {
+                ForceStable = false
+            },
+            markdown = {
+                IgnoreLinkTitle = false
+            },
+            diagnosticSeverity = "warning",
+            isolateEnglish = false,
+            dialect = "American",
+            maxFileLength = 120000,
+            ignoredLintsPath = "",
+            excludePatterns = {}
+        }
+    },
+    on_attach = function(client, bufnr)
+        -- Force harper to treat pandoc as markdown
+        if vim.bo[bufnr].filetype == 'pandoc' then
+            client.notify('textDocument/didOpen', {
+                textDocument = {
+                    uri = vim.uri_from_bufnr(bufnr),
+                    languageId = 'markdown', -- lie to harper
+                    version = 0,
+                    text = table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), '\n')
+                }
+            })
+        end
+    end
+})
+
 
 --  Neovim Lua LSP Setup -----------------------------------------------{{{
 
-require("lspconfig").lua_ls.setup({
-	on_init = function(client)
-		local path = client.workspace_folders[1].name
-		if not vim.loop.fs_stat(path .. "/.luarc.json") and not vim.loop.fs_stat(path .. "/.luarc.jsonc") then
-			client.config.settings = vim.tbl_deep_extend("force", client.config.settings, {
-				Lua = {
-					runtime = {
-						-- Tell the language server which version of Lua you're using
-						-- (most likely LuaJIT in the case of Neovim)
-						version = "LuaJIT",
-					},
-					-- Make the server aware of Neovim runtime files
-					workspace = {
-						checkThirdParty = false,
-						library = {
-							vim.env.VIMRUNTIME,
-							-- "${3rd}/luv/library"
-							-- "${3rd}/busted/library",
-						},
-						-- or pull in all of 'runtimepath'. NOTE: this is a lot slower
-						-- library = vim.api.nvim_get_runtime_file("", true)
-					},
-				},
-			})
+-- require("lspconfig").lua_ls.setup({
+vim.lsp.config('lua_ls', {
+    on_init = function(client)
+        local path = client.workspace_folders[1].name
 
-			client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
-		end
-		return true
-	end,
+        if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
+            return
+        end
+
+        client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+            runtime = {
+                -- Tell the language server which version of Lua you're using
+                -- (most likely LuaJIT in the case of Neovim)
+                version = "LuaJIT",
+            },
+            -- Make the server aware of Neovim runtime files
+            workspace = {
+                checkThirdParty = false,
+                library = {
+                    vim.env.VIMRUNTIME,
+                    -- Depending on the usage, you might want to add additional paths here.
+                    -- "${3rd}/luv/library"
+                    -- "${3rd}/busted/library",
+                },
+                -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+                -- library = vim.api.nvim_get_runtime_file("", true)
+            },
+        })
+    end,
+    settings = {
+        Lua = {},
+    },
 })
 
 --  End Neovim Lua LSP Setup -------------------------------------------}}}
