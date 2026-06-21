@@ -73,6 +73,11 @@
     "body": ["```{python}", "$0", "```"],
     "description": "Insert fenced code block"
   },
+  "Insert Mermaid Flow Chart": {
+    "prefix": "mermaid",
+    "body": ["```{mermaid}", "$0", "```"],
+    "description": "Insert mermaid flow chart"
+  },
   "Insert executable code block": {
     "prefix": "executable codeblock",
     "body": [
