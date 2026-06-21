@@ -727,84 +727,92 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- From: https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings for vim-vsnip
 local has_words_before = function()
-	unpack = unpack or table.unpack
-	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    unpack = unpack or table.unpack
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 local feedkey = function(key, mode)
-	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
 -- nvim-cmp setup
 local cmp = require("cmp")
 cmp.setup({
-	snippet = {
-		expand = function(args)
-			-- vim.fn['UtliSnips#Anon'](args.body)
-			vim.fn["vsnip#anonymous"](args.body)
-		end,
-	},
-	completion = {
-		keyword_length = 1,
-	},
-	mapping = cmp.mapping.preset.insert({
-		["<C-u>"] = cmp.mapping.scroll_docs(-4), -- Up
-		["<C-d>"] = cmp.mapping.scroll_docs(4), -- Down
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<CR>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Replace,
-			select = true,
-		}),
-		-- From: https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings for vim-vsnip
-		["<Tab>"] = cmp.mapping(function(fallback)
-			local entries = cmp.get_entries()
-			local entry_count = #entries
-			local first_entry_type = nil
+    snippet = {
+        expand = function(args)
+            -- vim.fn['UtliSnips#Anon'](args.body)
+            vim.fn["vsnip#anonymous"](args.body)
+        end,
+    },
+    completion = {
+        keyword_length = 1,
+    },
+    mapping = cmp.mapping.preset.insert({
+        ["<C-u>"] = cmp.mapping.scroll_docs(-4), -- Up
+        ["<C-d>"] = cmp.mapping.scroll_docs(4),  -- Down
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<CR>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+        }),
+        -- From: https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings for vim-vsnip
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            local entries = cmp.get_entries()
+            local entry_count = #entries
+            local first_entry_type = nil
 
-			if entry_count > 0 then
-				local completion_item = entries[1]["completion_item"]
-				if completion_item and completion_item["data"] and completion_item["data"]["snippet"] then
-					first_entry_type = "snippet"
-				end
-			end
+            -- Check if the entry is a snippet
+            if entry_count > 0 then
+                local completion_item = entries[1]["completion_item"]
+                if completion_item and completion_item["data"] and completion_item["data"]["snippet"] then
+                    first_entry_type = "snippet"
+                end
+            end
 
-			if entry_count == 1 or first_entry_type == "snippet" then
-				cmp.confirm({
-					behavior = cmp.ConfirmBehavior.Replace,
-					select = true,
-				})
-			elseif vim.fn["vsnip#available"](1) == 1 then
-				feedkey("<Plug>(vsnip-expand-or-jump)", "")
-			elseif cmp.visible() then
-				cmp.select_next_item()
-			elseif has_words_before() then
-				cmp.complete()
-			else
-				fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-			end
-		end, { "i", "s" }),
-		["<S-Tab>"] = cmp.mapping(function()
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-				feedkey("<Plug>(vsnip-jump-prev)", "")
-			end
-		end, { "i", "s" }),
-	}),
-	sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
-		{ name = "vsnip" },
-		{ name = "buffer" },
-		{ name = "otter" },
-		{
-			name = "path",
-			option = {
-				trailing_slash = true,
-				label_trailing_slash = true,
-			},
-		},
-	}),
+            -- Move to the next snippet location
+            -- If there is one entry, or it is a snippet, complete it
+            if entry_count == 1 or first_entry_type == "snippet" then
+                -- print("One entry or snippet")
+                cmp.confirm({
+                    behavior = cmp.ConfirmBehavior.Insert,
+                    select = true,
+                })
+            elseif has_words_before() and entry_count > 0 then
+                -- print("print has words_before and entry count > 0")
+                cmp.complete()
+            elseif vim.fn["vsnip#available"](1) == 1 then
+                -- print("vsnip available")
+                feedkey("<Plug>(vsnip-expand-or-jump)", "")
+            elseif cmp.visible() then
+                -- print("Cmp visible")
+                cmp.select_next_item()
+            else
+                -- print("fallback")
+                fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+            end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function()
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+                feedkey("<Plug>(vsnip-jump-prev)", "")
+            end
+        end, { "i", "s" }),
+    }),
+    sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+        { name = "vsnip" },
+        { name = "buffer" },
+        { name = "otter" },
+        {
+            name = "path",
+            option = {
+                trailing_slash = true,
+                label_trailing_slash = true,
+            },
+        },
+    }),
 })
 
 vim.g.vsnip_snippet_dir = "~/.config/nvim/snippets"
