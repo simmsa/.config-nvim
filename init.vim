@@ -1407,6 +1407,90 @@ function! ToggleQuartoFormatPrg()
     echom "Formatter set to: ".l:current_formatprg
 endfunction
 
+
+lua << EOF
+
+function QuartoNeatFoldText()
+  -- Get the line at the start of the fold
+  -- local line = vim.fn.getline(line_num)
+  local line = vim.fn.getline(vim.v.foldstart)
+
+  -- Defensive check: Ensure the line is valid
+  if not line or line == "" then
+    return ""
+  end
+
+  -- Count the number of '#' characters at the start of the line
+  -- local count = select(2, line:gsub("^#+", ""))  -- Counts leading '#' characters
+  local this_fold_level = vim.v.foldlevel
+
+  -- Replace leading '#' with the count (e.g., # -> 1:, ## -> 2:, etc.)
+  local modified_line = line:gsub("^#+", this_fold_level .. ":")  -- Replace the leading '#' characters with 'count:'
+
+  local fold_start = vim.v.foldstart
+  local fold_end = vim.v.foldend
+  local lines_count = fold_end - fold_start + 1  -- Total lines in the fold
+
+  -- Count the number of lines in the fold (assuming lines_count is available)
+  local lines_count_text = string.format(' %s line%s', lines_count > 0 and lines_count or 0, lines_count ~= 1 and 's' or '')
+
+  -- Calculate the padding to align fold text properly
+  local foldtext_start_len = #modified_line
+  local foldtext_end_len = #lines_count_text
+  local line_up_ending = 20  -- Adjust this based on your preference
+  local win_width = vim.fn.winwidth(0)  -- Get the window width
+  local padding = win_width - foldtext_start_len - line_up_ending - foldtext_end_len
+
+  -- Return the fold text with appropriate padding
+  return modified_line .. string.rep("─", padding) .. lines_count_text .. string.rep(" ", 8)
+end
+
+
+
+function QuartoHeaderFold(lnum)
+  local line = vim.fn.getline(lnum)
+
+  -- Check if the current line is blank
+  local function is_blank_line(line_num)
+    return vim.fn.getline(line_num):match("^%s*$") ~= nil
+  end
+
+  -- Check for blank lines before and after the header
+  local prev_line_blank = is_blank_line(lnum - 1)
+  -- local prev_line_blank = true
+  local next_line_blank = is_blank_line(lnum + 1)
+  -- local next_line_blank = true
+
+  -- Check for headers starting with a capital letter (ignoring comments)
+  if line:match("^#%s+[A-Z]") and prev_line_blank and next_line_blank then
+    -- H1 header with blank lines before and after
+    return ">1"
+  elseif line:match("^##%s+[A-Z]") and prev_line_blank and next_line_blank then
+    -- H2 header with blank lines before and after
+    return ">2"
+  elseif line:match("^###%s+[A-Z]") and prev_line_blank and next_line_blank then
+    -- H3 header with blank lines before and after
+    return ">3"
+  elseif line:match("^####%s+[A-Z]") and prev_line_blank and next_line_blank then
+    -- H4 header with blank lines before and after
+    return ">4"
+  elseif line:match("^#####%s+[A-Z]") and prev_line_blank and next_line_blank then
+    -- H5 header with blank lines before and after
+    return ">5"
+  elseif line:match("^######%s+[A-Z]") and prev_line_blank and next_line_blank then
+    -- H6 header with blank lines before and after
+    return ">6"
+  else
+    -- Use the fold level of the previous or next line if not a header
+    return "="
+  end
+end
+
+
+EOF
+
+
+
 augroup myNvimQuarto
     autocmd!
     au BufRead,BufNewFile *.qmd set ft=quarto
@@ -1417,6 +1501,12 @@ augroup myNvimQuarto
     " Same as the runtime but removes the . for easier code editing
     au FileType quarto setlocal iskeyword=@,48-57,_
     au FileType quarto nnoremap <buffer> cof :call ToggleQuartoFormatPrg()<CR>
+    " au FileType quarto setlocal foldlevel=1
+    au FileType quarto setlocal foldlevelstart=99
+    " au FileType quarto setlocal foldtext=NeatFoldText()
+    au FileType quarto setlocal foldtext=v:lua.QuartoNeatFoldText()
+    au FileType quarto setlocal foldexpr=v:lua.QuartoHeaderFold(v:lnum)
+    " au FileType quarto setlocal foldexpr=v:lua.QuartoFoldText(v:lnum)
 augroup END
 
 " End Quarto ------------------------------------------------------------}}}
