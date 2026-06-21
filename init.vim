@@ -1298,6 +1298,47 @@ let g:markdown_syntax_conceal = 0
 
 let g:python_highlight_all = 1
 
+" function! RunPython(input_type)
+"     :w
+"     let l:filename = expand('%:p')
+"     let l:command = 'python3 ' . l:filename
+"     let l:command_escaped = 'python3\\ ' . l:filename
+"     let l:root_directory = FindRootDirectory()
+"     execute ':cd %:p:h'
+"     if has('nvim')
+"         execute ':15sp term://' . l:command
+"         :winc r
+"         if(a:input_type ==# 'normal')
+"             exe('startinsert')
+"         endif
+"     else
+"         execute ':! ' . l:command
+"     endif
+"     execute ":cd " . l:root_directory
+" endfunction
+
+" augroup ft_python
+"     autocmd!
+"     au BufNewFile,BufRead *.py set keywordprg=pydoc
+"     au FileType python nnoremap <buffer> cp :call RunPython("normal")<CR>
+"     " au FileType python nnoremap <buffer> cn :call RunPython("input")<CR>
+" augroup END
+
+" Define a global variable to track split mode (horizontal by default)
+let g:split_mode = 'vertical'
+
+" Function to toggle split mode
+function! ToggleSplitMode()
+    if g:split_mode ==# 'horizontal'
+        let g:split_mode = 'vertical'
+        echo "Code Run Window Mode: vertical"
+    else
+        let g:split_mode = 'horizontal'
+        echo "Code Run Window Mode: horizontal"
+    endif
+endfunction
+
+" Function to run Python with the appropriate split
 function! RunPython(input_type)
     :w
     let l:filename = expand('%:p')
@@ -1305,24 +1346,36 @@ function! RunPython(input_type)
     let l:command_escaped = 'python3\\ ' . l:filename
     let l:root_directory = FindRootDirectory()
     execute ':cd %:p:h'
+
     if has('nvim')
-        execute ':15sp term://' . l:command
+        " Use split mode based on the global variable
+        if g:split_mode ==# 'horizontal'
+            execute ':15sp term://' . l:command
+        else
+            execute ':vs'
+            execute ':winc r'
+            execute ':term ' . l:command
+        endif
         :winc r
-        if(a:input_type ==# 'normal')
+        if a:input_type ==# 'normal'
             exe('startinsert')
         endif
     else
         execute ':! ' . l:command
     endif
+
     execute ":cd " . l:root_directory
 endfunction
 
+" Augroup for Python filetype
 augroup ft_python
     autocmd!
     au BufNewFile,BufRead *.py set keywordprg=pydoc
     au FileType python nnoremap <buffer> cp :call RunPython("normal")<CR>
-    " au FileType python nnoremap <buffer> cn :call RunPython("input")<CR>
 augroup END
+
+" Keymap to toggle split mode
+nnoremap <silent> cow :call ToggleSplitMode()<CR>
 
 " }}}
 " Quarto ----------------------------------------------------------------{{{
