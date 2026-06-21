@@ -2188,6 +2188,13 @@ call SourceDirectory()
 
 lua << EOF
 
+-- Troubleshooting: Defining diagnostic signs with :sign-define or sign_define() is deprecated. Feature will be removed in Nvim 0.12
+local original_sign_define = vim.fn.sign_define
+vim.fn.sign_define = function(...)
+  print("sign_define called from:", debug.traceback())
+  return original_sign_define(...)
+end
+
 require('plugin_definitions')
 require('plugin_settings')
 
