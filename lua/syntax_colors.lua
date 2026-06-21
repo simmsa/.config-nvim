@@ -3,7 +3,7 @@
 
 vim.opt.syntax = "on"
 
-vim.g["sustain#code#brightness"] = 5
+vim.g["sustain#code#brightness"] = 4
 vim.g["sustain#code#contrast"] = 1
 -- vim.g['sustain#code#contrast'] = 0
 vim.g["sustain#ui#brightness"] = 5
