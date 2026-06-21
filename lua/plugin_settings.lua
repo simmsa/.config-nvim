@@ -9,10 +9,19 @@ vim.g.ale_use_neovim_diagnostics_api = 1
 vim.g.ale_fix_on_save = 1
 
 vim.g.ale_fixers = {
-	json = { "prettier" },
-	lua = { "stylua" },
-	python = { "ruff", "black" },
-	r = { "formatR" },
+    ["*"] = { "remove_trailing_lines", "trim_whitespace" },
+    javascript = { "prettier" },
+    javascriptreact = { "prettier" },
+    typescript = { "prettier" },
+    typescriptreact = { "prettier" },
+    json = { "prettier" },
+    lua = { "stylua" },
+    python = { "ruff", "black" },
+    r = { "formatR" },
+}
+
+vim.g.ale_linters_ignore = {
+    markdown = { "vale", "writegood" },
 }
 
 --  End dense-analysis/ale ----------------------------------------------}}}
