@@ -148,7 +148,7 @@
   },
   "Image Snippet": {
     "prefix": "img",
-    "body": ["![${1:Caption}](${2:Path}){#fig-${3:Ref}}"],
+    "body": ["![${1:Caption}](${2:Path}){#fig-${3:Ref}\\}"],
     "description": "Insert an image snippet"
   },
   "Insert strikethrough": {
